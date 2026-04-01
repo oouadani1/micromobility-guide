@@ -1152,18 +1152,8 @@ function renderPrintRecommendationSummary(rec, answers, pathway) {
   }
 
   const trimmedConsiderations = [...considerationItems, ...considerations].slice(0, 2);
-  let nextSteps = [...(content.nextSteps || []), ...getDynamicNextSteps(rec.id, answers)]
-    .filter((step, index, allSteps) =>
-      allSteps.findIndex((candidate) => candidate.url === step.url) === index
-    )
-    .slice(0, 2);
-
   const considerationsHtml = trimmedConsiderations
     .map((item) => `<li>${item}</li>`)
-    .join("");
-
-  const nextStepsHtml = nextSteps
-    .map((step) => `<li>${step.label}</li>`)
     .join("");
 
   return `
@@ -1178,40 +1168,11 @@ function renderPrintRecommendationSummary(rec, answers, pathway) {
       <p class="print-rec-reason"><strong>Why this fits:</strong> ${getRecommendationReason(rec.id, answers, pathway)}</p>
       <p class="print-rec-cost"><strong>Typical cost:</strong> ${content.cost}</p>
       ${considerationsHtml ? `<ul class="print-rec-list">${considerationsHtml}</ul>` : ""}
-      ${nextStepsHtml ? `<p class="print-rec-next"><strong>Next steps:</strong></p><ul class="print-rec-list">${nextStepsHtml}</ul>` : ""}
     </article>
   `;
 }
 
-function renderPrintAllDevicesSummary(allRecommendations, answers) {
-  const visibleRecommendations = allRecommendations.filter((rec) => rec.score > 0);
-  if (!visibleRecommendations.length) return "";
-
-  const topScore = visibleRecommendations[0]?.score ?? 0;
-  const itemsHtml = visibleRecommendations
-    .map((rec, index) => {
-      const priority = getRecommendationPriorityMeta(index, rec.score, topScore);
-      const reason = getAllResultsReason(rec, answers, priority);
-
-      return `
-        <li class="print-all-results-item">
-          <span class="print-all-results-device">${rec.label}</span>
-          <span class="print-all-results-tag ${priority.className}">${priority.label}</span>
-          <span class="print-all-results-reason"><em>${reason}</em></span>
-        </li>
-      `;
-    })
-    .join("");
-
-  return `
-    <section class="print-section">
-      <h3 class="print-section-heading">See more device types</h3>
-      <ul class="print-all-results-list">${itemsHtml}</ul>
-    </section>
-  `;
-}
-
-function renderPrintSummary(recommendations, allRecommendations, answers, pathway) {
+function renderPrintSummary(recommendations, answers, pathway) {
   const rawAnswers = APP_STATE.answers || {};
   const topRecommendationsHtml = recommendations
     .slice(0, 2)
@@ -1220,13 +1181,15 @@ function renderPrintSummary(recommendations, allRecommendations, answers, pathwa
 
   return `
     <section class="print-summary" aria-hidden="true">
-      <h2 class="print-title">Micromobility Buyer's Guide</h2>
+      <div class="print-header">
+        <h2 class="print-title">Micromobility Buyer's Guide</h2>
+        <img src="lab-logo-black.png" alt="The Lab at MassDOT logo" class="print-logo">
+      </div>
       ${renderPrintInputsSummary(rawAnswers)}
       <section class="print-section">
         <h3 class="print-section-heading">Your top results</h3>
         <div class="print-rec-grid">${topRecommendationsHtml}</div>
       </section>
-      ${renderPrintAllDevicesSummary(allRecommendations, answers)}
       <p class="print-disclaimer">${SCORING_DISCLAIMER_TEXT}</p>
     </section>
   `;
@@ -1597,7 +1560,6 @@ function renderCurrentRecommendationPage() {
   const allResultsPanelHtml = renderAllDeviceResultsPanel(allRecommendations, answers);
   const printSummaryHtml = renderPrintSummary(
     recommendations,
-    allRecommendations,
     answers,
     pathway
   );
@@ -1638,18 +1600,19 @@ function renderCurrentRecommendationPage() {
 
       <button
         type="button"
-        class="results-print-btn results-print-btn-desktop"
-        data-role="print-results"
-      >
-        Print
-      </button>
-
-      <button
-        type="button"
         class="results-restart-btn results-restart-btn-desktop"
         data-role="restart-results"
       >
         Start over
+      </button>
+
+      <button
+        type="button"
+        class="results-print-btn results-print-btn-desktop"
+        data-role="print-results"
+        aria-label="Print results"
+      >
+        <span aria-hidden="true">&#128424;</span>
       </button>
     </div>
 
@@ -1658,18 +1621,19 @@ function renderCurrentRecommendationPage() {
     <div class="results-actions-mobile">
       <button
         type="button"
-        class="results-print-btn results-print-btn-mobile"
-        data-role="print-results"
-      >
-        Print
-      </button>
-
-      <button
-        type="button"
         class="results-restart-btn results-restart-btn-mobile"
         data-role="restart-results"
       >
         Start over
+      </button>
+
+      <button
+        type="button"
+        class="results-print-btn results-print-btn-mobile"
+        data-role="print-results"
+        aria-label="Print results"
+      >
+        <span aria-hidden="true">&#128424;</span>
       </button>
     </div>
 
@@ -1916,7 +1880,8 @@ progress.textContent = "";
 
   backBtn.classList.toggle("hidden", APP_STATE.currentStep === 0);
   nextBtn.classList.toggle("hidden", question.type !== "number");
-  nextBtn.textContent = "Continue";
+  backBtn.innerHTML = "&#8249;";
+  nextBtn.innerHTML = "&#8250;";
 
   const formNav = document.getElementById("formNav");
   if (formNav) {

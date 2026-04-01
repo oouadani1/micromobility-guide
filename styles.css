@@ -375,6 +375,26 @@ button:hover {
   margin-top: 20px;
 }
 
+.form-nav {
+  justify-content: space-between;
+}
+
+.form-nav button {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  min-height: 48px;
+  margin-top: 0;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1;
+}
+
 .lab-logo {
   height: 65px;
   width: auto;
@@ -705,6 +725,18 @@ button:hover {
   color: #24A850;
   border: 1px solid #24A850;
   box-shadow: none;
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  min-height: 48px;
+  margin-left: 0;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  font-size: 24px;
+  line-height: 1;
 }
 
 .results-actions-mobile {
@@ -753,7 +785,8 @@ button:hover {
   }
 
   .results-print-btn {
-    width: 100%;
+    width: 48px;
+    min-width: 48px;
   }
 
   .results-restart-btn-desktop {
@@ -765,8 +798,15 @@ button:hover {
   }
 
   .results-actions-mobile {
-    display: block;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
     margin-top: 14px;
+  }
+
+  .results-restart-btn-mobile {
+    width: auto;
+    flex: 1;
   }
 
   .question-label {
@@ -779,6 +819,14 @@ button:hover {
     font-size: 22px;
     line-height: 1.25;
     margin-bottom: 10px;
+  }
+
+  .form-nav button {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    min-height: 42px;
+    font-size: 26px;
   }
 
   .option-grid {
@@ -885,11 +933,26 @@ button:hover {
     line-height: 1.25;
   }
 
+  .print-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
   .print-title {
-    margin: 0 0 12px;
+    margin: 0;
     font-size: 18pt;
     line-height: 1.1;
     color: #0088FF;
+  }
+
+  .print-logo {
+    width: 72px;
+    height: auto;
+    flex: 0 0 72px;
+    opacity: 0.9;
   }
 
   .print-section {
@@ -925,8 +988,8 @@ button:hover {
 
   .print-rec-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    grid-template-columns: 1fr;
+    gap: 10px;
   }
 
   .print-rec-card {
@@ -959,38 +1022,17 @@ button:hover {
   .print-rec-image-tag,
   .print-rec-reason,
   .print-rec-cost,
-  .print-rec-next,
-  .print-all-results-reason,
   .print-disclaimer {
     margin: 4px 0 0;
   }
 
-  .print-rec-list,
-  .print-all-results-list {
+  .print-rec-list {
     margin: 4px 0 0;
     padding-left: 16px;
   }
 
-  .print-rec-list li,
-  .print-all-results-item {
+  .print-rec-list li {
     margin-bottom: 3px;
-  }
-
-  .print-all-results-item {
-    list-style: disc;
-  }
-
-  .print-all-results-device {
-    font-weight: 700;
-  }
-
-  .print-all-results-tag {
-    margin-left: 6px;
-  }
-
-  .print-all-results-reason {
-    display: block;
-    color: #555;
   }
 
   .print-disclaimer {
