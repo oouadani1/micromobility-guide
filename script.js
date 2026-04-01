@@ -42,8 +42,7 @@ const OUTPUTS = {
 const INTRO_TEXT =
   "Micromobility devices are small, affordable, and flexible ways to get around, such as bikes, e-scooters, and more. Answer a few questions to see what micromobility devices could work well for you.";
 const RESULTS_INTRO_TEXT = "Here are your suggested micromobility options.";
-const EXPLORING_RESULTS_INTRO_TEXT =
-  "These results are ranked to help you explore and compare the full range of micromobility options.";
+const EXPLORING_RESULTS_TITLE_TEXT = "Explore a variety of micromobility devices.";
 const SCORING_DISCLAIMER_TEXT =
   "Suggestions are generated using an additive scoring system based on your responses. Results are informational only, and more than one device type may be appropriate.";
 const CARGO_BIKE_CHILD_CONSIDERATION =
@@ -1350,7 +1349,7 @@ function getDynamicNextSteps(recId, answers) {
 
   if (recId === "cargoBike") {
     links.push({
-      label: "Borrow a cargo bike first to see if its for you",
+      label: "Borrow a cargo bike first to see if it is for you",
       url: "https://cpp.ebikelibrary.org/"
     });
   }
@@ -1636,15 +1635,14 @@ function renderCurrentRecommendationPage() {
   const showPrev = index > 0;
   const showNext = index < recommendations.length - 1;
 
-  const introHtml =
+  const resultsIntroText =
     pathway === "exploring"
-      ? `<p class="recommendation-reason">${EXPLORING_RESULTS_INTRO_TEXT}</p>`
-      : "";
+      ? EXPLORING_RESULTS_TITLE_TEXT
+      : RESULTS_INTRO_TEXT;
 
   result.classList.remove("hidden");
   result.innerHTML = `
-    <p class="results-intro-heading">${RESULTS_INTRO_TEXT}</p>
-    ${introHtml}
+    <p class="results-intro-heading">${resultsIntroText}</p>
 
     <div class="results-toolbar">
       <div class="results-pager">
