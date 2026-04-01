@@ -963,6 +963,76 @@ function getAllResultsImage(recId, answers) {
   return getRecommendationImage(recId, answers, content);
 }
 
+function getAllResultsReason(rec, answers, priority) {
+  if (!answers) return "";
+
+  if (priority.label === "Top suggestion") {
+    if (rec.id === "bicycle" && answers.transitLink === "yes") {
+      return "A standard bicycle rises to the top because it fits everyday trips and can still work well with a transit connection.";
+    }
+
+    if (rec.id === "ebike" && (answers.distance === "3to9" || answers.distance === "10plus")) {
+      return "An e-bike is a top suggestion because your trip distance points toward added assistance and range.";
+    }
+
+    if (rec.id === "cargoBike" && answers.carryChildren === "yes") {
+      return "A cargo bike is a top suggestion because carrying children makes extra capacity especially useful.";
+    }
+
+    if (rec.id === "adaptiveMobility" && answers.adaptiveNeed === "yes") {
+      return "An adaptive option is a top suggestion because you indicated a disability or mobility need.";
+    }
+
+    if (rec.id === "humanPoweredYouth") {
+      return "These options rise to the top because the selected age points toward age-appropriate nonmotorized devices.";
+    }
+
+    return `${rec.label} is a top suggestion because it aligns well with the trip needs and preferences you selected.`;
+  }
+
+  if (priority.label === "Secondary suggestion") {
+    return `${rec.label} is a secondary suggestion because it matches several of your inputs, but not as strongly as your top result.`;
+  }
+
+  if (priority.label === "Strongly suggested") {
+    if (rec.id === "bikeshare" && answers.carryChildren === "yes") {
+      return "Bikeshare may work for you, but because you will be carrying children, it is less practical than the top suggestions.";
+    }
+
+    if (rec.id === "ebike" && answers.age === "age14to16") {
+      return "An e-bike is still strongly suggested, but your age means only Class 1 e-bike options are appropriate.";
+    }
+
+    return `${rec.label} is strongly suggested because it fits several of your answers, even if it is not one of the top two matches.`;
+  }
+
+  if (priority.label === "Suggested") {
+    if (rec.id === "lowSpeedPoweredMicromobility") {
+      return "These devices may work for you because you selected short trips, indoor storage, and lower-stress routes.";
+    }
+
+    if (rec.id === "bikeshare" && answers.transitLink === "yes") {
+      return "Bikeshare is suggested because it can support a transit-linked trip, but it may be less convenient than owning a device.";
+    }
+
+    return `${rec.label} is suggested because it matches part of your profile, but it is a weaker fit than the higher-ranked options.`;
+  }
+
+  if (rec.id === "bikeshare" && answers.carryChildren === "yes") {
+    return "Bikeshare is not suggested because carrying children makes shared public bikes a poor fit for your needs.";
+  }
+
+  if (rec.id === "lowSpeedPoweredMicromobility") {
+    return "These devices are not suggested because they work best only for short indoor-stored trips on smoother, lower-stress routes.";
+  }
+
+  if (rec.id === "escooter" && answers.routeType === "regularRoads") {
+    return "An e-scooter is not suggested because regular roads with more traffic are a weaker match for this device type.";
+  }
+
+  return `${rec.label} is not suggested because other device types better match the needs and constraints you selected.`;
+}
+
 function renderAllDeviceResultsPanel(allRecommendations, answers) {
   const visibleRecommendations = allRecommendations.filter((rec) => rec.score > 0);
   if (!visibleRecommendations.length) return "";
@@ -972,6 +1042,7 @@ function renderAllDeviceResultsPanel(allRecommendations, answers) {
     .map((rec, index) => {
       const imageSrc = getAllResultsImage(rec.id, answers);
       const priority = getRecommendationPriorityMeta(index, rec.score, topScore);
+      const reason = getAllResultsReason(rec, answers, priority);
 
       return `
       <li class="all-results-item">
@@ -980,6 +1051,7 @@ function renderAllDeviceResultsPanel(allRecommendations, answers) {
         <div class="all-results-copy">
           <p class="all-results-device">${rec.label}</p>
           <p class="all-results-tag ${priority.className}">${priority.label}</p>
+          <p class="all-results-reason"><em>${reason}</em></p>
         </div>
       </li>
     `;

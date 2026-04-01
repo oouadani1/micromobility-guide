@@ -287,6 +287,13 @@ button:hover {
   color: #d32f2f;
 }
 
+.all-results-reason {
+  margin: 4px 0 0;
+  font-size: 13px;
+  line-height: 1.35;
+  color: #555;
+}
+
 .recommendation-eyebrow {
   font-size: 14px;
   line-height: 1.4;
