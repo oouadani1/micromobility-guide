@@ -1467,6 +1467,7 @@ function getRecommendationImageTag(recId, answers) {
 function renderSingleRecommendationCard(rec, answers, pathway) {
   const content = RESULT_CONTENT[rec.id];
   const considerationItems = getResultCardConsiderationItems(rec.id, answers, content);
+  const rationaleHeading = pathway === "exploring" ? "Why consider it" : "Why this fits";
   let considerations = [...content.considerations];
 
   if (rec.id === "cargoBike" && answers.carryChildren === "yes") {
@@ -1517,7 +1518,7 @@ function renderSingleRecommendationCard(rec, answers, pathway) {
       ${imageSrc ? `<img src="${imageSrc}" alt="${rec.label}" class="device-image">` : ""}
       ${imageTag ? `<p class="recommendation-image-tag">${imageTag}</p>` : ""}
 
-      <h4 class="guidance-heading">Why this fits</h4>
+      <h4 class="guidance-heading">${rationaleHeading}</h4>
       <p class="recommendation-reason">
         ${getRecommendationReason(rec.id, answers, pathway)}
       </p>
