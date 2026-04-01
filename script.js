@@ -1282,10 +1282,19 @@ function getDynamicNextSteps(recId, answers) {
       label: "Visit a local bike shop",
       url: "https://nbda.com/dealer-finder-member-directory/#!directory/map/tag=Massachusetts"
     });
+  }
 
+  if (recId === "bicycle" || recId === "ebike") {
     links.push({
       label: "Join a bike-friendly event",
       url: "https://www.massbike.org/massachusetts-bike-friendly-events-calendar"
+    });
+  }
+
+  if (recId === "cargoBike") {
+    links.push({
+      label: "Borrow a cargo bike first to see if its for you",
+      url: "https://cpp.ebikelibrary.org/"
     });
   }
 
