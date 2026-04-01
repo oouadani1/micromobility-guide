@@ -50,6 +50,8 @@ const CARGO_BIKE_CHILD_CONSIDERATION =
   "When carrying children, make sure they wear properly fitted helmets and are secured in appropriate seats or harnesses.";
 const YOUTH_PRODUCT_GUIDANCE_TEXT =
   "Children ages 9 to 12 can often ride bicycles and kick scooters confidently, but faster motorized devices are generally not appropriate because balancing, steering, and risk-taking behaviors can make them harder to use safely.";
+const PRINT_ICON_SVG =
+  '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 9V4h10v5"/><path d="M7 14H5a2 2 0 0 1-2-2v-1.5A2.5 2.5 0 0 1 5.5 8h13A2.5 2.5 0 0 1 21 10.5V12a2 2 0 0 1-2 2h-2"/><path d="M7 12h10v8H7z"/><circle cx="17.5" cy="10.5" r=".75" fill="currentColor" stroke="none"/></svg>';
 
 const RESULT_CONTENT = {
   bicycle: {
@@ -1612,7 +1614,7 @@ function renderCurrentRecommendationPage() {
         data-role="print-results"
         aria-label="Print results"
       >
-        <span aria-hidden="true">&#128424;</span>
+        ${PRINT_ICON_SVG}
       </button>
     </div>
 
@@ -1633,7 +1635,7 @@ function renderCurrentRecommendationPage() {
         data-role="print-results"
         aria-label="Print results"
       >
-        <span aria-hidden="true">&#128424;</span>
+        ${PRINT_ICON_SVG}
       </button>
     </div>
 
@@ -1878,14 +1880,17 @@ progress.textContent = "";
   }
 }
 
-  backBtn.classList.toggle("hidden", APP_STATE.currentStep === 0);
-  nextBtn.classList.toggle("hidden", question.type !== "number");
+  const shouldShowBack = APP_STATE.currentStep > 0;
+  const shouldShowNext = question.type === "number";
+
+  backBtn.classList.toggle("hidden", !shouldShowBack);
+  nextBtn.classList.toggle("hidden", !shouldShowNext);
   backBtn.innerHTML = "&#8249;";
   nextBtn.innerHTML = "&#8250;";
 
   const formNav = document.getElementById("formNav");
   if (formNav) {
-    formNav.classList.remove("hidden");
+    formNav.classList.toggle("hidden", !shouldShowBack && !shouldShowNext);
   }
 }
 

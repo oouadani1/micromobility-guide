@@ -739,6 +739,16 @@ button:hover {
   line-height: 1;
 }
 
+.results-print-btn svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 .results-actions-mobile {
   display: none;
 }
