@@ -698,7 +698,20 @@ button:hover {
   white-space: nowrap;
 }
 
+.results-print-btn {
+  margin-top: 0;
+  white-space: nowrap;
+  background: #ffffff;
+  color: #24A850;
+  border: 1px solid #24A850;
+  box-shadow: none;
+}
+
 .results-actions-mobile {
+  display: none;
+}
+
+.print-summary {
   display: none;
 }
 
@@ -739,7 +752,15 @@ button:hover {
     margin-left: 0;
   }
 
+  .results-print-btn {
+    width: 100%;
+  }
+
   .results-restart-btn-desktop {
+    display: none;
+  }
+
+  .results-print-btn-desktop {
     display: none;
   }
 
@@ -808,5 +829,173 @@ button:hover {
   .next-step-item,
   .device-cost {
     font-size: 14px;
+  }
+}
+
+@page {
+  margin: 0.45in;
+}
+
+@media print {
+  body {
+    background: #ffffff;
+    color: #111;
+  }
+
+  .container {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .card {
+    background: #ffffff;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .eyebrow,
+  #heroTitle,
+  #introText,
+  #progress,
+  #formStep,
+  #formNav,
+  .results-intro-heading,
+  .results-toolbar,
+  .results-actions-mobile,
+  .recommendation-card,
+  .results-disclaimer,
+  .all-results-panel,
+  .footer-branding {
+    display: none !important;
+  }
+
+  #result {
+    display: block !important;
+    margin-top: 0;
+  }
+
+  .print-summary {
+    display: block !important;
+    font-size: 10.5pt;
+    line-height: 1.25;
+  }
+
+  .print-title {
+    margin: 0 0 12px;
+    font-size: 18pt;
+    line-height: 1.1;
+    color: #0088FF;
+  }
+
+  .print-section {
+    margin-top: 12px;
+    break-inside: avoid;
+  }
+
+  .print-section-heading {
+    margin: 0 0 8px;
+    font-size: 11pt;
+    color: #24A850;
+  }
+
+  .print-input-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 14px;
+    margin: 0;
+  }
+
+  .print-input-item {
+    margin: 0;
+  }
+
+  .print-input-item dt {
+    font-weight: 700;
+    margin: 0 0 2px;
+  }
+
+  .print-input-item dd {
+    margin: 0;
+  }
+
+  .print-rec-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .print-rec-card {
+    border: 1px solid #dbe3f3;
+    border-radius: 12px;
+    padding: 10px;
+    break-inside: avoid;
+  }
+
+  .print-rec-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+
+  .print-rec-image {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    flex: 0 0 48px;
+  }
+
+  .print-rec-title {
+    margin: 0;
+    font-size: 11.5pt;
+    color: #24A850;
+  }
+
+  .print-rec-image-tag,
+  .print-rec-reason,
+  .print-rec-cost,
+  .print-rec-next,
+  .print-all-results-reason,
+  .print-disclaimer {
+    margin: 4px 0 0;
+  }
+
+  .print-rec-list,
+  .print-all-results-list {
+    margin: 4px 0 0;
+    padding-left: 16px;
+  }
+
+  .print-rec-list li,
+  .print-all-results-item {
+    margin-bottom: 3px;
+  }
+
+  .print-all-results-item {
+    list-style: disc;
+  }
+
+  .print-all-results-device {
+    font-weight: 700;
+  }
+
+  .print-all-results-tag {
+    margin-left: 6px;
+  }
+
+  .print-all-results-reason {
+    display: block;
+    color: #555;
+  }
+
+  .print-disclaimer {
+    margin-top: 12px;
+    font-size: 9pt;
+    color: #555;
   }
 }

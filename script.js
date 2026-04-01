@@ -963,6 +963,72 @@ function getAllResultsImage(recId, answers) {
   return getRecommendationImage(recId, answers, content);
 }
 
+function getQuestionLabelForPathway(questionId, pathway) {
+  if (pathway === "myself") {
+    const myselfLabels = {
+      ageInput: "How old are you?",
+      primaryUse: "How will you mostly use the device?",
+      transitLink: "Do you use public transit during your commute?",
+      carryChildren: "Do you plan to carry children with the device?",
+      distance: "What is your typical trip distance?",
+      routeType: "What will your ride mostly feel like?",
+      storage: "Which of these matters most when storing your device?"
+    };
+
+    return myselfLabels[questionId] || QUESTIONS[questionId]?.label || questionId;
+  }
+
+  return QUESTIONS[questionId]?.label || questionId;
+}
+
+function getAnswerDisplayValue(questionId, value) {
+  if (value === undefined || value === null || value === "") return "";
+
+  if (questionId === "ageInput") {
+    return String(value);
+  }
+
+  const options = QUESTIONS[questionId]?.options || [];
+  return options.find((option) => option.value === value)?.label || String(value);
+}
+
+function getPrintableQuestionKeys(rawAnswers) {
+  const pathway = rawAnswers.pathway || "myself";
+  const visibleKeys = getVisibleQuestionKeys(rawAnswers);
+
+  if (pathway === "child" || pathway === "adaptive") {
+    return visibleKeys.filter((key) => key !== "carryChildren");
+  }
+
+  return visibleKeys;
+}
+
+function renderPrintInputsSummary(rawAnswers) {
+  const pathway = rawAnswers.pathway || "myself";
+  const itemsHtml = getPrintableQuestionKeys(rawAnswers)
+    .map((questionId) => {
+      const label = getQuestionLabelForPathway(questionId, pathway);
+      const value = getAnswerDisplayValue(questionId, rawAnswers[questionId]);
+
+      if (!value) return "";
+
+      return `
+        <div class="print-input-item">
+          <dt>${label}</dt>
+          <dd>${value}</dd>
+        </div>
+      `;
+    })
+    .join("");
+
+  return `
+    <section class="print-section">
+      <h3 class="print-section-heading">Your inputs</h3>
+      <dl class="print-input-list">${itemsHtml}</dl>
+    </section>
+  `;
+}
+
 function getAllResultsReason(rec, answers, priority) {
   if (!answers) return "";
 
@@ -1063,6 +1129,106 @@ function renderAllDeviceResultsPanel(allRecommendations, answers) {
       <summary>See all device types</summary>
       <ul class="all-results-list">${itemsHtml}</ul>
     </details>
+  `;
+}
+
+function renderPrintRecommendationSummary(rec, answers, pathway) {
+  const content = RESULT_CONTENT[rec.id];
+  if (!content) return "";
+
+  const imageSrc = getRecommendationImage(rec.id, answers, content);
+  const imageTag = getRecommendationImageTag(rec.id, answers);
+  const considerationItems = getResultCardConsiderationItems(rec.id, answers, content);
+  let considerations = [...(content.considerations || [])];
+
+  if (rec.id === "cargoBike" && answers.carryChildren === "yes") {
+    considerations.push(CARGO_BIKE_CHILD_CONSIDERATION);
+  }
+
+  if (answers.storage !== "indoor" && (rec.id === "ebike" || rec.id === "escooter")) {
+    considerations = considerations.filter(
+      (item) => !item.includes("UL-certified batteries")
+    );
+  }
+
+  const trimmedConsiderations = [...considerationItems, ...considerations].slice(0, 2);
+  let nextSteps = [...(content.nextSteps || []), ...getDynamicNextSteps(rec.id, answers)]
+    .filter((step, index, allSteps) =>
+      allSteps.findIndex((candidate) => candidate.url === step.url) === index
+    )
+    .slice(0, 2);
+
+  const considerationsHtml = trimmedConsiderations
+    .map((item) => `<li>${item}</li>`)
+    .join("");
+
+  const nextStepsHtml = nextSteps
+    .map((step) => `<li>${step.label}</li>`)
+    .join("");
+
+  return `
+    <article class="print-rec-card">
+      <div class="print-rec-header">
+        ${imageSrc ? `<img src="${imageSrc}" alt="${rec.label}" class="print-rec-image">` : ""}
+        <div class="print-rec-title-wrap">
+          <h4 class="print-rec-title">${rec.label}</h4>
+          ${imageTag ? `<p class="print-rec-image-tag"><em>${imageTag}</em></p>` : ""}
+        </div>
+      </div>
+      <p class="print-rec-reason"><strong>Why this fits:</strong> ${getRecommendationReason(rec.id, answers, pathway)}</p>
+      <p class="print-rec-cost"><strong>Typical cost:</strong> ${content.cost}</p>
+      ${considerationsHtml ? `<ul class="print-rec-list">${considerationsHtml}</ul>` : ""}
+      ${nextStepsHtml ? `<p class="print-rec-next"><strong>Next steps:</strong></p><ul class="print-rec-list">${nextStepsHtml}</ul>` : ""}
+    </article>
+  `;
+}
+
+function renderPrintAllDevicesSummary(allRecommendations, answers) {
+  const visibleRecommendations = allRecommendations.filter((rec) => rec.score > 0);
+  if (!visibleRecommendations.length) return "";
+
+  const topScore = visibleRecommendations[0]?.score ?? 0;
+  const itemsHtml = visibleRecommendations
+    .map((rec, index) => {
+      const priority = getRecommendationPriorityMeta(index, rec.score, topScore);
+      const reason = getAllResultsReason(rec, answers, priority);
+
+      return `
+        <li class="print-all-results-item">
+          <span class="print-all-results-device">${rec.label}</span>
+          <span class="print-all-results-tag ${priority.className}">${priority.label}</span>
+          <span class="print-all-results-reason"><em>${reason}</em></span>
+        </li>
+      `;
+    })
+    .join("");
+
+  return `
+    <section class="print-section">
+      <h3 class="print-section-heading">See more device types</h3>
+      <ul class="print-all-results-list">${itemsHtml}</ul>
+    </section>
+  `;
+}
+
+function renderPrintSummary(recommendations, allRecommendations, answers, pathway) {
+  const rawAnswers = APP_STATE.answers || {};
+  const topRecommendationsHtml = recommendations
+    .slice(0, 2)
+    .map((rec) => renderPrintRecommendationSummary(rec, answers, pathway))
+    .join("");
+
+  return `
+    <section class="print-summary" aria-hidden="true">
+      <h2 class="print-title">Micromobility Buyer's Guide</h2>
+      ${renderPrintInputsSummary(rawAnswers)}
+      <section class="print-section">
+        <h3 class="print-section-heading">Your top results</h3>
+        <div class="print-rec-grid">${topRecommendationsHtml}</div>
+      </section>
+      ${renderPrintAllDevicesSummary(allRecommendations, answers)}
+      <p class="print-disclaimer">${SCORING_DISCLAIMER_TEXT}</p>
+    </section>
   `;
 }
 
@@ -1429,6 +1595,12 @@ function renderCurrentRecommendationPage() {
   const rec = recommendations[index];
   const cardHtml = renderSingleRecommendationCard(rec, answers, pathway);
   const allResultsPanelHtml = renderAllDeviceResultsPanel(allRecommendations, answers);
+  const printSummaryHtml = renderPrintSummary(
+    recommendations,
+    allRecommendations,
+    answers,
+    pathway
+  );
 
   const showPrev = index > 0;
   const showNext = index < recommendations.length - 1;
@@ -1466,6 +1638,14 @@ function renderCurrentRecommendationPage() {
 
       <button
         type="button"
+        class="results-print-btn results-print-btn-desktop"
+        data-role="print-results"
+      >
+        Print
+      </button>
+
+      <button
+        type="button"
         class="results-restart-btn results-restart-btn-desktop"
         data-role="restart-results"
       >
@@ -1476,6 +1656,14 @@ function renderCurrentRecommendationPage() {
     ${cardHtml}
 
     <div class="results-actions-mobile">
+      <button
+        type="button"
+        class="results-print-btn results-print-btn-mobile"
+        data-role="print-results"
+      >
+        Print
+      </button>
+
       <button
         type="button"
         class="results-restart-btn results-restart-btn-mobile"
@@ -1490,11 +1678,13 @@ function renderCurrentRecommendationPage() {
     </p>
 
     ${allResultsPanelHtml}
+    ${printSummaryHtml}
   `;
 
   const prevBtn = document.getElementById("resultPrevBtn");
   const nextBtn = document.getElementById("resultNextBtn");
   const restartBtns = document.querySelectorAll('[data-role="restart-results"]');
+  const printBtns = document.querySelectorAll('[data-role="print-results"]');
   const cardEl = result.querySelector(".recommendation-card");
 
   if (prevBtn) {
@@ -1520,6 +1710,12 @@ function renderCurrentRecommendationPage() {
       resetAppState();
       resetIntroState();
       renderQuestion();
+    });
+  });
+
+  printBtns.forEach((printBtn) => {
+    printBtn.addEventListener("click", () => {
+      window.print();
     });
   });
 
