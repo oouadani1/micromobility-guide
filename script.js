@@ -1390,6 +1390,7 @@ function getDynamicNextSteps(recId, answers) {
 
 function shouldSuggestFoldable(answers) {
   return (
+    answers.carryChildren !== "yes" &&
     answers.primaryUse === "transport" &&
     (answers.transitLink === "yes" || answers.storage === "indoor")
   );
