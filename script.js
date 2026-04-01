@@ -18,8 +18,8 @@ const OUTPUTS = {
     shortLabel: "E-scooter"
   },
   lowSpeedPoweredMicromobility: {
-    label: "Low Speed Powered Micromobility Devices",
-    shortLabel: "Low-speed powered devices"
+    label: "Other small powered devices",
+    shortLabel: "Small powered devices"
   },
   cargoBike: {
     label: "Cargo bike",
@@ -881,6 +881,11 @@ function enforceLowSpeedPlacement(sortedDevices) {
   );
 
   if (lowSpeedIndex === -1 || lowSpeedIndex >= 2) return sortedDevices;
+
+   const topScore = sortedDevices[0]?.score ?? 0;
+   const lowSpeedScore = sortedDevices[lowSpeedIndex]?.score ?? 0;
+
+   if (lowSpeedScore >= topScore - 1) return sortedDevices;
 
   const lowSpeedDevice = sortedDevices.splice(lowSpeedIndex, 1)[0];
   sortedDevices.splice(Math.min(2, sortedDevices.length), 0, lowSpeedDevice);
