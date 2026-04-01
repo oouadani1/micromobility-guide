@@ -135,7 +135,7 @@ const RESULT_CONTENT = {
 },
 
   bikeshare: {
-    image: "Bikeshare.jpg",
+    image: "Bikeshare-v2.png",
     cost: "$0-$120 per year depending on bikeshare membership or discounts",
     considerations: [
       "There are a few bikeshare systems in Massachusetts, including Bluebikes, Metro Mobility, ValleyBike Share, CargoB, and Port Bikeshare.",
