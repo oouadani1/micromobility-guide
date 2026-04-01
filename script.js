@@ -1887,7 +1887,10 @@ progress.textContent = "";
 
   const formNav = document.getElementById("formNav");
   if (formNav) {
-    formNav.classList.remove("hidden");
+    const bothNavButtonsHidden =
+      backBtn.classList.contains("hidden") &&
+      nextBtn.classList.contains("hidden");
+    formNav.classList.toggle("hidden", bothNavButtonsHidden);
   }
 }
 
