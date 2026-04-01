@@ -43,7 +43,7 @@ const INTRO_TEXT =
   "Micromobility devices are small, affordable, and flexible ways to get around, such as bikes, e-scooters, and more. Answer a few questions to see what micromobility devices could work well for you.";
 const RESULTS_INTRO_TEXT = "Here are your suggested micromobility options.";
 const EXPLORING_RESULTS_INTRO_TEXT =
-  "These suggestions can help you explore different micromobility options.";
+  "These results are ranked to help you explore and compare the full range of micromobility options.";
 const SCORING_DISCLAIMER_TEXT =
   "Suggestions are generated using an additive scoring system based on your responses. Results are informational only, and more than one device type may be appropriate.";
 const CARGO_BIKE_CHILD_CONSIDERATION =
@@ -616,9 +616,9 @@ const QUESTIONS = {
     label: "Who are you purchasing for?",
     options: [
       { value: "myself", label: "Myself" },
+      { value: "someoneElse", label: "Someone else" },
       { value: "child", label: "A child" },
-      { value: "adaptive", label: "Myself or for someone with a disability or mobility need" },
-      { value: "exploring", label: "I’m exploring options" }
+      { value: "exploring", label: "Explore and compare options" }
     ]
   },
   ageInput: {
@@ -626,6 +626,14 @@ const QUESTIONS = {
     label: "How old is the rider?",
     min: 3,
     max: 100
+  },
+  adaptiveNeed: {
+    type: "radio",
+    label: "Does the rider have a mobility disability or mobility need?",
+    options: [
+      { value: "yes", label: "Yes" },
+      { value: "no", label: "No" }
+    ]
   },
   primaryUse: {
     type: "radio",
@@ -737,11 +745,11 @@ function getCurrentSequence() {
   const pathway = getSelectedPathway();
   const visibleKeys = getVisibleQuestionKeys(APP_STATE.answers);
 
-  if (pathway === "myself" || pathway === "exploring") {
+  if (pathway === "myself" || pathway === "someoneElse" || pathway === "exploring") {
     return visibleKeys;
   }
 
-  if (pathway === "child" || pathway === "adaptive") {
+  if (pathway === "child") {
     return visibleKeys.filter((key) => key !== "carryChildren");
   }
 
@@ -887,10 +895,13 @@ function normalizeAnswers(rawAnswers) {
     pathway,
     ageInput: rawAnswers.ageInput || "",
     age: mapAgeToBracket(rawAnswers.ageInput),
-    adaptiveNeed: pathway === "adaptive" ? "yes" : "no",
+    adaptiveNeed:
+      pathway === "myself" || pathway === "someoneElse"
+        ? (rawAnswers.adaptiveNeed || "no")
+        : "no",
     primaryUse: rawAnswers.primaryUse || "",
     transitLink: rawAnswers.transitLink || "",
-    carryChildren: pathway === "myself" || pathway === "exploring"
+    carryChildren: pathway === "myself" || pathway === "someoneElse" || pathway === "exploring"
       ? (rawAnswers.carryChildren || "")
       : "no",
     distance: rawAnswers.distance || "",
@@ -981,6 +992,7 @@ function getQuestionLabelForPathway(questionId, pathway) {
   if (pathway === "myself") {
     const myselfLabels = {
       ageInput: "How old are you?",
+      adaptiveNeed: "Do you have a mobility disability or mobility need?",
       primaryUse: "How will you mostly use the device?",
       transitLink: "Do you use public transit during your commute?",
       carryChildren: "Do you plan to carry children with the device?",
@@ -990,6 +1002,34 @@ function getQuestionLabelForPathway(questionId, pathway) {
     };
 
     return myselfLabels[questionId] || QUESTIONS[questionId]?.label || questionId;
+  }
+
+  if (pathway === "someoneElse" || pathway === "exploring") {
+    const riderLabels = {
+      ageInput: "How old is the rider?",
+      adaptiveNeed: "Does the rider have a mobility disability or mobility need?",
+      primaryUse: "How will the rider mostly use the device?",
+      transitLink: "Will the rider be using public transit during their trip?",
+      carryChildren: "Does the rider plan to carry children with the device?",
+      distance: "What is the rider's typical trip distance?",
+      routeType: "What will the rider's ride mostly feel like?",
+      storage: "Which of these matters most when storing the rider's device?"
+    };
+
+    return riderLabels[questionId] || QUESTIONS[questionId]?.label || questionId;
+  }
+
+  if (pathway === "child") {
+    const childLabels = {
+      ageInput: "How old is the child?",
+      primaryUse: "How will the child mostly use the device?",
+      transitLink: "Will the child be using public transit during their trip?",
+      distance: "What is the child's typical trip distance?",
+      routeType: "What will the child's ride mostly feel like?",
+      storage: "Which of these matters most when storing the child's device?"
+    };
+
+    return childLabels[questionId] || QUESTIONS[questionId]?.label || questionId;
   }
 
   return QUESTIONS[questionId]?.label || questionId;
@@ -1010,7 +1050,7 @@ function getPrintableQuestionKeys(rawAnswers) {
   const pathway = rawAnswers.pathway || "myself";
   const visibleKeys = getVisibleQuestionKeys(rawAnswers);
 
-  if (pathway === "child" || pathway === "adaptive") {
+  if (pathway === "child") {
     return visibleKeys.filter((key) => key !== "carryChildren");
   }
 
@@ -1201,7 +1241,7 @@ function renderPrintSummary(recommendations, answers, pathway) {
       </div>
       ${renderPrintInputsSummary(rawAnswers)}
       <section class="print-section">
-        <h3 class="print-section-heading">Your top results</h3>
+        <h3 class="print-section-heading">${pathway === "exploring" ? "Ranked results" : "Your top results"}</h3>
         <div class="print-rec-grid">${topRecommendationsHtml}</div>
       </section>
       <p class="print-disclaimer">${SCORING_DISCLAIMER_TEXT}</p>
@@ -1264,10 +1304,6 @@ function getMatchedSupportKeys(answers) {
 }
 
 function getRecommendationReason(recId, answers, pathway) {
-  if (pathway === "exploring") {
-    return RATIONALE_TEXT[recId]?.base || "";
-  }
-
   const entry = RATIONALE_TEXT[recId];
   if (!entry) return "";
 
@@ -1580,7 +1616,8 @@ function renderCurrentRecommendationPage() {
 
   const rec = recommendations[index];
   const cardHtml = renderSingleRecommendationCard(rec, answers, pathway);
-  const allResultsPanelHtml = renderAllDeviceResultsPanel(allRecommendations, answers);
+  const allResultsPanelHtml =
+    pathway === "exploring" ? "" : renderAllDeviceResultsPanel(allRecommendations, answers);
   const printSummaryHtml = renderPrintSummary(
     recommendations,
     answers,
@@ -1745,7 +1782,10 @@ function submitCurrentAnswers() {
   const normalizedAnswers = normalizeAnswers(APP_STATE.answers);
   const scores = calculateScores(normalizedAnswers);
   const allRecommendations = getSortedRecommendations(scores, normalizedAnswers);
-  const recommendations = getTopRecommendations(allRecommendations);
+  const recommendations =
+    normalizedAnswers.pathway === "exploring"
+      ? allRecommendations
+      : getTopRecommendations(allRecommendations);
 
   renderRecommendations(
     recommendations,
@@ -1780,23 +1820,7 @@ function advanceFromCurrentRadioQuestion(selectedValue) {
 }
 
 function getRenderedQuestionLabel(questionId) {
-  const pathway = getSelectedPathway();
-
-  if (pathway === "myself") {
-    const myselfLabels = {
-      ageInput: "How old are you?",
-      primaryUse: "How will you mostly use the device?",
-      transitLink: "Do you use public transit during your commute?",
-      carryChildren: "Do you plan to carry children with the device?",
-      distance: "What is your typical trip distance?",
-      routeType: "What will your ride mostly feel like?",
-      storage: "Which of these matters most when storing your device?"
-    };
-
-    return myselfLabels[questionId] || QUESTIONS[questionId].label;
-  }
-
-  return QUESTIONS[questionId].label;
+  return getQuestionLabelForPathway(questionId, getSelectedPathway());
 }
 
 function renderQuestion() {
@@ -2084,9 +2108,14 @@ window.addEventListener("DOMContentLoaded", () => {
 function getVisibleQuestionKeys(answers) {
   const keys = [
     "pathway",
-    "ageInput",
-    "primaryUse"
+    "ageInput"
   ];
+
+  if (answers.pathway === "myself" || answers.pathway === "someoneElse") {
+    keys.push("adaptiveNeed");
+  }
+
+  keys.push("primaryUse");
 
   if (answers.primaryUse === "transport") {
     keys.push("transitLink");
