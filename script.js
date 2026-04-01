@@ -1880,17 +1880,14 @@ progress.textContent = "";
   }
 }
 
-  const shouldShowBack = APP_STATE.currentStep > 0;
-  const shouldShowNext = question.type === "number";
-
-  backBtn.classList.toggle("hidden", !shouldShowBack);
-  nextBtn.classList.toggle("hidden", !shouldShowNext);
+  backBtn.classList.toggle("hidden", APP_STATE.currentStep === 0);
+  nextBtn.classList.toggle("hidden", question.type !== "number");
   backBtn.innerHTML = "&#8249;";
   nextBtn.innerHTML = "&#8250;";
 
   const formNav = document.getElementById("formNav");
   if (formNav) {
-    formNav.classList.toggle("hidden", !shouldShowBack && !shouldShowNext);
+    formNav.classList.remove("hidden");
   }
 }
 
