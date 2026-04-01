@@ -105,7 +105,7 @@ const RESULT_CONTENT = {
 },
 
   lowSpeedPoweredMicromobility: {
-    image: "low-powered-mobility.png",
+    image: "low-power-mobility.png",
     cost: "$500-$2,500",
     considerations: [
       "These devices are best suited to short trips on smoother, lower-stress routes where the rider is already comfortable with balance and maneuvering.",
