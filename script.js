@@ -53,7 +53,7 @@ const YOUTH_PRODUCT_GUIDANCE_TEXT =
 
 const RESULT_CONTENT = {
   bicycle: {
-    image: "images/Bicycle.png",
+    image: "Bicycle.png",
     cost: "$300-$1,500",
     considerations: [
       "Wear a helmet, use front and rear lights, reflectors, and a bell so you remain visible and predictable to others on the road.",
@@ -71,7 +71,7 @@ const RESULT_CONTENT = {
 },
 
   ebike: {
-    image: "images/e-bike.png",
+    image: "E-bike.png",
     cost: "$1,000-$6,000",
     considerations: [
       "Wear a helmet, use front and rear lights, reflectors, and a bell. Ride predictably when sharing bike lanes, paths, or roadways. If you need to use a sidewalk, walk your bike.",
@@ -87,7 +87,7 @@ const RESULT_CONTENT = {
   },
 
   escooter: {
-    image: "images/E-Scooter.png",
+    image: "E-Scooter.png",
     cost: "$500-$2,000",
     considerations: [
       "Use a helmet, lights, and a bell to remain visible and alert others when riding in shared spaces.",
@@ -118,7 +118,7 @@ const RESULT_CONTENT = {
   },
 
   cargoBike: {
-    image: "images/Cargo_bike.png",
+    image: "Cargo_bike.png",
     cost: "$1,500-$7,500",
     considerations: [
       "Ensure the cargo bike is designed for the weight and type of items you plan to carry.",
@@ -134,7 +134,7 @@ const RESULT_CONTENT = {
 },
 
   bikeshare: {
-    image: "images/bikeshare.jpg",
+    image: "Bikeshare.jpg",
     cost: "$0-$120 per year depending on bikeshare membership or discounts",
     considerations: [
       "There are a few bikeshare systems in Massachusetts, including Bluebikes, Metro Mobility, ValleyBike Share, CargoB, and Port Bikeshare.",
@@ -151,7 +151,7 @@ const RESULT_CONTENT = {
 },
 
   adaptiveMobility: {
-    image: "images/Adaptive-v2.png",
+    image: "Adaptive-v2.png",
     extraLabel: "Suggested device types:",
     extraValue: "Tricycles, Recumbent cycles, Handcycles",
     cost: "$2,500-$10,000",
@@ -169,7 +169,7 @@ const RESULT_CONTENT = {
 },
 
     humanPoweredYouth: {
-    image: "images/youth-mobility.png",
+    image: "youth-mobility.png",
     cost: "$50-$500 depending on device type",
     considerations: [
       "Age-appropriate options may include kick scooters, rollerblades, bicycles, or tricycles depending on age, comfort, and coordination.",
@@ -1131,11 +1131,11 @@ function getRecommendationImage(recId, answers, content) {
   const foldableSuggested = shouldSuggestFoldable(answers);
 
   if (foldableSuggested && recId === "bicycle") {
-    return "images/foldable-bike-v2.png";
+    return "foldable-bike-v2.png";
   }
 
   if (foldableSuggested && recId === "ebike") {
-    return "images/foldable-ebike-v2.png";
+    return "foldable-ebike-v2.png";
   }
 
   return content.image;
