@@ -176,7 +176,7 @@ const RESULT_CONTENT = {
       url: "https://www.mass.gov/info-details/adaptive-cycling-equipment"
     },
     {
-      label: "Try out DCR's power-driven mobility devices"
+      label: "Try out DCR's power-driven mobility devices",
       url: "https://www.mass.gov/info-details/dcr-power-driven-mobility-devices"
     },
   ]
