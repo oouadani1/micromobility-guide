@@ -168,13 +168,13 @@ const RESULT_CONTENT = {
       url: "/micromobility-hub/device-library/adaptive-options.html"
     },
     {
-      label: "Learn more about mobility and transportation aid options in the Commonwealth",
-      url: "https://www.mass.gov/info-details/massability-transportation-resources"
+      label: "Check out DCR's Universal Access Program",
+      url: "https://www.mass.gov/orgs/universal-access-program"
     },
     {
-      label: "See if there are mobility aid devices available to borrow near you",
-      url: "https://www.mass.gov/info-details/assistive-technology-available-inventory-and-resources#can-i-borrow-an-assistive-technology-device"
-    }
+      label: "Check out DCR's adaptive cycling equipment list",
+      url: "https://www.mass.gov/info-details/adaptive-cycling-equipment"
+    },
   ]
 },
 
