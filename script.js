@@ -98,8 +98,8 @@ const RESULT_CONTENT = {
   ],
   nextSteps: [
     {
-      label: "Learn about electric scooters (coming soon)",
-      url: "/micromobility-hub/device-library/e-scooters.html"
+      label: "Learn about electric scooters",
+      url: "https://canva.link/t5ka95rvio5ijw3"
     }
   ]
 },
@@ -129,8 +129,8 @@ const RESULT_CONTENT = {
   ],
   nextSteps: [
     {
-      label: "Learn about cargo bike types (coming soon)",
-      url: "/micromobility-hub/device-library/cargo-bikes.html"
+      label: "Learn about cargo bike types",
+      url: "https://canva.link/gcyamow1yonirts"
     }
   ]
 },
