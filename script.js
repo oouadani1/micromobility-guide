@@ -618,7 +618,7 @@ const QUESTIONS = {
       { value: "myself", label: "Myself" },
       { value: "someoneElse", label: "Someone else" },
       { value: "child", label: "A child" },
-      { value: "exploring", label: "Explore and compare options" }
+      { value: "exploring", label: "Explore all device options" }
     ]
   },
   ageInput: {
@@ -2106,6 +2106,10 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 function getVisibleQuestionKeys(answers) {
+  if (answers.pathway === "exploring") {
+    return ["pathway"];
+  }
+
   const keys = [
     "pathway",
     "ageInput"
