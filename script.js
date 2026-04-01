@@ -103,7 +103,7 @@ const RESULT_CONTENT = {
 },
 
   lowSpeedPoweredMicromobility: {
-    image: "",
+    image: "low-powered-mobility.png",
     cost: "$500-$2,500",
     considerations: [
       "These devices are best suited to short trips on smoother, lower-stress routes where the rider is already comfortable with balance and maneuvering.",
@@ -1023,7 +1023,7 @@ function renderPrintInputsSummary(rawAnswers) {
 
   return `
     <section class="print-section">
-      <h3 class="print-section-heading">Your inputs</h3>
+      <h3 class="print-section-heading">Your responses</h3>
       <dl class="print-input-list">${itemsHtml}</dl>
     </section>
   `;
