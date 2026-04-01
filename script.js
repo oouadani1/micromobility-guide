@@ -153,7 +153,7 @@ const RESULT_CONTENT = {
 },
 
   adaptiveMobility: {
-    image: "Adaptive-v2.png",
+    image: "Adaptive-v3.png",
     extraLabel: "Suggested device types:",
     extraValue: "Tricycles, Recumbent cycles, Handcycles",
     cost: "$2,500-$10,000",
@@ -166,6 +166,14 @@ const RESULT_CONTENT = {
     {
       label: "Learn about adaptive mobility options (coming soon)",
       url: "/micromobility-hub/device-library/adaptive-options.html"
+    },
+    {
+      label: "Learn more about mobility and transportation aid options in the Commonwealth",
+      url: "https://www.mass.gov/info-details/massability-transportation-resources"
+    },
+    {
+      label: "See if there are mobility aid devices available to borrow near you",
+      url: "https://www.mass.gov/info-details/assistive-technology-available-inventory-and-resources#can-i-borrow-an-assistive-technology-device"
     }
   ]
 },
