@@ -62,8 +62,8 @@ const RESULT_CONTENT = {
   ],
   nextSteps: [
     {
-      label: "Learn about bicycles (coming soon)",
-      url: "/micromobility-hub/device-library/bicycles.html"
+      label: "Learn about bicycles",
+      url: "https://canva.link/nrvd5v2bvwbf99v"
     },
     {
       label: "Join a bike-friendly event",
@@ -794,6 +794,10 @@ function addScores(scores, ruleSet) {
 
 function applyOverrides(scores, answers) {
   const adjusted = { ...scores };
+
+  if (answers.pathway === "exploring") {
+    return adjusted;
+  }
 
   if (answers.age === "age3to13") {
     adjusted.bicycle = Number.NEGATIVE_INFINITY;
