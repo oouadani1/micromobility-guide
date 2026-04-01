@@ -1249,11 +1249,9 @@ function renderPrintSummary(recommendations, answers, pathway) {
       </div>
       ${renderPrintInputsSummary(rawAnswers)}
       <section class="print-section">
-        <h3 class="print-section-heading">${pathway === "exploring" ? "Ranked results" : "Your top results"}</h3>
+        <h3 class="print-section-heading">${pathway === "exploring" ? "Selected micromobility device" : "See micromobility options"}</h3>
         <div class="print-rec-grid">${topRecommendationsHtml}</div>
       </section>
-      <p class="print-disclaimer">${SCORING_DISCLAIMER_TEXT}</p>
-    </section>
   `;
 }
 
