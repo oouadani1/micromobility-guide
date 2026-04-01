@@ -168,12 +168,16 @@ const RESULT_CONTENT = {
       url: "/micromobility-hub/device-library/adaptive-options.html"
     },
     {
-      label: "Check out DCR's Universal Access Program",
+      label: "Learn more about the Department of Recreations's (DCP) Universal Access Program",
       url: "https://www.mass.gov/orgs/universal-access-program"
     },
     {
       label: "Check out DCR's adaptive cycling equipment list",
       url: "https://www.mass.gov/info-details/adaptive-cycling-equipment"
+    },
+    {
+      label: "Try out DCR's power-driven mobility devices"
+      url: "https://www.mass.gov/info-details/dcr-power-driven-mobility-devices"
     },
   ]
 },
