@@ -122,9 +122,9 @@ const RESULT_CONTENT = {
     image: "Cargo_bike.png",
     cost: "$1,500-$7,500",
     considerations: [
+      
       "Ensure the cargo bike is designed for the weight and type of items you plan to carry.",
       "Because cargo bikes are longer and heavier than standard bikes, practice handling and braking before riding in traffic.",
-      "Use lights and a bell to remain visible, especially when carrying large loads."
   ],
   nextSteps: [
     {
