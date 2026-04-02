@@ -1924,25 +1924,93 @@ function getRecommendationImage(recId, answers, content) {
   return content.image;
 }
 
+function getMatchedConsiderationSlots(answers) {
+  const slots = [];
+
+  if (answers.age) {
+    slots.push(answers.age);
+  }
+
+  if (answers.adaptiveNeed === "yes") {
+    slots.push("adaptiveNeedYes");
+  } else if (answers.adaptiveNeed === "no") {
+    slots.push("adaptiveNeedNo");
+  }
+
+  if (answers.primaryUse === "transport") {
+    slots.push("transport");
+  } else if (answers.primaryUse === "deliveries") {
+    slots.push("deliveries");
+  } else if (answers.primaryUse === "recreation") {
+    slots.push("recreation");
+  }
+
+  if (answers.transitLink === "yes") {
+    slots.push("transitLinkYes");
+  } else if (answers.transitLink === "no") {
+    slots.push("transitLinkNo");
+  }
+
+  if (answers.carryChildren === "yes") {
+    slots.push("carryChildrenYes");
+  } else if (answers.carryChildren === "no") {
+    slots.push("carryChildrenNo");
+  }
+
+  if (answers.distance === "under3") {
+    slots.push("distanceUnder3");
+  } else if (answers.distance === "3to9") {
+    slots.push("distance3to9");
+  } else if (answers.distance === "10plus") {
+    slots.push("distance10plus");
+  }
+
+  if (answers.routeType === "bikeLanes") {
+    slots.push("routeBikeLanes");
+  } else if (answers.routeType === "mixedRoads") {
+    slots.push("routeMixedRoads");
+  } else if (answers.routeType === "regularRoads") {
+    slots.push("routeRegularRoads");
+  } else if (answers.routeType === "trails") {
+    slots.push("routeTrails");
+  }
+
+  if (answers.storage === "indoor") {
+    slots.push("storageIndoor");
+  } else if (answers.storage === "outdoor") {
+    slots.push("storageOutdoor");
+  } else if (answers.storage === "notMajorConcern") {
+    slots.push("storageNotMajorConcern");
+  }
+
+  return slots;
+}
+
 function getResultCardConsiderationItems(recId, answers, content) {
   const items = [];
+  const handledSlots = new Set();
 
   if (answers.transitLink === "yes" && (recId === "bicycle" || recId === "ebike")) {
     items.push(getConsiderConditionalValue(recId, "transitLink"));
+    handledSlots.add("transitLinkYes");
   }
 
   if (recId === "ebike") {
     items.push(getConsiderConditionalValue(recId, "ohv"));
+    handledSlots.add("transport");
 
     items.push(
       answers.age === "age14to16"
         ? getConsiderConditionalValue(recId, "age14to16")
         : getConsiderConditionalValue(recId, "classes")
     );
+    handledSlots.add(answers.age === "age14to16" ? "age14to16" : "age17to49");
+    handledSlots.add("age50plus");
   }
 
   if (recId === "bicycle" && answers.carryChildren === "yes") {
     items.push(getConsiderConditionalValue(recId, "children"));
+    handledSlots.add("carryChildrenYes");
   }
 
   if (content.extraLabel && content.extraValue) {
@@ -1956,13 +2024,24 @@ function getResultCardConsiderationItems(recId, answers, content) {
 
   if (recId === "adaptiveMobility" && answers.pathway === "child" && answers.adaptiveNeed === "yes") {
     items.push(getConsiderConditionalValue(recId, "adaptiveChild"));
+    handledSlots.add("adaptiveNeedYes");
   }
 
   if (recId === "humanPoweredYouth" && answers.age === "age3to13") {
     items.push(getConsiderConditionalValue(recId, "youthGuidance"));
+    handledSlots.add("age3to13");
   }
 
-  return items.filter(Boolean);
+  getMatchedConsiderationSlots(answers).forEach((slot) => {
+    if (handledSlots.has(slot)) return;
+
+    const value = getConsiderConditionalValue(recId, slot);
+    if (value) {
+      items.push(value);
+    }
+  });
+
+  return items.filter(Boolean).filter((item, index, allItems) => allItems.indexOf(item) === index);
 }
 
 function getRecommendationImageTag(recId, answers) {
