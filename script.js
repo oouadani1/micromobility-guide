@@ -41,7 +41,7 @@ const OUTPUTS = {
 
 const INTRO_TEXT =
   "Micromobility devices are small, affordable, and flexible ways to get around, such as bikes, e-scooters, and more. Answer a few questions to see what micromobility devices could work well for you.";
-const RESULTS_INTRO_TEXT = "Here are your suggested micromobility options.";
+const RESULTS_INTRO_TEXT = "Based on your responses, these micromobility options may be a good fit for you.";
 const EXPLORING_RESULTS_TITLE_TEXT = "Explore a variety of micromobility devices.";
 const SCORING_DISCLAIMER_TEXT =
   "Suggestions are generated using an additive scoring system based on your responses. Results are informational only, and more than one device type may be appropriate.";
@@ -57,7 +57,7 @@ const RESULT_CONTENT = {
     image: "Bicycle.png",
     cost: "$300-$1,500",
     considerations: [
-      "Wear a helmet, use front and rear lights, reflectors, and a bell so you remain visible and predictable to others on the road.",
+      "A standard bicycle is simple, reliable, and low-cost to maintain. It requires more physical effort than e-devices, and may feel less comfortable on longer or hillier trips, but it is also a great source of exercise .",
   ],
   nextSteps: [
     {
@@ -1450,7 +1450,7 @@ function getResultCardConsiderationItems(recId, answers, content) {
 
   if (recId === "ebike") {
     items.push(
-      "Since they can look similiar, be careful not to confuse an e-bike with a higher-powered e-moto or e-dirt bike, which are considered Off-Highway Vehicles (OHVs) and must be registered with the Massachusetts Environmental Police (OHVs)."
+      "Since they can look similiar, be careful not to confuse an e-bike with a higher-powered e-moto or e-dirt bike, which are considered Off-Highway Vehicles (OHVs) and must be registered with the Massachusetts Environmental Police."
     );
 
     items.push(
