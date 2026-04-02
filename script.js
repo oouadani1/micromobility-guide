@@ -61,7 +61,7 @@ const RESULT_CONTENT = {
   ],
   nextSteps: [
     {
-      label: "Learn about bicycles",
+      label: "Learn more about bicycles",
       url: "https://canva.link/nrvd5v2bvwbf99v"
     },
     {
@@ -81,7 +81,7 @@ const RESULT_CONTENT = {
     ],
     nextSteps: [
       {
-        label: "Learn about e-bike types and classes",
+        label: "Learn more about e-bikes",
         url: "https://canva.link/ez6c09mq8tpfpk4"
       }
     ]
@@ -97,7 +97,7 @@ const RESULT_CONTENT = {
   ],
   nextSteps: [
     {
-      label: "Learn about electric scooters",
+      label: "more about electric scooters",
       url: "https://canva.link/t5ka95rvio5ijw3"
     }
   ]
@@ -128,7 +128,7 @@ const RESULT_CONTENT = {
   ],
   nextSteps: [
     {
-      label: "Learn about cargo bike types",
+      label: "Learn more about cargo bikes",
       url: "https://canva.link/gcyamow1yonirts"
     }
   ]
@@ -163,7 +163,7 @@ const RESULT_CONTENT = {
   ],
   nextSteps: [
     {
-      label: "Learn about adaptive mobility options (coming soon)",
+      label: "Learn more about adaptive mobility options (coming soon)",
       url: "/micromobility-hub/device-library/adaptive-options.html"
     },
     {
