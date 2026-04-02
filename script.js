@@ -191,8 +191,8 @@ const RESULT_CONTENT = {
   ],
   nextSteps: [
     {
-      label: "Learn about youth mobility options (coming soon)",
-      url: "/micromobility-hub/device-library/youth-mobility.html"
+      label: "Learn more about youth mobility options",
+      url: "https://canva.link/60qopm17rsnhlls"
     }
   ]
 },
