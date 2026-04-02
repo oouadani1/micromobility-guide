@@ -81,7 +81,7 @@ const DEVICE_CONTENT = {
       // Route type
       routeBikeLanes: "",
       routeMixedRoads: "",
-      routeRegularRoads: "While it is more stable than smaller micromobility devices on roads without bike lanes, you may want to consider an e-device to keep with the flow of traffic.",
+      routeRegularRoads: "While it is more stable than smaller micromobility devices on roads without bike lanes, you may want to consider an e-device to keep up with the flow of traffic.",
       routeTrails: "Some types of bikes, such as mountain bikes, are a great fit on trails and unpaved paths.",
       // Storage
       storageIndoor: "",
@@ -930,7 +930,7 @@ const SCORING_RULES = {
       bikeshare: 0
     },
     outdoor: {
-      bicycle: 1,
+      bicycle: 2,
       ebike: 1,
       escooter: 1,
       cargoBike: 0,
