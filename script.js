@@ -1430,7 +1430,7 @@ function getResultCardConsiderationItems(recId, answers, content) {
 
   if (recId === "ebike") {
     items.push(
-      "Be careful not to confuse an e-bike with a higher-powered e-moto or e-dirt bike, which may require registration, licensure, or different rules."
+      "Since they can look similiar, be careful not to confuse an e-bike with a higher-powered e-moto or e-dirt bike, which are considered Off-Highway Vehicles (OHVs) and must be registered with the Massachusetts Environmental Police (OHVs)."
     );
 
     items.push(
