@@ -1508,7 +1508,9 @@ function getRecommendationImageTag(recId, answers) {
 function renderSingleRecommendationCard(rec, answers, pathway) {
   const content = RESULT_CONTENT[rec.id];
   const considerationItems = getResultCardConsiderationItems(rec.id, answers, content);
-  const rationaleHeading = pathway === "exploring" ? "Why consider it" : "Why this fits";
+  const rationaleHeading = pathway === "myself" ? "Why this might work for you" : "Why this fits";
+  const rationaleHeading = pathway === "someoneElse" ? "Why this might be a good fit" : "Why this fits";
+  const rationaleHeading = pathway === "exploring" ? "Why this might fit" : "Why this fits";
   let considerations = [...content.considerations];
 
   if (rec.id === "cargoBike" && answers.carryChildren === "yes") {
