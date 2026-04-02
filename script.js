@@ -45,157 +45,257 @@ const RESULTS_INTRO_TEXT = "Based on your responses, these micromobility options
 const EXPLORING_RESULTS_TITLE_TEXT = "Explore a variety of micromobility devices.";
 const SCORING_DISCLAIMER_TEXT =
   "Suggestions are generated using an additive scoring system based on your responses. Results are informational only, and more than one device type may be appropriate.";
-const CARGO_BIKE_CHILD_CONSIDERATION =
-  "When carrying children, make sure they wear properly fitted helmets and are secured in appropriate seats or harnesses.";
-const YOUTH_PRODUCT_GUIDANCE_TEXT =
-  "Children ages 9 to 12 can often ride bicycles and kick scooters confidently, but faster motorized devices are generally not appropriate because balancing, steering, and risk-taking behaviors can make them harder to use safely.";
 const PRINT_ICON_SVG =
   '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 9V4h10v5"/><path d="M7 14H5a2 2 0 0 1-2-2v-1.5A2.5 2.5 0 0 1 5.5 8h13A2.5 2.5 0 0 1 21 10.5V12a2 2 0 0 1-2 2h-2"/><path d="M7 12h10v8H7z"/><circle cx="17.5" cy="10.5" r=".75" fill="currentColor" stroke="none"/></svg>';
 
-const RESULT_CONTENT = {
+const DEVICE_CONTENT = {
   bicycle: {
+    // migrated from old RESULT_CONTENT / RATIONALE_TEXT
     image: "Bicycle.png",
     cost: "$300-$1,500",
-    considerations: [
-      "A standard bicycle is simple, reliable, and low-cost to maintain. It requires more physical effort than e-devices, and may feel less comfortable on longer or hillier trips, but it is also a great source of exercise .",
-  ],
-  nextSteps: [
-    {
-      label: "Learn more about bicycles",
-      url: "https://canva.link/nrvd5v2bvwbf99v"
+    // WHY BASE
+    whyBase: "A standard bicycle is a versatile option for everyday riding.",
+    // WHY CONDITIONAL
+    whyConditional: {
+      transport: "It can be a good fit for short commutes and running quick errands.",
+      recreation: "It is especially well suited for recreation and exercise.",
+      deliveries: "It can support smaller work-related trips and deliveries.",
+      transitLink: "It can also work well for trips that connect to transit.",
+      under3: "It is a practical option for shorter distances.",
+      longDistance: "It may still work for longer trips, depending on comfort and route conditions.",
+      bikeLanes: "It is especially well suited for bike lanes and shared-use paths.",
+      mixedRoads: "It can work well on a mix of bike lanes and local roads.",
+      regularRoads: "It can feel more stable than smaller devices on roads with vehicle traffic.",
+      trails: "Some types, such as mountain bikes, are also a good fit for trails and unpaved paths.",
+      children: "With the right add-ons, it can also support carrying a child."
     },
-    {
-      label: "Join a bike-friendly event",
-      url: "https://www.massbike.org/massachusetts-bike-friendly-events-calendar"
-    }
-  ]
-},
-
+    // CONSIDER BASE
+    considerBase: [
+      "A standard bicycle is simple, reliable, and low-cost to maintain. It requires more physical effort than e-devices, and may feel less comfortable on longer or hillier trips, but it is also a great source of exercise ."
+    ],
+    // CONSIDER CONDITIONAL
+    considerConditional: {
+      transitLink: "Check MBTA or your local RTA rules before bringing a device onboard, and look into nearby station bike parking or bike shed options where available.",
+      children: `
+      <span class="recommendation-extra">
+        <span class="recommendation-extra-label">Suggested add-ons:</span>
+        <span class="recommendation-extra-value">Kid seat, Tag-along bike attachment, Bike trailer</span>
+      </span>
+    `
+    },
+    nextSteps: [
+      { label: "Learn more about bicycles", url: "https://canva.link/nrvd5v2bvwbf99v" },
+      { label: "Join a bike-friendly event", url: "https://www.massbike.org/massachusetts-bike-friendly-events-calendar" }
+    ]
+  },
   ebike: {
+    // migrated from old RESULT_CONTENT / RATIONALE_TEXT / getResultCardConsiderationItems
     image: "E-bike.png",
     cost: "$1,000-$6,000",
-    considerations: [
+    // WHY BASE
+    whyBase: "An e-bike can make everyday trips easier and less tiring.",
+    // WHY CONDITIONAL
+    whyConditional: {
+      transport: "It is especially useful for commuting and running errands.",
+      recreation: "It can also be a comfortable option for recreational riding.",
+      deliveries: "It can be a strong fit for frequent trips or work-related use.",
+      transitLink: "It may also work well for trips that connect to transit, especially if storage or parking is limited.",
+      under3: "It can still be a good option for short trips, especially if convenience matters.",
+      longDistance: "It can make longer distances more manageable.",
+      bikeLanes: "It works well on bike lanes and shared-use paths.",
+      mixedRoads: "It can also work well on a mix of bike lanes and local roads.",
+      regularRoads: "It may feel more comfortable than a smaller device on roads with vehicle traffic.",
+      trails: "It can also work well on many paths and trail settings.",
+      children: "Some models can also support carrying children or extra cargo."
+    },
+    // CONSIDER BASE
+    considerBase: [
       "Wear a helmet, use front and rear lights, reflectors, and a bell. Ride predictably when sharing bike lanes, paths, or roadways. If you need to use a sidewalk, walk your bike.",
       "Choose e-bikes with UL-certified batteries and electrical systems, and follow safe charging practices if storing indoors to avoid the risk of thermal runaway.",
       "Become familiar with your e-bike's class, speed, and braking performance before riding in traffic or crowded areas."
     ],
+    // CONSIDER CONDITIONAL
+    considerConditional: {
+      transitLink: "Check MBTA or your local RTA rules before bringing a device onboard, and look into nearby station bike parking or bike shed options where available.",
+      ohv: "Since they can look similiar, be careful not to confuse an e-bike with a higher-powered e-moto or e-dirt bike, which are considered Off-Highway Vehicles (OHVs) and must be registered with the Massachusetts Environmental Police.",
+      age14to16: "While e-bikes come in three classes, only Class 1 e-bikes are suggested for you given your age because of their manageable speed and power. This is based on recommendations made by the Special Commission on Micromobility. Ask your parents to learn more.",
+      classes: "E-bikes come in three classes. Research the ones that best meet your needs."
+    },
     nextSteps: [
-      {
-        label: "Learn more about e-bikes",
-        url: "https://canva.link/ez6c09mq8tpfpk4"
-      }
+      { label: "Learn more about e-bikes", url: "https://canva.link/ez6c09mq8tpfpk4" }
     ]
   },
-
   escooter: {
+    // migrated from old RESULT_CONTENT / RATIONALE_TEXT
     image: "E-Scooter.png",
     cost: "$500-$2,000",
-    considerations: [
+    // WHY BASE
+    whyBase: "An e-scooter can be a convenient option for quick, short trips.",
+    // WHY CONDITIONAL
+    whyConditional: {
+      transport: "It can work well for short commutes and first- or last-mile trips.",
+      recreation: "It can also be a fun option for casual riding.",
+      transitLink: "It can be especially useful for trips that connect to transit.",
+      under3: "It is best suited for shorter distances.",
+      bikeLanes: "It works best where there is dedicated bike space or shared-use paths.",
+      mixedRoads: "It may work in mixed conditions, but comfort can depend on the route."
+    },
+    // CONSIDER BASE
+    considerBase: [
       "Use a helmet, lights, and a bell to remain visible and alert others when riding in shared spaces.",
       "Ride where scooters are permitted, such as bike lanes or roadways, and avoid sidewalks. If you need to use a sidewalk, walk your e-scooter.",
       "Choose devices with UL-certified batteries and electrical systems, and follow safe charging practices if storing indoors to avoid the risk of thermal runaway."
-  ],
-  nextSteps: [
-    {
-      label: "more about electric scooters",
-      url: "https://canva.link/t5ka95rvio5ijw3"
-    }
-  ]
-},
-
+    ],
+    // CONSIDER CONDITIONAL
+    considerConditional: {},
+    nextSteps: [
+      { label: "more about electric scooters", url: "https://canva.link/t5ka95rvio5ijw3" }
+    ]
+  },
   lowSpeedPoweredMicromobility: {
+    // migrated from old RESULT_CONTENT / RATIONALE_TEXT
     image: "low-power-mobility.png",
     cost: "$500-$2,500",
-    considerations: [
+    // WHY BASE
+    whyBase: "Low speed powered micromobility devices can be a niche fit for short trips on smoother, lower-stress routes.",
+    // WHY CONDITIONAL
+    whyConditional: {
+      transport: "They may work for short commuting or errand trips when storage and route conditions are favorable.",
+      recreation: "They can also be a recreation-oriented option for riders who are already comfortable balancing and maneuvering.",
+      transitLink: "They can be easier to bring inside or combine with transit than larger devices.",
+      under3: "They are best suited to shorter distances.",
+      bikeLanes: "They work best on smoother routes with separation from traffic.",
+      trails: "Some riders may prefer using them in park-like settings away from vehicle traffic."
+    },
+    // CONSIDER BASE
+    considerBase: [
       "These devices are best suited to short trips on smoother, lower-stress routes where the rider is already comfortable with balance and maneuvering.",
       "They are not a strong fit for carrying children, rough pavement, or routes with a lot of vehicle traffic."
     ],
+    // CONSIDER CONDITIONAL
+    considerConditional: {},
     nextSteps: [
-      {
-        label: "Learn about low speed powered devices (coming soon)",
-        url: "/micromobility-hub/device-library/low-speed-powered-devices.html"
-      }
+      { label: "Learn about low speed powered devices (coming soon)", url: "/micromobility-hub/device-library/low-speed-powered-devices.html" }
     ]
   },
-
   cargoBike: {
+    // migrated from old RESULT_CONTENT / RATIONALE_TEXT / CARGO_BIKE_CHILD_CONSIDERATION
     image: "Cargo_bike.png",
     cost: "$1,500-$7,500",
-    considerations: [
-      
+    // WHY BASE
+    whyBase: "A cargo bike is a great option when a standard bike may not carry enough.",
+    // WHY CONDITIONAL
+    whyConditional: {
+      transport: "It is especially useful for errands such as groceries, hauling supplies, or carrying larger items.",
+      deliveries: "It can be a strong fit for deliveries or heavier-duty daily use.",
+      under3: "It can work well for shorter local trips with cargo.",
+      longDistance: "It can also support longer trips, especially in electric versions.",
+      bikeLanes: "It can work well on bike-friendly routes with enough space.",
+      regularRoads: "Its larger size can feel more stable and visible on roads with vehicle traffic.",
+      children: "It is one of the best options for carrying children."
+    },
+    // CONSIDER BASE
+    considerBase: [
       "Ensure the cargo bike is designed for the weight and type of items you plan to carry.",
-      "Because cargo bikes are longer and heavier than standard bikes, practice handling and braking before riding in traffic.",
-  ],
-  nextSteps: [
-    {
-      label: "Learn more about cargo bikes",
-      url: "https://canva.link/gcyamow1yonirts"
-    }
-  ]
-},
-
+      "Because cargo bikes are longer and heavier than standard bikes, practice handling and braking before riding in traffic."
+    ],
+    // CONSIDER CONDITIONAL
+    considerConditional: {
+      children: "When carrying children, make sure they wear properly fitted helmets and are secured in appropriate seats or harnesses."
+    },
+    nextSteps: [
+      { label: "Learn more about cargo bikes", url: "https://canva.link/gcyamow1yonirts" }
+    ]
+  },
   bikeshare: {
+    // migrated from old RESULT_CONTENT / RATIONALE_TEXT
     image: "Bikeshare-v2.png",
     cost: "$0-$120 per year depending on bikeshare membership or discounts",
-    considerations: [
+    // WHY BASE
+    whyBase: "Bikeshare can be a practical option if flexibility matters more than ownership.",
+    // WHY CONDITIONAL
+    whyConditional: {
+      transport: "It can work especially well for everyday trips near transit, schools, downtowns, and other active areas.",
+      transitLink: "It can be especially helpful for first- and last-mile trips that connect to transit.",
+      under3: "It is especially convenient for shorter trips.",
+      bikeLanes: "It works best where bike lanes or shared-use paths are available.",
+      storage: "It can be a good fit when storage is limited or inconvenient."
+    },
+    // CONSIDER BASE
+    considerBase: [
       "There are a few bikeshare systems in Massachusetts, including Bluebikes, Metro Mobility, ValleyBike Share, CargoB, and Port Bikeshare.",
       "Check whether a bikeshare system is available near your starting point and destination.",
       "Follow local bicycling rules and ride in bike lanes or shared paths when available.",
       "Consider using helmets and reflective gear when riding in low-light conditions."
-  ],
-  nextSteps: [
-    {
-      label: "Learn about bikeshare options (coming soon)",
-      url: "/micromobility-hub/device-library/bikeshare.html"
-    }
-  ]
-},
-
+    ],
+    // CONSIDER CONDITIONAL
+    considerConditional: {},
+    nextSteps: [
+      { label: "Learn about bikeshare options (coming soon)", url: "/micromobility-hub/device-library/bikeshare.html" }
+    ]
+  },
   adaptiveMobility: {
+    // migrated from old RESULT_CONTENT / RATIONALE_TEXT / getResultCardConsiderationItems
     image: "Adaptive-v3.png",
-    extraLabel: "Suggested device types:",
-    extraValue: "Tricycles, Recumbent cycles, Handcycles",
     cost: "$2,500-$10,000",
-    considerations: [
+    // WHY BASE
+    whyBase: "An adaptive device may be a better fit for riders with different mobility needs.",
+    // WHY CONDITIONAL
+    whyConditional: {
+      transport: "Many are designed for everyday use, and some can also carry larger loads.",
+      recreation: "It can be especially well suited for recreation and exercise.",
+      under3: "It may work well for shorter local trips.",
+      longDistance: "Some options can also support longer rides more comfortably.",
+      bikeLanes: "It can work well on bike-friendly routes and shared-use paths.",
+      trails: "It may be especially comfortable on trails and path-based routes.",
+      regularRoads: "A more stable device may feel more comfortable on regular roads."
+    },
+    // CONSIDER BASE
+    considerBase: [
       "Adaptive mobility devices include a range of designs such as tricycles or hand-powered cycles that support different mobility needs.",
       "Consider visibility features such as lights, reflectors, or flags to improve safety on shared paths or roadways.",
       "Some adaptive devices require additional space for storage or transport."
-  ],
-  nextSteps: [
-    {
-      label: "Learn more about adaptive mobility options (coming soon)",
-      url: "/micromobility-hub/device-library/adaptive-options.html"
+    ],
+    // CONSIDER CONDITIONAL
+    considerConditional: {
+      adaptiveChild: "Look for adaptive options that match the child's size, comfort, and supervision needs, and try borrowing equipment first when possible.",
+      childWhyBase: "An adaptive device may be a better fit for a child with a mobility disability or mobility need. Different device types can support comfort, fit, and confidence depending on how and where the child will ride."
     },
-    {
-      label: "Learn more about the Department of Recreations's (DCP) Universal Access Program",
-      url: "https://www.mass.gov/orgs/universal-access-program"
-    },
-    {
-      label: "Check out DCR's adaptive cycling equipment list",
-      url: "https://www.mass.gov/info-details/adaptive-cycling-equipment"
-    },
-    {
-      label: "Try out DCR's power-driven mobility devices",
-      url: "https://www.mass.gov/info-details/dcr-power-driven-mobility-devices"
-    },
-  ]
-},
-
-    humanPoweredYouth: {
+    nextSteps: [
+      { label: "Learn more about adaptive mobility options (coming soon)", url: "/micromobility-hub/device-library/adaptive-options.html" },
+      { label: "Learn more about the Department of Recreations's (DCP) Universal Access Program", url: "https://www.mass.gov/orgs/universal-access-program" },
+      { label: "Check out DCR's adaptive cycling equipment list", url: "https://www.mass.gov/info-details/adaptive-cycling-equipment" },
+      { label: "Try out DCR's power-driven mobility devices", url: "https://www.mass.gov/info-details/dcr-power-driven-mobility-devices" }
+    ],
+    extraLabel: "Suggested device types:",
+    extraValue: "Tricycles, Recumbent cycles, Handcycles"
+  },
+  humanPoweredYouth: {
+    // migrated from old RESULT_CONTENT / RATIONALE_TEXT / YOUTH_PRODUCT_GUIDANCE_TEXT
     image: "youth-mobility.png",
     cost: "$50-$500 depending on device type",
-    considerations: [
+    // WHY BASE
+    whyBase: "Age-appropriate mobility options can help younger riders build confidence and skills over time.",
+    // WHY CONDITIONAL
+    whyConditional: {
+      recreation: "These options are often a good fit for recreation, practice, and everyday neighborhood riding.",
+      under3: "They are especially well suited for shorter trips.",
+      trails: "They can work well in parks, on paths, and in other lower-stress riding environments."
+    },
+    // CONSIDER BASE
+    considerBase: [
       "Age-appropriate options may include kick scooters, rollerblades, bicycles, or tricycles depending on age, comfort, and coordination.",
       "Choose a device that matches the rider’s confidence level and the kinds of places where they will ride.",
       "Start in parks, backyards, or low-traffic streets, and always use a properly fitted helmet and other protective gear."
-  ],
-  nextSteps: [
-    {
-      label: "Learn more about youth mobility options",
-      url: "https://canva.link/60qopm17rsnhlls"
-    }
-  ]
-},
+    ],
+    // CONSIDER CONDITIONAL
+    considerConditional: {
+      youthGuidance: "Children ages 9 to 12 can often ride bicycles and kick scooters confidently, but faster motorized devices are generally not appropriate because balancing, steering, and risk-taking behaviors can make them harder to use safely."
+    },
+    nextSteps: [
+      { label: "Learn more about youth mobility options", url: "https://canva.link/60qopm17rsnhlls" }
+    ]
+  }
 };
 
 const SCORING_RULES = {
@@ -421,112 +521,6 @@ const SCORING_RULES = {
   }
 };
 
-const RATIONALE_TEXT = {
-  bicycle: {
-    base: "A standard bicycle is a versatile option for everyday riding.",
-    supports: {
-      transport: "It can be a good fit for short commutes and running quick errands.",
-      recreation: "It is especially well suited for recreation and exercise.",
-      deliveries: "It can support smaller work-related trips and deliveries.",
-      transitLink: "It can also work well for trips that connect to transit.",
-      under3: "It is a practical option for shorter distances.",
-      longDistance: "It may still work for longer trips, depending on comfort and route conditions.",
-      bikeLanes: "It is especially well suited for bike lanes and shared-use paths.",
-      mixedRoads: "It can work well on a mix of bike lanes and local roads.",
-      regularRoads: "It can feel more stable than smaller devices on roads with vehicle traffic.",
-      trails: "Some types, such as mountain bikes, are also a good fit for trails and unpaved paths.",
-      children: "With the right add-ons, it can also support carrying a child."
-    }
-  },
-
-  ebike: {
-    base: "An e-bike can make everyday trips easier and less tiring.",
-    supports: {
-      transport: "It is especially useful for commuting and running errands.",
-      recreation: "It can also be a comfortable option for recreational riding.",
-      deliveries: "It can be a strong fit for frequent trips or work-related use.",
-      transitLink: "It may also work well for trips that connect to transit, especially if storage or parking is limited.",
-      under3: "It can still be a good option for short trips, especially if convenience matters.",
-      longDistance: "It can make longer distances more manageable.",
-      bikeLanes: "It works well on bike lanes and shared-use paths.",
-      mixedRoads: "It can also work well on a mix of bike lanes and local roads.",
-      regularRoads: "It may feel more comfortable than a smaller device on roads with vehicle traffic.",
-      trails: "It can also work well on many paths and trail settings.",
-      children: "Some models can also support carrying children or extra cargo."
-    }
-  },
-
-  escooter: {
-    base: "An e-scooter can be a convenient option for quick, short trips.",
-    supports: {
-      transport: "It can work well for short commutes and first- or last-mile trips.",
-      recreation: "It can also be a fun option for casual riding.",
-      transitLink: "It can be especially useful for trips that connect to transit.",
-      under3: "It is best suited for shorter distances.",
-      bikeLanes: "It works best where there is dedicated bike space or shared-use paths.",
-      mixedRoads: "It may work in mixed conditions, but comfort can depend on the route."
-    }
-  },
-
-  lowSpeedPoweredMicromobility: {
-    base: "Low speed powered micromobility devices can be a niche fit for short trips on smoother, lower-stress routes.",
-    supports: {
-      transport: "They may work for short commuting or errand trips when storage and route conditions are favorable.",
-      recreation: "They can also be a recreation-oriented option for riders who are already comfortable balancing and maneuvering.",
-      transitLink: "They can be easier to bring inside or combine with transit than larger devices.",
-      under3: "They are best suited to shorter distances.",
-      bikeLanes: "They work best on smoother routes with separation from traffic.",
-      trails: "Some riders may prefer using them in park-like settings away from vehicle traffic."
-    }
-  },
-
-  cargoBike: {
-    base: "A cargo bike is a great option when a standard bike may not carry enough.",
-    supports: {
-      transport: "It is especially useful for errands such as groceries, hauling supplies, or carrying larger items.",
-      deliveries: "It can be a strong fit for deliveries or heavier-duty daily use.",
-      under3: "It can work well for shorter local trips with cargo.",
-      longDistance: "It can also support longer trips, especially in electric versions.",
-      bikeLanes: "It can work well on bike-friendly routes with enough space.",
-      regularRoads: "Its larger size can feel more stable and visible on roads with vehicle traffic.",
-      children: "It is one of the best options for carrying children."
-    }
-  },
-
-  bikeshare: {
-    base: "Bikeshare can be a practical option if flexibility matters more than ownership.",
-    supports: {
-      transport: "It can work especially well for everyday trips near transit, schools, downtowns, and other active areas.",
-      transitLink: "It can be especially helpful for first- and last-mile trips that connect to transit.",
-      under3: "It is especially convenient for shorter trips.",
-      bikeLanes: "It works best where bike lanes or shared-use paths are available.",
-      storage: "It can be a good fit when storage is limited or inconvenient."
-    }
-  },
-
-  adaptiveMobility: {
-    base: "An adaptive device may be a better fit for riders with different mobility needs.",
-    supports: {
-      transport: "Many are designed for everyday use, and some can also carry larger loads.",
-      recreation: "It can be especially well suited for recreation and exercise.",
-      under3: "It may work well for shorter local trips.",
-      longDistance: "Some options can also support longer rides more comfortably.",
-      bikeLanes: "It can work well on bike-friendly routes and shared-use paths.",
-      trails: "It may be especially comfortable on trails and path-based routes.",
-      regularRoads: "A more stable device may feel more comfortable on regular roads."
-    }
-  },
-
-  humanPoweredYouth: {
-    base: "Age-appropriate mobility options can help younger riders build confidence and skills over time.",
-    supports: {
-      recreation: "These options are often a good fit for recreation, practice, and everyday neighborhood riding.",
-      under3: "They are especially well suited for shorter trips.",
-      trails: "They can work well in parks, on paths, and in other lower-stress riding environments."
-    }
-  }
-};
-
 const RATIONALE_PRIORITY = {
   bicycle: [
     "children",
@@ -608,6 +602,30 @@ const RATIONALE_PRIORITY = {
     "trails"
   ]
 };
+
+function getDeviceContent(recId) {
+  return DEVICE_CONTENT[recId] || null;
+}
+
+function getWhyBase(recId) {
+  return getDeviceContent(recId)?.whyBase || "";
+}
+
+function getWhyConditional(recId, key) {
+  return getDeviceContent(recId)?.whyConditional?.[key] || "";
+}
+
+function getConsiderBase(recId) {
+  return [...(getDeviceContent(recId)?.considerBase || [])];
+}
+
+function getConsiderConditionalValue(recId, key) {
+  return getDeviceContent(recId)?.considerConditional?.[key] || "";
+}
+
+function getNextSteps(recId) {
+  return [...(getDeviceContent(recId)?.nextSteps || [])];
+}
 
 const QUESTIONS = {
   pathway: {
@@ -1016,7 +1034,7 @@ function getRecommendationPriorityMeta(index, score, topScore) {
 }
 
 function getAllResultsImage(recId, answers) {
-  const content = RESULT_CONTENT[recId];
+  const content = getDeviceContent(recId);
   if (!content) return "";
 
   return getRecommendationImage(recId, answers, content);
@@ -1222,16 +1240,16 @@ function renderAllDeviceResultsPanel(allRecommendations, answers) {
 }
 
 function renderPrintRecommendationSummary(rec, answers, pathway) {
-  const content = RESULT_CONTENT[rec.id];
+  const content = getDeviceContent(rec.id);
   if (!content) return "";
 
   const imageSrc = getRecommendationImage(rec.id, answers, content);
   const imageTag = getRecommendationImageTag(rec.id, answers);
   const considerationItems = getResultCardConsiderationItems(rec.id, answers, content);
-  let considerations = [...(content.considerations || [])];
+  let considerations = getConsiderBase(rec.id);
 
   if (rec.id === "cargoBike" && answers.carryChildren === "yes") {
-    considerations.push(CARGO_BIKE_CHILD_CONSIDERATION);
+    considerations.push(getConsiderConditionalValue("cargoBike", "children"));
   }
 
   if (answers.storage !== "indoor" && (rec.id === "ebike" || rec.id === "escooter")) {
@@ -1337,22 +1355,21 @@ function getMatchedSupportKeys(answers) {
 }
 
 function getRecommendationReason(recId, answers, pathway) {
-  const entry = RATIONALE_TEXT[recId];
-  if (!entry) return "";
+  if (!getDeviceContent(recId)) return "";
 
   if (recId === "adaptiveMobility" && pathway === "child" && answers.adaptiveNeed === "yes") {
-    return "An adaptive device may be a better fit for a child with a mobility disability or mobility need. Different device types can support comfort, fit, and confidence depending on how and where the child will ride.";
+    return getDeviceContent("adaptiveMobility")?.considerConditional?.childWhyBase || "";
   }
 
   const matchedKeys = getMatchedSupportKeys(answers);
   const priorityOrder = RATIONALE_PRIORITY[recId] || [];
 
   const chosenSupports = priorityOrder
-    .filter((key) => matchedKeys.includes(key) && entry.supports[key])
-    .map((key) => entry.supports[key])
+    .filter((key) => matchedKeys.includes(key) && getWhyConditional(recId, key))
+    .map((key) => getWhyConditional(recId, key))
     .slice(0, 2);
 
-  return [entry.base, ...chosenSupports].join(" ");
+  return [getWhyBase(recId), ...chosenSupports].join(" ");
 }
 
 function getDynamicNextSteps(recId, answers) {
@@ -1443,30 +1460,21 @@ function getResultCardConsiderationItems(recId, answers, content) {
   const items = [];
 
   if (answers.transitLink === "yes" && (recId === "bicycle" || recId === "ebike")) {
-    items.push(
-      "Check MBTA or your local RTA rules before bringing a device onboard, and look into nearby station bike parking or bike shed options where available."
-    );
+    items.push(getConsiderConditionalValue(recId, "transitLink"));
   }
 
   if (recId === "ebike") {
-    items.push(
-      "Since they can look similiar, be careful not to confuse an e-bike with a higher-powered e-moto or e-dirt bike, which are considered Off-Highway Vehicles (OHVs) and must be registered with the Massachusetts Environmental Police."
-    );
+    items.push(getConsiderConditionalValue(recId, "ohv"));
 
     items.push(
       answers.age === "age14to16"
-        ? "While e-bikes come in three classes, only Class 1 e-bikes are suggested for you given your age because of their manageable speed and power. This is based on recommendations made by the Special Commission on Micromobility. Ask your parents to learn more."
-        : "E-bikes come in three classes. Research the ones that best meet your needs."
+        ? getConsiderConditionalValue(recId, "age14to16")
+        : getConsiderConditionalValue(recId, "classes")
     );
   }
 
   if (recId === "bicycle" && answers.carryChildren === "yes") {
-    items.push(`
-      <span class="recommendation-extra">
-        <span class="recommendation-extra-label">Suggested add-ons:</span>
-        <span class="recommendation-extra-value">Kid seat, Tag-along bike attachment, Bike trailer</span>
-      </span>
-    `);
+    items.push(getConsiderConditionalValue(recId, "children"));
   }
 
   if (content.extraLabel && content.extraValue) {
@@ -1479,16 +1487,14 @@ function getResultCardConsiderationItems(recId, answers, content) {
   }
 
   if (recId === "adaptiveMobility" && answers.pathway === "child" && answers.adaptiveNeed === "yes") {
-    items.push(
-      "Look for adaptive options that match the child's size, comfort, and supervision needs, and try borrowing equipment first when possible."
-    );
+    items.push(getConsiderConditionalValue(recId, "adaptiveChild"));
   }
 
   if (recId === "humanPoweredYouth" && answers.age === "age3to13") {
-    items.push(YOUTH_PRODUCT_GUIDANCE_TEXT);
+    items.push(getConsiderConditionalValue(recId, "youthGuidance"));
   }
 
-  return items;
+  return items.filter(Boolean);
 }
 
 function getRecommendationImageTag(recId, answers) {
@@ -1506,15 +1512,13 @@ function getRecommendationImageTag(recId, answers) {
 }
 
 function renderSingleRecommendationCard(rec, answers, pathway) {
-  const content = RESULT_CONTENT[rec.id];
+  const content = getDeviceContent(rec.id);
   const considerationItems = getResultCardConsiderationItems(rec.id, answers, content);
-  const rationaleHeading = pathway === "myself" ? "Why this might work for you" : "Why this fits";
-  const rationaleHeading = pathway === "someoneElse" ? "Why this might be a good fit" : "Why this fits";
-  const rationaleHeading = pathway === "exploring" ? "Why this might fit" : "Why this fits";
-  let considerations = [...content.considerations];
+  const rationaleHeading = pathway === "exploring" ? "Why consider it" : "Why this fits";
+  let considerations = getConsiderBase(rec.id);
 
   if (rec.id === "cargoBike" && answers.carryChildren === "yes") {
-    considerations.push(CARGO_BIKE_CHILD_CONSIDERATION);
+    considerations.push(getConsiderConditionalValue(rec.id, "children"));
   }
 
   if (answers.storage !== "indoor" && (rec.id === "ebike" || rec.id === "escooter")) {
@@ -1535,7 +1539,7 @@ function renderSingleRecommendationCard(rec, answers, pathway) {
     .map((item) => `<li class="guidance-item">${item}</li>`)
     .join("");
 
-  const nextSteps = [...(content.nextSteps || []), ...getDynamicNextSteps(rec.id, answers)]
+  const nextSteps = [...getNextSteps(rec.id), ...getDynamicNextSteps(rec.id, answers)]
     .filter((step, index, allSteps) =>
       allSteps.findIndex((candidate) => candidate.url === step.url) === index
     )
