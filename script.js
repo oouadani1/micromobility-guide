@@ -41,7 +41,7 @@ const OUTPUTS = {
 
 const INTRO_TEXT =
   "Micromobility devices are small, affordable, and flexible ways to get around, such as bikes, e-scooters, and more. Answer a few questions to see what micromobility devices could work well for you.";
-const RESULTS_INTRO_TEXT = "Based on your responses, these micromobility options may be a good fit for you.";
+const RESULTS_INTRO_TEXT = "Based on your responses, these micromobility options may be a good fit.";
 const EXPLORING_RESULTS_TITLE_TEXT = "Explore a variety of micromobility devices.";
 const SCORING_DISCLAIMER_TEXT =
   "Suggestions are generated using an additive scoring system based on your responses. Results are informational only, and more than one device type may be appropriate.";
@@ -127,8 +127,8 @@ const DEVICE_CONTENT = {
       storageNotMajorConcern: ""
     },
     nextSteps: [
-      { label: "Visit your local bike shop", url: "https://nbda.com/dealer-finder-member-directory/#!directory/map/tag=Massachusetts" },
       { label: "Learn more about bicycles", url: "https://canva.link/nrvd5v2bvwbf99v" },
+      { label: "Visit your local bike shop", url: "https://nbda.com/dealer-finder-member-directory/#!directory/map/tag=Massachusetts" },
       { label: "Join a bike-friendly event", url: "https://www.massbike.org/massachusetts-bike-friendly-events-calendar" }
     ]
   },
