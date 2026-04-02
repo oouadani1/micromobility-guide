@@ -760,6 +760,26 @@ function getCurrentQuestionId() {
   return sequence[APP_STATE.currentStep];
 }
 
+function findQuestionIndex(questionId) {
+  return getCurrentSequence().indexOf(questionId);
+}
+
+function setCurrentStepToQuestion(questionId) {
+  const questionIndex = findQuestionIndex(questionId);
+  if (questionIndex === -1) return false;
+
+  APP_STATE.currentStep = questionIndex;
+  return true;
+}
+
+function getAdjacentQuestionId(questionId, direction) {
+  const sequence = getCurrentSequence();
+  const currentIndex = sequence.indexOf(questionId);
+  if (currentIndex === -1) return "";
+
+  return sequence[currentIndex + direction] || "";
+}
+
 function mapAgeToBracket(ageValue) {
   const age = Number(ageValue);
 
@@ -1835,10 +1855,10 @@ function advanceFromCurrentRadioQuestion(selectedValue) {
   APP_STATE.answers[questionId] = selectedValue;
 
   setTimeout(() => {
-    const sequence = getCurrentSequence();
+    const nextQuestionId = getAdjacentQuestionId(questionId, 1);
 
-    if (APP_STATE.currentStep < sequence.length - 1) {
-      APP_STATE.currentStep += 1;
+    if (nextQuestionId) {
+      setCurrentStepToQuestion(nextQuestionId);
       renderQuestion();
       return;
     }
@@ -2107,6 +2127,7 @@ function buildAirtablePayload(normalizedAnswers, recommendations, allRecommendat
 function handleNext() {
   clearStepError();
 
+  const currentQuestionId = getCurrentQuestionId();
   const validation = saveCurrentStepValue();
 
   if (!validation.valid) {
@@ -2114,10 +2135,10 @@ function handleNext() {
     return;
   }
 
-  const sequence = getCurrentSequence();
+  const nextQuestionId = getAdjacentQuestionId(currentQuestionId, 1);
 
-  if (APP_STATE.currentStep < sequence.length - 1) {
-    APP_STATE.currentStep += 1;
+  if (nextQuestionId) {
+    setCurrentStepToQuestion(nextQuestionId);
     renderQuestion();
     return;
   }
@@ -2134,8 +2155,11 @@ function handleBack() {
     return;
   }
 
-  if (APP_STATE.currentStep > 0) {
-    APP_STATE.currentStep -= 1;
+  const currentQuestionId = getCurrentQuestionId();
+  const previousQuestionId = getAdjacentQuestionId(currentQuestionId, -1);
+
+  if (previousQuestionId) {
+    setCurrentStepToQuestion(previousQuestionId);
     renderQuestion();
   }
 }
