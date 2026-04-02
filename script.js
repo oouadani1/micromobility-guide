@@ -804,9 +804,15 @@ function applyOverrides(scores, answers) {
     adjusted.escooter = Number.NEGATIVE_INFINITY;
     adjusted.lowSpeedPoweredMicromobility = Number.NEGATIVE_INFINITY;
     adjusted.cargoBike = Number.NEGATIVE_INFINITY;
-    adjusted.adaptiveMobility = Number.NEGATIVE_INFINITY;
     adjusted.bikeshare = Number.NEGATIVE_INFINITY;
     adjusted.humanPoweredYouth = 999;
+
+    if (answers.adaptiveNeed === "yes") {
+      adjusted.adaptiveMobility = 1000;
+      return adjusted;
+    }
+
+    adjusted.adaptiveMobility = Number.NEGATIVE_INFINITY;
     return adjusted;
   }
 
@@ -904,7 +910,7 @@ function normalizeAnswers(rawAnswers) {
     ageInput: rawAnswers.ageInput || "",
     age: mapAgeToBracket(rawAnswers.ageInput),
     adaptiveNeed:
-      pathway === "myself" || pathway === "someoneElse"
+      pathway === "myself" || pathway === "someoneElse" || pathway === "child"
         ? (rawAnswers.adaptiveNeed || "no")
         : "no",
     primaryUse: rawAnswers.primaryUse || "",
@@ -1030,6 +1036,7 @@ function getQuestionLabelForPathway(questionId, pathway) {
   if (pathway === "child") {
     const childLabels = {
       ageInput: "How old is the child?",
+      adaptiveNeed: "Does the child have a mobility disability or mobility need?",
       primaryUse: "How will the child mostly use the device?",
       transitLink: "Will the child be using public transit during their trip?",
       distance: "What is the child's typical trip distance?",
@@ -1313,6 +1320,10 @@ function getRecommendationReason(recId, answers, pathway) {
   const entry = RATIONALE_TEXT[recId];
   if (!entry) return "";
 
+  if (recId === "adaptiveMobility" && pathway === "child" && answers.adaptiveNeed === "yes") {
+    return "An adaptive device may be a better fit for a child with a mobility disability or mobility need. Different device types can support comfort, fit, and confidence depending on how and where the child will ride.";
+  }
+
   const matchedKeys = getMatchedSupportKeys(answers);
   const priorityOrder = RATIONALE_PRIORITY[recId] || [];
 
@@ -1419,6 +1430,10 @@ function getResultCardConsiderationItems(recId, answers, content) {
 
   if (recId === "ebike") {
     items.push(
+      "Be careful not to confuse an e-bike with a higher-powered e-moto or e-dirt bike, which may require registration, licensure, or different rules."
+    );
+
+    items.push(
       answers.age === "age14to16"
         ? "While e-bikes come in three classes, only Class 1 e-bikes are suggested for you given your age because of their manageable speed and power. This is based on recommendations made by the Special Commission on Micromobility. Ask your parents to learn more."
         : "E-bikes come in three classes. Research the ones that best meet your needs."
@@ -1441,6 +1456,12 @@ function getResultCardConsiderationItems(recId, answers, content) {
         <span class="recommendation-extra-value">${content.extraValue}</span>
       </span>
     `);
+  }
+
+  if (recId === "adaptiveMobility" && answers.pathway === "child" && answers.adaptiveNeed === "yes") {
+    items.push(
+      "Look for adaptive options that match the child's size, comfort, and supervision needs, and try borrowing equipment first when possible."
+    );
   }
 
   if (recId === "humanPoweredYouth" && answers.age === "age3to13") {
@@ -2146,7 +2167,11 @@ function getVisibleQuestionKeys(answers) {
     "ageInput"
   ];
 
-  if (answers.pathway === "myself" || answers.pathway === "someoneElse") {
+  if (
+    answers.pathway === "myself" ||
+    answers.pathway === "someoneElse" ||
+    answers.pathway === "child"
+  ) {
     keys.push("adaptiveNeed");
   }
 
