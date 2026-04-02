@@ -108,7 +108,7 @@ const DEVICE_CONTENT = {
       transitLinkYes: "Check MBTA or your local RTA rules before bringing a device onboard, and look into nearby station bike parking or bike shed options where available.",
       transitLinkNo: "",
       // Carrying children
-      carryChildrenYes: "Since you are carrying children, consider add-ons such as a kid seat, a tag-along bike attachment, or a bike trailer." 
+      carryChildrenYes: "Since you are carrying children, consider add-ons such as a kid seat, a tag-along bike attachment, or a bike trailer.",
       carryChildrenNo: "",
       // Distance
       distanceUnder3: "",
