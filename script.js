@@ -54,6 +54,7 @@ const DEVICE_CONTENT = {
     cost: "$300-$1,500",
     whyBase: "A standard bicycle is a versatile option for everyday riding.",
     // WHY CONDITIONAL
+    // Active text slots under current logic: recreation, transitLinkYes, carryChildrenYes, routeRegularRoads, routeTrails
     whyConditional: {
       // Age
       age3to13: "",
@@ -91,6 +92,7 @@ const DEVICE_CONTENT = {
       "A standard bicycle is simple, reliable, and low-cost to maintain. It requires more physical effort than e-devices, and may feel less comfortable on longer or hillier trips, but it is also a great source of exercise."
     ],
     // CONSIDER CONDITIONAL
+    // Active text slots under current logic: transitLinkYes, carryChildrenYes, distance10plus, storageOutdoor
     considerConditional: {
       // Age
       age3to13: "",
@@ -135,6 +137,7 @@ const DEVICE_CONTENT = {
     cost: "$1,000-$6,000",
     whyBase: "An e-bike can make everyday trips easier and less tiring.",
     // WHY CONDITIONAL
+    // Active text slots under current logic: transport, deliveries, recreation, transitLinkYes, carryChildrenYes, distanceUnder3, distance3to9, distance10plus, routeBikeLanes, routeMixedRoads, routeRegularRoads, routeTrails
     whyConditional: {
       // Age
       age3to13: "",
@@ -174,6 +177,7 @@ const DEVICE_CONTENT = {
       "Become familiar with your e-bike's class, speed, and braking performance before riding in traffic or crowded areas."
     ],
     // CONSIDER CONDITIONAL
+    // Active text slots under current logic: age14to16, age17to49, age50plus, transport, transitLinkYes
     considerConditional: {
       // Age
       age3to13: "",
@@ -219,6 +223,7 @@ const DEVICE_CONTENT = {
     cost: "$500-$2,000",
     whyBase: "An e-scooter can be a convenient option for quick, short trips.",
     // WHY CONDITIONAL
+    // Active text slots under current logic: transport, recreation, transitLinkYes, distanceUnder3, routeBikeLanes, routeMixedRoads
     whyConditional: {
       // Age
       age3to13: "",
@@ -258,6 +263,7 @@ const DEVICE_CONTENT = {
       "Choose devices with UL-certified batteries and electrical systems, and follow safe charging practices if storing indoors to avoid the risk of thermal runaway."
     ],
     // CONSIDER CONDITIONAL
+    // Active text slots under current logic: none
     considerConditional: {
       // Age
       age3to13: "",
@@ -300,6 +306,7 @@ const DEVICE_CONTENT = {
     cost: "$500-$2,500",
     whyBase: "Low speed powered micromobility devices can be a niche fit for short trips on smoother, lower-stress routes.",
     // WHY CONDITIONAL
+    // Active text slots under current logic: transport, recreation, transitLinkYes, distanceUnder3, routeBikeLanes, routeTrails
     whyConditional: {
       // Age
       age3to13: "",
@@ -338,6 +345,7 @@ const DEVICE_CONTENT = {
       "They are not a strong fit for carrying children, rough pavement, or routes with a lot of vehicle traffic."
     ],
     // CONSIDER CONDITIONAL
+    // Active text slots under current logic: none
     considerConditional: {
       // Age
       age3to13: "",
@@ -380,6 +388,7 @@ const DEVICE_CONTENT = {
     cost: "$1,500-$7,500",
     whyBase: "A cargo bike is a great option when a standard bike may not carry enough.",
     // WHY CONDITIONAL
+    // Active text slots under current logic: transport, deliveries, carryChildrenYes, distanceUnder3, distance3to9, distance10plus, routeBikeLanes, routeRegularRoads
     whyConditional: {
       // Age
       age3to13: "",
@@ -418,6 +427,7 @@ const DEVICE_CONTENT = {
       "Because cargo bikes are longer and heavier than standard bikes, practice handling and braking before riding in traffic."
     ],
     // CONSIDER CONDITIONAL
+    // Active text slots under current logic: carryChildrenYes
     considerConditional: {
       // Age
       age3to13: "",
@@ -460,6 +470,7 @@ const DEVICE_CONTENT = {
     cost: "$0-$120 per year depending on bikeshare membership or discounts",
     whyBase: "Bikeshare can be a practical option if flexibility matters more than ownership.",
     // WHY CONDITIONAL
+    // Active text slots under current logic: transport, transitLinkYes, distanceUnder3, routeBikeLanes, storageOutdoor
     whyConditional: {
       // Age
       age3to13: "",
@@ -501,6 +512,7 @@ const DEVICE_CONTENT = {
       "Consider using helmets and reflective gear when riding in low-light conditions."
     ],
     // CONSIDER CONDITIONAL
+    // Active text slots under current logic: none
     considerConditional: {
       // Age
       age3to13: "",
@@ -543,6 +555,7 @@ const DEVICE_CONTENT = {
     cost: "$2,500-$10,000",
     whyBase: "An adaptive device may be a better fit for riders with different mobility needs.",
     // WHY CONDITIONAL
+    // Active text slots under current logic: adaptiveNeedYes, transport, recreation, distanceUnder3, distance3to9, distance10plus, routeBikeLanes, routeRegularRoads, routeTrails
     whyConditional: {
       // Age
       age3to13: "",
@@ -583,6 +596,7 @@ const DEVICE_CONTENT = {
       "Some adaptive devices require additional space for storage or transport."
     ],
     // CONSIDER CONDITIONAL
+    // Active text slots under current logic: adaptiveNeedYes
     considerConditional: {
       // Age
       age3to13: "",
@@ -631,6 +645,7 @@ const DEVICE_CONTENT = {
     cost: "$50-$500 depending on device type",
     whyBase: "Age-appropriate mobility options can help younger riders build confidence and skills over time.",
     // WHY CONDITIONAL
+    // Active text slots under current logic: recreation, distanceUnder3, routeTrails
     whyConditional: {
       // Age
       age3to13: "",
@@ -670,6 +685,7 @@ const DEVICE_CONTENT = {
       "Start in parks, backyards, or low-traffic streets, and always use a properly fitted helmet and other protective gear."
     ],
     // CONSIDER CONDITIONAL
+    // Active text slots under current logic: age3to13
     considerConditional: {
       // Age
       age3to13: "Children ages 9 to 12 can often ride bicycles and kick scooters confidently, but faster motorized devices are generally not appropriate because balancing, steering, and risk-taking behaviors can make them harder to use safely.",
