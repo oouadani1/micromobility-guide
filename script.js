@@ -18,7 +18,7 @@ const OUTPUTS = {
     shortLabel: "E-scooter"
   },
   lowSpeedPoweredMicromobility: {
-    label: "Other small powered devices",
+    label: "Small e-devices",
     shortLabel: "Small powered devices"
   },
   cargoBike: {
