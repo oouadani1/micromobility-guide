@@ -380,6 +380,10 @@ button.hidden {
   margin-top: 20px;
 }
 
+.site-branding {
+  justify-content: space-between;
+}
+
 .form-nav {
   justify-content: space-between;
 }

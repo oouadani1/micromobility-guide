@@ -1830,6 +1830,29 @@ function getRenderedQuestionLabel(questionId) {
   return getQuestionLabelForPathway(questionId, getSelectedPathway());
 }
 
+function getRenderedQuestionOptions(questionId) {
+  const question = QUESTIONS[questionId];
+  if (!question?.options) return [];
+
+  const pathway = getSelectedPathway();
+  const options = question.options.map((option) => ({ ...option }));
+
+  if (questionId !== "primaryUse" || pathway !== "child") {
+    return options;
+  }
+
+  const childAge = Number(APP_STATE.answers.ageInput);
+  const showDeliveryOption = Number.isFinite(childAge) && childAge >= 18;
+
+  return options
+    .filter((option) => showDeliveryOption || option.value !== "deliveries")
+    .map((option) =>
+      option.value === "transport"
+        ? { ...option, label: "School, commuting, or errands" }
+        : option
+    );
+}
+
 function renderQuestion() {
   const formStep = document.getElementById("formStep");
   const progress = document.getElementById("progress");
@@ -1855,6 +1878,7 @@ function renderQuestion() {
   const sequence = getCurrentSequence();
   const questionId = getCurrentQuestionId();
   const question = QUESTIONS[questionId];
+  const renderedOptions = getRenderedQuestionOptions(questionId);
   const renderedLabel = getRenderedQuestionLabel(questionId);
   const savedValue = APP_STATE.answers[questionId] || "";
 
@@ -1864,8 +1888,8 @@ progress.textContent = "";
     formStep.innerHTML = `
       <div class="question-block">
         <p class="question-label">${renderedLabel}</p>
-        <div class="option-grid option-grid-${Math.min(question.options.length, 4)}">
-          ${question.options.map((option) => `
+        <div class="option-grid option-grid-${Math.min(renderedOptions.length, 4)}">
+          ${renderedOptions.map((option) => `
             <label class="option-card">
               <input
                 type="radio"
