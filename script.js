@@ -64,24 +64,24 @@ const DEVICE_CONTENT = {
       adaptiveNeedYes: "",
       adaptiveNeedNo: "",
       // Primary use
-      transport: "It can be a good fit for short commutes and running quick errands.",
+      transport: "",
       deliveries: "",
       recreation: "It is especially well suited for recreation and exercise.",
       // Transit link
       transitLinkYes: "It can also work well for trips that connect to transit.",
       transitLinkNo: "",
       // Carrying children
-      carryChildrenYes: "With the right add-ons, it can also support carrying a child.",
+      carryChildrenYes: "With the right add-ons, bikes can also support carrying a child.",
       carryChildrenNo: "",
       // Distance
-      distanceUnder3: "It is a practical option for shorter distances.",
-      distance3to9: "It may still work for longer trips, depending on comfort and route conditions.",
-      distance10plus: "It may still work for longer trips, depending on comfort and route conditions.",
+      distanceUnder3: "",
+      distance3to9: "",
+      distance10plus: "",
       // Route type
-      routeBikeLanes: "It is especially well suited for bike lanes and shared-use paths.",
-      routeMixedRoads: "It can work well on a mix of bike lanes and local roads.",
-      routeRegularRoads: "It can feel more stable than smaller devices on roads with vehicle traffic.",
-      routeTrails: "Some types, such as mountain bikes, are also a good fit for trails and unpaved paths.",
+      routeBikeLanes: "",
+      routeMixedRoads: "",
+      routeRegularRoads: "While it is more stable than smaller micromobility devices on roads without bike lanes, you may want to consider an e-device to keep with the flow of traffic.",
+      routeTrails: "Some types of bikes, such as mountain bikes, are a great fit on trails and unpaved paths.",
       // Storage
       storageIndoor: "",
       storageOutdoor: "",
@@ -108,17 +108,12 @@ const DEVICE_CONTENT = {
       transitLinkYes: "Check MBTA or your local RTA rules before bringing a device onboard, and look into nearby station bike parking or bike shed options where available.",
       transitLinkNo: "",
       // Carrying children
-      carryChildrenYes: `
-      <span class="recommendation-extra">
-        <span class="recommendation-extra-label">Suggested add-ons:</span>
-        <span class="recommendation-extra-value">Kid seat, Tag-along bike attachment, Bike trailer</span>
-      </span>
-    `,
+      carryChildrenYes: "Since you are carrying children, consider add-ons such as a kid seat, tag-along bike attachment, or bike trailer." 
       carryChildrenNo: "",
       // Distance
       distanceUnder3: "",
       distance3to9: "",
-      distance10plus: "",
+      distance10plus: "Investing in a comfortable seat for long distance trip can make your ride more comfortable",
       // Route type
       routeBikeLanes: "",
       routeMixedRoads: "",
@@ -126,7 +121,7 @@ const DEVICE_CONTENT = {
       routeTrails: "",
       // Storage
       storageIndoor: "",
-      storageOutdoor: "",
+      storageOutdoor: "When storing it outdoors, consider a high-quality lock and a safe place for parking.",
       storageNotMajorConcern: ""
     },
     nextSteps: [
