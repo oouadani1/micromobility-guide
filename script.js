@@ -175,13 +175,14 @@ const DEVICE_CONTENT = {
     considerBase: [
       "Choose e-bikes with UL-certified batteries and electrical systems.",
       "Since they can look similiar, be careful not to confuse an e-bike with a higher-powered e-moto or e-dirt bike, which are considered Off-Highway Vehicles (OHVs) and must be registered with the Massachusetts Environmental Police.",
+      "E-bikes come in three classes. Read more below to select the best e-bike class for you."
     ],
     // CONSIDER CONDITIONAL
     // Active text slots under current logic: age14to16, age17to49, age50plus, transport, transitLinkYes
     considerConditional: {
       // Age
       age3to13: "",
-      age14to16: "While e-bikes come in three classes, only Class 1 e-bikes are suggested for you given your age because of their manageable speed and power. This is based on recommendations made by the Special Commission on Micromobility. Ask your parents or see below to learn more.",
+      age14to16: "Class 1 e-bikes are suggested for you given your age because of their manageable speed and power. This is based on recommendations made by the Special Commission on Micromobility. Ask your parents or read below to learn more.",
       age17to49: "",
       age50plus: "",
       // Adaptive need
