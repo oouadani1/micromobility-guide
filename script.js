@@ -2019,7 +2019,7 @@ function getConditionalNextSteps(recId, answers) {
     (recId === "ebike" || recId === "escooter" || recId === "lowSpeedPoweredMicromobility" || recId === "cargoBike")
   ) {
     steps.push({
-      label: "Learn more about micromobility fire and battery safety",
+      label: "Learn how to safely charge your micromobility battery and avoid fires",
       url: "https://www.cpsc.gov/Safety-Education/Safety-Education-Centers/Micromobility-Information-Center"
     });
   }
