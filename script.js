@@ -245,7 +245,7 @@ const DEVICE_CONTENT = {
       carryChildrenYes: "",
       carryChildrenNo: "",
       // Distance
-      distanceUnder3: "An e-scooter is a great option for traveling short distances.",
+      distanceUnder3: "Due to their small size, an e-scooter is a great option for traveling short distances.",
       distance3to9: "",
       distance10plus: "",
       // Route type
@@ -254,7 +254,7 @@ const DEVICE_CONTENT = {
       routeRegularRoads: "",
       routeTrails: "",
       // Storage
-      storageIndoor: "Storing scooters indoors is easy due to their foldability.",
+      storageIndoor: "Storing e-scooters indoors is easy due to their foldability.",
       storageOutdoor: "",
       storageNotMajorConcern: ""
     },
