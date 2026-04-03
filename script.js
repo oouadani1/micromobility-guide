@@ -107,7 +107,7 @@ const DEVICE_CONTENT = {
       deliveries: "",
       recreation: "",
       // Transit link
-      transitLinkYes: "Check MBTA or your local RTA rules before bringing a device on a bus or train, and look into nearby station bike parking or bike shed options where available.",
+      transitLinkYes: "Check MBTA or your local RTA rules before bringing a bicycle on a bus or train, and look into nearby station bike parking or bike shed options where available.",
       transitLinkNo: "",
       // Carrying children
       carryChildrenYes: "Since you will carry children, consider add-ons such as a kid seat, a tag-along bike attachment, or a bike trailer. Make sure they wear properly fitted helmets and are secured in appropriate seats or harnesses.",
@@ -239,7 +239,7 @@ const DEVICE_CONTENT = {
       deliveries: "",
       recreation: "",
       // Transit link
-      transitLinkYes: "It is a great choice when public transit is part of your commute.",
+      transitLinkYes: "It is a great choice when public transit is part of your commute, since most can be folded.",
       transitLinkNo: "",
       // Carrying children
       carryChildrenYes: "",
@@ -277,7 +277,7 @@ const DEVICE_CONTENT = {
       deliveries: "",
       recreation: "",
       // Transit link
-      transitLinkYes: "Most e-scooter models can be folded, making them a great option when taking public transit. Check MBTA or your local RTA rules before bringing an e-scooter onto a bus or train.",
+      transitLinkYes: "Given you use transit during your commute, check MBTA or your local RTA rules before bringing an e-scooter onto a bus or train. You can find more information in Next Steps.",
       transitLinkNo: "",
       // Carrying children
       carryChildrenYes: "",
@@ -288,11 +288,11 @@ const DEVICE_CONTENT = {
       distance10plus: "",
       // Route type
       routeBikeLanes: "Due to their small wheels, standing position, and lack of suspension, e-scooters perform best on bike lanes and smooth paths.",
-      routeMixedRoads: "Due to their small wheels, standing position, and lack of suspension, e-scooters perform best on bike lanes and smooth paths. Consider a model with suspesion",
+      routeMixedRoads: "Due to their small wheels, standing position, and lack of suspension, e-scooters perform best on bike lanes and smooth paths. Consider a model with suspesion and all-season tires.",
       routeRegularRoads: "",
       routeTrails: "",
       // Storage
-      storageIndoor: "Follow safe charging practices when storing an e-scooter indoors to avoid the risk of thermal runaway and fire.",
+      storageIndoor: "Follow safe charging practices when storing an e-scooter indoors to avoid the risk of thermal runaway and fire. Find more information on safe charging below in Next Steps.",
       storageOutdoor: "",
       storageNotMajorConcern: ""
     },
