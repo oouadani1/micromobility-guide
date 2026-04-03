@@ -408,7 +408,7 @@ const DEVICE_CONTENT = {
       // Distance
       distanceUnder3: "",
       distance3to9: "",
-      distance10plus: "Consider an electric cargo bike if you'll mostly travel longer distances.",
+      distance10plus: "",
       // Route type
       routeBikeLanes: "",
       routeMixedRoads: "",
@@ -435,7 +435,7 @@ const DEVICE_CONTENT = {
       adaptiveNeedNo: "",
       // Primary use
       transport: "",
-      deliveries: "Since you plan to work with a cargo bike, consider an electric version to help you get around easily.",
+      deliveries: "Since you plan to work with your micromobility device, consider an electric cargo bike to help you get around easily.",
       recreation: "",
       // Transit link
       transitLinkYes: "Given you use transit during your commute, consider that cargo bikes are heavy and long and may not fit onto trains or station elevators, or may not be allowed on transit at all. If you decide a cargo bike is the right fit for you, consider station parking or nearby bicycle parking sheds. ",
@@ -446,7 +446,7 @@ const DEVICE_CONTENT = {
       // Distance
       distanceUnder3: "",
       distance3to9: "",
-      distance10plus: "",
+      distance10plus: "Consider an electric cargo bike if you'll mostly travel longer distances.",
       // Route type
       routeBikeLanes: "",
       routeMixedRoads: "",
