@@ -439,7 +439,7 @@ const DEVICE_CONTENT = {
       deliveries: "Since you plan to work with a cargo bike, consider an electric version to help you get around easily.",
       recreation: "",
       // Transit link
-      transitLinkYes: "",
+      transitLinkYes: "Given you use transit during your commute, consider that cargo bikes are heavy and long and may not fit onto trains or station elevators, or may not be allowed on transit at all. If you decide a cargo bike is the right fit for you, consider station parking or nearby bicycle parking sheds. ",
       transitLinkNo: "",
       // Carrying children
       carryChildrenYes: "Since you will carry children, make sure they wear properly fitted helmets and are secured in appropriate seats or harnesses.",
