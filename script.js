@@ -192,7 +192,7 @@ const DEVICE_CONTENT = {
       deliveries: "",
       recreation: "",
       // Transit link
-      transitLinkYes: "Check MBTA or your local RTA rules before bringing a device onboard, and look into nearby station bike parking or bike shed options where available.",
+      transitLinkYes: "Check MBTA or your local RTA rules before bringing a device on a bus or train, and look into nearby station bike parking or bike shed options where available.",
       transitLinkNo: "",
       // Carrying children
       carryChildrenYes: "Since you will carry children, consider add-ons such as a kid seat, a tag-along bike attachment, or a bike trailer. Make sure they wear properly fitted helmets and are secured in appropriate seats or harnesses.",
@@ -234,31 +234,31 @@ const DEVICE_CONTENT = {
       adaptiveNeedYes: "",
       adaptiveNeedNo: "",
       // Primary use
-      transport: "It can work well for short commutes and first- or last-mile trips.",
+      transport: "",
       deliveries: "",
-      recreation: "It can also be a fun option for casual riding.",
+      recreation: "",
       // Transit link
-      transitLinkYes: "It can be especially useful for trips that connect to transit.",
+      transitLinkYes: "It is a great choice when public transit is part of your commute.",
       transitLinkNo: "",
       // Carrying children
       carryChildrenYes: "",
       carryChildrenNo: "",
       // Distance
-      distanceUnder3: "It is best suited for shorter distances.",
+      distanceUnder3: "An e-scooter is a great option for traveling short distances.",
       distance3to9: "",
       distance10plus: "",
       // Route type
-      routeBikeLanes: "It works best where there is dedicated bike space or shared-use paths.",
-      routeMixedRoads: "It may work in mixed conditions, but comfort can depend on the route.",
+      routeBikeLanes: "It peforms best where there are dedicated bike lanes or smooth shared use paths.",
+      routeMixedRoads: "It may work on mixed road conditions, but your comfort will depend on the route and the type of e-scooter.",
       routeRegularRoads: "",
       routeTrails: "",
       // Storage
-      storageIndoor: "",
+      storageIndoor: "Storing scooters indoors is easy due to their foldability.",
       storageOutdoor: "",
       storageNotMajorConcern: ""
     },
     considerBase: [
-      "Choose devices with UL-certified batteries and electrical systems, and follow safe charging practices if storing indoors to avoid the risk of thermal runaway."
+      "Choose e-scooters with UL-certified batteries and electrical systems."
     ],
     // CONSIDER CONDITIONAL
     // Active text slots under current logic: none
@@ -276,7 +276,7 @@ const DEVICE_CONTENT = {
       deliveries: "",
       recreation: "",
       // Transit link
-      transitLinkYes: "",
+      transitLinkYes: "Most e-scooter models can be folded, making them a great option when taking public transit. Check MBTA or your local RTA rules before bringing an e-scooter onto a bus or train.",
       transitLinkNo: "",
       // Carrying children
       carryChildrenYes: "",
@@ -286,17 +286,17 @@ const DEVICE_CONTENT = {
       distance3to9: "",
       distance10plus: "",
       // Route type
-      routeBikeLanes: "",
-      routeMixedRoads: "",
+      routeBikeLanes: "Due to their small wheels, standing position, and lack of suspension, e-scooters perform best on bike lanes and smooth paths.",
+      routeMixedRoads: "Due to their small wheels, standing position, and lack of suspension, e-scooters perform best on bike lanes and smooth paths. Consider a model with suspesion",
       routeRegularRoads: "",
       routeTrails: "",
       // Storage
-      storageIndoor: "",
+      storageIndoor: "Follow safe charging practices when storing an e-scooter indoors to avoid the risk of thermal runaway and fire.",
       storageOutdoor: "",
       storageNotMajorConcern: ""
     },
     nextSteps: [
-      { label: "more about electric scooters", url: "https://canva.link/t5ka95rvio5ijw3" }
+      { label: "Learn more about e-scooters", url: "https://canva.link/t5ka95rvio5ijw3" }
     ]
   },
   lowSpeedPoweredMicromobility: {
