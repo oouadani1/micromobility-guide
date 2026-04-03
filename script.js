@@ -115,7 +115,7 @@ const DEVICE_CONTENT = {
       // Distance
       distanceUnder3: "",
       distance3to9: "",
-      distance10plus: "Investing in a comfortable seat for long distance trips can make your ride more comfortable",
+      distance10plus: "Investing in a comfortable seat for long distance trips can make your ride more comfortable.",
       // Route type
       routeBikeLanes: "",
       routeMixedRoads: "",
@@ -2071,15 +2071,22 @@ function renderSingleRecommendationCard(rec, answers, pathway) {
     );
   }
 
+  const [firstBaseConsideration = "", ...remainingBaseConsiderations] = considerations;
   const maxConsiderations = considerationItems.length >= 3 ? 3 : 4;
-  const remainingBaseConsiderations = Math.max(
+  const availableRemainingBaseSlots = Math.max(
     0,
-    maxConsiderations - considerationItems.length
+    maxConsiderations - considerationItems.length - (firstBaseConsideration ? 1 : 0)
   );
 
-  considerations = considerations.slice(0, remainingBaseConsiderations);
+  considerations = remainingBaseConsiderations.slice(0, availableRemainingBaseSlots);
 
-  const considerationsHtml = [...considerationItems, ...considerations]
+  const orderedConsiderations = [
+    firstBaseConsideration,
+    ...considerationItems,
+    ...considerations
+  ].filter(Boolean);
+
+  const considerationsHtml = orderedConsiderations
     .map((item) => `<li class="guidance-item">${item}</li>`)
     .join("");
 
