@@ -107,15 +107,15 @@ const DEVICE_CONTENT = {
       deliveries: "",
       recreation: "",
       // Transit link
-      transitLinkYes: "Check MBTA or your local RTA rules before bringing a bicycle on a bus or train, and look into nearby station bike parking or bike shed options where available.",
+      transitLinkYes: "Check MBTA or your local RTA rules before bringing a bicycle on a bus or train, and look into nearby station bike parking or bike shed options where available. Find more information on micromobility and transit in Next Steps below.",
       transitLinkNo: "",
       // Carrying children
       carryChildrenYes: "Since you will carry children, consider add-ons such as a kid seat, a tag-along bike attachment, or a bike trailer. Make sure they wear properly fitted helmets and are secured in appropriate seats or harnesses.",
       carryChildrenNo: "",
       // Distance
       distanceUnder3: "",
-      distance3to9: "",
-      distance10plus: "Investing in a comfortable seat for long distance trips can make your ride more comfortable.",
+      distance3to9: "Investing in a high-quality seat for long distance trips can make your ride more comofortable.",
+      distance10plus: "Investing in a high-quality seat for long distance trips can make your ride more comfortable.",
       // Route type
       routeBikeLanes: "",
       routeMixedRoads: "",
@@ -182,7 +182,7 @@ const DEVICE_CONTENT = {
     considerConditional: {
       // Age
       age3to13: "",
-      age14to16: "Class 1 e-bikes are suggested for you given your age because of their manageable speed and power. This is based on recommendations made by the Special Commission on Micromobility. Ask your parents or read below to learn more.",
+      age14to16: "Class 1 e-bikes are suggested for you given your age because of their manageable speed and power. This is based on recommendations made by the Special Commission on Micromobility. Ask your parents for more information, or see Next Steps below to learn more.",
       age17to49: "",
       age50plus: "",
       // Adaptive need
@@ -193,7 +193,7 @@ const DEVICE_CONTENT = {
       deliveries: "",
       recreation: "",
       // Transit link
-      transitLinkYes: "Check MBTA or your local RTA rules before bringing a device on a bus or train, and look into nearby station bike parking or bike shed options where available.",
+      transitLinkYes: "Check MBTA or your local RTA rules before bringing a device on a bus or train, and look into nearby station bike parking or bike shed options where available. Find more information on micromobility and transit in Next Steps below.",
       transitLinkNo: "",
       // Carrying children
       carryChildrenYes: "Since you will carry children, consider add-ons such as a kid seat, a tag-along bike attachment, or a bike trailer. Make sure they wear properly fitted helmets and are secured in appropriate seats or harnesses.",
@@ -208,7 +208,7 @@ const DEVICE_CONTENT = {
       routeRegularRoads: "",
       routeTrails: "",
       // Storage
-      storageIndoor: "Follow safe charging practices when storing an e-bike indoors to avoid the risk of thermal runaway and fire.",
+      storageIndoor: "Follow safe charging practices when storing an e-bike indoors to avoid the risk of thermal runaway and fire. Find more information on safe charging in Next Steps below.",
       storageOutdoor: "When storing an e-bike outdoors, always remove the battery, consider a high-quality lock, and ensure it is parked in a safe place.",
       storageNotMajorConcern: ""
     },
@@ -277,7 +277,7 @@ const DEVICE_CONTENT = {
       deliveries: "",
       recreation: "",
       // Transit link
-      transitLinkYes: "Given you use transit during your commute, check MBTA or your local RTA rules before bringing an e-scooter onto a bus or train. You can find more information in Next Steps.",
+      transitLinkYes: "Given you use transit during your commute, check MBTA or your local RTA rules before bringing an e-scooter onto a bus or train. Find more information on micromobility and transit in Next Steps below.",
       transitLinkNo: "",
       // Carrying children
       carryChildrenYes: "",
@@ -292,7 +292,7 @@ const DEVICE_CONTENT = {
       routeRegularRoads: "",
       routeTrails: "",
       // Storage
-      storageIndoor: "Follow safe charging practices when storing an e-scooter indoors to avoid the risk of thermal runaway and fire. Find more information on safe charging below in Next Steps.",
+      storageIndoor: "Follow safe charging practices when storing an e-scooter indoors to avoid the risk of thermal runaway and fire. Find more information on safe charging in Next Steps below.",
       storageOutdoor: "",
       storageNotMajorConcern: ""
     },
