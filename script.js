@@ -2005,8 +2005,12 @@ function getConditionalNextSteps(recId, answers) {
 
   if (answers.transitLink === "yes") {
     steps.push({
-      label: "Check MBTA bike policies",
+      label: "Check MBTA micromobility policies",
       url: "https://www.mbta.com/bikes"
+    });
+    steps.push({
+      label: "Learn how to safely park your micromobility device at an MBTA station",
+      url: "https://bc.mbta.com/riding_the_t/bikes/register/Default.asp"
     });
   }
 
