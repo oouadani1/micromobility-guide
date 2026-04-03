@@ -149,11 +149,11 @@ const DEVICE_CONTENT = {
       adaptiveNeedNo: "",
       // Primary use
       transport: "",
-      deliveries: "The electric-assist motor makes it great for work-related use.",
+      deliveries: "The electric-assist motor makes it great for work and deliveries.",
       recreation: "",
       
       // Transit link
-      transitLinkYes: "It can also work well for trips that connect to transit.",
+      transitLinkYes: "Connecting to transit is easier with an e-bike.",
       transitLinkNo: "",
       // Carrying children
       carryChildrenYes: "Some models can also support carrying children or extra cargo.",
@@ -173,8 +173,8 @@ const DEVICE_CONTENT = {
       storageNotMajorConcern: ""
     },
     considerBase: [
-      "Choose e-bikes with UL-certified batteries and electrical systems, and follow safe charging practices if storing indoors to avoid the risk of thermal runaway.",
-      "Become familiar with your e-bike's class, speed, and braking performance before riding in traffic or crowded areas."
+      "Choose e-bikes with UL-certified batteries and electrical systems.",
+      "Since they can look similiar, be careful not to confuse an e-bike with a higher-powered e-moto or e-dirt bike, which are considered Off-Highway Vehicles (OHVs) and must be registered with the Massachusetts Environmental Police.",
     ],
     // CONSIDER CONDITIONAL
     // Active text slots under current logic: age14to16, age17to49, age50plus, transport, transitLinkYes
@@ -182,16 +182,13 @@ const DEVICE_CONTENT = {
       // Age
       age3to13: "",
       age14to16: "While e-bikes come in three classes, only Class 1 e-bikes are suggested for you given your age because of their manageable speed and power. This is based on recommendations made by the Special Commission on Micromobility. Ask your parents to learn more.",
-      // migrated from old classes; duplicated for age-based compatibility
-      age17to49: "E-bikes come in three classes. Research the ones that best meet your needs.",
-      // migrated from old classes; duplicated for age-based compatibility
-      age50plus: "E-bikes come in three classes. Research the ones that best meet your needs.",
+      age17to49: "",
+      age50plus: "",
       // Adaptive need
       adaptiveNeedYes: "",
       adaptiveNeedNo: "",
       // Primary use
-      // migrated from old ohv; preserved in the closest slot with compatibility mapping
-      transport: "Since they can look similiar, be careful not to confuse an e-bike with a higher-powered e-moto or e-dirt bike, which are considered Off-Highway Vehicles (OHVs) and must be registered with the Massachusetts Environmental Police.",
+      transport: 
       deliveries: "",
       recreation: "",
       // Transit link
@@ -210,8 +207,8 @@ const DEVICE_CONTENT = {
       routeRegularRoads: "",
       routeTrails: "",
       // Storage
-      storageIndoor: "",
-      storageOutdoor: "",
+      storageIndoor: "Follow safe charging practices if storing indoors to avoid the risk of thermal runaway.",
+      storageOutdoor: "When storing an e-bike outdoors, always remove the battery, consider a high-quality lock, and ensure it is parked in a safe place.",
       storageNotMajorConcern: ""
     },
     nextSteps: [
