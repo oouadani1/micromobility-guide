@@ -212,7 +212,7 @@ const DEVICE_CONTENT = {
       storageNotMajorConcern: ""
     },
     nextSteps: [
-      { label: "Learn more about e-bikes", url: "https://canva.link/ez6c09mq8tpfpk4" }
+      { label: "Learn more about e-bikes.", url: "https://canva.link/ez6c09mq8tpfpk4" }
     ]
   },
   escooter: {
@@ -420,7 +420,7 @@ const DEVICE_CONTENT = {
       storageNotMajorConcern: ""
     },
     considerBase: [
-      "Ensure the cargo bike style and model is designed for the weight and type of items you plan to carry.",
+      "Ensure the cargo bike style is designed for the weight and type of items you plan to carry.",
     ],
     // CONSIDER CONDITIONAL
     // Active text slots under current logic: carryChildrenYes
@@ -458,8 +458,8 @@ const DEVICE_CONTENT = {
       storageNotMajorConcern: ""
     },
     nextSteps: [
-      { label: "Learn more about cargo bikes", url: "https://canva.link/gcyamow1yonirts" }
-      { label: "Borrow a cargo bike for free to see if it ia a good fit for you", url: "https://cpp.ebikelibrary.org/" }
+      { label: "Learn more about cargo bikes.", url: "https://canva.link/gcyamow1yonirts" },
+      { label: "Borrow a cargo bike for free to see if it is a good fit for you.", url: "https://cpp.ebikelibrary.org/" },
     ]
   },
   bikeshare: {
