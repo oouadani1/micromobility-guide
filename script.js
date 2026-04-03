@@ -188,7 +188,7 @@ const DEVICE_CONTENT = {
       adaptiveNeedYes: "",
       adaptiveNeedNo: "",
       // Primary use
-      transport: 
+      transport: "",
       deliveries: "",
       recreation: "",
       // Transit link
@@ -207,7 +207,7 @@ const DEVICE_CONTENT = {
       routeRegularRoads: "",
       routeTrails: "",
       // Storage
-      storageIndoor: "Follow safe charging practices if storing indoors to avoid the risk of thermal runaway.",
+      storageIndoor: "Follow safe charging practices when storing an e-bike indoors to avoid the risk of thermal runaway and fire.",
       storageOutdoor: "When storing an e-bike outdoors, always remove the battery, consider a high-quality lock, and ensure it is parked in a safe place.",
       storageNotMajorConcern: ""
     },
