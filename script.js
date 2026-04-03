@@ -2000,13 +2000,23 @@ function getRecommendationImageTag(recId, answers) {
   return "";
 }
 
-function getConditionalNextSteps(answers) {
+function getConditionalNextSteps(recId, answers) {
   const steps = [];
 
   if (answers.transitLink === "yes") {
     steps.push({
       label: "Check MBTA bike policies",
       url: "https://www.mbta.com/bikes"
+    });
+  }
+
+  if (
+    answers.storage === "indoor" &&
+    (recId === "ebike" || recId === "escooter" || recId === "lowSpeedPoweredMicromobility" || recId === "cargoBike")
+  ) {
+    steps.push({
+      label: "Learn more about micromobility fire and battery safety",
+      url: "https://www.cpsc.gov/Safety-Education/Safety-Education-Centers/Micromobility-Information-Center"
     });
   }
 
@@ -2048,7 +2058,7 @@ function renderSingleRecommendationCard(rec, answers, pathway) {
     .map((item) => `<li class="guidance-item">${item}</li>`)
     .join("");
 
-  const nextSteps = [...getNextSteps(rec.id), ...getConditionalNextSteps(answers)]
+  const nextSteps = [...getNextSteps(rec.id), ...getConditionalNextSteps(rec.id, answers)]
     .filter((step, index, allSteps) =>
       allSteps.findIndex((candidate) => candidate.url === step.url) === index
     )
