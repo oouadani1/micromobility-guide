@@ -212,7 +212,10 @@ const DEVICE_CONTENT = {
       storageNotMajorConcern: ""
     },
     nextSteps: [
-      { label: "Learn more about e-bikes.", url: "https://canva.link/ez6c09mq8tpfpk4" }
+      { label: "Learn more about e-bikes.", url: "https://canva.link/ez6c09mq8tpfpk4" },
+      { label: "Visit a local bike shop.", url: "https://nbda.com/dealer-finder-member-directory/#!directory/map/tag=Massachusetts" },
+      { label: "Join a bike-friendly event.", url: "https://www.massbike.org/massachusetts-bike-friendly-events-calendar" },
+      { label: "Check state e-bike incentives.", url: "https://goclean.masscec.com/clean-energy-solutions/electric-bicycles/" }
     ]
   },
   escooter: {
@@ -255,8 +258,6 @@ const DEVICE_CONTENT = {
       storageNotMajorConcern: ""
     },
     considerBase: [
-      "Use a helmet, lights, and a bell to remain visible and alert others when riding in shared spaces.",
-      "Ride where scooters are permitted, such as bike lanes or roadways, and avoid sidewalks. If you need to use a sidewalk, walk your e-scooter.",
       "Choose devices with UL-certified batteries and electrical systems, and follow safe charging practices if storing indoors to avoid the risk of thermal runaway."
     ],
     // CONSIDER CONDITIONAL
@@ -435,7 +436,7 @@ const DEVICE_CONTENT = {
       adaptiveNeedNo: "",
       // Primary use
       transport: "",
-      deliveries: "Since you plan to work with your micromobility device, consider an electric cargo bike to help you get around easily.",
+      deliveries: "Because you plan to work with your micromobility device, consider an electric cargo bike to help you get around easily.",
       recreation: "",
       // Transit link
       transitLinkYes: "Given you use transit during your commute, consider that cargo bikes are heavy and long and may not fit onto trains or station elevators, or may not be allowed on transit at all. If you decide a cargo bike is the right fit for you, consider station parking or nearby bicycle parking sheds. ",
@@ -460,6 +461,7 @@ const DEVICE_CONTENT = {
     nextSteps: [
       { label: "Learn more about cargo bikes.", url: "https://canva.link/gcyamow1yonirts" },
       { label: "Borrow a cargo bike for free to see if it is a good fit for you.", url: "https://cpp.ebikelibrary.org/" },
+      { label: "Visit a local bike shop.", url: "https://nbda.com/dealer-finder-member-directory/#!directory/map/tag=Massachusetts" },
     ]
   },
   bikeshare: {
@@ -544,7 +546,8 @@ const DEVICE_CONTENT = {
       storageNotMajorConcern: ""
     },
     nextSteps: [
-      { label: "Learn about bikeshare options (coming soon)", url: "/micromobility-hub/device-library/bikeshare.html" }
+      { label: "Learn about bikeshare options (coming soon)", url: "/micromobility-hub/device-library/bikeshare.html" },
+      { label: "Check Massachusetts bikeshare programs and discount pricing", url: "https://goclean.masscec.com/homeowners/bike-share-programs/" }
     ]
   },
   adaptiveMobility: {
@@ -717,7 +720,10 @@ const DEVICE_CONTENT = {
       storageNotMajorConcern: ""
     },
     nextSteps: [
-      { label: "Learn more about youth mobility options", url: "https://canva.link/60qopm17rsnhlls" }
+      { label: "Learn more about youth mobility options", url: "https://canva.link/60qopm17rsnhlls" },
+      { label: "Visit a local bike shop", url: "https://nbda.com/dealer-finder-member-directory/#!directory/map/tag=Massachusetts" },
+      { label: "Explore Safe Routes to School resources", url: "https://www.mass.gov/safe-routes-to-school" },
+      { label: "Read CPSC age-appropriate product guidance", url: "https://www.cpsc.gov/content/2020-Age-Determination-Guidelines" }
     ]
   }
 };
@@ -1837,68 +1843,6 @@ function getRecommendationReason(recId, answers, pathway) {
   return [getWhyBase(recId), ...chosenSupports].join(" ");
 }
 
-function getDynamicNextSteps(recId, answers) {
-  const links = [];
-
-  if (
-    recId === "bicycle" ||
-    recId === "ebike" ||
-    recId === "cargoBike"
-  ) {
-    links.push({
-      label: "Visit a local bike shop",
-      url: "https://nbda.com/dealer-finder-member-directory/#!directory/map/tag=Massachusetts"
-    });
-  }
-
-  if (recId === "bicycle" || recId === "ebike") {
-    links.push({
-      label: "Join a bike-friendly event",
-      url: "https://www.massbike.org/massachusetts-bike-friendly-events-calendar"
-    });
-  }
-
-  if (recId === "cargoBike") {
-    links.push({
-      label: "Borrow a cargo bike first to see if it is for you",
-      url: "https://cpp.ebikelibrary.org/"
-    });
-  }
-
-  if (recId === "humanPoweredYouth") {
-    links.push({
-      label: "Visit a local bike shop",
-      url: "https://nbda.com/dealer-finder-member-directory/#!directory/map/tag=Massachusetts"
-    });
-
-    links.push({
-      label: "Explore Safe Routes to School resources",
-      url: "https://www.mass.gov/safe-routes-to-school"
-    });
-
-    links.push({
-      label: "Read CPSC age-appropriate product guidance",
-      url: "https://www.cpsc.gov/content/2020-Age-Determination-Guidelines"
-    });
-  }
-
-  if (recId === "ebike") {
-    links.push({
-      label: "Check state e-bike incentives",
-      url: "https://goclean.masscec.com/clean-energy-solutions/electric-bicycles/"
-    });
-  }
-
-  if (recId === "bikeshare") {
-    links.push({
-      label: "Check Massachusetts bikeshare programs and discount pricing",
-      url: "https://goclean.masscec.com/homeowners/bike-share-programs/"
-    });
-  }
-
-  return links;
-}
-
 function shouldSuggestFoldable(answers) {
   return (
     answers.carryChildren !== "yes" &&
@@ -2090,7 +2034,7 @@ function renderSingleRecommendationCard(rec, answers, pathway) {
     .map((item) => `<li class="guidance-item">${item}</li>`)
     .join("");
 
-  const nextSteps = [...getNextSteps(rec.id), ...getDynamicNextSteps(rec.id, answers)]
+  const nextSteps = getNextSteps(rec.id)
     .filter((step, index, allSteps) =>
       allSteps.findIndex((candidate) => candidate.url === step.url) === index
     )
