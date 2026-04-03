@@ -459,6 +459,7 @@ const DEVICE_CONTENT = {
     },
     nextSteps: [
       { label: "Learn more about cargo bikes", url: "https://canva.link/gcyamow1yonirts" }
+      { label: "Borrow a cargo bike for free to see if it ia a good fit for you", url: "https://cpp.ebikelibrary.org/" }
     ]
   },
   bikeshare: {
