@@ -107,7 +107,7 @@ const DEVICE_CONTENT = {
       deliveries: "",
       recreation: "",
       // Transit link
-      transitLinkYes: "Check MBTA or your local RTA rules before bringing a device onboard, and look into nearby station bike parking or bike shed options where available.",
+      transitLinkYes: "Check MBTA or your local RTA rules before bringing a device on a bus or train, and look into nearby station bike parking or bike shed options where available.",
       transitLinkNo: "",
       // Carrying children
       carryChildrenYes: "Since you are carrying children, consider add-ons such as a kid seat, a tag-along bike attachment, or a bike trailer.",
@@ -148,31 +148,31 @@ const DEVICE_CONTENT = {
       adaptiveNeedYes: "",
       adaptiveNeedNo: "",
       // Primary use
-      transport: "It is especially useful for commuting and running errands.",
-      deliveries: "It can be a strong fit for frequent trips or work-related use.",
-      recreation: "It can also be a comfortable option for recreational riding.",
+      transport: "",
+      deliveries: "The electric-assist motor makes it great for work-related use.",
+      recreation: "",
+      
       // Transit link
-      transitLinkYes: "It may also work well for trips that connect to transit, especially if storage or parking is limited.",
+      transitLinkYes: "It can also work well for trips that connect to transit.",
       transitLinkNo: "",
       // Carrying children
       carryChildrenYes: "Some models can also support carrying children or extra cargo.",
       carryChildrenNo: "",
       // Distance
-      distanceUnder3: "It can still be a good option for short trips, especially if convenience matters.",
-      distance3to9: "It can make longer distances more manageable.",
+      distanceUnder3: "",
+      distance3to9: "",
       distance10plus: "It can make longer distances more manageable.",
       // Route type
-      routeBikeLanes: "It works well on bike lanes and shared-use paths.",
-      routeMixedRoads: "It can also work well on a mix of bike lanes and local roads.",
-      routeRegularRoads: "It may feel more comfortable than a smaller device on roads with vehicle traffic.",
-      routeTrails: "It can also work well on many paths and trail settings.",
+      routeBikeLanes: "",
+      routeMixedRoads: "",
+      routeRegularRoads: "Because they can keep up with traffic better, e-bikes are suitable on roads without bike lanes",
+      routeTrails: "E-bikes are only allowed on some Massachusetts trails, and at limited speeds. Check DCR regulations to learn more.",
       // Storage
       storageIndoor: "",
       storageOutdoor: "",
       storageNotMajorConcern: ""
     },
     considerBase: [
-      "Wear a helmet, use front and rear lights, reflectors, and a bell. Ride predictably when sharing bike lanes, paths, or roadways. If you need to use a sidewalk, walk your bike.",
       "Choose e-bikes with UL-certified batteries and electrical systems, and follow safe charging practices if storing indoors to avoid the risk of thermal runaway.",
       "Become familiar with your e-bike's class, speed, and braking performance before riding in traffic or crowded areas."
     ],
