@@ -250,7 +250,7 @@ const DEVICE_CONTENT = {
       distance10plus: "",
       // Route type
       routeBikeLanes: "It peforms best where there are dedicated bike lanes or smooth shared use paths.",
-      routeMixedRoads: "It may work on mixed road conditions, but your comfort will depend on the route and the type of e-scooter.",
+      routeMixedRoads: "It may work on road with only a few bike lanes, but your comfort will depend on the route and the type of e-scooter.",
       routeRegularRoads: "",
       routeTrails: "",
       // Storage
@@ -2000,6 +2000,19 @@ function getRecommendationImageTag(recId, answers) {
   return "";
 }
 
+function getConditionalNextSteps(answers) {
+  const steps = [];
+
+  if (answers.transitLink === "yes") {
+    steps.push({
+      label: "Check MBTA bike policies",
+      url: "https://www.mbta.com/bikes"
+    });
+  }
+
+  return steps;
+}
+
 function renderSingleRecommendationCard(rec, answers, pathway) {
   const content = getDeviceContent(rec.id);
   const considerationItems = getResultCardConsiderationItems(rec.id, answers, content);
@@ -2035,7 +2048,7 @@ function renderSingleRecommendationCard(rec, answers, pathway) {
     .map((item) => `<li class="guidance-item">${item}</li>`)
     .join("");
 
-  const nextSteps = getNextSteps(rec.id)
+  const nextSteps = [...getNextSteps(rec.id), ...getConditionalNextSteps(answers)]
     .filter((step, index, allSteps) =>
       allSteps.findIndex((candidate) => candidate.url === step.url) === index
     )
