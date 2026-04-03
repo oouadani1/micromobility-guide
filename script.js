@@ -181,7 +181,7 @@ const DEVICE_CONTENT = {
     considerConditional: {
       // Age
       age3to13: "",
-      age14to16: "While e-bikes come in three classes, only Class 1 e-bikes are suggested for you given your age because of their manageable speed and power. This is based on recommendations made by the Special Commission on Micromobility. Ask your parents to learn more.",
+      age14to16: "While e-bikes come in three classes, only Class 1 e-bikes are suggested for you given your age because of their manageable speed and power. This is based on recommendations made by the Special Commission on Micromobility. Ask your parents or see below to learn more.",
       age17to49: "",
       age50plus: "",
       // Adaptive need
@@ -396,23 +396,23 @@ const DEVICE_CONTENT = {
       adaptiveNeedYes: "",
       adaptiveNeedNo: "",
       // Primary use
-      transport: "It is especially useful for errands such as groceries, hauling supplies, or carrying larger items.",
-      deliveries: "It can be a strong fit for deliveries or heavier-duty daily use.",
+      transport: "It is especially useful for running errands such as getting groceries, hauling supplies, or carrying larger items.",
+      deliveries: "It is great for working and making deliveries, and can support heavy-duty daily use.",
       recreation: "",
       // Transit link
       transitLinkYes: "",
       transitLinkNo: "",
       // Carrying children
-      carryChildrenYes: "It is one of the best options for carrying children.",
+      carryChildrenYes: "Carrying children with cargo bikes is easy and fun.",
       carryChildrenNo: "",
       // Distance
-      distanceUnder3: "It can work well for shorter local trips with cargo.",
-      distance3to9: "It can also support longer trips, especially in electric versions.",
-      distance10plus: "It can also support longer trips, especially in electric versions.",
+      distanceUnder3: "",
+      distance3to9: "",
+      distance10plus: "Consider an electric cargo bike if you'll mostly travel longer distances.",
       // Route type
-      routeBikeLanes: "It can work well on bike-friendly routes with enough space.",
+      routeBikeLanes: "",
       routeMixedRoads: "",
-      routeRegularRoads: "Its larger size can feel more stable and visible on roads with vehicle traffic.",
+      routeRegularRoads: "A cargo bike's larger size can feel more stable and visible on roads with heavier vehicle traffic.",
       routeTrails: "",
       // Storage
       storageIndoor: "",
@@ -436,13 +436,13 @@ const DEVICE_CONTENT = {
       adaptiveNeedNo: "",
       // Primary use
       transport: "",
-      deliveries: "",
+      deliveries: "Since you plan to work with a cargo bike, consider an electric version to help you get around easily.",
       recreation: "",
       // Transit link
       transitLinkYes: "",
       transitLinkNo: "",
       // Carrying children
-      carryChildrenYes: "When carrying children, make sure they wear properly fitted helmets and are secured in appropriate seats or harnesses.",
+      carryChildrenYes: "Since you will carry children, make sure they wear properly fitted helmets and are secured in appropriate seats or harnesses.",
       carryChildrenNo: "",
       // Distance
       distanceUnder3: "",
@@ -454,7 +454,7 @@ const DEVICE_CONTENT = {
       routeRegularRoads: "",
       routeTrails: "",
       // Storage
-      storageIndoor: "",
+      storageIndoor: "Cargo bikes are heavy, long, and not suitable to be stored indoors. If you are storing them inside a shed or garage, follow safe charging practices to avoid the risk of thermal runaway and fire.",
       storageOutdoor: "",
       storageNotMajorConcern: ""
     },
