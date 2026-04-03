@@ -420,8 +420,7 @@ const DEVICE_CONTENT = {
       storageNotMajorConcern: ""
     },
     considerBase: [
-      "Ensure the cargo bike is designed for the weight and type of items you plan to carry.",
-      "Because cargo bikes are longer and heavier than standard bikes, practice handling and braking before riding in traffic."
+      "Ensure the cargo bike style and model is designed for the weight and type of items you plan to carry.",
     ],
     // CONSIDER CONDITIONAL
     // Active text slots under current logic: carryChildrenYes
@@ -454,8 +453,8 @@ const DEVICE_CONTENT = {
       routeRegularRoads: "",
       routeTrails: "",
       // Storage
-      storageIndoor: "Cargo bikes are heavy, long, and not suitable to be stored indoors. If you are storing them inside a shed or garage, follow safe charging practices to avoid the risk of thermal runaway and fire.",
-      storageOutdoor: "",
+      storageIndoor: "Cargo bikes are not suitable to be stored indoors due to their heavy weight and length. If you are storing them inside a shed or garage, follow safe charging practices to avoid the risk of thermal runaway and fire.",
+      storageOutdoor: "If you are storing a cargo bike outdoors, always remove the battery (if it is an e-cargo bike), consider a high-quality lock and weatherproof tarp, and ensure it is parked in a safe place.",
       storageNotMajorConcern: ""
     },
     nextSteps: [
