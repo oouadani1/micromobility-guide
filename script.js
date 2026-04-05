@@ -239,7 +239,7 @@ const DEVICE_CONTENT = {
       deliveries: "",
       recreation: "",
       // Transit link
-      transitLinkYes: "It is a great choice when public transit is part of your commute, since most can be folded.",
+      transitLinkYes: "It is also a great choice when public transit is part of your commute, since most e-scooters can be folded.",
       transitLinkNo: "",
       // Carrying children
       carryChildrenYes: "",
