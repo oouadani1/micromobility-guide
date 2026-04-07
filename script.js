@@ -2076,14 +2076,52 @@ function renderSingleRecommendationCard(rec, answers, pathway) {
     )
     .slice(0, 8);
 
-  const nextStepsHtml = nextSteps
-    .map(
-      (step) => `
+  const nextStepGroups = [];
+
+  nextSteps.forEach((step) => {
+    const isAdditionalShopLink =
+      step.label === "More shops on Pinkbike" ||
+      step.label === "More shops on Singletracks";
+
+    const lastGroup = nextStepGroups[nextStepGroups.length - 1];
+    const canNestUnderPrevious =
+      isAdditionalShopLink &&
+      lastGroup &&
+      /Visit (your|a) local bike shop\.?$/i.test(lastGroup.step.label);
+
+    if (canNestUnderPrevious) {
+      lastGroup.children.push(step);
+      return;
+    }
+
+    nextStepGroups.push({ step, children: [] });
+  });
+
+  const nextStepsHtml = nextStepGroups
+    .map(({ step, children }) => {
+      const childrenHtml = children.length
+        ? `
+          <ul class="next-step-sublist">
+            ${children
+              .map(
+                (child) => `
+                  <li class="next-step-subitem">
+                    <a href="${child.url}" target="_blank" rel="noopener noreferrer">${child.label}</a>
+                  </li>
+                `
+              )
+              .join("")}
+          </ul>
+        `
+        : "";
+
+      return `
         <li class="next-step-item">
           <a href="${step.url}" target="_blank" rel="noopener noreferrer">${step.label}</a>
+          ${childrenHtml}
         </li>
-      `
-    )
+      `;
+    })
     .join("");
 
   const imageSrc = getRecommendationImage(rec.id, answers, content);
