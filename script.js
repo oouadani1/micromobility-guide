@@ -129,6 +129,8 @@ const DEVICE_CONTENT = {
     nextSteps: [
       { label: "Learn more about bicycles", url: "https://canva.link/nrvd5v2bvwbf99v" },
       { label: "Visit your local bike shop", url: "https://nbda.com/dealer-finder-member-directory/#!directory/map/tag=Massachusetts" },
+      { label: "More shops on Pinkbike", url: "https://www.pinkbike.com/directory/list/massachusetts/2/bike-shop/" },
+      { label: "More shops on Singletracks", url: "https://www.singletracks.com/bike-shops/region/massachusetts/" },
       { label: "Join a bike-friendly event", url: "https://www.massbike.org/massachusetts-bike-friendly-events-calendar" }
     ]
   },
@@ -215,6 +217,8 @@ const DEVICE_CONTENT = {
     nextSteps: [
       { label: "Learn more about e-bikes.", url: "https://canva.link/ez6c09mq8tpfpk4" },
       { label: "Visit a local bike shop.", url: "https://nbda.com/dealer-finder-member-directory/#!directory/map/tag=Massachusetts" },
+      { label: "More shops on Pinkbike", url: "https://www.pinkbike.com/directory/list/massachusetts/2/bike-shop/" },
+      { label: "More shops on Singletracks", url: "https://www.singletracks.com/bike-shops/region/massachusetts/" },
       { label: "Join a bike-friendly event.", url: "https://www.massbike.org/massachusetts-bike-friendly-events-calendar" },
       { label: "Check state e-bike incentives.", url: "https://goclean.masscec.com/clean-energy-solutions/electric-bicycles/" }
     ]
@@ -463,6 +467,8 @@ const DEVICE_CONTENT = {
       { label: "Learn more about cargo bikes.", url: "https://canva.link/gcyamow1yonirts" },
       { label: "Borrow a cargo bike for free to see if it is a good fit for you.", url: "https://cpp.ebikelibrary.org/" },
       { label: "Visit a local bike shop.", url: "https://nbda.com/dealer-finder-member-directory/#!directory/map/tag=Massachusetts" },
+      { label: "More shops on Pinkbike", url: "https://www.pinkbike.com/directory/list/massachusetts/2/bike-shop/" },
+      { label: "More shops on Singletracks", url: "https://www.singletracks.com/bike-shops/region/massachusetts/" },
     ]
   },
   bikeshare: {
@@ -723,6 +729,8 @@ const DEVICE_CONTENT = {
     nextSteps: [
       { label: "Learn more about youth mobility options", url: "https://canva.link/60qopm17rsnhlls" },
       { label: "Visit a local bike shop", url: "https://nbda.com/dealer-finder-member-directory/#!directory/map/tag=Massachusetts" },
+      { label: "More shops on Pinkbike", url: "https://www.pinkbike.com/directory/list/massachusetts/2/bike-shop/" },
+      { label: "More shops on Singletracks", url: "https://www.singletracks.com/bike-shops/region/massachusetts/" },
       { label: "Explore Safe Routes to School resources", url: "https://www.mass.gov/safe-routes-to-school" },
       { label: "Read CPSC age-appropriate product guidance", url: "https://www.cpsc.gov/content/2020-Age-Determination-Guidelines" }
     ]
@@ -2066,7 +2074,7 @@ function renderSingleRecommendationCard(rec, answers, pathway) {
     .filter((step, index, allSteps) =>
       allSteps.findIndex((candidate) => candidate.url === step.url) === index
     )
-    .slice(0, 4);
+    .slice(0, 8);
 
   const nextStepsHtml = nextSteps
     .map(
