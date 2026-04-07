@@ -1,9 +1,5 @@
 console.log("script.js is loading");
 
-const AIRTABLE_BASE_ID = "appgrJr8eKyFwvOnU";
-const AIRTABLE_TABLE_NAME = "Submissions";
-const AIRTABLE_PAT = "patsxsWizbVQz9vuw.1bf0b98129af41e7aa85bfeb0c6bfdffcf75778d71b7068b72c2acda0e9bba92";
-
 const OUTPUTS = {
   bicycle: {
     label: "Standard bicycle",
@@ -2417,10 +2413,6 @@ function submitCurrentAnswers() {
     scores,
     normalizedAnswers.pathway
   );
-
-  const payload = buildAirtablePayload(normalizedAnswers, recommendations, allRecommendations);
-  console.log("Payload:", payload);
-  sendToAirtable(payload);
 }
 
 function advanceFromCurrentRadioQuestion(selectedValue) {
@@ -2641,62 +2633,6 @@ function saveCurrentStepValue() {
   }
 
   return { valid: false, message: "Unsupported question type." };
-}
-
-async function sendToAirtable(payload) {
-  const url = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${encodeURIComponent(AIRTABLE_TABLE_NAME)}`;
-
-  try {
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${AIRTABLE_PAT}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        records: [
-          {
-            fields: payload
-          }
-        ]
-      })
-    });
-
-    const data = await response.json();
-
-    console.log("Airtable response status:", response.status);
-    console.log("Airtable response data:", data);
-
-    if (!response.ok) {
-      console.error("Airtable error:", data);
-      return;
-    }
-
-    console.log("Airtable success:", data);
-  } catch (error) {
-    console.error("Network/Airtable error:", error);
-  }
-}
-
-function buildAirtablePayload(normalizedAnswers, recommendations, allRecommendations = recommendations) {
-  return {
-    timestamp: new Date().toISOString(),
-    pathway: normalizedAnswers.pathway,
-    ageInput: String(normalizedAnswers.ageInput || ""),
-    age: normalizedAnswers.age,
-    adaptiveNeed: normalizedAnswers.adaptiveNeed,
-    primaryUse: normalizedAnswers.primaryUse,
-    transitLink: normalizedAnswers.transitLink || "",
-    carryChildren: normalizedAnswers.carryChildren,
-    distance: normalizedAnswers.distance,
-    routeType: normalizedAnswers.routeType,
-    storage: normalizedAnswers.storage,
-    primaryRecommendation: recommendations[0]?.id || "",
-    secondaryRecommendation: recommendations[1]?.id || "",
-    allRecommendations: allRecommendations.map((rec) => rec.id).join(", "),
-    screenWidth: String(window.innerWidth),
-    deviceType: window.innerWidth <= 768 ? "mobile" : "desktop"
-  };
 }
 
 function handleNext() {
