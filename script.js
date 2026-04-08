@@ -316,7 +316,7 @@ const DEVICE_CONTENT = {
       adaptiveNeedYes: "",
       adaptiveNeedNo: "",
       // Primary use
-      transport: "They are suitable for quick commutes or running errands, but they require decent leg and core strength to maintain balance and maneuverability.",
+      transport: "They are suitable for quick commutes or running errands.",
       deliveries: "",
       recreation: "Using them recreationally can provide a decent, low-impact exercise because they require leg and core strength to maintain balance and maneuverability.",
       // Transit link
@@ -340,8 +340,7 @@ const DEVICE_CONTENT = {
       storageNotMajorConcern: ""
     },
     considerBase: [
-      "These devices are best suited to short trips on smoother, lower-stress routes where the rider is already comfortable with balance and maneuvering.",
-      "They are not a strong fit for carrying children, rough pavement, or routes with a lot of vehicle traffic."
+      "These devices require decent leg and core strength to safely balance and maneuver them.",
     ],
     // CONSIDER CONDITIONAL
     // Active text slots under current logic: none
@@ -355,7 +354,7 @@ const DEVICE_CONTENT = {
       adaptiveNeedYes: "",
       adaptiveNeedNo: "",
       // Primary use
-      transport: "While they are ideal for short commutes, you should be comfortable navigating busy areas on two wheels before considering a low speed powered device",
+      transport: "While they are ideal for short commutes, you should be comfortable navigating busy areas on other, more stable two wheeled devices before considering a low speed powered device",
       deliveries: "",
       recreation: "",
       // Transit link
@@ -372,7 +371,7 @@ const DEVICE_CONTENT = {
       routeBikeLanes: "",
       routeMixedRoads: "",
       routeRegularRoads: "",
-      routeTrails: "Check your local park or trail before purchasing a low speeded powered devices, as some areas do not allow them",
+      routeTrails: "Check your local park or trail rules before purchasing a low speeded powered devices, as some areas do not allow them",
       // Storage
       storageIndoor: "Follow safe charging practices when storing a low speed powered device indoors to avoid the risk of thermal runaway and fire. Find more information on safe charging in Next Steps below.",
       storageOutdoor: "",
