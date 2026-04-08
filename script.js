@@ -330,7 +330,7 @@ const DEVICE_CONTENT = {
       distance3to9: "",
       distance10plus: "",
       // Route type
-      routeBikeLanes: "These devices perform best where there are dedicated bike lanes or smooth shared use paths.",
+      routeBikeLanes: "These devices are best where there are dedicated bike lanes or smooth shared use paths.",
       routeMixedRoads: "",
       routeRegularRoads: "",
       routeTrails: "These devices work well on off-road trails or parks if the surfaces are paved and smooth",
