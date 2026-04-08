@@ -587,19 +587,17 @@ const DEVICE_CONTENT = {
       distance3to9: "",
       distance10plus: "",
       // Route type
-      routeBikeLanes: "It can work well on bike-friendly routes and shared-use paths.",
+      routeBikeLanes: "",
       routeMixedRoads: "",
-      routeRegularRoads: "A more stable device may feel more comfortable on regular roads.",
-      routeTrails: "It may be especially comfortable on trails and path-based routes.",
+      routeRegularRoads: "",
+      routeTrails: "They are especially great on trails and shared used paths.",
       // Storage
       storageIndoor: "",
       storageOutdoor: "",
       storageNotMajorConcern: ""
     },
     considerBase: [
-      "Adaptive mobility devices include a range of designs such as tricycles or hand-powered cycles that support different mobility needs.",
-      "Consider visibility features such as lights, reflectors, or flags to improve safety on shared paths or roadways.",
-      "Some adaptive devices require additional space for storage or transport."
+      "Adaptive mobility devices comes in variety of styles, including recubmenent bikes, tricycles, and hand-powered cycles.",
     ],
     // CONSIDER CONDITIONAL
     // Active text slots under current logic: adaptiveNeedYes
