@@ -560,7 +560,7 @@ const DEVICE_CONTENT = {
   adaptiveMobility: {
     image: "Adaptive-v3.png",
     cost: "$2,500-$10,000",
-    whyBase: "",
+    whyBase: "An adapative mobility device is a versatile transportation option.",
     // WHY CONDITIONAL
     // Active text slots under current logic: adaptiveNeedYes, transport, recreation, distanceUnder3, distance3to9, distance10plus, routeBikeLanes, routeRegularRoads, routeTrails
     whyConditional: {
@@ -570,12 +570,12 @@ const DEVICE_CONTENT = {
       age17to49: "",
       age50plus: "",
       // Adaptive need
-      adaptiveNeedYes: "Depending on your kind of disability or mobility needs, an adaptive mobility device can be an excellent choice. There are many types of devices in both electric-assisted and human-powered variants, with each built to adapt to different comfort levels and use cases.",
+      adaptiveNeedYes: "They are an excellent choice if you have a disability or need mobility assistance as they are designed to adapt to different disabilities, comfort levels, and use cases.",
       adaptiveNeedNo: "",
       // Primary use
-      transport: "Additionally, many are designed with everyday commuting in mind, and some can even carry larger loads.",
+      transport: "Additionally, many are built with everyday commuting in mind, and some can even carry larger loads.",
       deliveries: "",
-      recreation: "Additionally, many are designed with a comfortable or reclined seating position, making them a nice choice for casual recreation and exercise.",
+      recreation: "Additionally, many are built with a comfortable or reclined seating position, making them a nice choice for casual recreation and exercise.",
       // Transit link
       transitLinkYes: "",
       transitLinkNo: "",
