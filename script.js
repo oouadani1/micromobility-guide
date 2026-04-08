@@ -570,7 +570,7 @@ const DEVICE_CONTENT = {
       age17to49: "",
       age50plus: "",
       // Adaptive need
-      adaptiveNeedYes: "They are an excellent choice if you have a disability or need mobility assistance as they are designed to adapt to different disabilities, comfort levels, and use cases.",
+      adaptiveNeedYes: "They are an excellent choice if you have a disability or need mobility assistance, as they are designed to adapt to different disabilities, comfort levels, and use cases.",
       adaptiveNeedNo: "",
       // Primary use
       transport: "Additionally, many are built with everyday commuting in mind, and some can even carry larger loads.",
@@ -590,7 +590,7 @@ const DEVICE_CONTENT = {
       routeBikeLanes: "",
       routeMixedRoads: "",
       routeRegularRoads: "",
-      routeTrails: "They are especially great on trails and shared used paths.",
+      routeTrails: "",
       // Storage
       storageIndoor: "",
       storageOutdoor: "",
