@@ -454,7 +454,7 @@ const DEVICE_CONTENT = {
       routeRegularRoads: "",
       routeTrails: "",
       // Storage
-      storageIndoor: "Cargo bikes are not suitable to be stored indoors due to their heavy weight and length. If you are storing them inside a shed or garage, follow safe charging practices to avoid the risk of thermal runaway and fire.",
+      storageIndoor: "Cargo bikes are not suitable to be stored indoors due to their heavy weight and length. If you are storing them inside a shed or garage, follow safe charging practices to avoid the risk of thermal runaway and fire. Find more information on safe charging in Next Steps below.",
       storageOutdoor: "If you are storing a cargo bike outdoors, always remove the battery (if it is an e-cargo bike), consider a high-quality lock and weatherproof tarp, and ensure it is parked in a safe place.",
       storageNotMajorConcern: ""
     },
@@ -630,10 +630,10 @@ const DEVICE_CONTENT = {
       routeRegularRoads: "",
       routeTrails: "",
       // Storage
-      storageIndoor: "",
+      storageIndoor: "Adaptive mobility devices are not ideal to store indoors due to their heavy weight and length. If you are storing them inside a shed or garage and they are electrically assisted, follow safe charging practices to avoid the risk of thermal runaway and fire.",
       storageOutdoor: "",
       storageNotMajorConcern: ""
-    },
+    },    
     nextSteps: [
       { label: "Learn more about adaptive mobility options (coming soon)", url: "/micromobility-hub/device-library/adaptive-options.html" },
       { label: "Join an accessible cycling event", url: "https://www.mass.gov/accessible-cycling" },
@@ -2032,7 +2032,7 @@ function getConditionalNextSteps(recId, answers) {
 
   if (
     answers.storage === "indoor" &&
-    (recId === "ebike" || recId === "escooter" || recId === "lowSpeedPoweredMicromobility" || recId === "cargoBike")
+    (recId === "ebike" || recId === "escooter" || recId === "lowSpeedPoweredMicromobility" || recId === "cargoBike" || recId === "adaptiveMobility")
   ) {
     steps.push({
       label: "Learn how to safely charge your micromobility battery and avoid fires",
