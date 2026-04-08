@@ -320,7 +320,7 @@ const DEVICE_CONTENT = {
       deliveries: "",
       recreation: "Using them recreationally can provide a decent, low-impact exercise because they require leg and core strength to maintain balance and maneuverability.",
       // Transit link
-      transitLinkYes: "Taking public transit with these devices is seamless because they are portable and can be carried underarm.",
+      transitLinkYes: "Taking public transit with these devices is seamless because they are portable.",
       transitLinkNo: "",
       // Carrying children
       carryChildrenYes: "",
@@ -358,7 +358,7 @@ const DEVICE_CONTENT = {
       deliveries: "",
       recreation: "",
       // Transit link
-      transitLinkYes: "Although small, these devices can be heavy to carry. Consider a specialized backpack to carry them with. Additionally, given you use transit during your commute, check MBTA or your local RTA rules before bringing these devices onto a bus or train. Find more information on micromobility and transit in Next Steps below.",
+      transitLinkYes: "Given you use transit during your commute, check MBTA or your local RTA rules before bringing these devices onto a bus or train. Find more information on micromobility and transit in Next Steps below. Additionally, while small, these devices can be heavy to carry. Consider a specialized backpack to carry them with.",
       transitLinkNo: "",
       // Carrying children
       carryChildrenYes: "",
