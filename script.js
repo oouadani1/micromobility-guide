@@ -333,7 +333,7 @@ const DEVICE_CONTENT = {
       routeBikeLanes: "These devices are best where there are dedicated bike lanes or smooth shared use paths.",
       routeMixedRoads: "",
       routeRegularRoads: "",
-      routeTrails: "These devices work well on off-road trails or parks if the surfaces are paved and smooth",
+      routeTrails: "These devices work well on off-road trails or parks if the surfaces are paved and smooth.",
       // Storage
       storageIndoor: "Storing small e-devices indoors is easy due to their compact size.",
       storageOutdoor: "",
@@ -1227,6 +1227,52 @@ function printDeviceScoreTotals() {
     device,
     totalScore: totals[device]
   })));
+}
+
+function printCurrentResponseScores(answers, scores, sortedRecommendations) {
+  const deviceOrder = [
+    "bicycle",
+    "ebike",
+    "escooter",
+    "lowSpeedPoweredMicromobility",
+    "cargoBike",
+    "adaptiveMobility",
+    "bikeshare",
+    "humanPoweredYouth"
+  ];
+
+  const pathway = answers.pathway || "myself";
+  const questionRows = getPrintableQuestionKeys(APP_STATE.answers || {})
+    .map((questionId) => ({
+      question: getQuestionLabelForPathway(questionId, pathway),
+      answer: getAnswerDisplayValue(questionId, APP_STATE.answers?.[questionId] || "")
+    }))
+    .filter((row) => row.answer);
+
+  console.log("Current response questions and answers:");
+  console.table(questionRows);
+
+  console.log("Current response normalized answers:");
+  console.table(answers);
+
+  console.log("Current response scores by device:");
+  console.table(
+    deviceOrder
+      .filter((device) => scores[device] !== undefined)
+      .map((device) => ({
+        device,
+        score: scores[device]
+      }))
+  );
+
+  console.log("Current sorted recommendations:");
+  console.table(
+    sortedRecommendations.map((rec, index) => ({
+      rank: index + 1,
+      device: rec.id,
+      score: rec.score
+    }))
+  );
 }
 
 function getSelectedPathway() {
@@ -2358,6 +2404,8 @@ function submitCurrentAnswers() {
     normalizedAnswers.pathway === "exploring"
       ? allRecommendations
       : getTopRecommendations(allRecommendations);
+
+  printCurrentResponseScores(normalizedAnswers, scores, allRecommendations);
 
   renderRecommendations(
     recommendations,
