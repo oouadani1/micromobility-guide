@@ -222,7 +222,7 @@ const DEVICE_CONTENT = {
   escooter: {
     image: "E-Scooter.png",
     cost: "$500-$2,000",
-    whyBase: "An e-scooter can be a convenient option for quick, short trips.",
+    whyBase: "An e-scooter is a convenient option for quick trips.",
     // WHY CONDITIONAL
     // Active text slots under current logic: transport, recreation, transitLinkYes, distanceUnder3, routeBikeLanes, routeMixedRoads
     whyConditional: {
@@ -245,16 +245,16 @@ const DEVICE_CONTENT = {
       carryChildrenYes: "",
       carryChildrenNo: "",
       // Distance
-      distanceUnder3: "Due to their small size, an e-scooter is a great option for traveling short distances.",
+      distanceUnder3: "",
       distance3to9: "",
       distance10plus: "",
       // Route type
-      routeBikeLanes: "It peforms best where there are dedicated bike lanes or smooth shared use paths.",
-      routeMixedRoads: "It may work on roads with only a few bike lanes, but your comfort will depend on the route and the type of e-scooter.",
+      routeBikeLanes: "",
+      routeMixedRoads: "On roads with only a few bike lanes, e-scooters can be a decent choice, but your comfort will depend on the smoothness of the road and how heavy the traffic is.",
       routeRegularRoads: "",
       routeTrails: "",
       // Storage
-      storageIndoor: "Storing e-scooters indoors is easy due to their foldability.",
+      storageIndoor: "Storing e-scooters indoors is easy due to their compact size.",
       storageOutdoor: "",
       storageNotMajorConcern: ""
     },
