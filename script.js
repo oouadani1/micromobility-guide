@@ -65,7 +65,7 @@ const DEVICE_CONTENT = {
       deliveries: "",
       recreation: "It is especially well suited for recreation and exercise.",
       // Transit link
-      transitLinkYes: "It can also work well for trips that connect to transit.",
+      transitLinkYes: "A bicycle makes connecting to transit convenient.",
       transitLinkNo: "",
       // Carrying children
       carryChildrenYes: "With the right add-ons, bikes can also support carrying a child.",
@@ -335,7 +335,7 @@ const DEVICE_CONTENT = {
       routeRegularRoads: "",
       routeTrails: "These devices work well on off-road trails or parks if the surfaces are paved and smooth.",
       // Storage
-      storageIndoor: "Storing small e-devices indoors is easy due to their compact size.",
+      storageIndoor: "Relatedly, storing small e-devices indoors is easy due to their compact size.",
       storageOutdoor: "",
       storageNotMajorConcern: ""
     },
@@ -486,7 +486,7 @@ const DEVICE_CONTENT = {
       deliveries: "",
       recreation: "",
       // Transit link
-      transitLinkYes: "It is also great when you are making first- and last-mile trips that connect to transit becuase bikeshare docks are also located near transit stations.",
+      transitLinkYes: "Connecting to transit with bikeshare is easy because docks are often located near transit stations.",
       transitLinkNo: "",
       // Carrying children
       carryChildrenYes: "",
