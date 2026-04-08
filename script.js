@@ -303,7 +303,7 @@ const DEVICE_CONTENT = {
   lowSpeedPoweredMicromobility: {
     image: "low-power-mobility.png",
     cost: "$300-$2,500",
-    whyBase: "Small e-devices can be a great fit for short trips because of their affordability, small size, and fun factor.",
+    whyBase: "Small e-devices can be a great fit for short trips because of their affordability, compact size, and fun factor.",
     // WHY CONDITIONAL
     // Active text slots under current logic: transport, recreation, transitLinkYes, distanceUnder3, routeBikeLanes, routeTrails
     whyConditional: {
