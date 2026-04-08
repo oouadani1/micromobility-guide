@@ -933,7 +933,7 @@ const SCORING_RULES = {
       escooter: 1,
       lowSpeedPoweredMicromobility: 2,
       cargoBike: 1,
-      adaptiveMobility: 0,
+      adaptiveMobility: -1,
       bikeshare: 0
     },
     outdoor: {
