@@ -552,7 +552,9 @@ const DEVICE_CONTENT = {
     },
     nextSteps: [
       { label: "Learn about bikeshare options (coming soon)", url: "/micromobility-hub/device-library/bikeshare.html" },
-      { label: "Check Massachusetts bikeshare programs and discount pricing", url: "https://goclean.masscec.com/homeowners/bike-share-programs/" }
+      { label: "Check Massachusetts bikeshare programs and discount pricing", url: "https://goclean.masscec.com/homeowners/bike-share-programs/" },
+      { label: "Check Bluebikes income-eligible discount", url: "https://bluebikes.com/pricing/income-eligible-program" },
+      { label: "Check Bluebikes City of Boston discount", url: "https://www.boston.gov/departments/boston-bikes/discounted-bluebikes" }
     ]
   },
   adaptiveMobility: {
@@ -2092,25 +2094,7 @@ function renderSingleRecommendationCard(rec, answers, pathway) {
       const childrenHtml = children.length
         ? `
           <ul class="recommendation-sublist">
-            ${children.map((child) => {
-              if (child === "If you participate in programs like SNAP or MassHealth, or have a qualifying income, you are eligible for a $50/year Bluebikes membership.") {
-                return `
-                  <li class="recommendation-subitem">
-                    <a href="https://bluebikes.com/pricing/income-eligible-program" target="_blank" rel="noopener noreferrer">${child}</a>
-                  </li>
-                `;
-              }
-
-              if (child === "If you live in the City of Boston and have not had an annual membership recently., you may be eligible for a $60/year Bluebikes membership, or $5/year if you have a qualifying income.") {
-                return `
-                  <li class="recommendation-subitem">
-                    <a href="https://www.boston.gov/departments/boston-bikes/discounted-bluebikes" target="_blank" rel="noopener noreferrer">${child}</a>
-                  </li>
-                `;
-              }
-
-              return `<li class="recommendation-subitem">${child}</li>`;
-            }).join("")}
+            ${children.map((child) => `<li class="recommendation-subitem">${child}</li>`).join("")}
           </ul>
         `
         : "";
