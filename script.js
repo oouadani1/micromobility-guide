@@ -1510,7 +1510,6 @@ function getSortedRecommendations(scores, answers) {
 
   sortedDevices = enforceCargoBikePlacement(sortedDevices, answers);
   sortedDevices = enforceAdaptiveMobilityPlacement(sortedDevices, answers);
-  sortedDevices = enforceLowSpeedPlacement(sortedDevices);
 
   return sortedDevices;
 }
