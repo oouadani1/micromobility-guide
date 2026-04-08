@@ -2025,10 +2025,12 @@ function getConditionalNextSteps(recId, answers) {
       label: "Check MBTA micromobility policies",
       url: "https://www.mbta.com/bikes"
     });
-    steps.push({
-      label: "Learn how to safely park your micromobility device at an MBTA station",
-      url: "https://bc.mbta.com/riding_the_t/bikes/register/Default.asp"
-    });
+    if (recId !== "bikeshare") {
+      steps.push({
+        label: "Learn how to safely park your micromobility device at an MBTA station",
+        url: "https://bc.mbta.com/riding_the_t/bikes/register/Default.asp"
+      });
+    }
   }
 
   if (
@@ -2063,8 +2065,58 @@ function renderSingleRecommendationCard(rec, answers, pathway) {
     ...considerationItems,
   ].filter(Boolean);
 
-  const considerationsHtml = orderedConsiderations
-    .map((item) => `<li class="guidance-item">${item}</li>`)
+  const considerationGroups = [];
+
+  orderedConsiderations.forEach((item) => {
+    const isBluebikesDiscountDetail =
+      item === "If you participate in programs like SNAP or MassHealth, or have a qualifying income, you are eligible for a $50/year Bluebikes membership." ||
+      item === "If you live in the City of Boston and have not had an annual membership recently., you may be eligible for a $60/year Bluebikes membership, or $5/year if you have a qualifying income.";
+
+    const lastGroup = considerationGroups[considerationGroups.length - 1];
+    const canNestUnderPrevious =
+      rec.id === "bikeshare" &&
+      isBluebikesDiscountDetail &&
+      lastGroup &&
+      lastGroup.item === "Many bikeshare companies, health insurance providers, universities, employers, or municipalities offer discounts. Check your providers to learn more.";
+
+    if (canNestUnderPrevious) {
+      lastGroup.children.push(item);
+      return;
+    }
+
+    considerationGroups.push({ item, children: [] });
+  });
+
+  const considerationsHtml = considerationGroups
+    .map(({ item, children }) => {
+      const childrenHtml = children.length
+        ? `
+          <ul class="recommendation-sublist">
+            ${children.map((child) => {
+              if (child === "If you participate in programs like SNAP or MassHealth, or have a qualifying income, you are eligible for a $50/year Bluebikes membership.") {
+                return `
+                  <li class="recommendation-subitem">
+                    <a href="https://bluebikes.com/pricing/income-eligible-program" target="_blank" rel="noopener noreferrer">${child}</a>
+                  </li>
+                `;
+              }
+
+              if (child === "If you live in the City of Boston and have not had an annual membership recently., you may be eligible for a $60/year Bluebikes membership, or $5/year if you have a qualifying income.") {
+                return `
+                  <li class="recommendation-subitem">
+                    <a href="https://www.boston.gov/departments/boston-bikes/discounted-bluebikes" target="_blank" rel="noopener noreferrer">${child}</a>
+                  </li>
+                `;
+              }
+
+              return `<li class="recommendation-subitem">${child}</li>`;
+            }).join("")}
+          </ul>
+        `
+        : "";
+
+      return `<li class="guidance-item">${item}${childrenHtml}</li>`;
+    })
     .join("");
 
   const nextSteps = [...getNextSteps(rec.id), ...getConditionalNextSteps(rec.id, answers)]
