@@ -345,14 +345,15 @@ button.hidden {
 }
 
 .recommendation-sublist {
-  margin: -12px 0 24px 28px;
-  padding-left: 20px;
+  margin: 8px 0 0 0;
+  padding-left: 28px;
+  list-style-type: disc;
 }
 
 .recommendation-subitem {
   margin-bottom: 8px;
-  font-size: 16px;
-  line-height: 1.45;
+  font-size: 0.95rem;
+  line-height: 1.4;
   color: #000000;
 }
 

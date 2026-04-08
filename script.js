@@ -371,7 +371,7 @@ const DEVICE_CONTENT = {
       routeBikeLanes: "",
       routeMixedRoads: "",
       routeRegularRoads: "",
-      routeTrails: "Check your local park or trail rules before purchasing a small e-device, as some municipalities do not allow them",
+      routeTrails: "Check your local park or trail rules before purchasing a small e-device, as some municipalities do not allow them.",
       // Storage
       storageIndoor: "Follow safe charging practices when storing small e-device indoors to avoid the risk of thermal runaway and fire. Find more information on safe charging in Next Steps below.",
       storageOutdoor: "",
