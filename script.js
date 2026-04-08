@@ -250,7 +250,7 @@ const DEVICE_CONTENT = {
       distance10plus: "",
       // Route type
       routeBikeLanes: "It peforms best where there are dedicated bike lanes or smooth shared use paths.",
-      routeMixedRoads: "It may work on road with only a few bike lanes, but your comfort will depend on the route and the type of e-scooter.",
+      routeMixedRoads: "It may work on roads with only a few bike lanes, but your comfort will depend on the route and the type of e-scooter.",
       routeRegularRoads: "",
       routeTrails: "",
       // Storage
@@ -303,7 +303,7 @@ const DEVICE_CONTENT = {
   lowSpeedPoweredMicromobility: {
     image: "low-power-mobility.png",
     cost: "$500-$2,500",
-    whyBase: "Low speed powered micromobility devices can be a niche fit for short trips on smoother, lower-stress routes.",
+    whyBase: "Low speed powered micromobility devices require good balance to use but can be a great fit for short trips because of their affordability, portability, and fun factor.",
     // WHY CONDITIONAL
     // Active text slots under current logic: transport, recreation, transitLinkYes, distanceUnder3, routeBikeLanes, routeTrails
     whyConditional: {
@@ -316,11 +316,11 @@ const DEVICE_CONTENT = {
       adaptiveNeedYes: "",
       adaptiveNeedNo: "",
       // Primary use
-      transport: "They may work for short commuting or errand trips when storage and route conditions are favorable.",
+      transport: "They peform best for quick commutes or running errands.",
       deliveries: "",
-      recreation: "They can also be a recreation-oriented option for riders who are already comfortable balancing and maneuvering.",
+      recreation: "Using them recreationally can be ideal because they require active core strength, balance, and maneuverability.",
       // Transit link
-      transitLinkYes: "They can be easier to bring inside or combine with transit than larger devices.",
+      transitLinkYes: "Taking public transit with these devices is seamless because they are portable and can be carried underarm.",
       transitLinkNo: "",
       // Carrying children
       carryChildrenYes: "",
@@ -330,7 +330,7 @@ const DEVICE_CONTENT = {
       distance3to9: "",
       distance10plus: "",
       // Route type
-      routeBikeLanes: "They work best on smoother routes with separation from traffic.",
+      routeBikeLanes: "",
       routeMixedRoads: "",
       routeRegularRoads: "",
       routeTrails: "Some riders may prefer using them in park-like settings away from vehicle traffic.",
@@ -355,11 +355,11 @@ const DEVICE_CONTENT = {
       adaptiveNeedYes: "",
       adaptiveNeedNo: "",
       // Primary use
-      transport: "",
+      transport: "While they are ideal for short commutes, you should be comfortable with riding micromobility in busy areas before considering a low speed powered device",
       deliveries: "",
       recreation: "",
       // Transit link
-      transitLinkYes: "",
+      transitLinkYes: "While these devices are small, they can be heavy to carry. Consider a specialized backpack to carry them with. Additionally, given you use transit during your commute, check MBTA or your local RTA rules before bringing these devices onto a bus or train. Find more information on micromobility and transit in Next Steps below.",
       transitLinkNo: "",
       // Carrying children
       carryChildrenYes: "",
@@ -369,7 +369,7 @@ const DEVICE_CONTENT = {
       distance3to9: "",
       distance10plus: "",
       // Route type
-      routeBikeLanes: "",
+      routeBikeLanes: "It performs best where there are dedicated bike lanes or smooth shared use paths.",
       routeMixedRoads: "",
       routeRegularRoads: "",
       routeTrails: "",
