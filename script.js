@@ -316,7 +316,7 @@ const DEVICE_CONTENT = {
       adaptiveNeedYes: "",
       adaptiveNeedNo: "",
       // Primary use
-      transport: "They are suitable for quick commutes or running errands.",
+      transport: "They are suitable for quick commutes or running errands, but they require decent leg and core strength to maintain balance and maneuverability.",
       deliveries: "",
       recreation: "Using them recreationally can provide a decent, low-impact exercise because they require leg and core strength to maintain balance and maneuverability.",
       // Transit link
