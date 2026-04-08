@@ -303,7 +303,7 @@ const DEVICE_CONTENT = {
   lowSpeedPoweredMicromobility: {
     image: "low-power-mobility.png",
     cost: "$300-$2,500",
-    whyBase: "Low speed powered micromobility devices can be a great fit for short trips because of their affordability, small size, and fun factor.",
+    whyBase: "Low speed e-devices can be a great fit for short trips because of their affordability, small size, and fun factor.",
     // WHY CONDITIONAL
     // Active text slots under current logic: transport, recreation, transitLinkYes, distanceUnder3, routeBikeLanes, routeTrails
     whyConditional: {
@@ -335,7 +335,7 @@ const DEVICE_CONTENT = {
       routeRegularRoads: "",
       routeTrails: "These devices work well on off-road trails or parks if the surfaces are paved and smooth",
       // Storage
-      storageIndoor: "Storing low speed powered devices indoors is easy due to their compact size.",
+      storageIndoor: "Storing low speed e-devices indoors is easy due to their compact size.",
       storageOutdoor: "",
       storageNotMajorConcern: ""
     },
@@ -354,7 +354,7 @@ const DEVICE_CONTENT = {
       adaptiveNeedYes: "",
       adaptiveNeedNo: "",
       // Primary use
-      transport: "While they are ideal for short commutes, you should be comfortable navigating busy areas on other, more stable two wheeled devices before considering a low speed powered device",
+      transport: "While they are ideal for short commutes, you should already be comfortable navigating busy areas on two wheels before considering a low speed e-device",
       deliveries: "",
       recreation: "",
       // Transit link
