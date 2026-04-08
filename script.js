@@ -1724,18 +1724,14 @@ function renderPrintRecommendationSummary(rec, answers, pathway) {
   const considerationItems = getResultCardConsiderationItems(rec.id, answers, content);
   let considerations = getConsiderBase(rec.id);
 
-  if (rec.id === "cargoBike" && answers.carryChildren === "yes") {
-    considerations.push(getConsiderConditionalValue("cargoBike", "children"));
-  }
-
   if (answers.storage !== "indoor" && (rec.id === "ebike" || rec.id === "escooter")) {
     considerations = considerations.filter(
       (item) => !item.includes("UL-certified batteries")
     );
   }
 
-  const trimmedConsiderations = [...considerationItems, ...considerations].slice(0, 2);
-  const considerationsHtml = trimmedConsiderations
+  const orderedConsiderations = [...considerations, ...considerationItems];
+  const considerationsHtml = orderedConsiderations
     .map((item) => `<li>${item}</li>`)
     .join("");
 
@@ -1831,21 +1827,23 @@ function getMatchedSupportKeys(answers) {
 }
 
 function getRecommendationReason(recId, answers, pathway) {
-  if (!getDeviceContent(recId)) return "";
+  const content = getDeviceContent(recId);
+  if (!content) return "";
 
-  if (recId === "adaptiveMobility" && pathway === "child" && answers.adaptiveNeed === "yes") {
-    return getWhyConditional("adaptiveMobility", "adaptiveNeedYes");
-  }
+  const matchedSlots = new Set(getMatchedConsiderationSlots(answers));
+  const orderedWhyConditionals = Object.entries(content.whyConditional || {})
+    .filter(([slot, text]) => {
+      if (!text || !matchedSlots.has(slot)) return false;
 
-  const matchedKeys = getMatchedSupportKeys(answers);
-  const priorityOrder = RATIONALE_PRIORITY[recId] || [];
+      if (recId === "adaptiveMobility" && slot === "adaptiveNeedYes") {
+        return pathway === "child" && answers.adaptiveNeed === "yes";
+      }
 
-  const chosenSupports = priorityOrder
-    .filter((key) => matchedKeys.includes(key) && getWhyConditional(recId, key))
-    .map((key) => getWhyConditional(recId, key))
-    .slice(0, 2);
+      return true;
+    })
+    .map(([, text]) => text);
 
-  return [getWhyBase(recId), ...chosenSupports].join(" ");
+  return [getWhyBase(recId), ...orderedWhyConditionals].filter(Boolean).join(" ");
 }
 
 function shouldSuggestFoldable(answers) {
@@ -1933,31 +1931,18 @@ function getMatchedConsiderationSlots(answers) {
 }
 
 function getResultCardConsiderationItems(recId, answers, content) {
-  const items = [];
-  const handledSlots = new Set();
+  const matchedSlots = new Set(getMatchedConsiderationSlots(answers));
+  const items = Object.entries(content.considerConditional || {})
+    .filter(([slot, text]) => {
+      if (!text || !matchedSlots.has(slot)) return false;
 
-  if (answers.transitLink === "yes" && (recId === "bicycle" || recId === "ebike")) {
-    items.push(getConsiderConditionalValue(recId, "transitLink"));
-    handledSlots.add("transitLinkYes");
-  }
+      if (recId === "adaptiveMobility" && slot === "adaptiveNeedYes") {
+        return answers.pathway === "child" && answers.adaptiveNeed === "yes";
+      }
 
-  if (recId === "ebike") {
-    items.push(getConsiderConditionalValue(recId, "ohv"));
-    handledSlots.add("transport");
-
-    items.push(
-      answers.age === "age14to16"
-        ? getConsiderConditionalValue(recId, "age14to16")
-        : getConsiderConditionalValue(recId, "classes")
-    );
-    handledSlots.add(answers.age === "age14to16" ? "age14to16" : "age17to49");
-    handledSlots.add("age50plus");
-  }
-
-  if (recId === "bicycle" && answers.carryChildren === "yes") {
-    items.push(getConsiderConditionalValue(recId, "children"));
-    handledSlots.add("carryChildrenYes");
-  }
+      return true;
+    })
+    .map(([, text]) => text);
 
   if (content.extraLabel && content.extraValue) {
     items.push(`
@@ -1967,25 +1952,6 @@ function getResultCardConsiderationItems(recId, answers, content) {
       </span>
     `);
   }
-
-  if (recId === "adaptiveMobility" && answers.pathway === "child" && answers.adaptiveNeed === "yes") {
-    items.push(getConsiderConditionalValue(recId, "adaptiveChild"));
-    handledSlots.add("adaptiveNeedYes");
-  }
-
-  if (recId === "humanPoweredYouth" && answers.age === "age3to13") {
-    items.push(getConsiderConditionalValue(recId, "youthGuidance"));
-    handledSlots.add("age3to13");
-  }
-
-  getMatchedConsiderationSlots(answers).forEach((slot) => {
-    if (handledSlots.has(slot)) return;
-
-    const value = getConsiderConditionalValue(recId, slot);
-    if (value) {
-      items.push(value);
-    }
-  });
 
   return items.filter(Boolean).filter((item, index, allItems) => allItems.indexOf(item) === index);
 }
@@ -2035,31 +2001,19 @@ function renderSingleRecommendationCard(rec, answers, pathway) {
   const content = getDeviceContent(rec.id);
   const considerationItems = getResultCardConsiderationItems(rec.id, answers, content);
   const rationaleHeading = pathway === "exploring" ? "Why consider it" : "Why this fits";
-  let considerations = getConsiderBase(rec.id);
+  const considerations = getConsiderBase(rec.id);
 
-  if (rec.id === "cargoBike" && answers.carryChildren === "yes") {
-    considerations.push(getConsiderConditionalValue(rec.id, "children"));
-  }
+  let filteredBaseConsiderations = [...considerations];
 
   if (answers.storage !== "indoor" && (rec.id === "ebike" || rec.id === "escooter")) {
-    considerations = considerations.filter(
+    filteredBaseConsiderations = filteredBaseConsiderations.filter(
       (item) => !item.includes("UL-certified batteries")
     );
   }
 
-  const [firstBaseConsideration = "", ...remainingBaseConsiderations] = considerations;
-  const maxConsiderations = considerationItems.length >= 3 ? 3 : 4;
-  const availableRemainingBaseSlots = Math.max(
-    0,
-    maxConsiderations - considerationItems.length - (firstBaseConsideration ? 1 : 0)
-  );
-
-  considerations = remainingBaseConsiderations.slice(0, availableRemainingBaseSlots);
-
   const orderedConsiderations = [
-    firstBaseConsideration,
+    ...filteredBaseConsiderations,
     ...considerationItems,
-    ...considerations
   ].filter(Boolean);
 
   const considerationsHtml = orderedConsiderations
