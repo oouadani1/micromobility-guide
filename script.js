@@ -303,7 +303,7 @@ const DEVICE_CONTENT = {
   lowSpeedPoweredMicromobility: {
     image: "low-power-mobility.png",
     cost: "$500-$2,500",
-    whyBase: "Low speed powered micromobility devices require good balance to use but can be a great fit for short trips because of their affordability, portability, and fun factor.",
+    whyBase: "Low speed powered micromobility devices require good balance to use, but can be a great fit for short trips because of their affordability and fun factor.",
     // WHY CONDITIONAL
     // Active text slots under current logic: transport, recreation, transitLinkYes, distanceUnder3, routeBikeLanes, routeTrails
     whyConditional: {
