@@ -454,7 +454,7 @@ const DEVICE_CONTENT = {
       routeRegularRoads: "",
       routeTrails: "",
       // Storage
-      storageIndoor: "Cargo bikes are not suitable to be stored indoors due to their heavy weight and length. If you are storing them inside a shed or garage, follow safe charging practices to avoid the risk of thermal runaway and fire. Find more information on safe charging in Next Steps below.",
+      storageIndoor: "Cargo bikes are not ideal to store indoors due to their heavy weight and length. If you are storing and them inside a shed or garage and they have an electric motor, follow safe charging practices to avoid the risk of thermal runaway and fire. Find more information on safe charging in Next Steps below.",
       storageOutdoor: "If you are storing a cargo bike outdoors, always remove the battery (if it is an e-cargo bike), consider a high-quality lock and weatherproof tarp, and ensure it is parked in a safe place.",
       storageNotMajorConcern: ""
     },
@@ -570,7 +570,7 @@ const DEVICE_CONTENT = {
       age17to49: "",
       age50plus: "",
       // Adaptive need
-      adaptiveNeedYes: "Depending on your kind of disability, an adaptive mobility device can be an excellent choice. There are many types of devices in both electric-assisted and human-powered variants, with each designed to support different needs, comfort levels, and use cases.",
+      adaptiveNeedYes: "Depending on your kind of disability or mobility needs, an adaptive mobility device can be an excellent choice. There are many types of devices in both electric-assisted and human-powered variants, with each designed to support different needs, comfort levels, and use cases.",
       adaptiveNeedNo: "",
       // Primary use
       transport: "Additionally, many are designed with everyday commuting in mind, and some can even carry larger loads.",
@@ -630,8 +630,8 @@ const DEVICE_CONTENT = {
       routeRegularRoads: "",
       routeTrails: "",
       // Storage
-      storageIndoor: "Adaptive mobility devices are not ideal to store indoors due to their heavy weight and length. If you are storing them inside a shed or garage and they are electrically assisted, follow safe charging practices to avoid the risk of thermal runaway and fire.",
-      storageOutdoor: "",
+      storageIndoor: "Adaptive mobility devices are not ideal to store indoors due to their heavy weight and length. If you are storing them inside a shed or garage and they have electric motor, follow safe charging practices to avoid the risk of thermal runaway and fire.",
+      storageOutdoor: "If you are storing an adapative mobility device outdoors, always remove the battery (if it has an electric motor), consider a high-quality lock and weatherproof tarp, and ensure it is parked in a safe place.",
       storageNotMajorConcern: ""
     },    
     nextSteps: [
