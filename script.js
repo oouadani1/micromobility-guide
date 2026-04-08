@@ -469,7 +469,7 @@ const DEVICE_CONTENT = {
   bikeshare: {
     image: "Bikeshare-v2.png",
     cost: "$0-$120 per year depending on bikeshare membership or discounts",
-    whyBase: "Bikeshare can be a practical option if flexibility matters more than ownership.",
+    whyBase: "Bikeshare could be an excellent option for you if flexibility matters more than ownership.",
     // WHY CONDITIONAL
     // Active text slots under current logic: transport, transitLinkYes, distanceUnder3, routeBikeLanes, storageOutdoor
     whyConditional: {
@@ -482,38 +482,33 @@ const DEVICE_CONTENT = {
       adaptiveNeedYes: "",
       adaptiveNeedNo: "",
       // Primary use
-      transport: "It can work especially well for everyday trips near transit, schools, downtowns, and other active areas.",
+      transport: "It works especially well for everyday commuting since bikeshare docks are conveniently located near schools and workplaces",
       deliveries: "",
       recreation: "",
       // Transit link
-      transitLinkYes: "It can be especially helpful for first- and last-mile trips that connect to transit.",
+      transitLinkYes: "It is also great when you are making first- and last-mile trips that connect to transit becuase bikeshare docks are also located near transit stations.",
       transitLinkNo: "",
       // Carrying children
       carryChildrenYes: "",
       carryChildrenNo: "",
       // Distance
-      distanceUnder3: "It is especially convenient for shorter trips.",
+      distanceUnder3: "",
       distance3to9: "",
       distance10plus: "",
       // Route type
-      routeBikeLanes: "It works best where bike lanes or shared-use paths are available.",
+      routeBikeLanes: "",
       routeMixedRoads: "",
       routeRegularRoads: "",
       routeTrails: "",
       // Storage
       storageIndoor: "",
-      // migrated from old storage support; current behavior only triggers on outdoor storage
-      storageOutdoor: "It can be a good fit when storage is limited or inconvenient.",
+      storageOutdoor: "Since you need to store your device outdoors, bikeshare is a strong option for you because you can leave the bike at the dock",
       storageNotMajorConcern: ""
     },
     considerBase: [
-      "There are a few bikeshare systems in Massachusetts, including Bluebikes, Metro Mobility, ValleyBike Share, CargoB, and Port Bikeshare.",
-      "Check whether a bikeshare system is available near your starting point and destination.",
-      "Follow local bicycling rules and ride in bike lanes or shared paths when available.",
-      "Consider using helmets and reflective gear when riding in low-light conditions."
+      "There are a few bikeshare systems in Massachusetts, including Bluebikes, Metro Mobility, ValleyBike Share, CargoB, Minuteman Bikeshare, and Port Bikeshare. Check whether a bikeshare system is available near your starting point and destination.",
     ],
     // CONSIDER CONDITIONAL
-    // Active text slots under current logic: none
     considerConditional: {
       // Age
       age3to13: "",
@@ -524,7 +519,7 @@ const DEVICE_CONTENT = {
       adaptiveNeedYes: "",
       adaptiveNeedNo: "",
       // Primary use
-      transport: "",
+      transport: "Most bikeshare systems offer a choice between e-bikes and standard bikes.",
       deliveries: "",
       recreation: "",
       // Transit link
