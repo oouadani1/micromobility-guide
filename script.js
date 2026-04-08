@@ -303,7 +303,7 @@ const DEVICE_CONTENT = {
   lowSpeedPoweredMicromobility: {
     image: "low-power-mobility.png",
     cost: "$300-$2,500",
-    whyBase: "Low speed e-devices can be a great fit for short trips because of their affordability, small size, and fun factor.",
+    whyBase: "Small e-devices can be a great fit for short trips because of their affordability, small size, and fun factor.",
     // WHY CONDITIONAL
     // Active text slots under current logic: transport, recreation, transitLinkYes, distanceUnder3, routeBikeLanes, routeTrails
     whyConditional: {
@@ -335,7 +335,7 @@ const DEVICE_CONTENT = {
       routeRegularRoads: "",
       routeTrails: "These devices work well on off-road trails or parks if the surfaces are paved and smooth",
       // Storage
-      storageIndoor: "Storing low speed e-devices indoors is easy due to their compact size.",
+      storageIndoor: "Storing small e-devices indoors is easy due to their compact size.",
       storageOutdoor: "",
       storageNotMajorConcern: ""
     },
@@ -354,7 +354,7 @@ const DEVICE_CONTENT = {
       adaptiveNeedYes: "",
       adaptiveNeedNo: "",
       // Primary use
-      transport: "While they are ideal for short commutes, you should already be comfortable navigating busy areas on two wheels before considering a low speed e-device",
+      transport: "While they are ideal for short commutes, you should already be comfortable navigating busy areas on two wheels before considering a small e-device",
       deliveries: "",
       recreation: "",
       // Transit link
@@ -371,14 +371,14 @@ const DEVICE_CONTENT = {
       routeBikeLanes: "",
       routeMixedRoads: "",
       routeRegularRoads: "",
-      routeTrails: "Check your local park or trail rules before purchasing a low speeded powered devices, as some areas do not allow them",
+      routeTrails: "Check your local park or trail rules before purchasing a small e-device, as some municipalities do not allow them",
       // Storage
-      storageIndoor: "Follow safe charging practices when storing a low speed powered device indoors to avoid the risk of thermal runaway and fire. Find more information on safe charging in Next Steps below.",
+      storageIndoor: "Follow safe charging practices when storing small e-device indoors to avoid the risk of thermal runaway and fire. Find more information on safe charging in Next Steps below.",
       storageOutdoor: "",
       storageNotMajorConcern: ""
     },
     nextSteps: [
-      { label: "Learn about low speed powered devices (coming soon)", url: "/micromobility-hub/device-library/low-speed-powered-devices.html" }
+      { label: "Learn about small e-devices (coming soon)", url: "/micromobility-hub/device-library/low-speed-powered-devices.html" }
     ]
   },
   cargoBike: {
