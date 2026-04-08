@@ -482,7 +482,7 @@ const DEVICE_CONTENT = {
       adaptiveNeedYes: "",
       adaptiveNeedNo: "",
       // Primary use
-      transport: "It works especially well for everyday commuting since bikeshare docks are conveniently located near schools and workplaces",
+      transport: "It works especially well for everyday commuting since bikeshare docks are conveniently located near schools and workplaces.",
       deliveries: "",
       recreation: "",
       // Transit link
@@ -502,11 +502,19 @@ const DEVICE_CONTENT = {
       routeTrails: "",
       // Storage
       storageIndoor: "",
-      storageOutdoor: "Since you need to store your device outdoors, bikeshare is a strong option for you because you can leave the bike at the dock",
+      storageOutdoor: "Since you need to store your device outdoors, bikeshare is a strong option for you.",
       storageNotMajorConcern: ""
     },
     considerBase: [
-      "There are a few bikeshare systems in Massachusetts, including Bluebikes, Metro Mobility, ValleyBike Share, CargoB, Minuteman Bikeshare, and Port Bikeshare. Check whether a bikeshare system is available near your starting point and destination.",
+      "There are a few bikeshare systems in Massachusetts, including Bluebikes, Metro Mobility, ValleyBike Share, CargoB, Minuteman Bikeshare, and Port Bikeshare.",
+      "Verify whether a bikeshare system is available near your starting point and destination.",
+      "Many bikeshare companies, health insurance providers, universities, employers, or municipalities offer income-eligble discounts or discounted annual memberships. Check your providers to learn more.",
+      "If are a resident aged 16+ and participate in programs like SNAP or MassHealth, or meet income guidelines (up to 400% of the federal poverty line), 
+      "If you live in the City of Boston and have not had an annual membership recently., you may be eligible for a $60/year Bluebikes membership or $5/year if you have a qualifying income."
+      "Consider downloading the bikeshare app and setting it up and home before your ride.",
+      "Most bikeshare systems offer a choice between e-bikes and standard bikes.",
+      "It is a good idea to bring a helmet with you since most bikeshare systems do not typically provide them.",
+      ""
     ],
     // CONSIDER CONDITIONAL
     considerConditional: {
@@ -519,7 +527,7 @@ const DEVICE_CONTENT = {
       adaptiveNeedYes: "",
       adaptiveNeedNo: "",
       // Primary use
-      transport: "Most bikeshare systems offer a choice between e-bikes and standard bikes.",
+      transport: "",
       deliveries: "",
       recreation: "",
       // Transit link
