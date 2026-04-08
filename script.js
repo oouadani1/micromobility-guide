@@ -316,9 +316,9 @@ const DEVICE_CONTENT = {
       adaptiveNeedYes: "",
       adaptiveNeedNo: "",
       // Primary use
-      transport: "They peform best for quick commutes or running errands.",
+      transport: "They are suitable for quick commutes or running errands.",
       deliveries: "",
-      recreation: "Using them recreationally can be ideal because they require active core strength, balance, and maneuverability.",
+      recreation: "Using them recreationally can provide a decent, low-impact exercise because they require leg and core strength to maintain balance and maneuverability.",
       // Transit link
       transitLinkYes: "Taking public transit with these devices is seamless because they are portable and can be carried underarm.",
       transitLinkNo: "",
@@ -326,16 +326,16 @@ const DEVICE_CONTENT = {
       carryChildrenYes: "",
       carryChildrenNo: "",
       // Distance
-      distanceUnder3: "They are best suited to shorter distances.",
+      distanceUnder3: "",
       distance3to9: "",
       distance10plus: "",
       // Route type
-      routeBikeLanes: "",
+      routeBikeLanes: "These devices perform best where there are dedicated bike lanes or smooth shared use paths.",
       routeMixedRoads: "",
       routeRegularRoads: "",
-      routeTrails: "Some riders may prefer using them in park-like settings away from vehicle traffic.",
+      routeTrails: "These devices work well on off-road trails or parks if the surfaces are paved and smooth",
       // Storage
-      storageIndoor: "",
+      storageIndoor: "Storing low speed powered devices indoors is easy due to their compact size.",
       storageOutdoor: "",
       storageNotMajorConcern: ""
     },
@@ -355,11 +355,11 @@ const DEVICE_CONTENT = {
       adaptiveNeedYes: "",
       adaptiveNeedNo: "",
       // Primary use
-      transport: "While they are ideal for short commutes, you should be comfortable with riding micromobility in busy areas before considering a low speed powered device",
+      transport: "While they are ideal for short commutes, you should be comfortable navigating busy areas on two wheels before considering a low speed powered device",
       deliveries: "",
       recreation: "",
       // Transit link
-      transitLinkYes: "While these devices are small, they can be heavy to carry. Consider a specialized backpack to carry them with. Additionally, given you use transit during your commute, check MBTA or your local RTA rules before bringing these devices onto a bus or train. Find more information on micromobility and transit in Next Steps below.",
+      transitLinkYes: "Although small, these devices can be heavy to carry. Consider a specialized backpack to carry them with. Additionally, given you use transit during your commute, check MBTA or your local RTA rules before bringing these devices onto a bus or train. Find more information on micromobility and transit in Next Steps below.",
       transitLinkNo: "",
       // Carrying children
       carryChildrenYes: "",
@@ -369,12 +369,12 @@ const DEVICE_CONTENT = {
       distance3to9: "",
       distance10plus: "",
       // Route type
-      routeBikeLanes: "It performs best where there are dedicated bike lanes or smooth shared use paths.",
+      routeBikeLanes: "",
       routeMixedRoads: "",
       routeRegularRoads: "",
-      routeTrails: "",
+      routeTrails: "Check your local park or trail before purchasing a low speeded powered devices, as some areas do not allow them",
       // Storage
-      storageIndoor: "",
+      storageIndoor: "Follow safe charging practices when storing a low speed powered device indoors to avoid the risk of thermal runaway and fire. Find more information on safe charging in Next Steps below.",
       storageOutdoor: "",
       storageNotMajorConcern: ""
     },
