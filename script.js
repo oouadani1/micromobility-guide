@@ -560,7 +560,7 @@ const DEVICE_CONTENT = {
   adaptiveMobility: {
     image: "Adaptive-v3.png",
     cost: "$2,500-$10,000",
-    whyBase: "An adaptive device may be a better fit for riders with different mobility needs.",
+    whyBase: "An adaptive mobility device is a great fit for those who need mobility aid or have a disability.",
     // WHY CONDITIONAL
     // Active text slots under current logic: adaptiveNeedYes, transport, recreation, distanceUnder3, distance3to9, distance10plus, routeBikeLanes, routeRegularRoads, routeTrails
     whyConditional: {
@@ -570,13 +570,12 @@ const DEVICE_CONTENT = {
       age17to49: "",
       age50plus: "",
       // Adaptive need
-      // migrated from old childWhyBase; used by the existing child-path rationale special case
-      adaptiveNeedYes: "An adaptive device may be a better fit for a child with a mobility disability or mobility need. Different device types can support comfort, fit, and confidence depending on how and where the child will ride.",
+      adaptiveNeedYes: "Depending on your kind of disability, an adaptive mobility device can be an excellent choice. There are many types of devices in both electric-assisted and human-powered variants, with each designed to support different needs, comfort levels, and use cases.",
       adaptiveNeedNo: "",
       // Primary use
-      transport: "Many are designed for everyday use, and some can also carry larger loads.",
+      transport: "Additionally, many are designed with everyday commuting in mind, and some can even carry larger loads.",
       deliveries: "",
-      recreation: "It can be especially well suited for recreation and exercise.",
+      recreation: "Additionally, many are designed with a comfortable or relaxed seating position, making them a nice choice for casual recreation and exercise.",
       // Transit link
       transitLinkYes: "",
       transitLinkNo: "",
@@ -584,9 +583,9 @@ const DEVICE_CONTENT = {
       carryChildrenYes: "",
       carryChildrenNo: "",
       // Distance
-      distanceUnder3: "It may work well for shorter local trips.",
-      distance3to9: "Some options can also support longer rides more comfortably.",
-      distance10plus: "Some options can also support longer rides more comfortably.",
+      distanceUnder3: "",
+      distance3to9: "",
+      distance10plus: "",
       // Route type
       routeBikeLanes: "It can work well on bike-friendly routes and shared-use paths.",
       routeMixedRoads: "",
