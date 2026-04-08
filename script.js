@@ -340,7 +340,7 @@ const DEVICE_CONTENT = {
       storageNotMajorConcern: ""
     },
     considerBase: [
-      "These devices require decent leg and core strength to safely balance and maneuver them.",
+      "Small e-devices require decent leg and core strength to safely balance and maneuver them.",
     ],
     // CONSIDER CONDITIONAL
     // Active text slots under current logic: none
