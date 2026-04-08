@@ -597,7 +597,7 @@ const DEVICE_CONTENT = {
       storageNotMajorConcern: ""
     },
     considerBase: [
-      "Adaptive mobility devices comes in variety of styles, including recubmenent bikes, tricycles, and hand-powered cycles.",
+      "Adaptive mobility devices comes in variety of styles. Consider researching recubmenent bikes, tricycles, and hand-powered cycles.",
     ],
     // CONSIDER CONDITIONAL
     // Active text slots under current logic: adaptiveNeedYes
@@ -608,8 +608,7 @@ const DEVICE_CONTENT = {
       age17to49: "",
       age50plus: "",
       // Adaptive need
-      // migrated from old adaptiveChild; preserved in the closest questionnaire-derived slot
-      adaptiveNeedYes: "Look for adaptive options that match the child's size, comfort, and supervision needs, and try borrowing equipment first when possible.",
+      adaptiveNeedYes: "Key features to consider for stability, safety, and reduced physical strain are devices with three or four wheels, electric assist, wide seats with back support, and low step-throughs, such as e-trikes.",
       adaptiveNeedNo: "",
       // Primary use
       transport: "",
@@ -637,12 +636,11 @@ const DEVICE_CONTENT = {
     },
     nextSteps: [
       { label: "Learn more about adaptive mobility options (coming soon)", url: "/micromobility-hub/device-library/adaptive-options.html" },
+      { label: "Join an accessible cycling event", url: "https://www.mass.gov/accessible-cycling" },
       { label: "Learn more about the Department of Recreations's (DCP) Universal Access Program", url: "https://www.mass.gov/orgs/universal-access-program" },
       { label: "Check out DCR's adaptive cycling equipment list", url: "https://www.mass.gov/info-details/adaptive-cycling-equipment" },
       { label: "Try out DCR's power-driven mobility devices", url: "https://www.mass.gov/info-details/dcr-power-driven-mobility-devices" }
     ],
-    extraLabel: "Suggested device types:",
-    extraValue: "Tricycles, Recumbent cycles, Handcycles"
   },
   humanPoweredYouth: {
     image: "youth-mobility.png",
