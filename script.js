@@ -575,7 +575,7 @@ const DEVICE_CONTENT = {
       // Primary use
       transport: "Additionally, many are designed with everyday commuting in mind, and some can even carry larger loads.",
       deliveries: "",
-      recreation: "Additionally, many are designed with a comfortable or relaxed seating position, making them a nice choice for casual recreation and exercise.",
+      recreation: "Additionally, many are designed with a comfortable or reclined seating position, making them a nice choice for casual recreation and exercise.",
       // Transit link
       transitLinkYes: "",
       transitLinkNo: "",
@@ -604,11 +604,11 @@ const DEVICE_CONTENT = {
     considerConditional: {
       // Age
       age3to13: "",
-      age14to16: "",
+      age14to16: "The best adaptive mobility devices for young people with disabilities are highly adjustable for growth and comfort, have a parking brake to allow for safe rest, and are designed to enable a caregiver to steer or help with balance if needed.",
       age17to49: "",
       age50plus: "",
       // Adaptive need
-      adaptiveNeedYes: "Key features to consider for stability, safety, and reduced physical strain are devices with three or four wheels, electric assist, wide seats with back support, and low step-throughs, such as e-trikes.",
+      adaptiveNeedYes: "Key features to consider for stability, safety, and reduced physical strain are devices with three or four wheels, electric assist, wide seats with back support, and low step-through frames, such as e-trikes.",
       adaptiveNeedNo: "",
       // Primary use
       transport: "",
@@ -618,7 +618,7 @@ const DEVICE_CONTENT = {
       transitLinkYes: "",
       transitLinkNo: "",
       // Carrying children
-      carryChildrenYes: "",
+      carryChildrenYes: "Consider an electric cargo trike, which are stable, safe, and spacious, if you have a disability and are carrying a child. Make sure they wear properly fitted helmets and are secured in appropriate seats or harnesses.", 
       carryChildrenNo: "",
       // Distance
       distanceUnder3: "",
