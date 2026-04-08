@@ -502,7 +502,7 @@ const DEVICE_CONTENT = {
       routeTrails: "",
       // Storage
       storageIndoor: "",
-      storageOutdoor: "Since you need to store your device outdoors, bikeshare is a strong option for you.",
+      storageOutdoor: "Bikeshare is also a great option because you need to store your device outdoors.",
       storageNotMajorConcern: ""
     },
     considerBase: [
@@ -511,7 +511,7 @@ const DEVICE_CONTENT = {
       "Many bikeshare companies, health insurance providers, universities, employers, or municipalities offer discounts. Check your providers to learn more.",
       "If you participate in programs like SNAP or MassHealth, or have a qualifying income, you are eligible for a $50/year Bluebikes membership.",
       "If you live in the City of Boston and have not had an annual membership recently., you may be eligible for a $60/year Bluebikes membership, or $5/year if you have a qualifying income.",
-      "Consider downloading the bikeshare app and setting it up and home before your ride.",
+      "Consider downloading the bikeshare app and setting it up at home before your trip.",
       "Most bikeshare systems offer a choice between e-bikes and standard bikes.",
       "It is a good idea to bring a helmet with you since most bikeshare systems do not typically provide them.",
       ""
