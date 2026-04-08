@@ -778,7 +778,7 @@ const SCORING_RULES = {
       ebike: 1,
       escooter: 0,
       cargoBike: 1,
-      adaptiveMobility: 2,
+      adaptiveMobility: 3,
       bikeshare: 0
     },
     no: {
@@ -815,7 +815,7 @@ const SCORING_RULES = {
       escooter: 1,
       lowSpeedPoweredMicromobility: 1,
       cargoBike: 0,
-      adaptiveMobility: 3,
+      adaptiveMobility: 2,
       bikeshare: 1
     }
   },
