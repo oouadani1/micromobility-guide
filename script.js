@@ -1,5 +1,3 @@
-console.log("script.js is loading");
-
 const OUTPUTS = {
   bicycle: {
     label: "Standard bicycle",
@@ -974,88 +972,6 @@ const SCORING_RULES = {
   }
 };
 
-const RATIONALE_PRIORITY = {
-  bicycle: [
-    "children",
-    "transport",
-    "recreation",
-    "transitLink",
-    "bikeLanes",
-    "mixedRoads",
-    "regularRoads",
-    "trails",
-    "under3",
-    "longDistance",
-    "deliveries"
-  ],
-
-  ebike: [
-    "children",
-    "deliveries",
-    "transport",
-    "transitLink",
-    "longDistance",
-    "regularRoads",
-    "bikeLanes",
-    "mixedRoads",
-    "under3",
-    "trails",
-    "recreation"
-  ],
-
-  escooter: [
-    "under3",
-    "transitLink",
-    "transport",
-    "bikeLanes",
-    "mixedRoads",
-    "recreation"
-  ],
-
-  lowSpeedPoweredMicromobility: [
-    "under3",
-    "bikeLanes",
-    "trails",
-    "transitLink",
-    "transport",
-    "recreation"
-  ],
-
-  cargoBike: [
-    "children",
-    "deliveries",
-    "transport",
-    "under3",
-    "longDistance",
-    "bikeLanes",
-    "regularRoads"
-  ],
-
-  bikeshare: [
-    "storage",
-    "transitLink",
-    "transport",
-    "under3",
-    "bikeLanes"
-  ],
-
-  adaptiveMobility: [
-    "transport",
-    "recreation",
-    "under3",
-    "longDistance",
-    "bikeLanes",
-    "trails",
-    "regularRoads"
-  ],
-
-  humanPoweredYouth: [
-    "recreation",
-    "under3",
-    "trails"
-  ]
-};
-
 function getDeviceContent(recId) {
   return DEVICE_CONTENT[recId] || null;
 }
@@ -1212,43 +1128,13 @@ const APP_STATE = {
   currentPathway: null
 };
 
-function printDeviceScoreTotals() {
-  const deviceOrder = [
-    "bicycle",
-    "ebike",
-    "escooter",
-    "lowSpeedPoweredMicromobility",
-    "cargoBike",
-    "adaptiveMobility",
-    "bikeshare"
-  ];
-
-  const totals = {
-    bicycle: 0,
-    ebike: 0,
-    escooter: 0,
-    lowSpeedPoweredMicromobility: 0,
-    cargoBike: 0,
-    adaptiveMobility: 0,
-    bikeshare: 0
-  };
-
-  Object.values(SCORING_RULES).forEach((answerSet) => {
-    Object.values(answerSet).forEach((scoreSet) => {
-      deviceOrder.forEach((device) => {
-        totals[device] += scoreSet[device] ?? 0;
-      });
-    });
-  });
-
-  console.log("Total assigned score by device:");
-  console.table(deviceOrder.map((device) => ({
-    device,
-    totalScore: totals[device]
-  })));
-}
+const DEBUG_MODE = false;
 
 function printCurrentResponseScores(answers, scores, sortedRecommendations) {
+  if (!DEBUG_MODE) {
+    return;
+  }
+
   const deviceOrder = [
     "bicycle",
     "ebike",
@@ -1268,13 +1154,15 @@ function printCurrentResponseScores(answers, scores, sortedRecommendations) {
     }))
     .filter((row) => row.answer);
 
-  console.log("Current response questions and answers:");
+  console.groupCollapsed("Current response questions and answers");
   console.table(questionRows);
+  console.groupEnd();
 
-  console.log("Current response normalized answers:");
+  console.groupCollapsed("Current response normalized answers");
   console.table(answers);
+  console.groupEnd();
 
-  console.log("Current response scores by device:");
+  console.groupCollapsed("Current response scores by device");
   console.table(
     deviceOrder
       .filter((device) => scores[device] !== undefined)
@@ -1283,8 +1171,9 @@ function printCurrentResponseScores(answers, scores, sortedRecommendations) {
         score: scores[device]
       }))
   );
+  console.groupEnd();
 
-  console.log("Current sorted recommendations:");
+  console.groupCollapsed("Current sorted recommendations");
   console.table(
     sortedRecommendations.map((rec, index) => ({
       rank: index + 1,
@@ -1292,6 +1181,7 @@ function printCurrentResponseScores(answers, scores, sortedRecommendations) {
       score: rec.score
     }))
   );
+  console.groupEnd();
 }
 
 function getSelectedPathway() {
@@ -1458,24 +1348,6 @@ function enforceAdaptiveMobilityPlacement(sortedDevices, answers) {
 
   const adaptive = sortedDevices.splice(adaptiveIndex, 1)[0];
   sortedDevices.unshift(adaptive);
-
-  return sortedDevices;
-}
-
-function enforceLowSpeedPlacement(sortedDevices) {
-  const lowSpeedIndex = sortedDevices.findIndex(
-    (device) => device.id === "lowSpeedPoweredMicromobility"
-  );
-
-  if (lowSpeedIndex === -1 || lowSpeedIndex >= 2) return sortedDevices;
-
-   const topScore = sortedDevices[0]?.score ?? 0;
-   const lowSpeedScore = sortedDevices[lowSpeedIndex]?.score ?? 0;
-
-   if (lowSpeedScore >= topScore - 1) return sortedDevices;
-
-  const lowSpeedDevice = sortedDevices.splice(lowSpeedIndex, 1)[0];
-  sortedDevices.splice(Math.min(2, sortedDevices.length), 0, lowSpeedDevice);
 
   return sortedDevices;
 }
@@ -1822,15 +1694,49 @@ function renderPrintRecommendationSummary(rec, answers, pathway) {
   `;
 }
 
+function getPrintDensityClass(recommendations, rawAnswers, answers, pathway) {
+  const topRecommendations = recommendations.slice(0, 2);
+  const answerTextLength = getPrintableQuestionKeys(rawAnswers)
+    .map((questionId) => {
+      const label = getQuestionLabelForPathway(questionId, pathway);
+      const value = getAnswerDisplayValue(questionId, rawAnswers[questionId]);
+      return `${label} ${value}`.trim();
+    })
+    .join(" ")
+    .length;
+
+  const recommendationTextLength = topRecommendations.reduce((total, rec) => {
+    const content = getDeviceContent(rec.id);
+    if (!content) return total;
+
+    const reason = getRecommendationReason(rec.id, answers, pathway);
+    const considerations = [
+      ...getConsiderBase(rec.id),
+      ...getResultCardConsiderationItems(rec.id, answers, content)
+    ]
+      .slice(0, 3)
+      .join(" ");
+
+    return total + reason.length + considerations.length + content.cost.length + rec.label.length;
+  }, 0);
+
+  const totalLength = answerTextLength + recommendationTextLength;
+
+  if (totalLength > 2100) return "print-density-tight";
+  if (totalLength > 1500) return "print-density-compact";
+  return "print-density-default";
+}
+
 function renderPrintSummary(recommendations, answers, pathway) {
   const rawAnswers = APP_STATE.answers || {};
+  const densityClass = getPrintDensityClass(recommendations, rawAnswers, answers, pathway);
   const topRecommendationsHtml = recommendations
     .slice(0, 2)
     .map((rec) => renderPrintRecommendationSummary(rec, answers, pathway))
     .join("");
 
   return `
-    <section class="print-summary" aria-hidden="true">
+    <section class="print-summary ${densityClass}" aria-hidden="true">
       <div class="print-header">
         <h2 class="print-title">Micromobility Buyer's Guide</h2>
         <img src="lab-logo-black.png" alt="The Lab at MassDOT logo" class="print-logo">
@@ -1841,60 +1747,6 @@ function renderPrintSummary(recommendations, answers, pathway) {
         <div class="print-rec-grid">${topRecommendationsHtml}</div>
       </section>
   `;
-}
-
-function getMatchedSupportKeys(answers) {
-  const keys = [];
-
-  if (answers.carryChildren === "yes") {
-    keys.push("children");
-  }
-
-  if (answers.primaryUse === "transport") {
-    keys.push("transport");
-  }
-
-  if (answers.primaryUse === "recreation") {
-    keys.push("recreation");
-  }
-
-  if (answers.primaryUse === "deliveries") {
-    keys.push("deliveries");
-  }
-
-  if (answers.transitLink === "yes") {
-    keys.push("transitLink");
-  }
-
-  if (answers.distance === "under3") {
-    keys.push("under3");
-  }
-
-  if (answers.distance === "3to9" || answers.distance === "10plus") {
-    keys.push("longDistance");
-  }
-
-  if (answers.routeType === "bikeLanes") {
-    keys.push("bikeLanes");
-  }
-
-  if (answers.routeType === "mixedRoads") {
-    keys.push("mixedRoads");
-  }
-
-  if (answers.routeType === "regularRoads") {
-    keys.push("regularRoads");
-  }
-
-  if (answers.routeType === "trails") {
-    keys.push("trails");
-  }
-
-  if (answers.storage === "outdoor") {
-    keys.push("storage");
-  }
-
-  return keys;
 }
 
 function formatTextForPathway(text, pathway) {
@@ -2868,8 +2720,6 @@ function handleBack() {
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-  printDeviceScoreTotals();
-
   const backBtn = document.getElementById("backBtn");
   const nextBtn = document.getElementById("nextBtn");
   

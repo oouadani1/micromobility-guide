@@ -1,8 +1,14 @@
+html,
+body {
+  min-height: 100%;
+}
+
 body {
   margin: 0;
   font-family: "Poppins", Arial, sans-serif;
   background: linear-gradient(180deg, #f6c51b 0%, #ffd95a 100%);
   color: #222;
+  min-height: 100svh;
 }
 
 :root {
@@ -11,9 +17,13 @@ body {
 }
 
 .container {
-  max-width: 820px;
-  margin: 40px auto;
+  width: min(100%, 960px);
+  min-height: 100svh;
+  margin: 0 auto;
   padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: stretch;
 }
 
 .card {
@@ -26,6 +36,9 @@ body {
   box-shadow:
     0 12px 32px rgba(0, 0, 0, 0.10),
     0 2px 8px rgba(255, 255, 255, 0.25) inset;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: calc(100svh - 40px);
 }
 
 .eyebrow {
@@ -95,6 +108,11 @@ button {
 
 button:hover {
   opacity: 0.95;
+}
+
+.form-nav {
+  justify-content: space-between;
+  margin-top: 24px;
 }
 
 .result {
@@ -965,8 +983,21 @@ button.hidden {
 
   .print-summary {
     display: block !important;
-    font-size: 9pt;
-    line-height: 1.15;
+  }
+
+  .print-density-default {
+    font-size: 10pt;
+    line-height: 1.22;
+  }
+
+  .print-density-compact {
+    font-size: 9.25pt;
+    line-height: 1.17;
+  }
+
+  .print-density-tight {
+    font-size: 8.75pt;
+    line-height: 1.12;
   }
 
   .print-header {
@@ -1075,5 +1106,72 @@ button.hidden {
     margin-top: 8px;
     font-size: 8pt;
     color: #555;
+  }
+
+  .print-density-default .print-title {
+    font-size: 16pt;
+  }
+
+  .print-density-default .print-logo {
+    width: 64px;
+    flex-basis: 64px;
+  }
+
+  .print-density-default .print-rec-card {
+    padding: 9px 10px;
+  }
+
+  .print-density-default .print-rec-image {
+    width: 44px;
+    height: 44px;
+    flex-basis: 44px;
+  }
+
+  .print-density-default .print-rec-title {
+    font-size: 10.75pt;
+  }
+
+  .print-density-default .print-rec-list li {
+    margin-bottom: 2px;
+  }
+
+  .print-density-compact .print-title {
+    font-size: 15pt;
+  }
+
+  .print-density-compact .print-logo {
+    width: 56px;
+    flex-basis: 56px;
+  }
+
+  .print-density-tight .print-title {
+    font-size: 14pt;
+  }
+
+  .print-density-tight .print-logo {
+    width: 50px;
+    flex-basis: 50px;
+  }
+
+  .print-density-tight .print-section {
+    margin-top: 6px;
+  }
+
+  .print-density-tight .print-rec-card {
+    padding: 6px 7px;
+  }
+
+  .print-density-tight .print-rec-image {
+    width: 34px;
+    height: 34px;
+    flex-basis: 34px;
+  }
+
+  .print-density-tight .print-rec-title {
+    font-size: 9.5pt;
+  }
+
+  .print-density-tight .print-rec-list li {
+    margin-bottom: 0;
   }
 }
