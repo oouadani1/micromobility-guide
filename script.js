@@ -660,7 +660,7 @@ const DEVICE_CONTENT = {
       // Primary use
       transport: "",
       deliveries: "",
-      recreation: "These options are often a good fit for recreation, practice, and everyday neighborhood riding.",
+      recreation: "These options are a great fit for recreation, practice, and everyday neighborhood riding.",
       // Transit link
       transitLinkYes: "",
       transitLinkNo: "",
@@ -675,7 +675,7 @@ const DEVICE_CONTENT = {
       routeBikeLanes: "",
       routeMixedRoads: "",
       routeRegularRoads: "",
-      routeTrails: "They can work well in parks, on paths, and in other lower-stress riding environments.",
+      routeTrails: "Parks, smooth paths, and other lower-stress riding areas are an ideal environment for these options.",
       // Storage
       storageIndoor: "",
       storageOutdoor: "",
