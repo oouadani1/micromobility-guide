@@ -1762,6 +1762,12 @@ function renderAllDeviceResultsPanel(allRecommendations, answers) {
 function renderPrintRecommendationSummary(rec, answers, pathway) {
   const content = getDeviceContent(rec.id);
   if (!content) return "";
+  const printRationaleHeading =
+    pathway === "exploring"
+      ? "Why consider it"
+      : pathway === "myself"
+        ? "Why this fits for you"
+        : "Why this fits";
 
   const imageSrc = getRecommendationImage(rec.id, answers, content);
   const imageTag = getRecommendationImageTag(rec.id, answers);
@@ -1788,7 +1794,7 @@ function renderPrintRecommendationSummary(rec, answers, pathway) {
           ${imageTag ? `<p class="print-rec-image-tag"><em>${imageTag}</em></p>` : ""}
         </div>
       </div>
-      <p class="print-rec-reason"><strong>Why this fits:</strong> ${getRecommendationReason(rec.id, answers, pathway)}</p>
+      <p class="print-rec-reason"><strong>${printRationaleHeading}:</strong> ${getRecommendationReason(rec.id, answers, pathway)}</p>
       <p class="print-rec-cost"><strong>Typical cost:</strong> ${content.cost}</p>
       ${considerationsHtml ? `<ul class="print-rec-list">${considerationsHtml}</ul>` : ""}
     </article>
@@ -1876,6 +1882,14 @@ function formatTextForPathway(text, pathway) {
   }
 
   return text
+    .replace(/Check the rider's local DCR regulations/gi, "Check local DCR regulations")
+    .replace(/ensuring the rider's bike fits the rider well/gi, "ensuring a good-fitting bicycle")
+    .replace(/ensuring the rider's bike fits the rider/gi, "ensuring a good-fitting bicycle")
+    .replace(/Since the rider will carry children/gi, "If carrying children is a priority")
+    .replace(/Since the rider plans to carry children/gi, "If carrying children is a priority")
+    .replace(/Since the rider carries children/gi, "If carrying children is a priority")
+    .replace(/Since you will carry children/gi, "If carrying children is a priority")
+    .replace(/Since you plan to carry children/gi, "If carrying children is a priority")
     .replace(/\b[Bb]ecause you plan to\b/g, "Because the rider plans to")
     .replace(/\b[Bb]ecause you use\b/g, "Because the rider uses")
     .replace(/\b[Bb]ecause you need\b/g, "Because the rider needs")
@@ -2052,6 +2066,21 @@ function getResultCardConsiderationItems(recId, answers, content) {
     `);
   }
 
+  if (answers.pathway === "exploring" && recId === "escooter") {
+    const bikeLaneText = "Due to their small wheels, standing position, and lack of suspension, e-scooters perform best on bike lanes and smooth paths.";
+    const mixedRoadText = "Due to their small wheels, standing position, and lack of suspension, e-scooters can feel less comfortable on rougher roads or in heavier traffic. Consider a model with suspesion and all-season tires.";
+    const bikeLaneIndex = items.indexOf(bikeLaneText);
+    const mixedRoadIndex = items.indexOf(mixedRoadText);
+
+    if (bikeLaneIndex !== -1 && mixedRoadIndex !== -1) {
+      items.splice(
+        Math.min(bikeLaneIndex, mixedRoadIndex),
+        2,
+        "Due to their small wheels, standing position, and lack of suspension, e-scooters perform best on bike lanes and smooth paths, and can feel less comfortable on rougher roads or in heavier traffic. Consider a model with suspesion and all-season tires."
+      );
+    }
+  }
+
   return items.filter(Boolean).filter((item, index, allItems) => allItems.indexOf(item) === index);
 }
 
@@ -2101,7 +2130,12 @@ function getConditionalNextSteps(recId, answers) {
 function renderSingleRecommendationCard(rec, answers, pathway) {
   const content = getDeviceContent(rec.id);
   const considerationItems = getResultCardConsiderationItems(rec.id, answers, content);
-  const rationaleHeading = pathway === "exploring" ? "Why consider it" : "Why this fits";
+  const rationaleHeading =
+    pathway === "exploring"
+      ? "Why consider it"
+      : pathway === "myself"
+        ? "Why this fits for you"
+        : "Why this fits";
   const considerations = getConsiderBase(rec.id);
 
   let filteredBaseConsiderations = [...considerations];
