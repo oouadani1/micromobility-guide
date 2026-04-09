@@ -250,7 +250,7 @@ const DEVICE_CONTENT = {
       distance10plus: "",
       // Route type
       routeBikeLanes: "",
-      routeMixedRoads: "On roads with only a few bike lanes, e-scooters can be a decent choice, but your comfort will depend on the smoothness of the road and how heavy the traffic is.",
+      routeMixedRoads: "On roads with only a few bike lanes, e-scooters can be a decent choice, but your comfort will depend on the smoothness of the road and how heavy traffic is.",
       routeRegularRoads: "",
       routeTrails: "",
       // Storage
@@ -316,7 +316,7 @@ const DEVICE_CONTENT = {
       adaptiveNeedYes: "",
       adaptiveNeedNo: "",
       // Primary use
-      transport: "They are suitable for quick commutes or running errands.",
+      transport: "",
       deliveries: "",
       recreation: "Using them recreationally can provide a decent, low-impact exercise because they require leg and core strength to maintain balance and maneuverability.",
       // Transit link
@@ -413,7 +413,7 @@ const DEVICE_CONTENT = {
       // Route type
       routeBikeLanes: "",
       routeMixedRoads: "",
-      routeRegularRoads: "A cargo bike's larger size can feel more stable and visible on roads with heavier vehicle traffic.",
+      routeRegularRoads: "A cargo bike's larger size can feel more stable and visible on roads with heavier traffic.",
       routeTrails: "",
       // Storage
       storageIndoor: "",
