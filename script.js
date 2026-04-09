@@ -188,7 +188,8 @@ const DEVICE_CONTENT = {
       adaptiveNeedNo: "",
       // Primary use
       transport: "",
-      deliveries: "",
+      deliveries: "Prioritize a model with a high-capacity removable battery, strong brakes, and a mid-drive motor for hills and heavy loads.",
+      recreation: "",
       recreation: "",
       // Transit link
       transitLinkYes: "Check MBTA or your local RTA rules before bringing a device on a bus or train, and look into nearby station bike parking or bike shed options where available. Find more information on micromobility and transit in Next Steps below.",
@@ -436,7 +437,7 @@ const DEVICE_CONTENT = {
       adaptiveNeedNo: "",
       // Primary use
       transport: "",
-      deliveries: "Because you plan to work with your micromobility device, consider an electric cargo bike to help you get around easily.",
+      deliveries: "Because you plan to work with your micromobility device, consider an electric-assist cargo bike to help you get around easily. Also prioritize a model with a high-capacity removable battery, strong brakes, and a mid-drive motor for hills and heavy loads.",
       recreation: "",
       // Transit link
       transitLinkYes: "Given you use transit during your commute, consider that cargo bikes are heavy and long and may not fit onto trains or station elevators, or may not be allowed on transit at all. If you decide a cargo bike is the right fit for you, consider station parking or nearby bicycle parking sheds. ",
