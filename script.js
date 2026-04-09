@@ -1735,7 +1735,7 @@ function renderAllDeviceResultsPanel(allRecommendations, answers) {
     .map((rec, index) => {
       const imageSrc = getAllResultsImage(rec.id, answers);
       const priority = getRecommendationPriorityMeta(index, rec.score, topScore);
-      const reason = getAllResultsReason(rec, answers, priority);
+      const reason = formatTextForPathway(getAllResultsReason(rec, answers, priority), answers.pathway);
 
       return `
       <li class="all-results-item">
@@ -1776,7 +1776,7 @@ function renderPrintRecommendationSummary(rec, answers, pathway) {
 
   const orderedConsiderations = [...considerations, ...considerationItems];
   const considerationsHtml = orderedConsiderations
-    .map((item) => `<li>${item}</li>`)
+    .map((item) => `<li>${formatTextForPathway(item, pathway)}</li>`)
     .join("");
 
   return `
@@ -1870,24 +1870,74 @@ function getMatchedSupportKeys(answers) {
   return keys;
 }
 
+function formatTextForPathway(text, pathway) {
+  if (!text || (pathway !== "someoneElse" && pathway !== "exploring")) {
+    return text;
+  }
+
+  return text
+    .replace(/\b[Bb]ecause you plan to\b/g, "Because the rider plans to")
+    .replace(/\b[Bb]ecause you use\b/g, "Because the rider uses")
+    .replace(/\b[Bb]ecause you need\b/g, "Because the rider needs")
+    .replace(/\b[Bb]ecause you have\b/g, "Because the rider has")
+    .replace(/\b[Gg]iven you use\b/g, "Given the rider uses")
+    .replace(/\b[Ss]ince you will\b/g, "Since the rider will")
+    .replace(/\b[Ii]f you plan to\b/g, "If the rider plans to")
+    .replace(/\b[Ii]f you are\b/g, "If the rider is")
+    .replace(/\b[Ii]f you use\b/g, "If the rider uses")
+    .replace(/\b[Ii]f you live\b/g, "If the rider lives")
+    .replace(/\b[Yy]ou will\b/g, "the rider will")
+    .replace(/\b[Yy]ou are\b/g, "the rider is")
+    .replace(/\b[Yy]ou use\b/g, "the rider uses")
+    .replace(/\b[Yy]ou need\b/g, "the rider needs")
+    .replace(/\b[Yy]ou have\b/g, "the rider has")
+    .replace(/\b[Yy]ou plan to\b/g, "the rider plans to")
+    .replace(/\b[Yy]ou should\b/g, "the rider should")
+    .replace(/\b[Ff]or you\b/g, "for the rider")
+    .replace(/\b[Yy]our\b/g, "the rider's")
+    .replace(/\b[Yy]ou\b/g, "the rider");
+}
+
+function shouldIncludeExploreConditionalSlot(recId, slot) {
+  if (slot.startsWith("age")) return false;
+  if (slot === "adaptiveNeedNo") return false;
+  if (slot === "transitLinkNo") return false;
+  if (slot === "carryChildrenNo") return false;
+  if (slot === "storageNotMajorConcern") return false;
+
+  if (recId !== "adaptiveMobility" && slot === "adaptiveNeedYes") {
+    return false;
+  }
+
+  return true;
+}
+
 function getRecommendationReason(recId, answers, pathway) {
   const content = getDeviceContent(recId);
   if (!content) return "";
 
-  const matchedSlots = new Set(getMatchedConsiderationSlots(answers));
-  const orderedWhyConditionals = Object.entries(content.whyConditional || {})
-    .filter(([slot, text]) => {
-      if (!text || !matchedSlots.has(slot)) return false;
+  const orderedWhyConditionals =
+    pathway === "exploring"
+      ? Object.entries(content.whyConditional || {})
+          .filter(([slot, text]) => text && shouldIncludeExploreConditionalSlot(recId, slot))
+          .map(([, text]) => text)
+      : Object.entries(content.whyConditional || {})
+          .filter(([slot, text]) => {
+            const matchedSlots = new Set(getMatchedConsiderationSlots(answers));
+            if (!text || !matchedSlots.has(slot)) return false;
 
-      if (recId === "adaptiveMobility" && slot === "adaptiveNeedYes") {
-        return pathway === "child" && answers.adaptiveNeed === "yes";
-      }
+            if (recId === "adaptiveMobility" && slot === "adaptiveNeedYes") {
+              return pathway === "child" && answers.adaptiveNeed === "yes";
+            }
 
-      return true;
-    })
-    .map(([, text]) => text);
+            return true;
+          })
+          .map(([, text]) => text);
 
-  return [getWhyBase(recId), ...orderedWhyConditionals].filter(Boolean).join(" ");
+  return [getWhyBase(recId), ...orderedWhyConditionals]
+    .filter(Boolean)
+    .map((text) => formatTextForPathway(text, pathway))
+    .join(" ");
 }
 
 function shouldSuggestFoldable(answers) {
@@ -1975,18 +2025,23 @@ function getMatchedConsiderationSlots(answers) {
 }
 
 function getResultCardConsiderationItems(recId, answers, content) {
-  const matchedSlots = new Set(getMatchedConsiderationSlots(answers));
-  const items = Object.entries(content.considerConditional || {})
-    .filter(([slot, text]) => {
-      if (!text || !matchedSlots.has(slot)) return false;
+  const items =
+    answers.pathway === "exploring"
+      ? Object.entries(content.considerConditional || {})
+          .filter(([slot, text]) => text && shouldIncludeExploreConditionalSlot(recId, slot))
+          .map(([, text]) => text)
+      : Object.entries(content.considerConditional || {})
+          .filter(([slot, text]) => {
+            const matchedSlots = new Set(getMatchedConsiderationSlots(answers));
+            if (!text || !matchedSlots.has(slot)) return false;
 
-      if (recId === "adaptiveMobility" && slot === "adaptiveNeedYes") {
-        return answers.pathway === "child" && answers.adaptiveNeed === "yes";
-      }
+            if (recId === "adaptiveMobility" && slot === "adaptiveNeedYes") {
+              return answers.pathway === "child" && answers.adaptiveNeed === "yes";
+            }
 
-      return true;
-    })
-    .map(([, text]) => text);
+            return true;
+          })
+          .map(([, text]) => text);
 
   if (content.extraLabel && content.extraValue) {
     items.push(`
@@ -2089,12 +2144,12 @@ function renderSingleRecommendationCard(rec, answers, pathway) {
       const childrenHtml = children.length
         ? `
           <ul class="recommendation-sublist">
-            ${children.map((child) => `<li class="recommendation-subitem">${child}</li>`).join("")}
+            ${children.map((child) => `<li class="recommendation-subitem">${formatTextForPathway(child, pathway)}</li>`).join("")}
           </ul>
         `
         : "";
 
-      return `<li class="guidance-item">${item}${childrenHtml}</li>`;
+      return `<li class="guidance-item">${formatTextForPathway(item, pathway)}${childrenHtml}</li>`;
     })
     .join("");
 
@@ -2134,7 +2189,7 @@ function renderSingleRecommendationCard(rec, answers, pathway) {
               .map(
                 (child) => `
                   <li class="next-step-subitem">
-                    <a href="${child.url}" target="_blank" rel="noopener noreferrer">${child.label}</a>
+                    <a href="${child.url}" target="_blank" rel="noopener noreferrer">${formatTextForPathway(child.label, pathway)}</a>
                   </li>
                 `
               )
@@ -2145,7 +2200,7 @@ function renderSingleRecommendationCard(rec, answers, pathway) {
 
       return `
         <li class="next-step-item">
-          <a href="${step.url}" target="_blank" rel="noopener noreferrer">${step.label}</a>
+          <a href="${step.url}" target="_blank" rel="noopener noreferrer">${formatTextForPathway(step.label, pathway)}</a>
           ${childrenHtml}
         </li>
       `;
