@@ -1940,6 +1940,28 @@ function shouldIncludeExploreConditionalSlot(recId, slot) {
   return true;
 }
 
+function buildExploreReasonText(baseText, conditionalTexts) {
+  const parts = [baseText, ...conditionalTexts].filter(Boolean);
+  if (parts.length <= 1) {
+    return parts[0] || "";
+  }
+
+  return parts
+    .map((part, index) => {
+      if (index === 0) return part;
+      if (index === 1) return part;
+
+      const normalized = part.charAt(0).toLowerCase() + part.slice(1);
+
+      if (index === parts.length - 1) {
+        return `It is also worth noting that ${normalized}`;
+      }
+
+      return `It can also be a good fit because ${normalized}`;
+    })
+    .join(" ");
+}
+
 function getRecommendationReason(recId, answers, pathway) {
   const content = getDeviceContent(recId);
   if (!content) return "";
@@ -1962,10 +1984,15 @@ function getRecommendationReason(recId, answers, pathway) {
           })
           .map(([, text]) => text);
 
-  return [getWhyBase(recId), ...orderedWhyConditionals]
+  const formattedParts = [getWhyBase(recId), ...orderedWhyConditionals]
     .filter(Boolean)
-    .map((text) => formatTextForPathway(text, pathway))
-    .join(" ");
+    .map((text) => formatTextForPathway(text, pathway));
+
+  if (pathway === "exploring") {
+    return buildExploreReasonText(formattedParts[0], formattedParts.slice(1));
+  }
+
+  return formattedParts.join(" ");
 }
 
 function shouldSuggestFoldable(answers) {
