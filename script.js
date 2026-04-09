@@ -1877,7 +1877,21 @@ function getMatchedSupportKeys(answers) {
 }
 
 function formatTextForPathway(text, pathway) {
-  if (!text || (pathway !== "someoneElse" && pathway !== "exploring")) {
+  if (!text) {
+    return text;
+  }
+
+  if (pathway === "exploring") {
+    return text
+      .replace(/Since you will carry children/gi, "If carrying children is a priority")
+      .replace(/Since you plan to carry children/gi, "If carrying children is a priority")
+      .replace(/Since you are carrying children/gi, "If carrying children is a priority")
+      .replace(/With the right add-ons, it can support carrying a child\./gi, "With the right add-ons, it can support carrying a child if needed.")
+      .replace(/Some models can also support carrying children or extra cargo\./gi, "Some models can also support carrying children or extra cargo if needed.")
+      .replace(/Carrying children with cargo bikes is an excellent and fun option because they are designed to carry people securely\./gi, "Cargo bikes can be a strong option for carrying children because they are designed to carry people securely.");
+  }
+
+  if (pathway !== "someoneElse") {
     return text;
   }
 
