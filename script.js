@@ -147,7 +147,7 @@ const DEVICE_CONTENT = {
       adaptiveNeedNo: "",
       // Primary use
       transport: "",
-      deliveries: "The electric-assist motor makes it great for work and deliveries.",
+      deliveries: "The electric-assist makes it great for work and deliveries.",
       recreation: "",
       
       // Transit link
@@ -608,7 +608,7 @@ const DEVICE_CONTENT = {
       age17to49: "",
       age50plus: "",
       // Adaptive need
-      adaptiveNeedYes: "Key features to consider for stability, safety, and reduced physical strain are devices with three or four wheels, electric assist, wide seats with back support, and low step-through frames.",
+      adaptiveNeedYes: "Key features to consider for stability, safety, and reduced physical strain are devices with three or four wheels, electric-assist, wide seats with back support, and low step-through frames.",
       adaptiveNeedNo: "",
       // Primary use
       transport: "",
@@ -631,7 +631,7 @@ const DEVICE_CONTENT = {
       routeTrails: "",
       // Storage
       storageIndoor: "Adaptive mobility devices are not ideal to store indoors due to their heavy weight and length. If you are storing them inside a shed or garage and they have an electric motor, follow safe charging practices to avoid the risk of thermal runaway and fire.",
-      storageOutdoor: "If you are storing an adapative mobility device outdoors, always remove the battery (if it has an electric motor), consider a high-quality lock and weatherproof tarp, and ensure it is parked in a safe place.",
+      storageOutdoor: "If you are storing an adapative mobility device outdoors, always remove the battery (if it has one), consider a high-quality lock and weatherproof tarp, and ensure it is parked in a safe place.",
       storageNotMajorConcern: ""
     },    
     nextSteps: [
