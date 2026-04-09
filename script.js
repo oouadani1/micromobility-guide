@@ -110,7 +110,7 @@ const DEVICE_CONTENT = {
       carryChildrenNo: "",
       // Distance
       distanceUnder3: "",
-      distance3to9: "Investing in a high-quality seat and ensuring your bike fits you well for long distance trips can make your ride more comofortable.",
+      distance3to9: "",
       distance10plus: "Investing in a high-quality seat and ensuring your bike fits you well for long distance trips can make your ride more comfortable.",
       // Route type
       routeBikeLanes: "",
@@ -1801,8 +1801,10 @@ function renderPrintRecommendationSummary(rec, answers, pathway) {
 
   const orderedConsiderations = [...considerations, ...considerationItems];
   const considerationsHtml = orderedConsiderations
+    .slice(0, 3)
     .map((item) => `<li>${formatTextForPathway(item, pathway)}</li>`)
     .join("");
+  const printReason = getRecommendationReason(rec.id, answers, pathway);
 
   return `
     <article class="print-rec-card">
@@ -1813,7 +1815,7 @@ function renderPrintRecommendationSummary(rec, answers, pathway) {
           ${imageTag ? `<p class="print-rec-image-tag"><em>${imageTag}</em></p>` : ""}
         </div>
       </div>
-      <p class="print-rec-reason"><strong>${printRationaleHeading}:</strong> ${getRecommendationReason(rec.id, answers, pathway)}</p>
+      <p class="print-rec-reason"><strong>${printRationaleHeading}:</strong> ${printReason}</p>
       <p class="print-rec-cost"><strong>Typical cost:</strong> ${content.cost}</p>
       ${considerationsHtml ? `<ul class="print-rec-list">${considerationsHtml}</ul>` : ""}
     </article>
@@ -1900,6 +1902,36 @@ function formatTextForPathway(text, pathway) {
     return text;
   }
 
+  if (pathway === "child") {
+    return text
+      .replace(/if you have a disability or need mobility assistance/gi, "if a child has a disability or needs mobility assistance")
+      .replace(/if you have a disability and are carrying a child/gi, "if the child has a disability and is carrying a child")
+      .replace(/Check your local DCR regulations/gi, "Check local DCR regulations")
+      .replace(/Because you plan to/gi, "Because the child plans to")
+      .replace(/Because you use/gi, "Because the child uses")
+      .replace(/Because you need/gi, "Because the child needs")
+      .replace(/Because you have/gi, "Because the child has")
+      .replace(/Given you use/gi, "Given the child uses")
+      .replace(/Since you will/gi, "Since the child will")
+      .replace(/Since you plan to/gi, "Since the child plans to")
+      .replace(/If you plan to/gi, "If the child plans to")
+      .replace(/If you are/gi, "If the child is")
+      .replace(/If you use/gi, "If the child uses")
+      .replace(/If you live/gi, "If the child lives")
+      .replace(/You will/gi, "the child will")
+      .replace(/You are/gi, "the child is")
+      .replace(/You use/gi, "the child uses")
+      .replace(/You need/gi, "the child needs")
+      .replace(/You have/gi, "the child has")
+      .replace(/You plan to/gi, "the child plans to")
+      .replace(/You should/gi, "the child should")
+      .replace(/For you/gi, "for the child")
+      .replace(/your bike fits you well/gi, "the bike fits the child well")
+      .replace(/your bike fits you/gi, "the bike fits the child")
+      .replace(/\byour\b/gi, "the child's")
+      .replace(/\byou\b/gi, "the child");
+  }
+
   if (pathway === "exploring") {
     return text
       .replace(/Since you will carry children/gi, "If carrying children is a priority")
@@ -1951,6 +1983,9 @@ function shouldIncludeExploreConditionalSlot(recId, slot) {
   if (slot === "transitLinkNo") return false;
   if (slot === "carryChildrenNo") return false;
   if (slot === "storageNotMajorConcern") return false;
+
+  if (recId === "lowSpeedPoweredMicromobility" && slot === "transitLinkYes") return false;
+  if (recId === "cargoBike" && (slot === "deliveries" || slot === "transitLinkYes")) return false;
 
   if (recId !== "adaptiveMobility" && slot === "adaptiveNeedYes") {
     return false;

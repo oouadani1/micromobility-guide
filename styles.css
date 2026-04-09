@@ -917,7 +917,7 @@ button.hidden {
 }
 
 @page {
-  margin: 0.45in;
+  margin: 0.3in;
 }
 
 @media print {
@@ -965,47 +965,47 @@ button.hidden {
 
   .print-summary {
     display: block !important;
-    font-size: 10.5pt;
-    line-height: 1.25;
+    font-size: 9pt;
+    line-height: 1.15;
   }
 
   .print-header {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    gap: 12px;
-    margin-bottom: 8px;
+    gap: 10px;
+    margin-bottom: 6px;
   }
 
   .print-title {
     margin: 0;
-    font-size: 18pt;
+    font-size: 15pt;
     line-height: 1.1;
     color: var(--text-blue-aa);
   }
 
   .print-logo {
-    width: 72px;
+    width: 56px;
     height: auto;
-    flex: 0 0 72px;
+    flex: 0 0 56px;
     opacity: 0.9;
   }
 
   .print-section {
-    margin-top: 12px;
+    margin-top: 8px;
     break-inside: avoid;
   }
 
   .print-section-heading {
-    margin: 0 0 8px;
-    font-size: 11pt;
+    margin: 0 0 5px;
+    font-size: 10pt;
     color: var(--text-green-aa);
   }
 
   .print-input-list {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 6px 14px;
+    gap: 4px 10px;
     margin: 0;
   }
 
@@ -1015,7 +1015,7 @@ button.hidden {
 
   .print-input-item dt {
     font-weight: 700;
-    margin: 0 0 2px;
+    margin: 0 0 1px;
   }
 
   .print-input-item dd {
@@ -1025,33 +1025,33 @@ button.hidden {
   .print-rec-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 10px;
+    gap: 6px;
   }
 
   .print-rec-card {
     border: 1px solid #dbe3f3;
-    border-radius: 12px;
-    padding: 10px;
+    border-radius: 10px;
+    padding: 7px 8px;
     break-inside: avoid;
   }
 
   .print-rec-header {
     display: flex;
     align-items: center;
-    gap: 8px;
-    margin-bottom: 6px;
+    gap: 6px;
+    margin-bottom: 4px;
   }
 
   .print-rec-image {
-    width: 48px;
-    height: 48px;
+    width: 38px;
+    height: 38px;
     object-fit: contain;
-    flex: 0 0 48px;
+    flex: 0 0 38px;
   }
 
   .print-rec-title {
     margin: 0;
-    font-size: 11.5pt;
+    font-size: 10pt;
     color: var(--text-green-aa);
   }
 
@@ -1059,21 +1059,21 @@ button.hidden {
   .print-rec-reason,
   .print-rec-cost,
   .print-disclaimer {
-    margin: 4px 0 0;
+    margin: 2px 0 0;
   }
 
   .print-rec-list {
-    margin: 4px 0 0;
-    padding-left: 16px;
+    margin: 2px 0 0;
+    padding-left: 14px;
   }
 
   .print-rec-list li {
-    margin-bottom: 3px;
+    margin-bottom: 1px;
   }
 
   .print-disclaimer {
-    margin-top: 12px;
-    font-size: 9pt;
+    margin-top: 8px;
+    font-size: 8pt;
     color: #555;
   }
 }
