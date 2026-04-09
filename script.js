@@ -65,10 +65,10 @@ const DEVICE_CONTENT = {
       deliveries: "",
       recreation: "It is especially well suited for recreation and exercise.",
       // Transit link
-      transitLinkYes: "A bicycle makes connecting to transit convenient.",
+      transitLinkYes: "Connecting to transit is also convenient with a bicycle.",
       transitLinkNo: "",
       // Carrying children
-      carryChildrenYes: "With the right add-ons, bikes can also support carrying a child.",
+      carryChildrenYes: "With the right add-ons, it can support carrying a child.",
       carryChildrenNo: "",
       // Distance
       distanceUnder3: "",
@@ -77,7 +77,7 @@ const DEVICE_CONTENT = {
       // Route type
       routeBikeLanes: "",
       routeMixedRoads: "",
-      routeRegularRoads: "While it is more stable than smaller micromobility devices on roads without bike lanes, you may want to consider an e-device to keep up with the flow of traffic.",
+      routeRegularRoads: "",
       routeTrails: "Some types of bikes, such as mountain bikes, are a great fit on trails and unpaved paths.",
       // Storage
       storageIndoor: "",
@@ -110,8 +110,8 @@ const DEVICE_CONTENT = {
       carryChildrenNo: "",
       // Distance
       distanceUnder3: "",
-      distance3to9: "Investing in a high-quality seat for long distance trips can make your ride more comofortable.",
-      distance10plus: "Investing in a high-quality seat for long distance trips can make your ride more comfortable.",
+      distance3to9: "Investing in a high-quality seat and ensuring your bike fits you well for long distance trips can make your ride more comofortable.",
+      distance10plus: "Investing in a high-quality seat and ensuring your bike fits you well for long distance trips can make your ride more comfortable.",
       // Route type
       routeBikeLanes: "",
       routeMixedRoads: "",
@@ -148,7 +148,7 @@ const DEVICE_CONTENT = {
       // Primary use
       transport: "",
       deliveries: "The electric-assist makes it great for work and deliveries.",
-      recreation: "",
+      recreation: "It can also be a comfortable option for recreation or exercise, especially if you want help with hills or longer rides.",
       
       // Transit link
       transitLinkYes: "Connecting to transit is easier with an e-bike.",
@@ -163,8 +163,8 @@ const DEVICE_CONTENT = {
       // Route type
       routeBikeLanes: "",
       routeMixedRoads: "",
-      routeRegularRoads: "Because they can keep up with traffic better, e-bikes are suitable on roads without bike lanes",
-      routeTrails: "E-bikes are only allowed on some Massachusetts trails, and at limited speeds. Check DCR regulations to learn more.",
+      routeRegularRoads: "Because they can keep up with traffic better, e-bikes feel more comofortable on roads without bike lanes",
+      routeTrails: "E-bikes are only allowed on some Massachusetts trails, and at limited speeds. Check your local DCR regulations to learn more.",
       // Storage
       storageIndoor: "",
       storageOutdoor: "",
@@ -223,7 +223,7 @@ const DEVICE_CONTENT = {
   escooter: {
     image: "E-Scooter.png",
     cost: "$500-$2,000",
-    whyBase: "An e-scooter is a convenient option for quick trips.",
+    whyBase: "An e-scooter is a practical option for quick trips.",
     // WHY CONDITIONAL
     // Active text slots under current logic: transport, recreation, transitLinkYes, distanceUnder3, routeBikeLanes, routeMixedRoads
     whyConditional: {
@@ -289,7 +289,7 @@ const DEVICE_CONTENT = {
       distance10plus: "",
       // Route type
       routeBikeLanes: "Due to their small wheels, standing position, and lack of suspension, e-scooters perform best on bike lanes and smooth paths.",
-      routeMixedRoads: "Due to their small wheels, standing position, and lack of suspension, e-scooters perform best on bike lanes and smooth paths. Consider a model with suspesion and all-season tires.",
+      routeMixedRoads: "Due to their small wheels, standing position, and lack of suspension, e-scooters can feel less comfortable on rougher roads or in heavier traffic. Consider a model with suspesion and all-season tires.",
       routeRegularRoads: "",
       routeTrails: "",
       // Storage
@@ -405,12 +405,11 @@ const DEVICE_CONTENT = {
       transitLinkYes: "",
       transitLinkNo: "",
       // Carrying children
-      carryChildrenYes: "Carrying children with cargo bikes is easy and fun.",
+      carryChildrenYes: "Carrying children with cargo bikes is an excellent and fun option because they are designed to carry people securely.",
       carryChildrenNo: "",
       // Distance
       distanceUnder3: "",
       distance3to9: "",
-      distance10plus: "",
       // Route type
       routeBikeLanes: "",
       routeMixedRoads: "",
@@ -455,8 +454,8 @@ const DEVICE_CONTENT = {
       routeRegularRoads: "",
       routeTrails: "",
       // Storage
-      storageIndoor: "Cargo bikes are not ideal to store indoors due to their heavy weight and length. If you are storing and them inside a shed or garage and they have an electric motor, follow safe charging practices to avoid the risk of thermal runaway and fire. Find more information on safe charging in Next Steps below.",
-      storageOutdoor: "If you are storing a cargo bike outdoors, always remove the battery (if it is an e-cargo bike), consider a high-quality lock and weatherproof tarp, and ensure it is parked in a safe place.",
+      storageIndoor: "Cargo bikes are not ideal to store indoors because of their heavy weight and length. If you plan to store one inside a shed or garage and it has a battery, follow safe charging practices to avoid the risk of thermal runaway and fire. Find more information on safe charging in Next Steps below.",
+      storageOutdoor: "If you plan to to store a cargo bike outdoors, always remove the battery (if it has one), consider a high-quality lock and weatherproof tarp, and ensure it is parked in a safe place.",
       storageNotMajorConcern: ""
     },
     nextSteps: [
@@ -470,7 +469,7 @@ const DEVICE_CONTENT = {
   bikeshare: {
     image: "Bikeshare-v2.png",
     cost: "$0-$120 per year depending on bikeshare membership or discounts",
-    whyBase: "Bikeshare could be an excellent option for you if flexibility matters more than ownership.",
+    whyBase: "Bikeshare could be an excellent option for you if you want the convenience of riding without needing to own or store a device.",
     // WHY CONDITIONAL
     // Active text slots under current logic: transport, transitLinkYes, distanceUnder3, routeBikeLanes, storageOutdoor
     whyConditional: {
@@ -507,14 +506,14 @@ const DEVICE_CONTENT = {
       storageNotMajorConcern: ""
     },
     considerBase: [
-      "There are a few bikeshare systems in Massachusetts, including Bluebikes, Metro Mobility, ValleyBike Share, CargoB, Minuteman Bikeshare, and Port Bikeshare.",
+      "There are several bikeshare systems in Massachusetts, including Bluebikes, Metro Mobility, ValleyBike Share, CargoB, Minuteman Bikeshare, and Port Bikeshare.",
       "Verify whether a bikeshare system is available near your starting point and destination.",
-      "Many bikeshare companies, health insurance providers, universities, employers, or municipalities offer discounts. Check your providers to learn more.",
+      "Many bikeshare companies, health insurance providers, universities, employers, or municipalities offer discounted prices. Check your providers to learn more.",
       "If you participate in programs like SNAP or MassHealth, or have a qualifying income, you are eligible for a $50/year Bluebikes membership.",
-      "If you live in the City of Boston and have not had an annual membership recently., you may be eligible for a $60/year Bluebikes membership, or $5/year if you have a qualifying income.",
-      "Consider downloading the bikeshare app and setting it up at home before your trip.",
+      "If you live in the City of Boston and have not had an annual membership recently, you may be eligible for a $60/year Bluebikes membership, or $5/year if you have a qualifying income.",
+      "Consider downloading your local bikeshare app and setting it up at home before your trip.",
       "Most bikeshare systems offer a choice between e-bikes and standard bikes.",
-      "It is a good idea to bring a helmet with you since most bikeshare systems do not typically provide them.",
+      "It is a good idea to bring a helmet with you since most bikeshare systems do not typically provide one.",
       ""
     ],
     // CONSIDER CONDITIONAL
