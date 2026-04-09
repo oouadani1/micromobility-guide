@@ -732,6 +732,25 @@ const DEVICE_CONTENT = {
   }
 };
 
+const EXPLORE_REASON_TEXT = {
+  bicycle:
+    "A standard bicycle is a versatile option for everyday riding, recreation, and many short trips. It can also work well for carrying a child with the right add-ons, for connecting to transit, or for riding on trails and unpaved paths with the right bike type.",
+  ebike:
+    "An e-bike can make everyday trips easier and less tiring, especially for longer rides, hills, or carrying extra weight. It can also work well for recreation, deliveries, transit connections, and some child-carrying or cargo needs depending on the model.",
+  escooter:
+    "An e-scooter can be a practical option for quick trips, especially when compact storage and transit connections matter. It tends to work best on smooth routes, bike lanes, and other lower-stress riding environments.",
+  lowSpeedPoweredMicromobility:
+    "Small e-devices can be a good fit for short trips because they are compact, portable, and easy to store. They tend to work best on smoother routes, bike lanes, and paved park paths, and can also appeal to riders looking for a fun, lightweight option.",
+  cargoBike:
+    "A cargo bike can be a strong option when a standard bike may not carry enough. It is especially useful for hauling groceries, supplies, children, or heavier everyday loads, and can also support delivery use depending on the setup.",
+  bikeshare:
+    "Bikeshare can be a strong option if flexibility matters more than ownership. It often works well for short trips, errands, and transit connections, especially in places where bike docks are easy to find.",
+  adaptiveMobility:
+    "An adaptive mobility device can be a strong option when comfort, stability, or physical support are especially important. Different adaptive designs can work for transportation, recreation, or rider-specific mobility needs depending on the setup.",
+  humanPoweredYouth:
+    "Age-appropriate mobility options can help younger riders build confidence and skills over time. These options are often a good fit for recreation, practice, and shorter trips in parks, paths, and other lower-stress riding areas."
+};
+
 const SCORING_RULES = {
     age: {
     age3to13: {
@@ -1940,57 +1959,31 @@ function shouldIncludeExploreConditionalSlot(recId, slot) {
   return true;
 }
 
-function buildExploreReasonText(baseText, conditionalTexts) {
-  const parts = [baseText, ...conditionalTexts].filter(Boolean);
-  if (parts.length <= 1) {
-    return parts[0] || "";
-  }
-
-  return parts
-    .map((part, index) => {
-      if (index === 0) return part;
-      if (index === 1) return part;
-
-      const normalized = part.charAt(0).toLowerCase() + part.slice(1);
-
-      if (index === parts.length - 1) {
-        return `It is also worth noting that ${normalized}`;
-      }
-
-      return `It can also be a good fit because ${normalized}`;
-    })
-    .join(" ");
-}
-
 function getRecommendationReason(recId, answers, pathway) {
   const content = getDeviceContent(recId);
   if (!content) return "";
 
+  if (pathway === "exploring") {
+    return EXPLORE_REASON_TEXT[recId] || formatTextForPathway(getWhyBase(recId), pathway);
+  }
+
   const orderedWhyConditionals =
-    pathway === "exploring"
-      ? Object.entries(content.whyConditional || {})
-          .filter(([slot, text]) => text && shouldIncludeExploreConditionalSlot(recId, slot))
-          .map(([, text]) => text)
-      : Object.entries(content.whyConditional || {})
-          .filter(([slot, text]) => {
-            const matchedSlots = new Set(getMatchedConsiderationSlots(answers));
-            if (!text || !matchedSlots.has(slot)) return false;
+    Object.entries(content.whyConditional || {})
+      .filter(([slot, text]) => {
+        const matchedSlots = new Set(getMatchedConsiderationSlots(answers));
+        if (!text || !matchedSlots.has(slot)) return false;
 
-            if (recId === "adaptiveMobility" && slot === "adaptiveNeedYes") {
-              return pathway === "child" && answers.adaptiveNeed === "yes";
-            }
+        if (recId === "adaptiveMobility" && slot === "adaptiveNeedYes") {
+          return pathway === "child" && answers.adaptiveNeed === "yes";
+        }
 
-            return true;
-          })
-          .map(([, text]) => text);
+        return true;
+      })
+      .map(([, text]) => text);
 
   const formattedParts = [getWhyBase(recId), ...orderedWhyConditionals]
     .filter(Boolean)
     .map((text) => formatTextForPathway(text, pathway));
-
-  if (pathway === "exploring") {
-    return buildExploreReasonText(formattedParts[0], formattedParts.slice(1));
-  }
 
   return formattedParts.join(" ");
 }
