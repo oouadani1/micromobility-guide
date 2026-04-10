@@ -377,7 +377,7 @@ const DEVICE_CONTENT = {
       storageNotMajorConcern: ""
     },
     nextSteps: [
-      { label: "Learn about small e-devices (coming soon)", url: "/micromobility-hub/device-library/low-speed-powered-devices.html" }
+      { label: "Learn about small e-devices (coming soon)", url: "https://canva.link/60attcpjzby1bki" }
     ]
   },
   cargoBike: {
@@ -549,7 +549,7 @@ const DEVICE_CONTENT = {
       storageNotMajorConcern: ""
     },
     nextSteps: [
-      { label: "Learn about bikeshare options (coming soon)", url: "/micromobility-hub/device-library/bikeshare.html" },
+      { label: "Learn about bikeshare", url: "https://canva.link/b11lytyb0ic1dgc" },
       { label: "Check Massachusetts bikeshare programs and discount pricing", url: "https://goclean.masscec.com/homeowners/bike-share-programs/" },
       { label: "Check Bluebikes income-eligible discount", url: "https://bluebikes.com/pricing/income-eligible-program" },
       { label: "Check Bluebikes City of Boston discount", url: "https://www.boston.gov/departments/boston-bikes/discounted-bluebikes" }
