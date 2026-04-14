@@ -1110,9 +1110,9 @@ const QUESTIONS = {
     type: "radio",
     label: "What is your typical route like?",
     options: [
-      { value: "bikeLanes", label: "Bike lanes or other paths separated from cars" },
-      { value: "mixedRoads", label: "A mix of bike lanes and some roads with more traffic" },
-      { value: "regularRoads", label: "Roads next to cars, without separated bike space" },
+      { value: "bikeLanes", label: "Bike lanes separated from cars" },
+      { value: "mixedRoads", label: "Some bike lanes but without seperation from cars" },
+      { value: "regularRoads", label: "Roads without seperation from cars" },
       { value: "trails", label: "Mostly on trails, paths, or in parks" }
     ]
   },
