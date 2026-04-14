@@ -41,6 +41,16 @@ const SCORING_DISCLAIMER_TEXT =
   "Suggestions are generated using an additive scoring system based on your responses. Results are informational only, and more than one device type may be appropriate.";
 const PRINT_ICON_SVG =
   '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 9V4h10v5"/><path d="M7 14H5a2 2 0 0 1-2-2v-1.5A2.5 2.5 0 0 1 5.5 8h13A2.5 2.5 0 0 1 21 10.5V12a2 2 0 0 1-2 2h-2"/><path d="M7 12h10v8H7z"/><circle cx="17.5" cy="10.5" r=".75" fill="currentColor" stroke="none"/></svg>';
+const RECOMMENDATION_IMAGE_ALT_TEXT = {
+  bicycle: "Image of a standard bicycle",
+  ebike: "Image of an electric bicycle",
+  escooter: "Image of an electric scooter",
+  lowSpeedPoweredMicromobility: "Image of small powered micromobility devices",
+  cargoBike: "Image of a cargo bike",
+  adaptiveMobility: "Image of adaptive or mobility aid cycles",
+  bikeshare: "Image of bikeshare bicycles",
+  humanPoweredYouth: "Image of age-appropriate youth mobility devices"
+};
 
 const DEVICE_CONTENT = {
   bicycle: {
@@ -1631,7 +1641,7 @@ function renderAllDeviceResultsPanel(allRecommendations, answers) {
       return `
       <li class="all-results-item">
         <div class="all-results-rank">${index + 1}</div>
-        ${imageSrc ? `<img src="${imageSrc}" alt="${rec.label}" class="all-results-image">` : ""}
+        ${imageSrc ? `<img src="${imageSrc}" alt="${getRecommendationImageAlt(rec.id, answers)}" class="all-results-image">` : ""}
         <div class="all-results-copy">
           <p class="all-results-device">${rec.label}</p>
           <p class="all-results-tag ${priority.className}">${priority.label}</p>
@@ -1681,7 +1691,7 @@ function renderPrintRecommendationSummary(rec, answers, pathway) {
   return `
     <article class="print-rec-card">
       <div class="print-rec-header">
-        ${imageSrc ? `<img src="${imageSrc}" alt="${rec.label}" class="print-rec-image">` : ""}
+        ${imageSrc ? `<img src="${imageSrc}" alt="${getRecommendationImageAlt(rec.id, answers)}" class="print-rec-image">` : ""}
         <div class="print-rec-title-wrap">
           <h4 class="print-rec-title">${rec.label}</h4>
           ${imageTag ? `<p class="print-rec-image-tag"><em>${imageTag}</em></p>` : ""}
@@ -1895,6 +1905,20 @@ function getRecommendationImage(recId, answers, content) {
   }
 
   return content.image;
+}
+
+function getRecommendationImageAlt(recId, answers) {
+  const foldableSuggested = shouldSuggestFoldable(answers);
+
+  if (foldableSuggested && recId === "bicycle") {
+    return "Image of a foldable bicycle";
+  }
+
+  if (foldableSuggested && recId === "ebike") {
+    return "Image of a foldable electric bicycle";
+  }
+
+  return RECOMMENDATION_IMAGE_ALT_TEXT[recId] || OUTPUTS[recId]?.label || "";
 }
 
 function getMatchedConsiderationSlots(answers) {
@@ -2169,7 +2193,7 @@ function renderSingleRecommendationCard(rec, answers, pathway) {
     <div class="recommendation-card">
       <h2 class="recommendation-title">${rec.label}</h2>
 
-      ${imageSrc ? `<img src="${imageSrc}" alt="${rec.label}" class="device-image">` : ""}
+      ${imageSrc ? `<img src="${imageSrc}" alt="${getRecommendationImageAlt(rec.id, answers)}" class="device-image">` : ""}
       ${imageTag ? `<p class="recommendation-image-tag">${imageTag}</p>` : ""}
 
       <h4 class="guidance-heading">${rationaleHeading}</h4>
@@ -2539,21 +2563,23 @@ progress.textContent = "";
   if (question.type === "radio") {
     formStep.innerHTML = `
       <div class="question-block">
-        <p class="question-label">${renderedLabel}</p>
-        <div class="option-grid option-grid-${Math.min(renderedOptions.length, 4)}">
-          ${renderedOptions.map((option) => `
-            <label class="option-card">
-              <input
-                type="radio"
-                name="${questionId}"
-                value="${option.value}"
-                ${savedValue === option.value ? "checked" : ""}
-              >
-              <span class="option-card-text">${option.label}</span>
-            </label>
-          `).join("")}
-        </div>
-        <div id="stepError" class="error-message hidden" style="margin-top: 8px;"></div>
+        <fieldset class="question-fieldset">
+          <legend class="question-label">${renderedLabel}</legend>
+          <div class="option-grid option-grid-${Math.min(renderedOptions.length, 4)}">
+            ${renderedOptions.map((option) => `
+              <label class="option-card">
+                <input
+                  type="radio"
+                  name="${questionId}"
+                  value="${option.value}"
+                  ${savedValue === option.value ? "checked" : ""}
+                >
+                <span class="option-card-text">${option.label}</span>
+              </label>
+            `).join("")}
+          </div>
+          <div id="stepError" class="error-message hidden" style="margin-top: 8px;"></div>
+        </fieldset>
       </div>
     `;
 
