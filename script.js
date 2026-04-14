@@ -1074,16 +1074,16 @@ const QUESTIONS = {
   },
   primaryUse: {
     type: "radio",
-    label: "How will the rider mostly use the device?",
+    label: "What will the device mostly be used for?",
     options: [
-      { value: "transport", label: "Commuting or errands" },
-      { value: "deliveries", label: "Deliveries or gig economy work" },
+      { value: "transport", label: "Getting to work, school, or errands" },
+      { value: "deliveries", label: "Deliveries or work" },
       { value: "recreation", label: "Recreation or exercise" }
     ]
   },
   transitLink: {
   type: "radio",
-  label: "Will the rider be using public transit during their trip?",
+  label: "Will this trip include public transit?",
   options: [
     { value: "yes", label: "Yes" },
     { value: "no", label: "No" }
@@ -1108,21 +1108,21 @@ const QUESTIONS = {
   },
   routeType: {
     type: "radio",
-    label: "What will the ride mostly feel like?",
+    label: "What kind of route will this mostly be?",
     options: [
-      { value: "bikeLanes", label: "Mostly separate from traffic, such as bike lanes" },
-      { value: "mixedRoads", label: "A mix of bike lanes and some busier roads" },
-      { value: "regularRoads", label: "Mostly riding next to cars, without any separation" },
-      { value: "trails", label: "Mostly off-road trails or parks" }
+      { value: "bikeLanes", label: "Mostly on bike lanes or other space separated from cars" },
+      { value: "mixedRoads", label: "A mix of bike lanes and some roads with more traffic" },
+      { value: "regularRoads", label: "Mostly on roads next to cars, without separated bike space" },
+      { value: "trails", label: "Mostly on trails, paths, or in parks" }
     ]
   },
   storage: {
     type: "radio",
-    label: "Which of these matters most when storing the device?",
+    label: "How will this device usually be stored?",
     options: [
-      { value: "indoor", label: "I need something easy to bring inside" },
+      { value: "indoor", label: "It needs to be easy to bring inside" },
       { value: "outdoor", label: "It will usually be stored outside" },
-      { value: "notMajorConcern", label: "Storage is not a major concern" }
+      { value: "notMajorConcern", label: "Storage location is flexible" }
     ]
   }
 };
@@ -1466,12 +1466,12 @@ function getQuestionLabelForPathway(questionId, pathway) {
     const myselfLabels = {
       ageInput: "How old are you?",
       adaptiveNeed: "Do you have a mobility disability or mobility need?",
-      primaryUse: "How will you mostly use the device?",
-      transitLink: "Do you use public transit during your commute?",
+      primaryUse: "What will you mostly use the device for?",
+      transitLink: "Will your trip include public transit?",
       carryChildren: "Do you plan to carry children with the device?",
       distance: "What is your typical trip distance?",
-      routeType: "What will your ride mostly feel like?",
-      storage: "Which of these matters most when storing your device?"
+      routeType: "What kind of route will your trip mostly be?",
+      storage: "How will your device usually be stored?"
     };
 
     return myselfLabels[questionId] || QUESTIONS[questionId]?.label || questionId;
@@ -1481,12 +1481,12 @@ function getQuestionLabelForPathway(questionId, pathway) {
     const riderLabels = {
       ageInput: "How old is the rider?",
       adaptiveNeed: "Does the rider have a mobility disability or mobility need?",
-      primaryUse: "How will the rider mostly use the device?",
-      transitLink: "Will the rider be using public transit during their trip?",
+      primaryUse: "What will the rider mostly use the device for?",
+      transitLink: "Will the rider's trip include public transit?",
       carryChildren: "Does the rider plan to carry children with the device?",
       distance: "What is the rider's typical trip distance?",
-      routeType: "What will the rider's ride mostly feel like?",
-      storage: "Which of these matters most when storing the rider's device?"
+      routeType: "What kind of route will the rider's trip mostly be?",
+      storage: "How will the rider's device usually be stored?"
     };
 
     return riderLabels[questionId] || QUESTIONS[questionId]?.label || questionId;
@@ -1496,11 +1496,11 @@ function getQuestionLabelForPathway(questionId, pathway) {
     const childLabels = {
       ageInput: "How old is the child?",
       adaptiveNeed: "Does the child have a mobility disability or mobility need?",
-      primaryUse: "How will the child mostly use the device?",
-      transitLink: "Will the child be using public transit during their trip?",
+      primaryUse: "What will the child mostly use the device for?",
+      transitLink: "Will the child's trip include public transit?",
       distance: "What is the child's typical trip distance?",
-      routeType: "What will the child's ride mostly feel like?",
-      storage: "Which of these matters most when storing the child's device?"
+      routeType: "What kind of route will the child's trip mostly be?",
+      storage: "How will the child's device usually be stored?"
     };
 
     return childLabels[questionId] || QUESTIONS[questionId]?.label || questionId;
