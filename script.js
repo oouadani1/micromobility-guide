@@ -2613,21 +2613,22 @@ progress.textContent = "";
     `;
 
     let pointerSelectionInProgress = false;
-    let keyboardSelectionInProgress = false;
 
     const radioInputs = formStep.querySelectorAll(`input[name="${questionId}"]`);
     radioInputs.forEach((input) => {
       input.addEventListener("change", () => {
-        if (pointerSelectionInProgress || keyboardSelectionInProgress) {
+        if (pointerSelectionInProgress) {
           pointerSelectionInProgress = false;
-          keyboardSelectionInProgress = false;
           advanceFromCurrentRadioQuestion(input.value);
         }
       });
 
-      input.addEventListener("keydown", (event) => {
-        if (event.key !== " " && event.key !== "Spacebar") return;
-        keyboardSelectionInProgress = true;
+      input.addEventListener("focus", () => {
+        nextBtn.classList.remove("hidden");
+        const formNav = document.getElementById("formNav");
+        if (formNav) {
+          formNav.classList.remove("hidden");
+        }
       });
     });
 
@@ -2685,6 +2686,10 @@ progress.textContent = "";
 
   backBtn.classList.toggle("hidden", APP_STATE.currentStep === 0);
   nextBtn.classList.toggle("hidden", question.type !== "number");
+
+  if (question.type === "radio" && savedValue) {
+    nextBtn.classList.remove("hidden");
+  }
   backBtn.innerHTML = "&#8249;";
   nextBtn.innerHTML = "&#8250;";
 
