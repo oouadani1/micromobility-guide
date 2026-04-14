@@ -1127,6 +1127,25 @@ const QUESTIONS = {
   }
 };
 
+const ROUTE_OPTION_MEDIA = {
+  bikeLanes: {
+    src: "route-bikeLanes-square.jpg",
+    alt: "Photo of a bike lane separated from cars"
+  },
+  mixedRoads: {
+    src: "route-mixedRoads-square.jpg",
+    alt: "Photo of a route with a bike lane next to busier traffic"
+  },
+  regularRoads: {
+    src: "route-regularRoads-square.jpg",
+    alt: "Photo of a road next to cars without separated bike space"
+  },
+  trails: {
+    src: "route-trails-square.jpg",
+    alt: "Photo of a trail or park path for biking"
+  }
+};
+
 const APP_STATE = {
   currentStep: 0,
   answers: {},
@@ -2561,19 +2580,29 @@ function renderQuestion() {
 progress.textContent = "";
 
   if (question.type === "radio") {
+    const usesRouteImages = questionId === "routeType";
     formStep.innerHTML = `
       <div class="question-block">
         <fieldset class="question-fieldset">
           <legend class="question-label">${renderedLabel}</legend>
           <div class="option-grid option-grid-${Math.min(renderedOptions.length, 4)}">
             ${renderedOptions.map((option) => `
-              <label class="option-card">
+              <label class="option-card ${usesRouteImages ? "option-card--with-image" : ""}">
                 <input
                   type="radio"
                   name="${questionId}"
                   value="${option.value}"
                   ${savedValue === option.value ? "checked" : ""}
                 >
+                ${usesRouteImages ? `
+                  <span class="option-card-media">
+                    <img
+                      src="${ROUTE_OPTION_MEDIA[option.value].src}"
+                      alt="${ROUTE_OPTION_MEDIA[option.value].alt}"
+                      class="option-card-image"
+                    >
+                  </span>
+                ` : ""}
                 <span class="option-card-text">${option.label}</span>
               </label>
             `).join("")}
