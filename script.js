@@ -111,7 +111,7 @@ const DEVICE_CONTENT = {
       deliveries: "",
       recreation: "",
       // Transit link
-      transitLinkYes: "Check MBTA or your local RTA rules before bringing a bicycle on a bus or train, and look into nearby station bike parking or bike shed options where available. Find more information on micromobility and transit in Next Steps below.",
+      transitLinkYes: "Check Massachusetts Bay Transportation Authority (MBTA) or your local Regional Transit Authority (RTA) rules before bringing a bicycle on a bus or train, and look into nearby station bike parking or bike shed options where available. See Next steps for more information.",
       transitLinkNo: "",
       // Carrying children
       carryChildrenYes: "Since you will carry children, consider add-ons such as a kid seat, a tag-along bike attachment, or a bike trailer. Make sure they wear properly fitted helmets and are secured in appropriate seats or harnesses.",
@@ -132,10 +132,10 @@ const DEVICE_CONTENT = {
     },
     nextSteps: [
       { label: "Learn more about bicycles", url: "https://canva.link/nrvd5v2bvwbf99v" },
-      { label: "Visit your local bike shop", url: "https://nbda.com/dealer-finder-member-directory/#!directory/map/tag=Massachusetts" },
-      { label: "More shops on Pinkbike", url: "https://www.pinkbike.com/directory/list/massachusetts/2/bike-shop/" },
-      { label: "More shops on Singletracks", url: "https://www.singletracks.com/bike-shops/region/massachusetts/" },
-      { label: "Join a bike-friendly event", url: "https://www.massbike.org/massachusetts-bike-friendly-events-calendar" }
+      { label: "Visit a local bike shop for bicycles", url: "https://nbda.com/dealer-finder-member-directory/#!directory/map/tag=Massachusetts" },
+      { label: "Explore more bicycle shops on Pinkbike", url: "https://www.pinkbike.com/directory/list/massachusetts/2/bike-shop/" },
+      { label: "Explore more bicycle shops on Singletracks", url: "https://www.singletracks.com/bike-shops/region/massachusetts/" },
+      { label: "Join a bicycle-friendly event", url: "https://www.massbike.org/massachusetts-bike-friendly-events-calendar" }
     ]
   },
   ebike: {
@@ -172,23 +172,23 @@ const DEVICE_CONTENT = {
       routeBikeLanes: "",
       routeMixedRoads: "",
       routeRegularRoads: "Because they can keep up with traffic better, e-bikes feel more comofortable on roads without bike lanes",
-      routeTrails: "E-bikes are only allowed on some Massachusetts trails, and at limited speeds. Check your local DCR regulations to learn more.",
+      routeTrails: "E-bikes are only allowed on some Massachusetts trails, and at limited speeds. Check your local Department of Conservation and Recreation (DCR) regulations to learn more.",
       // Storage
       storageIndoor: "",
       storageOutdoor: "",
       storageNotMajorConcern: ""
     },
     considerBase: [
-      "Choose e-bikes with UL-certified batteries and electrical systems.",
+      "Choose e-bikes with batteries and electrical systems certified to Underwriters Laboratories (UL) safety standards.",
       "Since they can look similiar, be careful not to confuse an e-bike with a higher-powered e-moto or e-dirt bike, which are considered Off-Highway Vehicles (OHVs) and must be registered with the Massachusetts Environmental Police.",
-      "E-bikes come in three classes. Read more below to select the best e-bike class for you."
+      "E-bikes come in three classes. See Next steps to select the best e-bike class for you."
     ],
     // CONSIDER CONDITIONAL
     // Active text slots under current logic: age14to16, age17to49, age50plus, transport, transitLinkYes
     considerConditional: {
       // Age
       age3to13: "",
-      age14to16: "Class 1 e-bikes are suggested for you given your age because of their manageable speed and power. This is based on recommendations made by the Special Commission on Micromobility. Ask your parents for more information, or see Next Steps below to learn more.",
+      age14to16: "Class 1 e-bikes are suggested for you given your age because of their manageable speed and power. This is based on recommendations made by the Special Commission on Micromobility. Ask your parents for more information, or see Next steps to learn more.",
       age17to49: "",
       age50plus: "",
       // Adaptive need
@@ -200,7 +200,7 @@ const DEVICE_CONTENT = {
       recreation: "",
       recreation: "",
       // Transit link
-      transitLinkYes: "Check MBTA or your local RTA rules before bringing a device on a bus or train, and look into nearby station bike parking or bike shed options where available. Find more information on micromobility and transit in Next Steps below.",
+      transitLinkYes: "Check Massachusetts Bay Transportation Authority (MBTA) or your local Regional Transit Authority (RTA) rules before bringing a device on a bus or train, and look into nearby station bike parking or bike shed options where available. See Next steps for more information.",
       transitLinkNo: "",
       // Carrying children
       carryChildrenYes: "Since you will carry children, consider add-ons such as a kid seat, a tag-along bike attachment, or a bike trailer. Make sure they wear properly fitted helmets and are secured in appropriate seats or harnesses.",
@@ -215,16 +215,16 @@ const DEVICE_CONTENT = {
       routeRegularRoads: "",
       routeTrails: "",
       // Storage
-      storageIndoor: "Follow safe charging practices when storing an e-bike indoors to avoid the risk of thermal runaway and fire. Find more information on safe charging in Next Steps below.",
+      storageIndoor: "Follow safe charging practices when storing an e-bike indoors to avoid the risk of thermal runaway and fire. See Next steps for more information on safe charging.",
       storageOutdoor: "When storing an e-bike outdoors, always remove the battery, consider a high-quality lock, and ensure it is parked in a safe place.",
       storageNotMajorConcern: ""
     },
     nextSteps: [
       { label: "Learn more about e-bikes.", url: "https://canva.link/ez6c09mq8tpfpk4" },
-      { label: "Visit a local bike shop.", url: "https://nbda.com/dealer-finder-member-directory/#!directory/map/tag=Massachusetts" },
-      { label: "More shops on Pinkbike", url: "https://www.pinkbike.com/directory/list/massachusetts/2/bike-shop/" },
-      { label: "More shops on Singletracks", url: "https://www.singletracks.com/bike-shops/region/massachusetts/" },
-      { label: "Join a bike-friendly event.", url: "https://www.massbike.org/massachusetts-bike-friendly-events-calendar" },
+      { label: "Visit a local bike shop for e-bikes.", url: "https://nbda.com/dealer-finder-member-directory/#!directory/map/tag=Massachusetts" },
+      { label: "Explore more e-bike shops on Pinkbike", url: "https://www.pinkbike.com/directory/list/massachusetts/2/bike-shop/" },
+      { label: "Explore more e-bike shops on Singletracks", url: "https://www.singletracks.com/bike-shops/region/massachusetts/" },
+      { label: "Join an e-bike-friendly event.", url: "https://www.massbike.org/massachusetts-bike-friendly-events-calendar" },
       { label: "Check state e-bike incentives.", url: "https://goclean.masscec.com/clean-energy-solutions/electric-bicycles/" }
     ]
   },
@@ -268,7 +268,7 @@ const DEVICE_CONTENT = {
       storageNotMajorConcern: ""
     },
     considerBase: [
-      "Choose e-scooters with UL-certified batteries and electrical systems."
+      "Choose e-scooters with batteries and electrical systems certified to Underwriters Laboratories (UL) safety standards."
     ],
     // CONSIDER CONDITIONAL
     // Active text slots under current logic: none
@@ -286,7 +286,7 @@ const DEVICE_CONTENT = {
       deliveries: "",
       recreation: "",
       // Transit link
-      transitLinkYes: "Given you use transit during your commute, check MBTA or your local RTA rules before bringing an e-scooter onto a bus or train. Find more information on micromobility and transit in Next Steps below.",
+      transitLinkYes: "Given you use transit during your commute, check Massachusetts Bay Transportation Authority (MBTA) or your local Regional Transit Authority (RTA) rules before bringing an e-scooter onto a bus or train. See Next steps for more information on micromobility and transit.",
       transitLinkNo: "",
       // Carrying children
       carryChildrenYes: "",
@@ -301,7 +301,7 @@ const DEVICE_CONTENT = {
       routeRegularRoads: "",
       routeTrails: "",
       // Storage
-      storageIndoor: "Follow safe charging practices when storing an e-scooter indoors to avoid the risk of thermal runaway and fire. Find more information on safe charging in Next Steps below.",
+      storageIndoor: "Follow safe charging practices when storing an e-scooter indoors to avoid the risk of thermal runaway and fire. See Next steps for more information on safe charging.",
       storageOutdoor: "",
       storageNotMajorConcern: ""
     },
@@ -367,7 +367,7 @@ const DEVICE_CONTENT = {
       deliveries: "",
       recreation: "",
       // Transit link
-      transitLinkYes: "Given you use transit during your commute, check MBTA or your local RTA rules before bringing these devices onto a bus or train. Find more information on micromobility and transit in Next Steps below. Additionally, while small, these devices can be heavy to carry. Consider a specialized backpack to carry them with.",
+      transitLinkYes: "Given you use transit during your commute, check Massachusetts Bay Transportation Authority (MBTA) or your local Regional Transit Authority (RTA) rules before bringing these devices onto a bus or train. See Next steps for more information on micromobility and transit. Additionally, while small, these devices can be heavy to carry. Consider a specialized backpack to carry them with.",
       transitLinkNo: "",
       // Carrying children
       carryChildrenYes: "",
@@ -382,7 +382,7 @@ const DEVICE_CONTENT = {
       routeRegularRoads: "",
       routeTrails: "Check your local park or trail rules before purchasing a small e-device, as some municipalities do not allow them.",
       // Storage
-      storageIndoor: "Follow safe charging practices when storing small e-device indoors to avoid the risk of thermal runaway and fire. Find more information on safe charging in Next Steps below.",
+      storageIndoor: "Follow safe charging practices when storing small e-device indoors to avoid the risk of thermal runaway and fire. See Next steps for more information on safe charging.",
       storageOutdoor: "",
       storageNotMajorConcern: ""
     },
@@ -462,16 +462,16 @@ const DEVICE_CONTENT = {
       routeRegularRoads: "",
       routeTrails: "",
       // Storage
-      storageIndoor: "Cargo bikes are not ideal to store indoors because of their heavy weight and length. If you plan to store one inside a shed or garage and it has a battery, follow safe charging practices to avoid the risk of thermal runaway and fire. Find more information on safe charging in Next Steps below.",
+      storageIndoor: "Cargo bikes are not ideal to store indoors because of their heavy weight and length. If you plan to store one inside a shed or garage and it has a battery, follow safe charging practices to avoid the risk of thermal runaway and fire. See Next steps for more information on safe charging.",
       storageOutdoor: "If you plan to to store a cargo bike outdoors, always remove the battery (if it has one), consider a high-quality lock and weatherproof tarp, and ensure it is parked in a safe place.",
       storageNotMajorConcern: ""
     },
     nextSteps: [
       { label: "Learn more about cargo bikes.", url: "https://canva.link/gcyamow1yonirts" },
       { label: "Borrow a cargo bike for free to see if it is a good fit for you.", url: "https://cpp.ebikelibrary.org/" },
-      { label: "Visit a local bike shop.", url: "https://nbda.com/dealer-finder-member-directory/#!directory/map/tag=Massachusetts" },
-      { label: "More shops on Pinkbike", url: "https://www.pinkbike.com/directory/list/massachusetts/2/bike-shop/" },
-      { label: "More shops on Singletracks", url: "https://www.singletracks.com/bike-shops/region/massachusetts/" },
+      { label: "Visit a local bike shop for cargo bikes.", url: "https://nbda.com/dealer-finder-member-directory/#!directory/map/tag=Massachusetts" },
+      { label: "Explore more cargo bike shops on Pinkbike", url: "https://www.pinkbike.com/directory/list/massachusetts/2/bike-shop/" },
+      { label: "Explore more cargo bike shops on Singletracks", url: "https://www.singletracks.com/bike-shops/region/massachusetts/" },
     ]
   },
   bikeshare: {
@@ -517,7 +517,7 @@ const DEVICE_CONTENT = {
       "There are several bikeshare systems in Massachusetts, including Bluebikes, Metro Mobility, ValleyBike Share, CargoB, Minuteman Bikeshare, and Port Bikeshare.",
       "Verify whether a bikeshare system is available near your starting point and destination.",
       "Many bikeshare companies, health insurance providers, universities, employers, or municipalities offer discounted prices. Check your providers to learn more.",
-      "If you participate in programs like SNAP or MassHealth, or have a qualifying income, you are eligible for a $50/year Bluebikes membership.",
+      "If you participate in programs like the Supplemental Nutrition Assistance Program (SNAP) or MassHealth, or have a qualifying income, you are eligible for a $50/year Bluebikes membership.",
       "If you live in the City of Boston and have not had an annual membership recently, you may be eligible for a $60/year Bluebikes membership, or $5/year if you have a qualifying income.",
       "Consider downloading your local bikeshare app and setting it up at home before your trip.",
       "Most bikeshare systems offer a choice between e-bikes and standard bikes.",
@@ -645,7 +645,7 @@ const DEVICE_CONTENT = {
     nextSteps: [
       { label: "Learn more about adaptive mobility options (coming soon)", url: "/micromobility-hub/device-library/adaptive-options.html" },
       { label: "Join an accessible cycling event", url: "https://www.mass.gov/accessible-cycling" },
-      { label: "Learn more about the Department of Recreations's (DCP) Universal Access Program", url: "https://www.mass.gov/orgs/universal-access-program" },
+      { label: "Learn more about the Department of Conservation and Recreation's (DCR) Universal Access Program", url: "https://www.mass.gov/orgs/universal-access-program" },
       { label: "Check out DCR's adaptive cycling equipment list", url: "https://www.mass.gov/info-details/adaptive-cycling-equipment" },
       { label: "Try out DCR's power-driven mobility devices", url: "https://www.mass.gov/info-details/dcr-power-driven-mobility-devices" }
     ],
@@ -731,11 +731,11 @@ const DEVICE_CONTENT = {
     },
     nextSteps: [
       { label: "Learn more about youth mobility options", url: "https://canva.link/60qopm17rsnhlls" },
-      { label: "Visit a local bike shop", url: "https://nbda.com/dealer-finder-member-directory/#!directory/map/tag=Massachusetts" },
-      { label: "More shops on Pinkbike", url: "https://www.pinkbike.com/directory/list/massachusetts/2/bike-shop/" },
-      { label: "More shops on Singletracks", url: "https://www.singletracks.com/bike-shops/region/massachusetts/" },
+      { label: "Visit a local bike shop for youth bikes", url: "https://nbda.com/dealer-finder-member-directory/#!directory/map/tag=Massachusetts" },
+      { label: "Explore more youth bike shops on Pinkbike", url: "https://www.pinkbike.com/directory/list/massachusetts/2/bike-shop/" },
+      { label: "Explore more youth bike shops on Singletracks", url: "https://www.singletracks.com/bike-shops/region/massachusetts/" },
       { label: "Explore Safe Routes to School resources", url: "https://www.mass.gov/safe-routes-to-school" },
-      { label: "Read CPSC age-appropriate product guidance", url: "https://www.cpsc.gov/content/2020-Age-Determination-Guidelines" }
+      { label: "Read Consumer Product Safety Commission (CPSC) age-appropriate product guidance", url: "https://www.cpsc.gov/content/2020-Age-Determination-Guidelines" }
     ]
   }
 };
