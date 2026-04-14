@@ -2623,12 +2623,12 @@ progress.textContent = "";
         }
       });
 
-      input.addEventListener("focus", () => {
-        nextBtn.classList.remove("hidden");
-        const formNav = document.getElementById("formNav");
-        if (formNav) {
-          formNav.classList.remove("hidden");
-        }
+      input.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter") return;
+        if (!input.checked) return;
+
+        event.preventDefault();
+        advanceFromCurrentRadioQuestion(input.value);
       });
     });
 
@@ -2685,11 +2685,7 @@ progress.textContent = "";
 }
 
   backBtn.classList.toggle("hidden", APP_STATE.currentStep === 0);
-  nextBtn.classList.toggle("hidden", question.type !== "number");
-
-  if (question.type === "radio" && savedValue) {
-    nextBtn.classList.remove("hidden");
-  }
+  nextBtn.classList.toggle("hidden", question.type !== "number" && question.type !== "radio");
   backBtn.innerHTML = "&#8249;";
   nextBtn.innerHTML = "&#8250;";
 
