@@ -748,20 +748,25 @@ button.hidden {
   border-radius: 999px;
   border: none;
   background: var(--button-green-aa);
-  box-shadow: 0 10px 22px rgba(30, 133, 63, 0.24);
   font-size: 30px;
   font-weight: 700;
   line-height: 1;
+  flex: 0 0 48px;
 }
 
 .results-arrow-btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 14px 28px rgba(30, 133, 63, 0.28);
 }
 
 .results-arrow-btn span {
   display: block;
   transform: translateY(-1px);
+}
+
+.results-arrow-btn.hidden {
+  display: inline-flex !important;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .results-restart-btn {
@@ -838,7 +843,7 @@ button.hidden {
     min-width: 40px;
     min-height: 40px;
     font-size: 25px;
-    box-shadow: 0 8px 18px rgba(36, 168, 80, 0.22);
+    flex-basis: 40px;
   }
 
   .results-restart-btn {
