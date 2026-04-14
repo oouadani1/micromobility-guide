@@ -2606,7 +2606,7 @@ progress.textContent = "";
  if (question.type === "number") {
   formStep.innerHTML = `
     <div class="question-block">
-      <p class="question-label">${renderedLabel}</p>
+      <label for="${questionId}" class="question-label">${renderedLabel}</label>
       <input
         id="${questionId}"
         type="number"
