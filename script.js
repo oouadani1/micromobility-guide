@@ -2613,22 +2613,21 @@ progress.textContent = "";
     `;
 
     let pointerSelectionInProgress = false;
+    let keyboardSelectionInProgress = false;
 
     const radioInputs = formStep.querySelectorAll(`input[name="${questionId}"]`);
     radioInputs.forEach((input) => {
       input.addEventListener("change", () => {
-        if (pointerSelectionInProgress) {
+        if (pointerSelectionInProgress || keyboardSelectionInProgress) {
           pointerSelectionInProgress = false;
+          keyboardSelectionInProgress = false;
           advanceFromCurrentRadioQuestion(input.value);
         }
       });
 
-      input.addEventListener("keyup", (event) => {
+      input.addEventListener("keydown", (event) => {
         if (event.key !== " " && event.key !== "Spacebar") return;
-        if (!input.checked) return;
-
-        event.preventDefault();
-        advanceFromCurrentRadioQuestion(input.value);
+        keyboardSelectionInProgress = true;
       });
     });
 
