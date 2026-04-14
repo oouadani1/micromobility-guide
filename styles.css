@@ -14,6 +14,7 @@ body {
 :root {
   --text-blue-aa: #14558F;
   --text-green-aa: #1e853f;
+  --button-green-aa: #1e853f;
 }
 
 .container {
@@ -106,7 +107,7 @@ button {
   padding: 12px 18px;
   border: none;
   border-radius: 8px;
-  background: #24A850;
+  background: var(--button-green-aa);
   color: white;
   font-size: 16px;
   font-weight: 600;
@@ -746,8 +747,8 @@ button.hidden {
   justify-content: center;
   border-radius: 999px;
   border: none;
-  background: #24A850;
-  box-shadow: 0 10px 22px rgba(36, 168, 80, 0.24);
+  background: var(--button-green-aa);
+  box-shadow: 0 10px 22px rgba(30, 133, 63, 0.24);
   font-size: 30px;
   font-weight: 700;
   line-height: 1;
@@ -755,7 +756,7 @@ button.hidden {
 
 .results-arrow-btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 14px 28px rgba(36, 168, 80, 0.28);
+  box-shadow: 0 14px 28px rgba(30, 133, 63, 0.28);
 }
 
 .results-arrow-btn span {
