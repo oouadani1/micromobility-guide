@@ -1108,7 +1108,7 @@ const QUESTIONS = {
   },
   routeType: {
     type: "radio",
-    label: "What kind of route will this mostly be?",
+    label: "What is your typical route like?",
     options: [
       { value: "bikeLanes", label: "Bike lanes or other paths separated from cars" },
       { value: "mixedRoads", label: "A mix of bike lanes and some roads with more traffic" },
@@ -2746,11 +2746,6 @@ function handleBack() {
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-  const params = new URLSearchParams(window.location.search);
-  if (params.get("printPreview") === "1") {
-    document.body.classList.add("print-preview");
-  }
-
   const backBtn = document.getElementById("backBtn");
   const nextBtn = document.getElementById("nextBtn");
   
