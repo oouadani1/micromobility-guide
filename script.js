@@ -1154,7 +1154,8 @@ const APP_STATE = {
   currentAllRecommendations: [],
   currentNormalizedAnswers: null,
   currentScores: null,
-  currentPathway: null
+  currentPathway: null,
+  keyboardMode: false
 };
 
 const DEBUG_MODE = false;
@@ -2548,6 +2549,27 @@ function getRenderedQuestionOptions(questionId) {
     );
 }
 
+function updateFormNavigation(questionType) {
+  const backBtn = document.getElementById("backBtn");
+  const nextBtn = document.getElementById("nextBtn");
+  const formNav = document.getElementById("formNav");
+
+  if (!backBtn || !nextBtn || !formNav) return;
+
+  backBtn.classList.toggle("hidden", APP_STATE.currentStep === 0);
+  nextBtn.classList.toggle(
+    "hidden",
+    questionType !== "number" && !(questionType === "radio" && APP_STATE.keyboardMode)
+  );
+  backBtn.innerHTML = "&#8249;";
+  nextBtn.innerHTML = "&#8250;";
+
+  const bothNavButtonsHidden =
+    backBtn.classList.contains("hidden") &&
+    nextBtn.classList.contains("hidden");
+  formNav.classList.toggle("hidden", bothNavButtonsHidden);
+}
+
 function renderQuestion() {
   const formStep = document.getElementById("formStep");
   const progress = document.getElementById("progress");
@@ -2683,18 +2705,7 @@ progress.textContent = "";
   }
 }
 
-  backBtn.classList.toggle("hidden", APP_STATE.currentStep === 0);
-  nextBtn.classList.toggle("hidden", question.type !== "number");
-  backBtn.innerHTML = "&#8249;";
-  nextBtn.innerHTML = "&#8250;";
-
-  const formNav = document.getElementById("formNav");
-  if (formNav) {
-    const bothNavButtonsHidden =
-      backBtn.classList.contains("hidden") &&
-      nextBtn.classList.contains("hidden");
-    formNav.classList.toggle("hidden", bothNavButtonsHidden);
-  }
+  updateFormNavigation(question.type);
 }
 
 function showStepError(message) {
@@ -2795,6 +2806,28 @@ function handleBack() {
 }
 
 window.addEventListener("DOMContentLoaded", () => {
+  const syncKeyboardMode = (keyboardMode) => {
+    APP_STATE.keyboardMode = keyboardMode;
+
+    const result = document.getElementById("result");
+    if (result && !result.classList.contains("hidden")) return;
+
+    const currentQuestionId = getCurrentQuestionId();
+    const currentQuestion = QUESTIONS[currentQuestionId];
+    if (!currentQuestion) return;
+
+    updateFormNavigation(currentQuestion.type);
+  };
+
+  window.addEventListener("keydown", (event) => {
+    if (event.metaKey || event.ctrlKey || event.altKey) return;
+    syncKeyboardMode(true);
+  });
+
+  window.addEventListener("pointerdown", () => {
+    syncKeyboardMode(false);
+  }, true);
+
   const backBtn = document.getElementById("backBtn");
   const nextBtn = document.getElementById("nextBtn");
   
