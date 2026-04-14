@@ -2215,13 +2215,13 @@ function renderSingleRecommendationCard(rec, answers, pathway) {
       ${imageSrc ? `<img src="${imageSrc}" alt="${getRecommendationImageAlt(rec.id, answers)}" class="device-image">` : ""}
       ${imageTag ? `<p class="recommendation-image-tag">${imageTag}</p>` : ""}
 
-      <h4 class="guidance-heading">${rationaleHeading}</h4>
+      <h3 class="guidance-heading">${rationaleHeading}</h3>
       <p class="recommendation-reason">
         ${getRecommendationReason(rec.id, answers, pathway)}
       </p>
 
       <div class="guidance">
-        <h4 class="guidance-heading">Things to consider</h4>
+        <h3 class="guidance-heading">Things to consider</h3>
         <ul class="guidance-list">${considerationsHtml}</ul>
 
         <p class="device-cost">
@@ -2231,7 +2231,7 @@ function renderSingleRecommendationCard(rec, answers, pathway) {
       </div>
 
       <div class="next-steps">
-        <h4 class="guidance-heading">Next steps</h4>
+        <h3 class="guidance-heading">Next steps</h3>
         <ul class="next-steps-list">${nextStepsHtml}</ul>
       </div>
     </div>
@@ -2612,10 +2612,22 @@ progress.textContent = "";
       </div>
     `;
 
+    let pointerSelectionInProgress = false;
+
     const radioInputs = formStep.querySelectorAll(`input[name="${questionId}"]`);
     radioInputs.forEach((input) => {
       input.addEventListener("change", () => {
-        advanceFromCurrentRadioQuestion(input.value);
+        if (pointerSelectionInProgress) {
+          pointerSelectionInProgress = false;
+          advanceFromCurrentRadioQuestion(input.value);
+        }
+      });
+
+      input.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          advanceFromCurrentRadioQuestion(input.value);
+        }
       });
     });
 
@@ -2623,6 +2635,14 @@ progress.textContent = "";
     optionCards.forEach((card) => {
       const input = card.querySelector(`input[name="${questionId}"]`);
       if (!input) return;
+
+      const markPointerSelection = () => {
+        pointerSelectionInProgress = true;
+      };
+
+      card.addEventListener("pointerdown", markPointerSelection);
+      card.addEventListener("mousedown", markPointerSelection);
+      card.addEventListener("touchstart", markPointerSelection, { passive: true });
 
       card.addEventListener("click", () => {
         if (input.checked && APP_STATE.answers[questionId] === input.value) {
