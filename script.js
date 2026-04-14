@@ -2622,16 +2622,14 @@ progress.textContent = "";
           advanceFromCurrentRadioQuestion(input.value);
         }
       });
-    });
 
-    formStep.addEventListener("keydown", (event) => {
-      if (event.key !== "Enter") return;
+      input.addEventListener("keyup", (event) => {
+        if (event.key !== " " && event.key !== "Spacebar") return;
+        if (!input.checked) return;
 
-      const selected = formStep.querySelector(`input[name="${questionId}"]:checked`);
-      if (!selected) return;
-
-      event.preventDefault();
-      advanceFromCurrentRadioQuestion(selected.value);
+        event.preventDefault();
+        advanceFromCurrentRadioQuestion(input.value);
+      });
     });
 
     const optionCards = formStep.querySelectorAll(".option-card");
