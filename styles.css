@@ -951,6 +951,244 @@ button.hidden {
   margin: 0.3in;
 }
 
+body.print-preview {
+  background: #ffffff;
+  color: #111;
+}
+
+body.print-preview .container {
+  max-width: none;
+  min-height: auto;
+  margin: 0;
+  padding: 0;
+}
+
+body.print-preview .card {
+  background: #ffffff;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  min-height: auto;
+}
+
+body.print-preview .eyebrow,
+body.print-preview #heroTitle,
+body.print-preview #introText,
+body.print-preview #progress,
+body.print-preview #formStep,
+body.print-preview #formNav,
+body.print-preview .results-intro-heading,
+body.print-preview .results-toolbar,
+body.print-preview .results-actions-mobile,
+body.print-preview .recommendation-card,
+body.print-preview .results-disclaimer,
+body.print-preview .all-results-panel,
+body.print-preview .footer-branding {
+  display: none !important;
+}
+
+body.print-preview #result {
+  display: block !important;
+  margin-top: 0;
+}
+
+body.print-preview .print-summary {
+  display: block !important;
+}
+
+body.print-preview .print-density-default {
+  font-size: 10pt;
+  line-height: 1.22;
+}
+
+body.print-preview .print-density-compact {
+  font-size: 9.25pt;
+  line-height: 1.17;
+}
+
+body.print-preview .print-density-tight {
+  font-size: 8.75pt;
+  line-height: 1.12;
+}
+
+body.print-preview .print-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+body.print-preview .print-title {
+  margin: 0;
+  font-size: 15pt;
+  line-height: 1.1;
+  color: var(--text-blue-aa);
+}
+
+body.print-preview .print-logo {
+  width: 56px;
+  height: auto;
+  flex: 0 0 56px;
+  opacity: 0.9;
+}
+
+body.print-preview .print-section {
+  margin-top: 8px;
+  break-inside: avoid;
+}
+
+body.print-preview .print-section-heading {
+  margin: 0 0 5px;
+  font-size: 10pt;
+  color: var(--text-green-aa);
+}
+
+body.print-preview .print-input-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 10px;
+  margin: 0;
+}
+
+body.print-preview .print-input-item {
+  margin: 0;
+}
+
+body.print-preview .print-input-item dt {
+  font-weight: 700;
+  margin: 0 0 1px;
+}
+
+body.print-preview .print-input-item dd {
+  margin: 0;
+}
+
+body.print-preview .print-rec-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+}
+
+body.print-preview .print-rec-card {
+  border: 1px solid #dbe3f3;
+  border-radius: 10px;
+  padding: 7px 8px;
+  break-inside: avoid;
+}
+
+body.print-preview .print-rec-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+body.print-preview .print-rec-image {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+  flex: 0 0 38px;
+}
+
+body.print-preview .print-rec-title {
+  margin: 0;
+  font-size: 10pt;
+  color: var(--text-green-aa);
+}
+
+body.print-preview .print-rec-image-tag,
+body.print-preview .print-rec-reason,
+body.print-preview .print-rec-cost,
+body.print-preview .print-disclaimer {
+  margin: 2px 0 0;
+}
+
+body.print-preview .print-rec-list {
+  margin: 2px 0 0;
+  padding-left: 14px;
+}
+
+body.print-preview .print-rec-list li {
+  margin-bottom: 1px;
+}
+
+body.print-preview .print-disclaimer {
+  margin-top: 8px;
+  font-size: 8pt;
+  color: #555;
+}
+
+body.print-preview .print-density-default .print-title {
+  font-size: 16pt;
+}
+
+body.print-preview .print-density-default .print-logo {
+  width: 64px;
+  flex-basis: 64px;
+}
+
+body.print-preview .print-density-default .print-rec-card {
+  padding: 9px 10px;
+}
+
+body.print-preview .print-density-default .print-rec-image {
+  width: 44px;
+  height: 44px;
+  flex-basis: 44px;
+}
+
+body.print-preview .print-density-default .print-rec-title {
+  font-size: 10.75pt;
+}
+
+body.print-preview .print-density-default .print-rec-list li {
+  margin-bottom: 2px;
+}
+
+body.print-preview .print-density-compact .print-title {
+  font-size: 15pt;
+}
+
+body.print-preview .print-density-compact .print-logo {
+  width: 56px;
+  flex-basis: 56px;
+}
+
+body.print-preview .print-density-tight .print-title {
+  font-size: 14pt;
+}
+
+body.print-preview .print-density-tight .print-logo {
+  width: 50px;
+  flex-basis: 50px;
+}
+
+body.print-preview .print-density-tight .print-section {
+  margin-top: 6px;
+}
+
+body.print-preview .print-density-tight .print-rec-card {
+  padding: 6px 7px;
+}
+
+body.print-preview .print-density-tight .print-rec-image {
+  width: 34px;
+  height: 34px;
+  flex-basis: 34px;
+}
+
+body.print-preview .print-density-tight .print-rec-title {
+  font-size: 9.5pt;
+}
+
+body.print-preview .print-density-tight .print-rec-list li {
+  margin-bottom: 0;
+}
+
 @media print {
   body {
     background: #ffffff;

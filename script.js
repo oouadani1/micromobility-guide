@@ -1110,9 +1110,9 @@ const QUESTIONS = {
     type: "radio",
     label: "What kind of route will this mostly be?",
     options: [
-      { value: "bikeLanes", label: "Mostly on bike lanes or other space separated from cars" },
+      { value: "bikeLanes", label: "Bike lanes or other paths separated from cars" },
       { value: "mixedRoads", label: "A mix of bike lanes and some roads with more traffic" },
-      { value: "regularRoads", label: "Mostly on roads next to cars, without separated bike space" },
+      { value: "regularRoads", label: "Roads next to cars, without separated bike space" },
       { value: "trails", label: "Mostly on trails, paths, or in parks" }
     ]
   },
@@ -2746,6 +2746,11 @@ function handleBack() {
 }
 
 window.addEventListener("DOMContentLoaded", () => {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("printPreview") === "1") {
+    document.body.classList.add("print-preview");
+  }
+
   const backBtn = document.getElementById("backBtn");
   const nextBtn = document.getElementById("nextBtn");
   
