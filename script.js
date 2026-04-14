@@ -2647,8 +2647,12 @@ progress.textContent = "";
 
       card.addEventListener("click", () => {
         if (input.checked && APP_STATE.answers[questionId] === input.value) {
+          pointerSelectionInProgress = false;
           advanceFromCurrentRadioQuestion(input.value);
+          return;
         }
+
+        pointerSelectionInProgress = false;
       });
     });
   }
