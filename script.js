@@ -132,10 +132,10 @@ const DEVICE_CONTENT = {
     },
     nextSteps: [
       { label: "Learn more about bicycles", url: "https://canva.link/nrvd5v2bvwbf99v" },
-      { label: "Visit a local bike shop for bicycles", url: "https://nbda.com/dealer-finder-member-directory/#!directory/map/tag=Massachusetts" },
-      { label: "Explore more bicycle shops on Pinkbike", url: "https://www.pinkbike.com/directory/list/massachusetts/2/bike-shop/" },
-      { label: "Explore more bicycle shops on Singletracks", url: "https://www.singletracks.com/bike-shops/region/massachusetts/" },
-      { label: "Join a bicycle-friendly event", url: "https://www.massbike.org/massachusetts-bike-friendly-events-calendar" }
+      { label: "Visit your local bike shop", url: "https://nbda.com/dealer-finder-member-directory/#!directory/map/tag=Massachusetts" },
+      { label: "More shops on Pinkbike", url: "https://www.pinkbike.com/directory/list/massachusetts/2/bike-shop/" },
+      { label: "More shops on Singletracks", url: "https://www.singletracks.com/bike-shops/region/massachusetts/" },
+      { label: "Join a bike-friendly event", url: "https://www.massbike.org/massachusetts-bike-friendly-events-calendar" }
     ]
   },
   ebike: {
@@ -221,10 +221,10 @@ const DEVICE_CONTENT = {
     },
     nextSteps: [
       { label: "Learn more about e-bikes.", url: "https://canva.link/ez6c09mq8tpfpk4" },
-      { label: "Visit a local bike shop for e-bikes.", url: "https://nbda.com/dealer-finder-member-directory/#!directory/map/tag=Massachusetts" },
-      { label: "Explore more e-bike shops on Pinkbike", url: "https://www.pinkbike.com/directory/list/massachusetts/2/bike-shop/" },
-      { label: "Explore more e-bike shops on Singletracks", url: "https://www.singletracks.com/bike-shops/region/massachusetts/" },
-      { label: "Join an e-bike-friendly event.", url: "https://www.massbike.org/massachusetts-bike-friendly-events-calendar" },
+      { label: "Visit a local bike shop.", url: "https://nbda.com/dealer-finder-member-directory/#!directory/map/tag=Massachusetts" },
+      { label: "More shops on Pinkbike", url: "https://www.pinkbike.com/directory/list/massachusetts/2/bike-shop/" },
+      { label: "More shops on Singletracks", url: "https://www.singletracks.com/bike-shops/region/massachusetts/" },
+      { label: "Join a bike-friendly event.", url: "https://www.massbike.org/massachusetts-bike-friendly-events-calendar" },
       { label: "Check state e-bike incentives.", url: "https://goclean.masscec.com/clean-energy-solutions/electric-bicycles/" }
     ]
   },
@@ -469,9 +469,9 @@ const DEVICE_CONTENT = {
     nextSteps: [
       { label: "Learn more about cargo bikes.", url: "https://canva.link/gcyamow1yonirts" },
       { label: "Borrow a cargo bike for free to see if it is a good fit for you.", url: "https://cpp.ebikelibrary.org/" },
-      { label: "Visit a local bike shop for cargo bikes.", url: "https://nbda.com/dealer-finder-member-directory/#!directory/map/tag=Massachusetts" },
-      { label: "Explore more cargo bike shops on Pinkbike", url: "https://www.pinkbike.com/directory/list/massachusetts/2/bike-shop/" },
-      { label: "Explore more cargo bike shops on Singletracks", url: "https://www.singletracks.com/bike-shops/region/massachusetts/" },
+      { label: "Visit a local bike shop.", url: "https://nbda.com/dealer-finder-member-directory/#!directory/map/tag=Massachusetts" },
+      { label: "More shops on Pinkbike", url: "https://www.pinkbike.com/directory/list/massachusetts/2/bike-shop/" },
+      { label: "More shops on Singletracks", url: "https://www.singletracks.com/bike-shops/region/massachusetts/" },
     ]
   },
   bikeshare: {
@@ -731,9 +731,9 @@ const DEVICE_CONTENT = {
     },
     nextSteps: [
       { label: "Learn more about youth mobility options", url: "https://canva.link/60qopm17rsnhlls" },
-      { label: "Visit a local bike shop for youth bikes", url: "https://nbda.com/dealer-finder-member-directory/#!directory/map/tag=Massachusetts" },
-      { label: "Explore more youth bike shops on Pinkbike", url: "https://www.pinkbike.com/directory/list/massachusetts/2/bike-shop/" },
-      { label: "Explore more youth bike shops on Singletracks", url: "https://www.singletracks.com/bike-shops/region/massachusetts/" },
+      { label: "Visit a local bike shop", url: "https://nbda.com/dealer-finder-member-directory/#!directory/map/tag=Massachusetts" },
+      { label: "More shops on Pinkbike", url: "https://www.pinkbike.com/directory/list/massachusetts/2/bike-shop/" },
+      { label: "More shops on Singletracks", url: "https://www.singletracks.com/bike-shops/region/massachusetts/" },
       { label: "Explore Safe Routes to School resources", url: "https://www.mass.gov/safe-routes-to-school" },
       { label: "Read Consumer Product Safety Commission (CPSC) age-appropriate product guidance", url: "https://www.cpsc.gov/content/2020-Age-Determination-Guidelines" }
     ]
@@ -1154,8 +1154,7 @@ const APP_STATE = {
   currentAllRecommendations: [],
   currentNormalizedAnswers: null,
   currentScores: null,
-  currentPathway: null,
-  keyboardMode: false
+  currentPathway: null
 };
 
 const DEBUG_MODE = false;
@@ -2549,27 +2548,6 @@ function getRenderedQuestionOptions(questionId) {
     );
 }
 
-function updateFormNavigation(questionType) {
-  const backBtn = document.getElementById("backBtn");
-  const nextBtn = document.getElementById("nextBtn");
-  const formNav = document.getElementById("formNav");
-
-  if (!backBtn || !nextBtn || !formNav) return;
-
-  backBtn.classList.toggle("hidden", APP_STATE.currentStep === 0);
-  nextBtn.classList.toggle(
-    "hidden",
-    questionType !== "number" && !(questionType === "radio" && APP_STATE.keyboardMode)
-  );
-  backBtn.innerHTML = "&#8249;";
-  nextBtn.innerHTML = "&#8250;";
-
-  const bothNavButtonsHidden =
-    backBtn.classList.contains("hidden") &&
-    nextBtn.classList.contains("hidden");
-  formNav.classList.toggle("hidden", bothNavButtonsHidden);
-}
-
 function renderQuestion() {
   const formStep = document.getElementById("formStep");
   const progress = document.getElementById("progress");
@@ -2644,13 +2622,16 @@ progress.textContent = "";
           advanceFromCurrentRadioQuestion(input.value);
         }
       });
+    });
 
-      input.addEventListener("keydown", (event) => {
-        if (event.key === "Enter") {
-          event.preventDefault();
-          advanceFromCurrentRadioQuestion(input.value);
-        }
-      });
+    formStep.addEventListener("keydown", (event) => {
+      if (event.key !== "Enter") return;
+
+      const selected = formStep.querySelector(`input[name="${questionId}"]:checked`);
+      if (!selected) return;
+
+      event.preventDefault();
+      advanceFromCurrentRadioQuestion(selected.value);
     });
 
     const optionCards = formStep.querySelectorAll(".option-card");
@@ -2705,7 +2686,18 @@ progress.textContent = "";
   }
 }
 
-  updateFormNavigation(question.type);
+  backBtn.classList.toggle("hidden", APP_STATE.currentStep === 0);
+  nextBtn.classList.toggle("hidden", question.type !== "number");
+  backBtn.innerHTML = "&#8249;";
+  nextBtn.innerHTML = "&#8250;";
+
+  const formNav = document.getElementById("formNav");
+  if (formNav) {
+    const bothNavButtonsHidden =
+      backBtn.classList.contains("hidden") &&
+      nextBtn.classList.contains("hidden");
+    formNav.classList.toggle("hidden", bothNavButtonsHidden);
+  }
 }
 
 function showStepError(message) {
@@ -2806,28 +2798,6 @@ function handleBack() {
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-  const syncKeyboardMode = (keyboardMode) => {
-    APP_STATE.keyboardMode = keyboardMode;
-
-    const result = document.getElementById("result");
-    if (result && !result.classList.contains("hidden")) return;
-
-    const currentQuestionId = getCurrentQuestionId();
-    const currentQuestion = QUESTIONS[currentQuestionId];
-    if (!currentQuestion) return;
-
-    updateFormNavigation(currentQuestion.type);
-  };
-
-  window.addEventListener("keydown", (event) => {
-    if (event.metaKey || event.ctrlKey || event.altKey) return;
-    syncKeyboardMode(true);
-  });
-
-  window.addEventListener("pointerdown", () => {
-    syncKeyboardMode(false);
-  }, true);
-
   const backBtn = document.getElementById("backBtn");
   const nextBtn = document.getElementById("nextBtn");
   
