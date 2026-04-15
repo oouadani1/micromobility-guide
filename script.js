@@ -2274,6 +2274,8 @@ function renderRecommendations(recommendations, allRecommendations, answers, sco
   const backBtn = document.getElementById("backBtn");
   const nextBtn = document.getElementById("nextBtn");
 
+  setAppViewMode("results");
+
   if (intro) {
     intro.classList.add("hidden");
     intro.classList.remove("results-state");
@@ -2548,6 +2550,11 @@ function getRenderedQuestionOptions(questionId) {
     );
 }
 
+function setAppViewMode(mode) {
+  document.body.classList.toggle("question-flow-active", mode === "question");
+  document.body.classList.toggle("results-view-active", mode === "results");
+}
+
 function renderQuestion() {
   const formStep = document.getElementById("formStep");
   const progress = document.getElementById("progress");
@@ -2558,6 +2565,8 @@ function renderQuestion() {
   const heroTitle = document.getElementById("heroTitle");
 
   if (!formStep || !progress || !backBtn || !nextBtn) return;
+
+  setAppViewMode("question");
 
   if (intro) {
     intro.classList.toggle("hidden", APP_STATE.currentStep > 0);

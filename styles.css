@@ -447,6 +447,21 @@ button.hidden {
   justify-content: space-between;
 }
 
+body.question-flow-active .form-nav {
+  margin-top: auto;
+  padding-top: 16px;
+}
+
+body.question-flow-active .site-branding {
+  margin-top: 12px;
+  padding-top: 0;
+}
+
+body.results-view-active .site-branding {
+  margin-top: auto;
+  padding-top: 24px;
+}
+
 .form-nav--next-only {
   justify-content: flex-end;
 }
@@ -780,6 +795,21 @@ button.hidden {
 @media (max-width: 768px) {
   .form-nav {
     margin-top: 16px;
+  }
+
+  body.question-flow-active .form-nav {
+    margin-top: auto;
+    padding-top: 12px;
+  }
+
+  body.question-flow-active .site-branding {
+    margin-top: 10px;
+    padding-top: 0;
+  }
+
+  body.results-view-active .site-branding {
+    margin-top: auto;
+    padding-top: 16px;
   }
 
   .option-grid-2,
