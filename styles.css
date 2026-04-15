@@ -678,8 +678,8 @@ body.results-view-active .site-branding {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  min-height: 112px;
-  padding: 24px 22px;
+  min-height: 92px;
+  padding: 18px 20px;
   border-radius: 22px;
   border: 1.5px solid rgba(20, 85, 143, 0.22);
   background: rgba(255, 255, 255, 0.72);
@@ -783,8 +783,8 @@ body.results-view-active .site-branding {
   }
 
   .option-card {
-    min-height: 104px;
-    padding: 22px 18px;
+    min-height: 88px;
+    padding: 16px 18px;
   }
 
   .option-card-text {
@@ -819,8 +819,8 @@ body.results-view-active .site-branding {
   }
 
   .option-card {
-    min-height: 96px;
-    padding: 20px 16px;
+    min-height: 84px;
+    padding: 14px 14px;
   }
 
   .option-card--with-image {
@@ -1106,8 +1106,8 @@ body.results-view-active .site-branding {
   }
 
   .option-card {
-    min-height: 96px;
-    padding: 14px 13px;
+    min-height: 82px;
+    padding: 12px 13px;
     border-radius: 18px;
   }
 
