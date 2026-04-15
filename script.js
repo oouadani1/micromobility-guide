@@ -1550,89 +1550,6 @@ function getPrintableQuestionKeys(rawAnswers) {
   return visibleKeys;
 }
 
-function getAuditQuestionOptions(questionId, pathway, context = {}) {
-  const question = QUESTIONS[questionId];
-  if (!question?.options) return [];
-
-  let options = question.options.map((option) => ({ ...option }));
-
-  if (questionId === "primaryUse" && pathway === "child") {
-    const childAge = context.childAge ?? 17;
-    const showDeliveryOption = childAge >= 18;
-
-    options = options
-      .filter((option) => showDeliveryOption || option.value !== "deliveries")
-      .map((option) =>
-        option.value === "transport"
-          ? { ...option, label: "School, commuting, or errands" }
-          : option
-      );
-  }
-
-  return options;
-}
-
-function renderQuestionAuditVariant(pathway, title, questionIds, context = {}) {
-  const itemsHtml = questionIds
-    .map((questionId) => {
-      const label = getQuestionLabelForPathway(questionId, pathway);
-      const options = getAuditQuestionOptions(questionId, pathway, context);
-      const optionsHtml = options.length
-        ? `
-          <ul class="question-audit-options">
-            ${options
-              .map((option) => `<li class="question-audit-option">${option.label}</li>`)
-              .join("")}
-          </ul>
-        `
-        : '<p class="question-audit-note">Response type: number input</p>';
-
-      const note =
-        questionId === "transitLink"
-          ? '<p class="question-audit-note">Shown only when the primary use is "Getting to work, school, or errands" or, on the child pathway, "School, commuting, or errands."</p>'
-          : "";
-
-      return `
-        <li class="question-audit-item">
-          <h4 class="question-audit-question">${label}</h4>
-          ${optionsHtml}
-          ${note}
-        </li>
-      `;
-    })
-    .join("");
-
-  return `
-    <section class="question-audit-variant">
-      <h3 class="question-audit-variant-title">${title}</h3>
-      <ol class="question-audit-list">${itemsHtml}</ol>
-    </section>
-  `;
-}
-
-function renderQuestionAuditPage() {
-  const intro = document.getElementById("introText");
-  const heroTitle = document.getElementById("heroTitle");
-  const progress = document.getElementById("progress");
-  const formStep = document.getElementById("formStep");
-  const formNav = document.getElementById("formNav");
-  const result = document.getElementById("result");
-  const staticAudit = document.getElementById("questionAuditStatic");
-
-  if (!result || !staticAudit) return;
-
-  document.body.classList.add("question-audit-mode");
-
-  if (intro) intro.classList.add("hidden");
-  if (heroTitle) heroTitle.classList.add("hidden");
-  if (progress) progress.textContent = "";
-  if (formStep) formStep.innerHTML = "";
-  if (formNav) formNav.classList.add("hidden");
-  result.classList.add("hidden");
-  result.innerHTML = "";
-  staticAudit.classList.remove("hidden");
-}
-
 function renderPrintInputsSummary(rawAnswers) {
   const pathway = rawAnswers.pathway || "myself";
   const itemsHtml = getPrintableQuestionKeys(rawAnswers)
@@ -2635,7 +2552,6 @@ function renderQuestion() {
   const formStep = document.getElementById("formStep");
   const progress = document.getElementById("progress");
   const result = document.getElementById("result");
-  const staticAudit = document.getElementById("questionAuditStatic");
   const backBtn = document.getElementById("backBtn");
   const nextBtn = document.getElementById("nextBtn");
   const intro = document.getElementById("introText");
@@ -2653,9 +2569,6 @@ function renderQuestion() {
 
   result.classList.add("hidden");
   result.innerHTML = "";
-  if (staticAudit) {
-    staticAudit.classList.add("hidden");
-  }
 
   const sequence = getCurrentSequence();
   const questionId = getCurrentQuestionId();
@@ -2890,7 +2803,6 @@ function handleBack() {
 window.addEventListener("DOMContentLoaded", () => {
   const backBtn = document.getElementById("backBtn");
   const nextBtn = document.getElementById("nextBtn");
-  const urlParams = new URLSearchParams(window.location.search);
   
   if (backBtn) {
     backBtn.addEventListener("click", handleBack);
@@ -2898,11 +2810,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
   if (nextBtn) {
     nextBtn.addEventListener("click", handleNext);
-  }
-
-  if (urlParams.get("questionAudit") === "1") {
-    renderQuestionAuditPage();
-    return;
   }
 
   renderQuestion();
