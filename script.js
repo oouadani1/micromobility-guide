@@ -1111,8 +1111,8 @@ const QUESTIONS = {
     label: "What is your typical route like?",
     options: [
       { value: "bikeLanes", label: "Bike lanes separated from cars" },
-      { value: "mixedRoads", label: "Some bike lanes but without seperation from cars" },
-      { value: "regularRoads", label: "Roads without seperation from cars" },
+      { value: "mixedRoads", label: "Some bike lanes but without separation from cars" },
+      { value: "regularRoads", label: "Roads without separation from cars" },
       { value: "trails", label: "Mostly on trails, paths, or in parks" }
     ]
   },
@@ -1589,7 +1589,7 @@ function renderQuestionAuditVariant(pathway, title, questionIds, context = {}) {
 
       const note =
         questionId === "transitLink"
-          ? '<p class="question-audit-note">This question appears only when the primary use is "Getting to work, school, or errands" or, on the child pathway, "School, commuting, or errands."</p>'
+          ? '<p class="question-audit-note">Shown only when the primary use is "Getting to work, school, or errands" or, on the child pathway, "School, commuting, or errands."</p>'
           : "";
 
       return `
@@ -1617,8 +1617,9 @@ function renderQuestionAuditPage() {
   const formStep = document.getElementById("formStep");
   const formNav = document.getElementById("formNav");
   const result = document.getElementById("result");
+  const staticAudit = document.getElementById("questionAuditStatic");
 
-  if (!result) return;
+  if (!result || !staticAudit) return;
 
   document.body.classList.add("question-audit-mode");
 
@@ -1627,107 +1628,9 @@ function renderQuestionAuditPage() {
   if (progress) progress.textContent = "";
   if (formStep) formStep.innerHTML = "";
   if (formNav) formNav.classList.add("hidden");
-
-  const pathwaySections = [
-    {
-      title: "Myself",
-      variants: [
-        {
-          title: "Standard flow",
-          pathway: "myself",
-          questionIds: ["pathway", "ageInput", "adaptiveNeed", "primaryUse", "carryChildren", "distance", "routeType", "storage"]
-        },
-        {
-          title: "Transport variant",
-          pathway: "myself",
-          questionIds: ["pathway", "ageInput", "adaptiveNeed", "primaryUse", "transitLink", "carryChildren", "distance", "routeType", "storage"]
-        }
-      ]
-    },
-    {
-      title: "Someone else",
-      variants: [
-        {
-          title: "Standard flow",
-          pathway: "someoneElse",
-          questionIds: ["pathway", "ageInput", "adaptiveNeed", "primaryUse", "carryChildren", "distance", "routeType", "storage"]
-        },
-        {
-          title: "Transport variant",
-          pathway: "someoneElse",
-          questionIds: ["pathway", "ageInput", "adaptiveNeed", "primaryUse", "transitLink", "carryChildren", "distance", "routeType", "storage"]
-        }
-      ]
-    },
-    {
-      title: "A child",
-      variants: [
-        {
-          title: "Child under 18",
-          pathway: "child",
-          questionIds: ["pathway", "ageInput", "adaptiveNeed", "primaryUse", "carryChildren", "distance", "routeType", "storage"],
-          context: { childAge: 17 }
-        },
-        {
-          title: "Child under 18 transport variant",
-          pathway: "child",
-          questionIds: ["pathway", "ageInput", "adaptiveNeed", "primaryUse", "transitLink", "carryChildren", "distance", "routeType", "storage"],
-          context: { childAge: 17 }
-        },
-        {
-          title: "Child age 18 or older",
-          pathway: "child",
-          questionIds: ["pathway", "ageInput", "adaptiveNeed", "primaryUse", "carryChildren", "distance", "routeType", "storage"],
-          context: { childAge: 18 }
-        },
-        {
-          title: "Child age 18 or older transport variant",
-          pathway: "child",
-          questionIds: ["pathway", "ageInput", "adaptiveNeed", "primaryUse", "transitLink", "carryChildren", "distance", "routeType", "storage"],
-          context: { childAge: 18 }
-        }
-      ]
-    },
-    {
-      title: "Explore all device options",
-      variants: [
-        {
-          title: "Explore-only flow",
-          pathway: "exploring",
-          questionIds: ["pathway"]
-        }
-      ]
-    }
-  ];
-
-  const pathwaysHtml = pathwaySections
-    .map(
-      (section) => `
-        <section class="question-audit-pathway">
-          <h2 class="question-audit-pathway-title">${section.title}</h2>
-          ${section.variants
-            .map((variant) =>
-              renderQuestionAuditVariant(
-                variant.pathway,
-                variant.title,
-                variant.questionIds,
-                variant.context || {}
-              )
-            )
-            .join("")}
-        </section>
-      `
-    )
-    .join("");
-
-  result.classList.remove("hidden");
-  result.innerHTML = `
-    <section class="question-audit">
-      <h1 class="question-audit-title">Question audit</h1>
-      <p class="question-audit-intro">This view prints every current pathway and question variant so wording, response options, and heading nesting can be reviewed without clicking through the live questionnaire.</p>
-      ${pathwaysHtml}
-    </section>
-  `;
+  result.classList.add("hidden");
+  result.innerHTML = "";
+  staticAudit.classList.remove("hidden");
 }
 
 function renderPrintInputsSummary(rawAnswers) {
@@ -2732,6 +2635,7 @@ function renderQuestion() {
   const formStep = document.getElementById("formStep");
   const progress = document.getElementById("progress");
   const result = document.getElementById("result");
+  const staticAudit = document.getElementById("questionAuditStatic");
   const backBtn = document.getElementById("backBtn");
   const nextBtn = document.getElementById("nextBtn");
   const intro = document.getElementById("introText");
@@ -2749,6 +2653,9 @@ function renderQuestion() {
 
   result.classList.add("hidden");
   result.innerHTML = "";
+  if (staticAudit) {
+    staticAudit.classList.add("hidden");
+  }
 
   const sequence = getCurrentSequence();
   const questionId = getCurrentQuestionId();
@@ -2872,9 +2779,13 @@ progress.textContent = "";
 
   const formNav = document.getElementById("formNav");
   if (formNav) {
+    const nextOnlyVisible =
+      backBtn.classList.contains("hidden") &&
+      !nextBtn.classList.contains("hidden");
     const bothNavButtonsHidden =
       backBtn.classList.contains("hidden") &&
       nextBtn.classList.contains("hidden");
+    formNav.classList.toggle("form-nav--next-only", nextOnlyVisible);
     formNav.classList.toggle("hidden", bothNavButtonsHidden);
   }
 }

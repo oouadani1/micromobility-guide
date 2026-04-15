@@ -16,8 +16,6 @@ body {
   --text-green-aa: #1e853f;
   --button-green-aa: #1e853f;
   --app-max-width: 960px;
-  --app-shell-min-height-desktop: 1500px;
-  --app-shell-min-height-tablet: 1360px;
 }
 
 .container {
@@ -42,7 +40,7 @@ body {
     0 2px 8px rgba(255, 255, 255, 0.25) inset;
   box-sizing: border-box;
   width: 100%;
-  min-height: max(calc(100svh - 40px), var(--app-shell-min-height-desktop));
+  min-height: calc(100svh - 40px);
   display: flex;
   flex-direction: column;
 }
@@ -448,6 +446,10 @@ button.hidden {
   justify-content: space-between;
 }
 
+.form-nav--next-only {
+  justify-content: flex-end;
+}
+
 .form-nav button {
   width: 48px;
   height: 48px;
@@ -746,7 +748,7 @@ button.hidden {
 
   .card {
     padding: 28px 24px;
-    min-height: max(calc(100svh - 32px), var(--app-shell-min-height-tablet));
+    min-height: calc(100svh - 32px);
   }
 
   .question-label,
