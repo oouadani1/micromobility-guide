@@ -1576,74 +1576,166 @@ function renderPrintInputsSummary(rawAnswers) {
   `;
 }
 
+function getAllResultsPositiveFactor(recId, answers) {
+  if (!answers) return "";
+
+  if (recId === "adaptiveMobility" && answers.adaptiveNeed === "yes") {
+    return "it is better suited to mobility support needs than most other device types";
+  }
+
+  if (recId === "cargoBike" && answers.carryChildren === "yes") {
+    return "its added carrying capacity matches your need to bring children";
+  }
+
+  if (recId === "bikeshare" && answers.storage === "outdoor") {
+    return "you do not need to store it yourself outdoors";
+  }
+
+  if (recId === "ebike" && (answers.distance === "3to9" || answers.distance === "10plus")) {
+    return "the electric assist is a strong match for your trip distance";
+  }
+
+  if (
+    recId === "escooter" &&
+    answers.routeType === "bikeLanes" &&
+    answers.distance === "under3"
+  ) {
+    return "your shorter trip and lower-stress route are a good match for it";
+  }
+
+  if (
+    recId === "lowSpeedPoweredMicromobility" &&
+    answers.distance === "under3" &&
+    answers.storage === "indoor"
+  ) {
+    return "your short trip and indoor storage needs line up well with these compact devices";
+  }
+
+  if (
+    recId === "bicycle" &&
+    (answers.primaryUse === "recreation" || answers.routeType === "trails")
+  ) {
+    return "it fits well with the kind of riding you described";
+  }
+
+  if (
+    recId === "bikeshare" &&
+    (answers.transitLink === "yes" || answers.primaryUse === "transport")
+  ) {
+    return "it can work well for everyday trips and transit connections";
+  }
+
+  if (recId === "ebike" && answers.routeType === "regularRoads") {
+    return "it can handle longer or more demanding road riding better than lighter devices";
+  }
+
+  if (recId === "bicycle" && answers.transitLink === "yes") {
+    return "it can still work reasonably well with a transit-linked trip";
+  }
+
+  return "";
+}
+
+function getAllResultsCautionFactor(recId, answers) {
+  if (!answers) return "";
+
+  if (
+    recId === "bikeshare" &&
+    answers.adaptiveNeed === "yes"
+  ) {
+    return "shared bikes are less adaptable for mobility support needs";
+  }
+
+  if (
+    recId === "escooter" &&
+    (answers.routeType === "regularRoads" || answers.routeType === "mixedRoads")
+  ) {
+    return "it is less comfortable on rougher roads or around heavier traffic";
+  }
+
+  if (
+    recId === "lowSpeedPoweredMicromobility" &&
+    answers.routeType !== "bikeLanes" &&
+    answers.routeType !== "trails"
+  ) {
+    return "these devices work best on smoother, lower-stress routes";
+  }
+
+  if (recId === "cargoBike" && answers.storage === "indoor") {
+    return "its larger size can make indoor storage harder";
+  }
+
+  if (recId === "cargoBike" && answers.transitLink === "yes") {
+    return "its heavier and bulkier size makes transit connections harder";
+  }
+
+  if (
+    recId === "bikeshare" &&
+    answers.carryChildren === "yes"
+  ) {
+    return "shared public bikes are not a practical choice for carrying children";
+  }
+
+  if (
+    recId === "ebike" &&
+    answers.age === "age14to16"
+  ) {
+    return "age limits narrow the appropriate options to Class 1 models";
+  }
+
+  if (
+    recId === "bikeshare" &&
+    answers.distance === "10plus"
+  ) {
+    return "it may be less convenient if you need longer trips on a regular basis";
+  }
+
+  if (
+    recId === "bicycle" &&
+    answers.distance === "10plus"
+  ) {
+    return "longer distances may take more effort without electric assist";
+  }
+
+  if (
+    recId === "adaptiveMobility" &&
+    answers.storage === "indoor"
+  ) {
+    return "some models can be larger and harder to store inside";
+  }
+
+  return "";
+}
+
 function getAllResultsReason(rec, answers, priority) {
   if (!answers) return "";
 
-  if (priority.label === "Top suggestion") {
-    if (rec.id === "bicycle" && answers.transitLink === "yes") {
-      return "A standard bicycle rises to the top because it fits everyday trips and can still work well with a transit connection.";
-    }
-
-    if (rec.id === "ebike" && (answers.distance === "3to9" || answers.distance === "10plus")) {
-      return "An e-bike is a top suggestion because your trip distance points toward added assistance and range.";
-    }
-
-    if (rec.id === "cargoBike" && answers.carryChildren === "yes") {
-      return "A cargo bike is a top suggestion because carrying children makes extra capacity especially useful.";
-    }
-
-    if (rec.id === "adaptiveMobility" && answers.adaptiveNeed === "yes") {
-      return "An adaptive option is a top suggestion because you indicated a disability or mobility need.";
-    }
-
-    if (rec.id === "humanPoweredYouth") {
-      return "These options rise to the top because the selected age points toward age-appropriate nonmotorized devices.";
-    }
-
-    return `${rec.label} is a top suggestion because it aligns well with the trip needs and preferences you selected.`;
+  if (rec.id === "humanPoweredYouth") {
+    return "These options stand out because the selected age points toward age-appropriate nonmotorized devices.";
   }
 
-  if (priority.label === "Secondary suggestion") {
-    return `${rec.label} is a secondary suggestion because it matches several of your inputs, but not as strongly as your top result.`;
+  const positive = getAllResultsPositiveFactor(rec.id, answers);
+  const caution = getAllResultsCautionFactor(rec.id, answers);
+
+  if (positive && caution) {
+    return `${rec.label} could work because ${positive}, but ${caution}.`;
   }
 
-  if (priority.label === "Strongly suggested") {
-    if (rec.id === "bikeshare" && answers.carryChildren === "yes") {
-      return "Bikeshare may work for you, but because you will be carrying children, it is less practical than the top suggestions.";
-    }
-
-    if (rec.id === "ebike" && answers.age === "age14to16") {
-      return "An e-bike is still strongly suggested, but your age means only Class 1 e-bike options are appropriate.";
-    }
-
-    return `${rec.label} is strongly suggested because it fits several of your answers, even if it is not one of the top two matches.`;
+  if (positive) {
+    return priority.label === "Top suggestion" || priority.label === "Secondary suggestion"
+      ? `${rec.label} stands out because ${positive}.`
+      : `${rec.label} could work because ${positive}.`;
   }
 
-  if (priority.label === "Suggested") {
-    if (rec.id === "lowSpeedPoweredMicromobility") {
-      return "These devices may work for you because you selected short trips, indoor storage, and lower-stress routes.";
-    }
-
-    if (rec.id === "bikeshare" && answers.transitLink === "yes") {
-      return "Bikeshare is suggested because it can support a transit-linked trip, but it may be less convenient than owning a device.";
-    }
-
-    return `${rec.label} is suggested because it matches part of your profile, but it is a weaker fit than the higher-ranked options.`;
+  if (caution) {
+    return `${rec.label} is still visible here, but ${caution}.`;
   }
 
-  if (rec.id === "bikeshare" && answers.carryChildren === "yes") {
-    return "Bikeshare is not suggested because carrying children makes shared public bikes a poor fit for your needs.";
+  if (priority.label === "Top suggestion" || priority.label === "Secondary suggestion") {
+    return `${rec.label} stands out because it matches the trip needs and preferences you selected.`;
   }
 
-  if (rec.id === "lowSpeedPoweredMicromobility") {
-    return "These devices are not suggested because they work best only for short indoor-stored trips on smoother, lower-stress routes.";
-  }
-
-  if (rec.id === "escooter" && answers.routeType === "regularRoads") {
-    return "An e-scooter is not suggested because regular roads with more traffic are a weaker match for this device type.";
-  }
-
-  return `${rec.label} is not suggested because other device types better match the needs and constraints you selected.`;
+  return `${rec.label} may still work, but it is a less direct fit than the higher-ranked options.`;
 }
 
 function renderAllDeviceResultsPanel(allRecommendations, answers) {
