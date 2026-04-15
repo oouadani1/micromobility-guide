@@ -387,7 +387,7 @@ const DEVICE_CONTENT = {
       storageNotMajorConcern: ""
     },
     nextSteps: [
-      { label: "Learn about small e-devices (coming soon)", url: "https://canva.link/60attcpjzby1bki" }
+      { label: "Learn about small e-devices", url: "https://canva.link/60attcpjzby1bki" }
     ]
   },
   cargoBike: {
@@ -643,7 +643,7 @@ const DEVICE_CONTENT = {
       storageNotMajorConcern: ""
     },    
     nextSteps: [
-      { label: "Learn more about adaptive mobility options (coming soon)", url: "/micromobility-hub/device-library/adaptive-options.html" },
+      { label: "Learn more about adaptive mobility options", url: "https://canva.link/nj039whwwsd7466" },
       { label: "Join an accessible cycling event", url: "https://www.mass.gov/accessible-cycling" },
       { label: "Learn more about the Department of Conservation and Recreation's (DCR) Universal Access Program", url: "https://www.mass.gov/orgs/universal-access-program" },
       { label: "Check out DCR's adaptive cycling equipment list", url: "https://www.mass.gov/info-details/adaptive-cycling-equipment" },
