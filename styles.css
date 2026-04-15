@@ -15,10 +15,13 @@ body {
   --text-blue-aa: #14558F;
   --text-green-aa: #1e853f;
   --button-green-aa: #1e853f;
+  --app-max-width: 960px;
+  --app-shell-min-height-desktop: 1500px;
+  --app-shell-min-height-tablet: 1360px;
 }
 
 .container {
-  width: min(100%, 960px);
+  width: min(100%, var(--app-max-width));
   min-height: 100svh;
   margin: 0 auto;
   padding: 20px;
@@ -39,7 +42,9 @@ body {
     0 2px 8px rgba(255, 255, 255, 0.25) inset;
   box-sizing: border-box;
   width: 100%;
-  min-height: calc(100svh - 40px);
+  min-height: max(calc(100svh - 40px), var(--app-shell-min-height-desktop));
+  display: flex;
+  flex-direction: column;
 }
 
 .eyebrow {
@@ -114,8 +119,18 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+button:hover,
+button:focus-visible {
   opacity: 0.95;
+}
+
+button:focus-visible,
+.next-step-item a:focus-visible,
+.all-results-panel summary:focus-visible,
+.results-arrow-btn:focus-visible,
+.results-print-btn:focus-visible {
+  outline: 3px solid var(--text-blue-aa);
+  outline-offset: 3px;
 }
 
 .form-nav {
@@ -425,6 +440,8 @@ button.hidden {
 
 .site-branding {
   justify-content: space-between;
+  margin-top: auto;
+  padding-top: 24px;
 }
 
 .form-nav {
@@ -504,6 +521,7 @@ button.hidden {
   .card {
     padding: 16px 14px;
     border-radius: 10px;
+    min-height: calc(100svh - 16px);
   }
 
   h1 {
@@ -613,6 +631,11 @@ button.hidden {
   .footer-note {
     font-size: 13px;
   }
+
+  .site-branding {
+    margin-top: 20px;
+    padding-top: 0;
+  }
 }
 
 .option-grid {
@@ -713,6 +736,40 @@ button.hidden {
   outline: 3px solid #14558F;
   outline-offset: 3px;
   border-color: #14558F;
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .container {
+    width: 100%;
+    padding: 16px;
+  }
+
+  .card {
+    padding: 28px 24px;
+    min-height: max(calc(100svh - 32px), var(--app-shell-min-height-tablet));
+  }
+
+  .question-label,
+  .results-intro-heading {
+    font-size: 22px;
+  }
+
+  .recommendation-card {
+    padding: 28px 24px;
+  }
+
+  .recommendation-title {
+    font-size: 28px;
+  }
+
+  .option-card {
+    min-height: 104px;
+    padding: 22px 18px;
+  }
+
+  .option-card-text {
+    font-size: 17px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -848,6 +905,73 @@ button.hidden {
 
 .print-summary {
   display: none;
+}
+
+.question-audit {
+  margin-top: 16px;
+}
+
+.question-audit-title {
+  margin: 0 0 12px;
+  font-size: 24px;
+  line-height: 1.25;
+  color: var(--text-blue-aa);
+}
+
+.question-audit-intro {
+  margin: 0 0 16px;
+  line-height: 1.5;
+}
+
+.question-audit-pathway {
+  margin-top: 24px;
+  padding: 18px 20px;
+  border: 1px solid #dbe3f3;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.62);
+}
+
+.question-audit-pathway-title {
+  margin: 0 0 10px;
+  color: var(--text-green-aa);
+  font-size: 22px;
+}
+
+.question-audit-variant-title {
+  margin: 18px 0 10px;
+  font-size: 18px;
+  color: #222;
+}
+
+.question-audit-list {
+  margin: 0;
+  padding-left: 22px;
+}
+
+.question-audit-item {
+  margin-bottom: 16px;
+}
+
+.question-audit-question {
+  margin: 0 0 6px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.question-audit-options {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.question-audit-option {
+  margin-bottom: 6px;
+}
+
+.question-audit-note {
+  margin: 6px 0 0;
+  font-size: 14px;
+  line-height: 1.45;
+  color: #555;
 }
 
 @media (max-width: 768px) {
@@ -1032,6 +1156,54 @@ button.hidden {
 
   .print-summary {
     display: block !important;
+  }
+
+  body.question-audit-mode .eyebrow,
+  body.question-audit-mode #heroTitle,
+  body.question-audit-mode #introText,
+  body.question-audit-mode #progress,
+  body.question-audit-mode #formStep,
+  body.question-audit-mode #formNav,
+  body.question-audit-mode .footer-branding {
+    display: none !important;
+  }
+
+  body.question-audit-mode #result {
+    display: block !important;
+    margin-top: 0;
+  }
+
+  body.question-audit-mode .question-audit {
+    margin-top: 0;
+  }
+
+  body.question-audit-mode .question-audit-pathway {
+    break-inside: avoid;
+    margin-top: 14px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: #ffffff;
+  }
+
+  body.question-audit-mode .question-audit-title {
+    font-size: 15pt;
+  }
+
+  body.question-audit-mode .question-audit-pathway-title {
+    font-size: 12pt;
+  }
+
+  body.question-audit-mode .question-audit-variant-title {
+    font-size: 10pt;
+  }
+
+  body.question-audit-mode .question-audit-question {
+    font-size: 9.25pt;
+  }
+
+  body.question-audit-mode .question-audit-note,
+  body.question-audit-mode .question-audit-option {
+    font-size: 8.75pt;
   }
 
   .print-density-default {
