@@ -3148,6 +3148,7 @@ function renderQuestion() {
   const nextBtn = document.getElementById("nextBtn");
   const intro = document.getElementById("introText");
   const heroTitle = document.getElementById("heroTitle");
+  const introDescriptionId = APP_STATE.currentStep === 0 ? "introText" : "";
 
   if (!formStep || !progress || !backBtn || !nextBtn) return;
 
@@ -3178,7 +3179,7 @@ progress.textContent = "";
     const usesRouteImages = questionId === "routeType";
     formStep.innerHTML = `
       <div class="question-block">
-        <fieldset class="question-fieldset">
+        <fieldset class="question-fieldset" ${introDescriptionId ? `aria-describedby="${introDescriptionId}"` : ""}>
           <legend class="question-label">${renderedLabel}</legend>
           <div class="option-grid option-grid-${Math.min(renderedOptions.length, 4)}">
             ${renderedOptions.map((option) => `
@@ -3261,6 +3262,7 @@ progress.textContent = "";
         step="1"
         value="${savedValue}"
         placeholder="${isSpanishLocale() ? getUiText("agePlaceholder") : "Enter age"}"
+        ${introDescriptionId ? `aria-describedby="${introDescriptionId}"` : ""}
         style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #d0d0d0; font-size: 15px; box-sizing: border-box;"
       />
       <div id="stepError" class="error-message hidden" style="margin-top: 8px;"></div>
