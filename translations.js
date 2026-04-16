@@ -59,8 +59,8 @@ window.MICROMOBILITY_TRANSLATIONS = {
         shortLabel: "Scooter eléctrico"
       },
       lowSpeedPoweredMicromobility: {
-        label: "Dispositivos eléctricos ligeros",
-        shortLabel: "Dispositivos ligeros"
+        label: "Dispositivos eléctricos compactos",
+        shortLabel: "Dispositivos compactos"
       },
       cargoBike: {
         label: "Bicicleta de carga",
@@ -71,8 +71,8 @@ window.MICROMOBILITY_TRANSLATIONS = {
         shortLabel: "Bicicletas compartidas"
       },
       adaptiveMobility: {
-        label: "Opciones de movilidad adaptada",
-        shortLabel: "Movilidad adaptada"
+        label: "Ciclos adaptados",
+        shortLabel: "Ciclos adaptados"
       },
       humanPoweredYouth: {
         label: "Opciones de movilidad según la edad",
@@ -196,9 +196,9 @@ window.MICROMOBILITY_TRANSLATIONS = {
       bicycle: "Imagen de una bicicleta tradicional",
       ebike: "Imagen de una bicicleta eléctrica",
       escooter: "Imagen de un scooter eléctrico",
-      lowSpeedPoweredMicromobility: "Imagen de dispositivos eléctricos ligeros",
+      lowSpeedPoweredMicromobility: "Imagen de dispositivos eléctricos compactos",
       cargoBike: "Imagen de una bicicleta de carga",
-      adaptiveMobility: "Imagen de opciones de movilidad adaptada",
+      adaptiveMobility: "Imagen de ciclos adaptados",
       bikeshare: "Imagen de bicicletas compartidas",
       humanPoweredYouth: "Imagen de opciones de movilidad para niños y jóvenes"
     }
@@ -212,13 +212,13 @@ window.MICROMOBILITY_TRANSLATIONS = {
       escooter:
         "Un scooter eléctrico resulta práctico para viajes rápidos, especialmente cuando importan el almacenamiento compacto y la conexión con el transporte público. Suele funcionar mejor en rutas lisas, ciclovías y otros entornos de menor estrés para circular.",
       lowSpeedPoweredMicromobility:
-        "Los dispositivos eléctricos ligeros pueden ir bien en trayectos cortos porque son compactos, portátiles y fáciles de guardar. Suelen rendir mejor en rutas más lisas, ciclovías y caminos pavimentados en parques, y también pueden atraer a quienes buscan una opción liviana y divertida.",
+        "Los dispositivos eléctricos compactos pueden ir bien en trayectos cortos porque son portátiles y fáciles de guardar. Suelen rendir mejor en rutas más lisas, ciclovías y caminos pavimentados en parques, y también pueden atraer a quienes buscan una opción liviana y práctica.",
       cargoBike:
         "Una bicicleta de carga es una opción fuerte cuando una bicicleta tradicional no alcanza para llevar todo lo necesario. Es especialmente útil para llevar compras, suministros, niños o cargas más pesadas del día a día, y también puede servir para trabajo y entregas según la configuración.",
       bikeshare:
         "Las bicicletas compartidas resultan muy útiles cuando la flexibilidad importa más que tener un dispositivo propio. Suelen funcionar bien para trayectos cortos, mandados y conexiones con el transporte público, especialmente en lugares donde las estaciones son fáciles de encontrar.",
       adaptiveMobility:
-        "Un dispositivo de movilidad adaptada puede ser una muy buena opción cuando la comodidad, la estabilidad o el apoyo físico son especialmente importantes. Distintos diseños adaptados pueden servir para transporte, recreación o necesidades específicas de movilidad, según la configuración.",
+        "Un ciclo adaptado puede ser una muy buena opción cuando la comodidad, la estabilidad o el apoyo físico son especialmente importantes. Distintos diseños adaptados pueden servir para transporte, recreación o necesidades específicas de movilidad, según la configuración.",
       humanPoweredYouth:
         "Las opciones de movilidad adecuadas para la edad pueden ayudar a niños y jóvenes a ganar confianza y habilidades con el tiempo. Suelen ser adecuadas para recreación, práctica y trayectos cortos en parques, caminos y otros entornos de menor estrés."
     }
@@ -231,7 +231,7 @@ window.MICROMOBILITY_TRANSLATIONS = {
         whyConditional: {
           recreation: "Es especialmente buena para recreación y ejercicio.",
           transitLinkYes: "También funciona bien para conectar con el transporte público.",
-          carryChildrenYes: "Con los accesorios adecuados, puede servir para llevar a un niño o niña.",
+          carryChildrenYes: "Con la configuración adecuada para llevar niños, puede funcionar para transportar a un niño o niña.",
           routeTrails: "Algunos tipos de bicicletas, como las de montaña, funcionan muy bien en senderos y caminos sin pavimentar."
         },
         considerBase: [
@@ -241,7 +241,7 @@ window.MICROMOBILITY_TRANSLATIONS = {
           transitLinkYes:
             "Revisa las reglas de la MBTA o de tu autoridad local de tránsito regional (RTA) antes de llevar una bicicleta en autobús o tren, y busca opciones de estacionamiento o cobertizos para bicicletas cerca de la estación cuando existan. Consulta Próximos pasos para más información.",
           carryChildrenYes:
-            "Si se van a llevar niños, conviene considerar accesorios como un asiento infantil, un remolque o un accesorio de bicicleta de arrastre. Asegúrate de que usen casco bien ajustado y que vayan sujetos en asientos o arneses adecuados.",
+            "Si llevar niños es una prioridad, la mejor opción dependerá de la edad del niño o niña y del tipo de bicicleta. Puede convenir un asiento infantil, un remolque o una bicicleta de arrastre. Asegúrate de que usen casco bien ajustado y que vayan sujetos en asientos o arneses adecuados.",
           distance10plus:
             "Para viajes largos, un asiento cómodo y una bicicleta bien ajustada pueden hacer el recorrido más agradable.",
           storageOutdoor:
@@ -328,7 +328,7 @@ window.MICROMOBILITY_TRANSLATIONS = {
       lowSpeedPoweredMicromobility: {
         cost: "$300-$2,500",
         whyBase:
-          "Los dispositivos eléctricos ligeros pueden ir bien en viajes cortos por su precio, su tamaño compacto y lo fáciles que son de guardar.",
+          "Los dispositivos eléctricos compactos pueden ir bien en viajes cortos por su precio, su tamaño compacto y lo fáciles que son de guardar.",
         whyConditional: {
           recreation:
             "Usarlos para recreación puede ofrecer ejercicio de bajo impacto, porque requieren fuerza en piernas y torso para mantener el equilibrio y maniobrar.",
@@ -338,7 +338,7 @@ window.MICROMOBILITY_TRANSLATIONS = {
           storageIndoor: "Además, por su tamaño compacto, guardarlos adentro suele ser fácil."
         },
         considerBase: [
-          "Los dispositivos eléctricos ligeros requieren buena fuerza en piernas y torso para mantener el equilibrio y maniobrar con seguridad."
+          "Los dispositivos eléctricos compactos requieren buena fuerza en piernas y torso para mantener el equilibrio y maniobrar con seguridad."
         ],
         considerConditional: {
           transport:
@@ -348,10 +348,10 @@ window.MICROMOBILITY_TRANSLATIONS = {
           routeTrails:
             "Revisa las reglas locales del parque o sendero antes de comprar uno, ya que algunos municipios no los permiten.",
           storageIndoor:
-            "Sigue prácticas seguras de carga si el dispositivo eléctrico ligero se guardará adentro para reducir el riesgo de sobrecalentamiento y fuego. Consulta Próximos pasos para más información sobre carga segura."
+            "Sigue prácticas seguras de carga si el dispositivo eléctrico compacto se guardará adentro para reducir el riesgo de sobrecalentamiento y fuego. Consulta Próximos pasos para más información sobre carga segura."
         },
         nextSteps: [
-          { label: "Aprende más sobre dispositivos eléctricos ligeros", url: "https://canva.link/60attcpjzby1bki" }
+          { label: "Aprende más sobre dispositivos eléctricos compactos", url: "https://canva.link/60attcpjzby1bki" }
         ]
       },
       cargoBike: {
@@ -425,7 +425,7 @@ window.MICROMOBILITY_TRANSLATIONS = {
       },
       adaptiveMobility: {
         cost: "$2,500-$10,000",
-        whyBase: "Un dispositivo de movilidad adaptada puede ser una opción versátil para moverse.",
+        whyBase: "Un ciclo adaptado puede ser una opción versátil para moverse.",
         whyConditional: {
           adaptiveNeedYes:
             "Es una muy buena opción cuando hay una discapacidad o una necesidad de apoyo para la movilidad, porque estos dispositivos pueden adaptarse a distintas necesidades, niveles de comodidad y usos.",
@@ -435,7 +435,7 @@ window.MICROMOBILITY_TRANSLATIONS = {
             "Además, muchos tienen una posición sentada cómoda o reclinada, lo que puede hacerlos una buena opción para recreación y ejercicio suave."
         },
         considerBase: [
-          "Los dispositivos de movilidad adaptada vienen en distintos estilos. Vale la pena explorar bicicletas reclinadas, triciclos y ciclos impulsados con las manos."
+          "Los ciclos adaptados vienen en distintos estilos. Vale la pena explorar bicicletas reclinadas, triciclos y ciclos impulsados con las manos."
         ],
         considerConditional: {
           age14to16:
@@ -445,12 +445,12 @@ window.MICROMOBILITY_TRANSLATIONS = {
           carryChildrenYes:
             "Si hay una discapacidad y además se llevarán niños, vale la pena considerar un triciclo de carga eléctrico, que puede ofrecer estabilidad, seguridad y espacio. Asegúrate de que los niños usen cascos bien ajustados y que vayan sujetos en asientos o arneses adecuados.",
           storageIndoor:
-            "Los dispositivos de movilidad adaptada no suelen ser ideales para guardarlos adentro por su peso y largo. Si se guardarán en un cobertizo o garaje y tienen motor eléctrico, sigue prácticas seguras de carga para reducir el riesgo de sobrecalentamiento y fuego.",
+            "Los ciclos adaptados no suelen ser ideales para guardarlos adentro por su peso y largo. Si se guardarán en un cobertizo o garaje y tienen motor eléctrico, sigue prácticas seguras de carga para reducir el riesgo de sobrecalentamiento y fuego.",
           storageOutdoor:
-            "Si se guardará afuera un dispositivo de movilidad adaptada, quita siempre la batería si la tiene, usa un candado de buena calidad y una cubierta impermeable, y procura dejarlo en un lugar seguro."
+            "Si se guardará afuera un ciclo adaptado, quita siempre la batería si la tiene, usa un candado de buena calidad y una cubierta impermeable, y procura dejarlo en un lugar seguro."
         },
         nextSteps: [
-          { label: "Aprende más sobre opciones de movilidad adaptada", url: "https://canva.link/nj039whwwsd7466" },
+          { label: "Aprende más sobre ciclos adaptados", url: "https://canva.link/nj039whwwsd7466" },
           { label: "Participa en un evento de ciclismo accesible", url: "https://www.mass.gov/accessible-cycling" },
           { label: "Aprende más sobre el Programa de Acceso Universal del DCR", url: "https://www.mass.gov/orgs/universal-access-program" },
           { label: "Consulta la lista de equipos de ciclismo adaptado del DCR", url: "https://www.mass.gov/info-details/adaptive-cycling-equipment" },

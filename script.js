@@ -12,8 +12,8 @@ const OUTPUTS = {
     shortLabel: "E-scooter"
   },
   lowSpeedPoweredMicromobility: {
-    label: "Small e-devices",
-    shortLabel: "Small powered devices"
+    label: "Compact e-devices",
+    shortLabel: "Compact e-devices"
   },
   cargoBike: {
     label: "Cargo bike",
@@ -24,8 +24,8 @@ const OUTPUTS = {
     shortLabel: "Bikeshare"
   },
   adaptiveMobility: {
-    label: "Adaptive mobility options",
-    shortLabel: "Adaptive option"
+    label: "Adaptive cycles",
+    shortLabel: "Adaptive cycles"
   },
     humanPoweredYouth: {
     label: "Age-appropriate mobility options",
@@ -57,9 +57,9 @@ const RECOMMENDATION_IMAGE_ALT_TEXT = {
   bicycle: "Image of a standard bicycle",
   ebike: "Image of an electric bicycle",
   escooter: "Image of an electric scooter",
-  lowSpeedPoweredMicromobility: "Image of small powered micromobility devices",
+  lowSpeedPoweredMicromobility: "Image of compact e-devices",
   cargoBike: "Image of a cargo bike",
-  adaptiveMobility: "Image of adaptive mobility options",
+  adaptiveMobility: "Image of adaptive cycles",
   bikeshare: "Image of bikeshare bicycles",
   humanPoweredYouth: "Image of age-appropriate youth mobility devices"
 };
@@ -88,7 +88,7 @@ const DEVICE_CONTENT = {
       transitLinkYes: "Connecting to transit is also convenient with a bicycle.",
       transitLinkNo: "",
       // Carrying children
-      carryChildrenYes: "With the right add-ons, it can support carrying a child.",
+      carryChildrenYes: "With the right child-carrying setup, it can work for bringing a child.",
       carryChildrenNo: "",
       // Distance
       distanceUnder3: "",
@@ -126,7 +126,7 @@ const DEVICE_CONTENT = {
       transitLinkYes: "Check Massachusetts Bay Transportation Authority (MBTA) or your local Regional Transit Authority (RTA) rules before bringing a bicycle on a bus or train, and look into nearby station bike parking or bike shed options where available. See Next steps for more information.",
       transitLinkNo: "",
       // Carrying children
-      carryChildrenYes: "Since you will carry children, consider add-ons such as a kid seat, a tag-along bike attachment, or a bike trailer. Make sure they wear properly fitted helmets and are secured in appropriate seats or harnesses.",
+      carryChildrenYes: "If carrying a child is a priority, the right setup will depend on the child's age and the bike. Options can include a child seat, trailer, or tag-along attachment. Make sure they wear properly fitted helmets and are secured in appropriate seats or harnesses.",
       carryChildrenNo: "",
       // Distance
       distanceUnder3: "",
@@ -324,7 +324,7 @@ const DEVICE_CONTENT = {
   lowSpeedPoweredMicromobility: {
     image: "low-power-mobility.png",
     cost: "$300-$2,500",
-    whyBase: "Small e-devices can be a great fit for short trips because of their affordability, compact size, and fun factor.",
+    whyBase: "Compact e-devices can be a great fit for short trips because of their affordability, size, and fun factor.",
     // WHY CONDITIONAL
     // Active text slots under current logic: transport, recreation, transitLinkYes, distanceUnder3, routeBikeLanes, routeTrails
     whyConditional: {
@@ -356,12 +356,12 @@ const DEVICE_CONTENT = {
       routeRegularRoads: "",
       routeTrails: "These devices work well on off-road trails or parks if the surfaces are paved and smooth.",
       // Storage
-      storageIndoor: "Relatedly, storing small e-devices indoors is easy due to their compact size.",
+      storageIndoor: "Relatedly, storing compact e-devices indoors is easy due to their size.",
       storageOutdoor: "",
       storageNotMajorConcern: ""
     },
     considerBase: [
-      "Small e-devices require decent leg and core strength to safely balance and maneuver them.",
+      "Compact e-devices require decent leg and core strength to safely balance and maneuver them.",
     ],
     // CONSIDER CONDITIONAL
     // Active text slots under current logic: none
@@ -375,7 +375,7 @@ const DEVICE_CONTENT = {
       adaptiveNeedYes: "",
       adaptiveNeedNo: "",
       // Primary use
-      transport: "While they are ideal for short commutes, you should already be comfortable navigating busy areas on two wheels before considering a small e-device",
+      transport: "While they are ideal for short commutes, you should already be comfortable navigating busy areas on two wheels before considering a compact e-device.",
       deliveries: "",
       recreation: "",
       // Transit link
@@ -392,14 +392,14 @@ const DEVICE_CONTENT = {
       routeBikeLanes: "",
       routeMixedRoads: "",
       routeRegularRoads: "",
-      routeTrails: "Check your local park or trail rules before purchasing a small e-device, as some municipalities do not allow them.",
+      routeTrails: "Check your local park or trail rules before purchasing a compact e-device, as some municipalities do not allow them.",
       // Storage
-      storageIndoor: "Follow safe charging practices when storing small e-device indoors to avoid the risk of thermal runaway and fire. See Next steps for more information on safe charging.",
+      storageIndoor: "Follow safe charging practices when storing a compact e-device indoors to avoid the risk of thermal runaway and fire. See Next steps for more information on safe charging.",
       storageOutdoor: "",
       storageNotMajorConcern: ""
     },
     nextSteps: [
-      { label: "Learn about small e-devices", url: "https://canva.link/60attcpjzby1bki" }
+      { label: "Learn about compact e-devices", url: "https://canva.link/60attcpjzby1bki" }
     ]
   },
   cargoBike: {
@@ -580,7 +580,7 @@ const DEVICE_CONTENT = {
   adaptiveMobility: {
     image: "Adaptive-v3.png",
     cost: "$2,500-$10,000",
-    whyBase: "An adapative mobility device is a versatile transportation option.",
+    whyBase: "An adaptive cycle can be a versatile way to get around.",
     // WHY CONDITIONAL
     // Active text slots under current logic: adaptiveNeedYes, transport, recreation, distanceUnder3, distance3to9, distance10plus, routeBikeLanes, routeRegularRoads, routeTrails
     whyConditional: {
@@ -617,14 +617,14 @@ const DEVICE_CONTENT = {
       storageNotMajorConcern: ""
     },
     considerBase: [
-      "Adaptive mobility devices comes in variety of styles. Consider researching recubmenent bikes, tricycles, and hand-powered cycles.",
+      "Adaptive cycles come in a range of styles. Consider looking into recumbent bikes, tricycles, and hand-powered cycles.",
     ],
     // CONSIDER CONDITIONAL
     // Active text slots under current logic: adaptiveNeedYes
     considerConditional: {
       // Age
       age3to13: "",
-      age14to16: "The best adaptive mobility devices for young people with disabilities are highly adjustable for growth and comfort, have a parking brake to allow for safe rest, and are designed to enable a caregiver to steer or help with balance if needed.",
+      age14to16: "The best adaptive cycles for young people with disabilities are highly adjustable for growth and comfort, have a parking brake to allow for safe rest, and are designed to let a caregiver steer or help with balance if needed.",
       age17to49: "",
       age50plus: "",
       // Adaptive need
@@ -650,12 +650,12 @@ const DEVICE_CONTENT = {
       routeRegularRoads: "",
       routeTrails: "",
       // Storage
-      storageIndoor: "Adaptive mobility devices are not ideal to store indoors due to their heavy weight and length. If you are storing them inside a shed or garage and they have an electric motor, follow safe charging practices to avoid the risk of thermal runaway and fire.",
-      storageOutdoor: "If you are storing an adapative mobility device outdoors, always remove the battery (if it has one), consider a high-quality lock and weatherproof tarp, and ensure it is parked in a safe place.",
+      storageIndoor: "Adaptive cycles are not ideal to store indoors due to their weight and length. If you are storing one inside a shed or garage and it has an electric motor, follow safe charging practices to avoid the risk of thermal runaway and fire.",
+      storageOutdoor: "If you are storing an adaptive cycle outdoors, always remove the battery if it has one, use a high-quality lock and weatherproof cover, and make sure it is parked in a safe place.",
       storageNotMajorConcern: ""
     },    
     nextSteps: [
-      { label: "Learn more about adaptive mobility options", url: "https://canva.link/nj039whwwsd7466" },
+      { label: "Learn more about adaptive cycles", url: "https://canva.link/nj039whwwsd7466" },
       { label: "Join an accessible cycling event", url: "https://www.mass.gov/accessible-cycling" },
       { label: "Learn more about the Department of Conservation and Recreation's (DCR) Universal Access Program", url: "https://www.mass.gov/orgs/universal-access-program" },
       { label: "Check out DCR's adaptive cycling equipment list", url: "https://www.mass.gov/info-details/adaptive-cycling-equipment" },
@@ -760,13 +760,13 @@ const EXPLORE_REASON_TEXT = {
   escooter:
     "An e-scooter can be a practical option for quick trips, especially when compact storage and transit connections matter. It tends to work best on smooth routes, bike lanes, and other lower-stress riding environments.",
   lowSpeedPoweredMicromobility:
-    "Small e-devices can be a good fit for short trips because they are compact, portable, and easy to store. They tend to work best on smoother routes, bike lanes, and paved park paths, and can also appeal to riders looking for a fun, lightweight option.",
+    "Compact e-devices can be a good fit for short trips because they are portable and easy to store. They tend to work best on smoother routes, bike lanes, and paved park paths, and can also appeal to riders looking for a fun, lightweight option.",
   cargoBike:
     "A cargo bike can be a strong option when a standard bike may not carry enough. It is especially useful for hauling groceries, supplies, children, or heavier everyday loads, and can also support delivery use depending on the setup.",
   bikeshare:
     "Bikeshare can be a strong option if flexibility matters more than ownership. It often works well for short trips, errands, and transit connections, especially in places where bike docks are easy to find.",
   adaptiveMobility:
-    "An adaptive mobility device can be a strong option when comfort, stability, or physical support are especially important. Different adaptive designs can work for transportation, recreation, or rider-specific mobility needs depending on the setup.",
+    "An adaptive cycle can be a strong option when comfort, stability, or physical support are especially important. Different adaptive designs can work for transportation, recreation, or rider-specific mobility needs depending on the setup.",
   humanPoweredYouth:
     "Age-appropriate mobility options can help younger riders build confidence and skills over time. These options are often a good fit for recreation, practice, and shorter trips in parks, paths, and other lower-stress riding areas."
 };
@@ -3102,7 +3102,7 @@ function updateLandingLanguageToggle() {
   const enBtn = document.getElementById("langEnBtn");
   const esBtn = document.getElementById("langEsBtn");
   const landingControls = document.getElementById("landingControls");
-  const showLandingControls = APP_STATE.currentStep === 0;
+  const showLandingControls = APP_STATE.currentStep === 0 && !APP_STATE.answers.pathway;
 
   if (landingControls) {
     landingControls.classList.toggle("hidden", !showLandingControls);
