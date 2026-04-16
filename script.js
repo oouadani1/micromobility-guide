@@ -1728,7 +1728,7 @@ function getAllResultsReason(rec, answers, priority) {
   }
 
   if (caution) {
-    return `${rec.label} is still visible here, but ${caution}.`;
+    return `${rec.label} is still suggested here, but ${caution}.`;
   }
 
   if (priority.label === "Top suggestion" || priority.label === "Secondary suggestion") {
