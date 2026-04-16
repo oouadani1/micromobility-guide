@@ -44,7 +44,7 @@ const LANDING_PAGE_COPY = {
   es: {
     heroTitle: "Encuentra un dispositivo de micromovilidad que se adapte a tus necesidades.",
     introText:
-      "Los dispositivos de micromovilidad, como bicicletas y scooters eléctricos, son formas pequeñas, asequibles y flexibles de moverte. Responde algunas preguntas para ver qué dispositivos de micromovilidad podrían funcionar bien para ti."
+      "Los dispositivos de micromovilidad, como bicicletas y scooters eléctricos, son formas simples, accesibles y flexibles de moverse. Responde algunas preguntas para ver qué opciones podrían funcionarte."
   }
 };
 const RESULTS_INTRO_TEXT = "Based on your responses, these micromobility options may be a good fit.";
@@ -1270,8 +1270,8 @@ function getExploreReasonText(recId) {
 function getAgeReferenceText(pathway) {
   if (isSpanishLocale()) {
     if (pathway === "myself") return "tu edad";
-    if (pathway === "child") return "la edad del nino o la nina";
-    return "la edad de la persona que lo usara";
+    if (pathway === "child") return "la edad del niño o la niña";
+    return "la edad de quien lo usará";
   }
 
   if (pathway === "myself") return "your age";
@@ -1752,93 +1752,93 @@ function getAllResultsPositiveFactor(recId, answers) {
     switch (recId) {
       case "bicycle":
         if (answers.transitLink === "yes") {
-          return "todavia puede funcionar razonablemente bien en un viaje que incluye transporte publico";
+          return "todavía encaja razonablemente bien en un viaje que incluye transporte público";
         }
         if (answers.carryChildren === "yes") {
-          return "puede servir para llevar ninos con los accesorios adecuados";
+          return "puede servir para llevar niños con los accesorios adecuados";
         }
         if (answers.primaryUse === "recreation" || answers.routeType === "trails") {
-          return "encaja bien con el tipo de recorrido que se describio";
+          return "encaja bien con el tipo de recorrido que se describió";
         }
         if (answers.distance === "under3" || answers.distance === "3to9") {
-          return "es una opcion versatil para los viajes diarios y los trayectos cortos";
+          return "es una opción versátil para los viajes diarios y los trayectos cortos";
         }
-        return "es una opcion versatil para los viajes diarios";
+        return "es una opción versátil para los viajes diarios";
 
       case "ebike":
         if (answers.distance === "10plus" || answers.distance === "3to9") {
-          return "la asistencia electrica encaja bien con la distancia del viaje";
+          return "la asistencia eléctrica encaja bien con la distancia del viaje";
         }
         if (answers.routeType === "regularRoads") {
-          return "puede manejar mejor recorridos largos o calles mas exigentes que los dispositivos mas livianos";
+          return "responde mejor en recorridos largos o en calles más exigentes que los dispositivos más livianos";
         }
         if (answers.carryChildren === "yes") {
-          return "algunos modelos pueden servir para llevar ninos o carga extra";
+          return "algunos modelos pueden servir para llevar niños o carga extra";
         }
         if (answers.transitLink === "yes") {
-          return "todavia puede apoyar un viaje que incluye transporte publico si hace falta";
+          return "todavía puede apoyar un viaje que incluye transporte público si hace falta";
         }
-        return "reduce el esfuerzo fisico en los viajes diarios";
+        return "reduce el esfuerzo físico en los viajes diarios";
 
       case "escooter":
         if (answers.transitLink === "yes") {
-          return "su tamano plegable puede funcionar bien con una conexion al transporte publico";
+          return "su tamaño plegable puede funcionar bien con una conexión al transporte público";
         }
         if (answers.distance === "under3" && answers.routeType === "bikeLanes") {
-          return "la distancia corta del viaje y la ruta de menor estres encajan bien con esta opcion";
+          return "la distancia corta del viaje y la ruta de menor estrés encajan bien con esta opción";
         }
         if (answers.storage === "indoor") {
-          return "su tamano compacto hace mas facil guardarlo adentro";
+          return "su tamaño compacto hace más fácil guardarlo adentro";
         }
-        return "puede ser practico para viajes cortos en rutas mas lisas";
+        return "resulta práctico para viajes cortos en rutas más lisas";
 
       case "lowSpeedPoweredMicromobility":
         if (answers.distance === "under3" && answers.storage === "indoor") {
           return "el viaje corto y la necesidad de guardarlo adentro encajan bien con estos dispositivos compactos";
         }
         if (answers.routeType === "bikeLanes" || answers.routeType === "trails") {
-          return "estos dispositivos funcionan mejor en el tipo de ruta de menor estres que se selecciono";
+          return "estos dispositivos funcionan mejor en el tipo de ruta de menor estrés que se seleccionó";
         }
         if (answers.transitLink === "yes") {
-          return "su portabilidad puede ayudar cuando el transporte publico forma parte del viaje";
+          return "su portabilidad ayuda cuando el transporte público forma parte del viaje";
         }
-        return "su tamano compacto puede hacer que los trayectos cortos se sientan simples y flexibles";
+        return "su tamaño compacto puede hacer que los trayectos cortos se sientan simples y flexibles";
 
       case "cargoBike":
         if (answers.carryChildren === "yes") {
-          return "su mayor capacidad de carga encaja con la necesidad de llevar ninos";
+          return "su mayor capacidad de carga encaja con la necesidad de llevar niños";
         }
         if (answers.primaryUse === "deliveries") {
-          return "su capacidad mayor funciona bien para entregas o cargas pesadas";
+          return "su capacidad de carga funciona bien para entregas o cargas pesadas";
         }
         if (answers.primaryUse === "transport") {
-          return "puede manejar mandados, compras y carga cotidiana mejor que la mayoria de los dispositivos";
+          return "resuelve mandados, compras y carga cotidiana mejor que la mayoría de los dispositivos";
         }
-        return "ofrece mucha mas capacidad de carga que una bicicleta tradicional";
+        return "ofrece mucha más capacidad de carga que una bicicleta tradicional";
 
       case "bikeshare":
         if (answers.storage === "outdoor") {
-          return "no hace falta guardarlas afuera personalmente";
+          return "no hace falta guardarlas afuera por cuenta propia";
         }
         if (answers.transitLink === "yes") {
-          return "pueden funcionar bien para conexiones con transporte publico y viajes de ida";
+          return "funcionan bien para conexiones con transporte público y viajes de ida";
         }
         if (answers.primaryUse === "transport") {
-          return "pueden ser utiles para viajes diarios sin comprometerse a tener un dispositivo propio";
+          return "resultan útiles para viajes diarios sin comprometerse a tener un dispositivo propio";
         }
-        return "pueden ser utiles cuando la flexibilidad importa mas que tener un dispositivo propio";
+        return "resultan útiles cuando la flexibilidad importa más que tener un dispositivo propio";
 
       case "adaptiveMobility":
         if (answers.adaptiveNeed === "yes") {
-          return "suele ofrecer mas apoyo para la movilidad que la mayoria de los otros tipos de dispositivos";
+          return "suele ofrecer más apoyo para la movilidad que la mayoría de los otros tipos de dispositivos";
         }
         if (answers.primaryUse === "recreation") {
-          return "puede ofrecer una posicion mas estable y comoda para circular";
+          return "puede ofrecer una posición más estable y cómoda para circular";
         }
         if (answers.primaryUse === "transport") {
-          return "puede ser una opcion de transporte estable con la configuracion adecuada";
+          return "puede ser una opción de transporte estable con la configuración adecuada";
         }
-        return "puede ofrecer mas estabilidad y comodidad que los dispositivos estandar de dos ruedas";
+        return "puede ofrecer más estabilidad y comodidad que los dispositivos estándar de dos ruedas";
 
       case "humanPoweredYouth":
         if (answers.distance === "under3") {
@@ -1847,7 +1847,7 @@ function getAllResultsPositiveFactor(recId, answers) {
         return `${getAgeReferenceText(answers.pathway)} apunta a opciones no motorizadas adecuadas para esta etapa`;
 
       default:
-        return "coincide con parte del perfil de viaje que se describio";
+        return "coincide con parte del perfil de viaje que se describió";
     }
   }
 
@@ -1960,99 +1960,99 @@ function getAllResultsCautionFactor(recId, answers) {
     switch (recId) {
       case "bicycle":
         if (answers.primaryUse === "deliveries") {
-          return "los viajes de trabajo o entrega mas exigentes suelen ser mas faciles con mas capacidad de carga o asistencia electrica";
+          return "los viajes de trabajo o entrega más exigentes suelen ser más fáciles con más capacidad de carga o asistencia eléctrica";
         }
         if (answers.carryChildren === "yes") {
-          return "llevar ninos suele ser mas facil en una bicicleta de carga o en una bicicleta electrica pensada para eso";
+          return "llevar niños suele ser más fácil en una bicicleta de carga o en una bicicleta eléctrica pensada para eso";
         }
         if (answers.distance === "10plus") {
-          return "las distancias mas largas pueden requerir mas esfuerzo sin asistencia electrica";
+          return "las distancias más largas pueden requerir más esfuerzo sin asistencia eléctrica";
         }
         if (answers.routeType === "regularRoads") {
-          return "las calles sin separacion de los autos pueden sentirse mas exigentes que las rutas de menor estres";
+          return "las calles sin separación del tráfico pueden sentirse más exigentes que las rutas de menor estrés";
         }
-        return "requiere mas esfuerzo fisico que las opciones electricas";
+        return "requiere más esfuerzo físico que las opciones eléctricas";
 
       case "ebike":
         if (answers.age === "age14to16") {
           return `${getAgeReferenceText(answers.pathway)} reduce las opciones apropiadas a modelos de Clase 1`;
         }
         if (answers.transitLink === "yes") {
-          return "su peso puede hacer que las conexiones con el transporte publico sean menos practicas que con dispositivos plegables mas pequenos";
+          return "su peso puede hacer que las conexiones con el transporte público sean menos prácticas que con dispositivos plegables más pequeños";
         }
         if (answers.storage === "indoor") {
-          return "la carga en interiores y la seguridad de la bateria requieren mas planificacion";
+          return "la carga en interiores y la seguridad de la batería requieren más planificación";
         }
-        return "cuesta mas y requiere mas mantenimiento que una bicicleta tradicional";
+        return "cuesta más y requiere más mantenimiento que una bicicleta tradicional";
 
       case "escooter":
         if (answers.routeType === "regularRoads" || answers.routeType === "mixedRoads") {
-          return "se siente menos comodo en calles mas irregulares o con mas trafico";
+          return "se siente menos cómodo en calles más irregulares o con más tráfico";
         }
         if (answers.distance === "10plus") {
-          return "es menos ideal para viajes largos donde importan mas la comodidad y la autonomia";
+          return "es menos ideal para viajes largos donde importan más la comodidad y la autonomía";
         }
         if (answers.carryChildren === "yes") {
-          return "no esta disenado para llevar ninos";
+          return "no está diseñado para llevar niños";
         }
-        return "sus ruedas pequenas y la posicion de pie limitan la comodidad en superficies mas irregulares";
+        return "sus ruedas pequeñas y la posición de pie limitan la comodidad en superficies más irregulares";
 
       case "lowSpeedPoweredMicromobility":
         if (answers.routeType !== "bikeLanes" && answers.routeType !== "trails") {
-          return "estos dispositivos funcionan mejor en rutas mas lisas y de menor estres";
+          return "estos dispositivos funcionan mejor en rutas más lisas y de menor estrés";
         }
         if (answers.distance === "3to9" || answers.distance === "10plus") {
-          return "suelen ser una opcion mas debil cuando los viajes se vuelven mas largos";
+          return "suelen ser una opción más débil cuando los viajes se vuelven más largos";
         }
         if (answers.storage !== "indoor") {
-          return "tienen mas sentido cuando pueden guardarse adentro con facilidad";
+          return "tienen más sentido cuando pueden guardarse adentro con facilidad";
         }
-        return "suelen ser menos versatiles que las bicicletas para los viajes cotidianos";
+        return "suelen ser menos versátiles que las bicicletas para los viajes cotidianos";
 
       case "cargoBike":
         if (answers.transitLink === "yes") {
-          return "su tamano mas pesado y voluminoso dificulta las conexiones con el transporte publico";
+          return "su tamaño más pesado y voluminoso dificulta las conexiones con el transporte público";
         }
         if (answers.storage === "indoor") {
-          return "su tamano mas grande puede hacer mas dificil guardarla adentro";
+          return "su tamaño más grande puede hacer más difícil guardarla adentro";
         }
         if (answers.distance === "10plus") {
-          return "los viajes largos suelen ser mas faciles en un modelo electrico de carga que en uno sin asistencia";
+          return "los viajes largos suelen ser más fáciles en un modelo eléctrico de carga que en uno sin asistencia";
         }
-        return "su tamano y peso la hacen mas aparatosa que las opciones mas simples";
+        return "su tamaño y peso la hacen más aparatosa que las opciones más simples";
 
       case "bikeshare":
         if (answers.adaptiveNeed === "yes") {
           return "las bicicletas compartidas se adaptan menos a necesidades de apoyo para la movilidad";
         }
         if (answers.carryChildren === "yes") {
-          return "las bicicletas publicas compartidas no suelen ser una opcion practica para llevar ninos";
+          return "las bicicletas públicas compartidas no suelen ser una opción práctica para llevar niños";
         }
         if (answers.distance === "10plus") {
-          return "pueden ser menos practicas si se necesitan viajes largos con regularidad";
+          return "pueden ser menos prácticas si se necesitan viajes largos con regularidad";
         }
         return "dependen de la disponibilidad de estaciones y pueden ser menos confiables que tener un dispositivo propio";
 
       case "adaptiveMobility":
         if (answers.storage === "indoor") {
-          return "algunos modelos pueden ser mas grandes y dificiles de guardar adentro";
+          return "algunos modelos pueden ser más grandes y difíciles de guardar adentro";
         }
         if (answers.transitLink === "yes") {
-          return "el tamano y el peso varian mucho, asi que algunos modelos son mas dificiles de combinar con el transporte publico";
+          return "el tamaño y el peso varían mucho, así que algunos modelos son más difíciles de combinar con el transporte público";
         }
         if (answers.adaptiveNeed !== "yes") {
-          return "puede ser una opcion mas especializada y costosa de lo necesario";
+          return "puede ser una opción más especializada y costosa de lo necesario";
         }
-        return "la mejor opcion depende mucho del tipo de apoyo que se necesite";
+        return "la mejor opción depende mucho del tipo de apoyo que se necesite";
 
       case "humanPoweredYouth":
         if (answers.distance === "10plus" || answers.transitLink === "yes") {
-          return "los viajes largos o con conexion al transporte publico pueden ir mas alla de lo que estas opciones sencillas hacen mejor";
+          return "los viajes largos o con conexión al transporte público pueden ir más allá de lo que estas opciones sencillas hacen mejor";
         }
-        return "ofrecen menos velocidad y alcance que las opciones motorizadas mas grandes";
+        return "ofrecen menos velocidad y alcance que las opciones motorizadas más grandes";
 
       default:
-        return "es una opcion menos directa que algunas de las que quedaron mejor ubicadas";
+        return "es una opción menos directa que algunas de las que quedaron mejor ubicadas";
     }
   }
 
@@ -2571,7 +2571,7 @@ function getResultCardConsiderationItems(recId, answers, content) {
         Math.min(bikeLaneIndex, mixedRoadIndex),
         2,
         isSpanishLocale()
-          ? "Por sus ruedas pequenas, la posicion de pie y la falta de suspension, los scooters electricos funcionan mejor en ciclovias y superficies lisas, y pueden sentirse menos comodos en calles irregulares o con mas trafico. Considera un modelo con suspension y llantas para todo clima."
+          ? "Por sus ruedas pequeñas, la posición de pie y la falta de suspensión, los scooters eléctricos funcionan mejor en ciclovías y superficies lisas, y pueden sentirse menos cómodos en calles irregulares o con más tráfico. Considera un modelo con suspensión y llantas para todo clima."
           : "Due to their small wheels, standing position, and lack of suspension, e-scooters perform best on bike lanes and smooth paths, and can feel less comfortable on rougher roads or in heavier traffic. Consider a model with suspesion and all-season tires."
       );
     }
@@ -2599,13 +2599,13 @@ function getConditionalNextSteps(recId, answers) {
 
   if (answers.transitLink === "yes") {
     steps.push({
-      label: isSpanishLocale() ? "Consulta las politicas de micromovilidad de la MBTA" : "Check MBTA micromobility policies",
+      label: isSpanishLocale() ? "Consulta las políticas de micromovilidad de la MBTA" : "Check MBTA micromobility policies",
       url: "https://www.mbta.com/bikes"
     });
     if (recId !== "bikeshare") {
       steps.push({
         label: isSpanishLocale()
-          ? "Aprende a estacionar de forma segura tu dispositivo de micromovilidad en una estacion de la MBTA"
+          ? "Aprende a estacionar de forma segura tu dispositivo de micromovilidad en una estación de la MBTA"
           : "Learn how to safely park your micromobility device at an MBTA station",
         url: "https://bc.mbta.com/riding_the_t/bikes/register/Default.asp"
       });
@@ -2618,7 +2618,7 @@ function getConditionalNextSteps(recId, answers) {
   ) {
     steps.push({
       label: isSpanishLocale()
-        ? "Aprende a cargar de forma segura tu bateria de micromovilidad y a evitar incendios"
+        ? "Aprende a cargar de forma segura tu batería de micromovilidad y a evitar incendios"
         : "Learn how to safely charge your micromobility battery and avoid fires",
       url: "https://www.cpsc.gov/Safety-Education/Safety-Education-Centers/Micromobility-Information-Center"
     });
@@ -3318,7 +3318,7 @@ function saveCurrentStepValue() {
   const questionId = getCurrentQuestionId();
   const question = getLocalizedQuestion(questionId);
 
-  if (!question) return { valid: false, message: isSpanishLocale() ? "No se encontro la pregunta." : "Question not found." };
+  if (!question) return { valid: false, message: isSpanishLocale() ? "No se encontró la pregunta." : "Question not found." };
 
   if (question.type === "radio") {
     const selected = document.querySelector(`input[name="${questionId}"]:checked`);
