@@ -1579,163 +1579,214 @@ function renderPrintInputsSummary(rawAnswers) {
 function getAllResultsPositiveFactor(recId, answers) {
   if (!answers) return "";
 
-  if (recId === "adaptiveMobility" && answers.adaptiveNeed === "yes") {
-    return "it is better suited to mobility support needs than most other device types";
-  }
+  switch (recId) {
+    case "bicycle":
+      if (answers.transitLink === "yes") {
+        return "it can still work reasonably well with a transit-linked trip";
+      }
+      if (answers.carryChildren === "yes") {
+        return "it can support carrying children with the right add-ons";
+      }
+      if (answers.primaryUse === "recreation" || answers.routeType === "trails") {
+        return "it fits well with the kind of riding you described";
+      }
+      if (answers.distance === "under3" || answers.distance === "3to9") {
+        return "it is a versatile fit for everyday riding and shorter trips";
+      }
+      return "it is a versatile fit for everyday riding";
 
-  if (recId === "cargoBike" && answers.carryChildren === "yes") {
-    return "its added carrying capacity matches your need to bring children";
-  }
+    case "ebike":
+      if (answers.distance === "10plus" || answers.distance === "3to9") {
+        return "the electric assist is a strong match for your trip distance";
+      }
+      if (answers.routeType === "regularRoads") {
+        return "it can handle longer or more demanding road riding better than lighter devices";
+      }
+      if (answers.carryChildren === "yes") {
+        return "some models can support carrying children or extra cargo";
+      }
+      if (answers.transitLink === "yes") {
+        return "it can still support a transit-linked trip if needed";
+      }
+      return "it reduces physical effort on everyday trips";
 
-  if (recId === "bikeshare" && answers.storage === "outdoor") {
-    return "you do not need to store it yourself outdoors";
-  }
+    case "escooter":
+      if (answers.transitLink === "yes") {
+        return "its foldable size can work well with a transit connection";
+      }
+      if (answers.distance === "under3" && answers.routeType === "bikeLanes") {
+        return "your shorter trip and lower-stress route are a good match for it";
+      }
+      if (answers.storage === "indoor") {
+        return "its compact size makes indoor storage easier";
+      }
+      return "it can be practical for short trips on smoother routes";
 
-  if (recId === "ebike" && (answers.distance === "3to9" || answers.distance === "10plus")) {
-    return "the electric assist is a strong match for your trip distance";
-  }
+    case "lowSpeedPoweredMicromobility":
+      if (answers.distance === "under3" && answers.storage === "indoor") {
+        return "your short trip and indoor storage needs line up well with these compact devices";
+      }
+      if (answers.routeType === "bikeLanes" || answers.routeType === "trails") {
+        return "these devices work best on the kind of lower-stress route you selected";
+      }
+      if (answers.transitLink === "yes") {
+        return "their portability can help if transit is part of the trip";
+      }
+      return "their compact size can make short trips feel simple and flexible";
 
-  if (
-    recId === "escooter" &&
-    answers.routeType === "bikeLanes" &&
-    answers.distance === "under3"
-  ) {
-    return "your shorter trip and lower-stress route are a good match for it";
-  }
+    case "cargoBike":
+      if (answers.carryChildren === "yes") {
+        return "its added carrying capacity matches your need to bring children";
+      }
+      if (answers.primaryUse === "deliveries") {
+        return "its larger capacity is well suited to deliveries or heavier loads";
+      }
+      if (answers.primaryUse === "transport") {
+        return "it can handle errands, groceries, and everyday hauling better than most devices";
+      }
+      return "it offers much more carrying capacity than a standard bike";
 
-  if (
-    recId === "lowSpeedPoweredMicromobility" &&
-    answers.distance === "under3" &&
-    answers.storage === "indoor"
-  ) {
-    return "your short trip and indoor storage needs line up well with these compact devices";
-  }
+    case "bikeshare":
+      if (answers.storage === "outdoor") {
+        return "you do not need to store it yourself outdoors";
+      }
+      if (answers.transitLink === "yes") {
+        return "it can work well for transit connections and one-way trips";
+      }
+      if (answers.primaryUse === "transport") {
+        return "it can be useful for everyday trips without committing to ownership";
+      }
+      return "it can be useful if flexibility matters more than ownership";
 
-  if (
-    recId === "bicycle" &&
-    (answers.primaryUse === "recreation" || answers.routeType === "trails")
-  ) {
-    return "it fits well with the kind of riding you described";
-  }
+    case "adaptiveMobility":
+      if (answers.adaptiveNeed === "yes") {
+        return "it is better suited to support mobility needs than most other device types";
+      }
+      if (answers.primaryUse === "recreation") {
+        return "it can offer a more stable and comfortable riding position";
+      }
+      if (answers.primaryUse === "transport") {
+        return "it can be a stable transportation option with the right setup";
+      }
+      return "it can offer added stability and comfort compared with standard two-wheel devices";
 
-  if (
-    recId === "bikeshare" &&
-    (answers.transitLink === "yes" || answers.primaryUse === "transport")
-  ) {
-    return "it can work well for everyday trips and transit connections";
-  }
+    case "humanPoweredYouth":
+      if (answers.distance === "under3") {
+        return "your age and shorter trip distance point toward age-appropriate nonmotorized options";
+      }
+      return "your age points toward age-appropriate nonmotorized options";
 
-  if (recId === "ebike" && answers.routeType === "regularRoads") {
-    return "it can handle longer or more demanding road riding better than lighter devices";
+    default:
+      return "it matches part of the trip profile you described";
   }
-
-  if (recId === "bicycle" && answers.transitLink === "yes") {
-    return "it can still work reasonably well with a transit-linked trip";
-  }
-
-  return "";
 }
 
 function getAllResultsCautionFactor(recId, answers) {
   if (!answers) return "";
 
-  if (
-    recId === "bikeshare" &&
-    answers.adaptiveNeed === "yes"
-  ) {
-    return "shared bikes are less adaptable for mobility support needs";
-  }
+  switch (recId) {
+    case "bicycle":
+      if (answers.distance === "10plus") {
+        return "longer distances may take more effort without electric assist";
+      }
+      if (answers.routeType === "regularRoads") {
+        return "roads without separation from cars may feel more demanding than lower-stress routes";
+      }
+      if (answers.storage === "outdoor") {
+        return "outdoor storage means theft protection and weather exposure matter more";
+      }
+      return "it relies more on physical effort than electric options";
 
-  if (
-    recId === "escooter" &&
-    (answers.routeType === "regularRoads" || answers.routeType === "mixedRoads")
-  ) {
-    return "it is less comfortable on rougher roads or around heavier traffic";
-  }
+    case "ebike":
+      if (answers.age === "age14to16") {
+        return "your age narrows the appropriate options to Class 1 models";
+      }
+      if (answers.transitLink === "yes") {
+        return "its weight can make transit connections less convenient than smaller foldable devices";
+      }
+      if (answers.storage === "indoor") {
+        return "indoor charging and battery safety need more planning";
+      }
+      return "it costs more and needs more upkeep than a standard bicycle";
 
-  if (
-    recId === "lowSpeedPoweredMicromobility" &&
-    answers.routeType !== "bikeLanes" &&
-    answers.routeType !== "trails"
-  ) {
-    return "these devices work best on smoother, lower-stress routes";
-  }
+    case "escooter":
+      if (answers.routeType === "regularRoads" || answers.routeType === "mixedRoads") {
+        return "it is less comfortable on rougher roads or around heavier traffic";
+      }
+      if (answers.distance === "10plus") {
+        return "it is less ideal for longer trips where comfort and range matter more";
+      }
+      if (answers.carryChildren === "yes") {
+        return "it is not designed for carrying children";
+      }
+      return "its small wheels and standing position limit comfort on rougher surfaces";
 
-  if (recId === "cargoBike" && answers.storage === "indoor") {
-    return "its larger size can make indoor storage harder";
-  }
+    case "lowSpeedPoweredMicromobility":
+      if (answers.routeType !== "bikeLanes" && answers.routeType !== "trails") {
+        return "these devices work best on smoother, lower-stress routes";
+      }
+      if (answers.distance === "3to9" || answers.distance === "10plus") {
+        return "they are usually a weaker fit once trips get longer";
+      }
+      if (answers.storage !== "indoor") {
+        return "they make the most sense when they can be brought inside easily";
+      }
+      return "they are usually less versatile than bikes for everyday travel";
 
-  if (recId === "cargoBike" && answers.transitLink === "yes") {
-    return "its heavier and bulkier size makes transit connections harder";
-  }
+    case "cargoBike":
+      if (answers.transitLink === "yes") {
+        return "its heavier and bulkier size makes transit connections harder";
+      }
+      if (answers.storage === "indoor") {
+        return "its larger size can make indoor storage harder";
+      }
+      if (answers.distance === "10plus") {
+        return "longer trips are usually easier on an electric cargo model than a non-assisted one";
+      }
+      return "its size and weight make it more cumbersome than simpler devices";
 
-  if (
-    recId === "bikeshare" &&
-    answers.carryChildren === "yes"
-  ) {
-    return "shared public bikes are not a practical choice for carrying children";
-  }
+    case "bikeshare":
+      if (answers.adaptiveNeed === "yes") {
+        return "shared bikes are less adaptable for mobility support needs";
+      }
+      if (answers.carryChildren === "yes") {
+        return "shared public bikes are not a practical choice for carrying children";
+      }
+      if (answers.distance === "10plus") {
+        return "it may be less convenient if you need longer trips on a regular basis";
+      }
+      return "it depends on station availability and may be less reliable than owning a device";
 
-  if (
-    recId === "ebike" &&
-    answers.age === "age14to16"
-  ) {
-    return "age limits narrow the appropriate options to Class 1 models";
-  }
+    case "adaptiveMobility":
+      if (answers.storage === "indoor") {
+        return "some models can be larger and harder to store inside";
+      }
+      if (answers.transitLink === "yes") {
+        return "size and weight vary a lot, so some models are harder to combine with transit";
+      }
+      if (answers.adaptiveNeed !== "yes") {
+        return "it can be more specialized and expensive than you may need";
+      }
+      return "the best option depends heavily on the rider's specific support needs";
 
-  if (
-    recId === "bikeshare" &&
-    answers.distance === "10plus"
-  ) {
-    return "it may be less convenient if you need longer trips on a regular basis";
-  }
+    case "humanPoweredYouth":
+      if (answers.distance === "10plus" || answers.transitLink === "yes") {
+        return "longer trips or transit-linked trips may push beyond what these simpler devices do best";
+      }
+      return "they offer less speed and range than larger motorized options";
 
-  if (
-    recId === "bicycle" &&
-    answers.distance === "10plus"
-  ) {
-    return "longer distances may take more effort without electric assist";
+    default:
+      return "it is a less direct fit than some of the higher-ranked options";
   }
-
-  if (
-    recId === "adaptiveMobility" &&
-    answers.storage === "indoor"
-  ) {
-    return "some models can be larger and harder to store inside";
-  }
-
-  return "";
 }
 
 function getAllResultsReason(rec, answers, priority) {
   if (!answers) return "";
 
-  if (rec.id === "humanPoweredYouth") {
-    return "These options stand out because the selected age points toward age-appropriate nonmotorized devices.";
-  }
-
   const positive = getAllResultsPositiveFactor(rec.id, answers);
   const caution = getAllResultsCautionFactor(rec.id, answers);
 
-  if (positive && caution) {
-    return `${rec.label} could work because ${positive}, but ${caution}.`;
-  }
-
-  if (positive) {
-    return priority.label === "Top suggestion" || priority.label === "Secondary suggestion"
-      ? `${rec.label} stands out because ${positive}.`
-      : `${rec.label} could work because ${positive}.`;
-  }
-
-  if (caution) {
-    return `${rec.label} is still suggested here, but ${caution}.`;
-  }
-
-  if (priority.label === "Top suggestion" || priority.label === "Secondary suggestion") {
-    return `${rec.label} stands out because it matches the trip needs and preferences you selected.`;
-  }
-
-  return `${rec.label} may still work, but it is a less direct fit than the higher-ranked options.`;
+  return `${rec.label} could work because ${positive}, but ${caution}.`;
 }
 
 function renderAllDeviceResultsPanel(allRecommendations, answers) {
