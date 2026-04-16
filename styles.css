@@ -23,7 +23,7 @@ body {
   min-width: 300px;
   min-height: 100svh;
   margin: 0 auto;
-  padding: 20px;
+  padding: 16px;
   box-sizing: border-box;
   display: flex;
   align-items: stretch;
@@ -35,7 +35,7 @@ body {
   -webkit-backdrop-filter: blur(14px);
   border: 1px solid rgba(255, 255, 255, 0.45);
   border-radius: 20px;
-  padding: 32px;
+  padding: 28px;
   box-shadow:
     0 12px 32px rgba(0, 0, 0, 0.10),
     0 2px 8px rgba(255, 255, 255, 0.25) inset;
@@ -63,13 +63,13 @@ h1 {
 }
 
 .intro {
-  margin-bottom: 28px;
+  margin-bottom: 20px;
   color: #000000;
-  line-height: 1.5;
+  line-height: 1.45;
 }
 
 .question-block {
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   font-size: 15px;
 }
 
@@ -84,10 +84,10 @@ label {
 }
 
 .question-label {
-  margin: 0 0 10px 0;
-  font-size: 25px;
+  margin: 0 0 8px 0;
+  font-size: 23px;
   font-weight: 600;
-  line-height: 1.4;
+  line-height: 1.3;
   color: var(--text-blue-aa);
 }
 
@@ -134,7 +134,7 @@ button:focus-visible,
 
 .form-nav {
   justify-content: space-between;
-  margin-top: 24px;
+  margin-top: 18px;
 }
 
 .result {
@@ -154,22 +154,22 @@ button.hidden {
   background: #f7f8fc;
   border: 1px solid #dbe3f3;
   border-radius: 20px;
-  padding: 32px 36px;
-  margin-top: 24px;
+  padding: 24px 28px;
+  margin-top: 18px;
 }
 
 .recommendation-title {
-  margin: 0 0 24px 0;
-  font-size: 32px;
+  margin: 0 0 18px 0;
+  font-size: 30px;
   font-weight: 800;
   line-height: 1.1;
   color: var(--text-green-aa);
 }
 
 .recommendation-extra {
-  margin: 0 0 14px 0;
+  margin: 0 0 10px 0;
   font-size: 15px;
-  line-height: 1.5;
+  line-height: 1.4;
   color: #000000;
 }
 
@@ -182,12 +182,12 @@ button.hidden {
 }
 
 .guidance {
-  margin-top: 8px;
+  margin-top: 6px;
 }
 
 .guidance-heading {
-  margin: 0 0 14px 0;
-  font-size: 18px;
+  margin: 0 0 10px 0;
+  font-size: 17px;
   font-weight: 700;
   line-height: 1.3;
   color: #222;
@@ -195,38 +195,38 @@ button.hidden {
 
 .guidance-list {
   margin: 0;
-  padding-left: 28px;
+  padding-left: 24px;
 }
 
 .guidance-item {
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   font-size: 0.95rem;
-  line-height: 1.4;
+  line-height: 1.35;
   color: #000000;
 }
 
 .next-steps {
-  margin-top: 18px;
+  margin-top: 14px;
 }
 
 .next-steps-list {
   margin: 0;
-  padding-left: 28px;
+  padding-left: 24px;
 }
 
 .next-step-item {
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   font-size: 0.95rem;
-  line-height: 1.4;
+  line-height: 1.35;
 }
 
 .next-step-sublist {
-  margin: 8px 0 0 0;
+  margin: 6px 0 0 0;
   padding-left: 22px;
 }
 
 .next-step-subitem {
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   font-size: 0.92rem;
   line-height: 1.35;
 }
@@ -243,28 +243,28 @@ button.hidden {
 .recommendation-reason {
   font-size: 0.95rem;
   color: #000000;
-  margin: 6px 0 10px;
-  line-height: 1.4;
+  margin: 4px 0 8px;
+  line-height: 1.35;
 }
 
 .results-intro-heading {
-  margin: 0 0 12px 0;
-  font-size: 25px;
+  margin: 0 0 8px 0;
+  font-size: 23px;
   font-weight: 600;
-  line-height: 1.4;
+  line-height: 1.3;
   color: var(--text-blue-aa);
 }
 
 .results-disclaimer {
-  margin-top: 18px;
+  margin-top: 14px;
 }
 
 .all-results-panel {
-  margin-top: 18px;
+  margin-top: 14px;
   border: 1px solid #dbe3f3;
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.7);
-  padding: 14px 16px;
+  padding: 12px 14px;
 }
 
 .all-results-panel summary {
@@ -275,7 +275,7 @@ button.hidden {
 
 .all-results-list {
   list-style: none;
-  margin: 14px 0 0;
+  margin: 10px 0 0;
   padding: 0;
 }
 
@@ -283,7 +283,7 @@ button.hidden {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 10px 0;
+  padding: 8px 0;
   border-top: 1px solid rgba(219, 227, 243, 0.9);
 }
 
@@ -342,15 +342,15 @@ button.hidden {
 
 .all-results-reason {
   margin: 4px 0 0;
-  font-size: 13px;
-  line-height: 1.35;
+  font-size: 12.5px;
+  line-height: 1.3;
   color: #555;
 }
 
 .recommendation-eyebrow {
   font-size: 14px;
   line-height: 1.4;
-  margin-bottom: 28px;
+  margin-bottom: 18px;
   color: #555;
   max-width: 700px;
 }
@@ -370,9 +370,9 @@ button.hidden {
 
 .recommendation-disclaimer {
   max-width: 720px;
-  margin-top: 28px;
+  margin-top: 18px;
   font-size: 12px;
-  line-height: 1.45;
+  line-height: 1.35;
   color: #666;
 }
 
@@ -383,9 +383,9 @@ button.hidden {
 }
 
 .recommendation-subitem {
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   font-size: 0.95rem;
-  line-height: 1.4;
+  line-height: 1.35;
   color: #000000;
 }
 
@@ -397,13 +397,13 @@ button.hidden {
   width: 100%;
   max-width: 420px;
   display: block;
-  margin: 14px auto 0;
+  margin: 10px auto 0;
 }
 
 .recommendation-image-tag {
-  margin: 8px auto 0;
+  margin: 6px auto 0;
   max-width: 420px;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.4;
   font-style: italic;
   text-align: center;
@@ -411,10 +411,10 @@ button.hidden {
 }
 
 .intro-helper {
-  font-size: 15px;
+  font-size: 14px;
   color: var(--text-green-aa);
   font-style: italic;
-  margin-bottom: 18px;
+  margin-bottom: 12px;
 }
 
 .error-message {
@@ -652,8 +652,8 @@ body.results-view-active .site-branding {
 
 .option-grid {
   display: grid;
-  gap: 16px;
-  margin-top: 16px;
+  gap: 12px;
+  margin-top: 12px;
 }
 
 .option-grid-2 {
