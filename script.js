@@ -1665,14 +1665,17 @@ function getAllResultsCautionFactor(recId, answers) {
 
   switch (recId) {
     case "bicycle":
+      if (answers.primaryUse === "deliveries") {
+        return "heavier work or delivery trips may be easier with cargo capacity or electric assist";
+      }
+      if (answers.carryChildren === "yes") {
+        return "carrying children is usually easier on a cargo bike or an e-bike built for that purpose";
+      }
       if (answers.distance === "10plus") {
         return "longer distances may take more effort without electric assist";
       }
       if (answers.routeType === "regularRoads") {
         return "roads without separation from cars may feel more demanding than lower-stress routes";
-      }
-      if (answers.storage === "outdoor") {
-        return "outdoor storage means theft protection and weather exposure matter more";
       }
       return "it relies more on physical effort than electric options";
 
