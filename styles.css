@@ -143,6 +143,14 @@ button:focus-visible,
   margin-top: 16px;
 }
 
+body.results-view-active .card {
+  padding-top: 18px;
+}
+
+body.results-view-active .result {
+  margin-top: 6px;
+}
+
 .hidden {
   display: none;
 }
@@ -371,7 +379,6 @@ button.hidden {
 }
 
 .recommendation-disclaimer {
-  max-width: 720px;
   margin-top: 18px;
   font-size: 12px;
   line-height: 1.35;
