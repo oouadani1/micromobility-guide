@@ -1439,31 +1439,10 @@ function getTopRecommendations(sortedDevices) {
 }
 
 function getRecommendationPriorityMeta(index, score, topScore) {
-  if (index === 0) {
-    return {
-      label: "Top suggestion",
-      className: "all-results-tag-top"
-    };
-  }
-
-  if (index === 1) {
-    return {
-      label: "Secondary suggestion",
-      className: "all-results-tag-top"
-    };
-  }
-
   if (score >= topScore - 1) {
     return {
-      label: "Strongly suggested",
+      label: "Also suggested",
       className: "all-results-tag-strong"
-    };
-  }
-
-  if (score >= topScore - 3) {
-    return {
-      label: "Suggested",
-      className: "all-results-tag-suggested"
     };
   }
 
@@ -1790,14 +1769,16 @@ function getAllResultsReason(rec, answers, priority) {
 }
 
 function renderAllDeviceResultsPanel(allRecommendations, answers) {
-  const visibleRecommendations = allRecommendations.filter((rec) => rec.score > 0);
-  if (!visibleRecommendations.length) return "";
+  const panelRecommendations = allRecommendations
+    .filter((rec) => rec.score > 0)
+    .slice(2);
+  if (!panelRecommendations.length) return "";
 
-  const topScore = visibleRecommendations[0]?.score ?? 0;
-  const itemsHtml = visibleRecommendations
+  const topPanelScore = panelRecommendations[0]?.score ?? 0;
+  const itemsHtml = panelRecommendations
     .map((rec, index) => {
       const imageSrc = getAllResultsImage(rec.id, answers);
-      const priority = getRecommendationPriorityMeta(index, rec.score, topScore);
+      const priority = getRecommendationPriorityMeta(index, rec.score, topPanelScore);
       const reason = formatTextForPathway(getAllResultsReason(rec, answers, priority), answers.pathway);
 
       return `
