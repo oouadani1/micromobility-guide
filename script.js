@@ -35,6 +35,18 @@ const OUTPUTS = {
 
 const INTRO_TEXT =
   "Micromobility devices are small, affordable, and flexible ways to get around, such as bikes, e-scooters, and more. Answer a few questions to see what micromobility devices could work well for you.";
+const LANDING_PAGE_COPY = {
+  en: {
+    heroTitle: "Find a micromobility device that fits your needs.",
+    introText:
+      "Micromobility devices are small, affordable, and flexible ways to get around, such as bikes, e-scooters, and more. Answer a few questions to see what micromobility devices could work well for you."
+  },
+  es: {
+    heroTitle: "Encuentra un dispositivo de micromovilidad que se adapte a tus necesidades.",
+    introText:
+      "Los dispositivos de micromovilidad, como bicicletas y scooters eléctricos, son formas pequeñas, asequibles y flexibles de moverte. Responde algunas preguntas para ver qué dispositivos de micromovilidad podrían funcionar bien para ti."
+  }
+};
 const RESULTS_INTRO_TEXT = "Based on your responses, these micromobility options may be a good fit.";
 const EXPLORING_RESULTS_TITLE_TEXT = "Explore a variety of micromobility devices.";
 const SCORING_DISCLAIMER_TEXT =
@@ -1149,6 +1161,7 @@ const ROUTE_OPTION_MEDIA = {
 const APP_STATE = {
   currentStep: 0,
   answers: {},
+  locale: "en",
   currentResultIndex: 0,
   currentRecommendations: [],
   currentAllRecommendations: [],
@@ -2379,8 +2392,9 @@ function resetIntroState() {
   const intro = document.getElementById("introText");
   const heroTitle = document.getElementById("heroTitle");
 
+  renderLandingCopy();
+
   if (intro) {
-    intro.textContent = INTRO_TEXT;
     intro.classList.remove("hidden");
     intro.classList.remove("results-state");
   }
@@ -2401,6 +2415,7 @@ function renderRecommendations(recommendations, allRecommendations, answers, sco
   const nextBtn = document.getElementById("nextBtn");
 
   setAppViewMode("results");
+  updateLandingLanguageToggle();
 
   if (intro) {
     intro.classList.add("hidden");
@@ -2681,6 +2696,51 @@ function setAppViewMode(mode) {
   document.body.classList.toggle("results-view-active", mode === "results");
 }
 
+function getLandingLocaleCopy() {
+  return LANDING_PAGE_COPY[APP_STATE.locale] || LANDING_PAGE_COPY.en;
+}
+
+function updateLandingLanguageToggle() {
+  const enBtn = document.getElementById("langEnBtn");
+  const esBtn = document.getElementById("langEsBtn");
+  const landingControls = document.getElementById("landingControls");
+  const showLandingControls = APP_STATE.currentStep === 0;
+
+  if (landingControls) {
+    landingControls.classList.toggle("hidden", !showLandingControls);
+  }
+
+  if (enBtn) {
+    const isActive = APP_STATE.locale === "en";
+    enBtn.classList.toggle("is-active", isActive);
+    enBtn.setAttribute("aria-pressed", String(isActive));
+  }
+
+  if (esBtn) {
+    const isActive = APP_STATE.locale === "es";
+    esBtn.classList.toggle("is-active", isActive);
+    esBtn.setAttribute("aria-pressed", String(isActive));
+  }
+}
+
+function renderLandingCopy() {
+  const intro = document.getElementById("introText");
+  const heroTitle = document.getElementById("heroTitle");
+  const copy = getLandingLocaleCopy();
+
+  document.documentElement.lang = APP_STATE.locale;
+
+  if (heroTitle) {
+    heroTitle.textContent = copy.heroTitle;
+  }
+
+  if (intro) {
+    intro.textContent = copy.introText;
+  }
+
+  updateLandingLanguageToggle();
+}
+
 function renderQuestion() {
   const formStep = document.getElementById("formStep");
   const progress = document.getElementById("progress");
@@ -2693,6 +2753,7 @@ function renderQuestion() {
   if (!formStep || !progress || !backBtn || !nextBtn) return;
 
   setAppViewMode("question");
+  renderLandingCopy();
 
   if (intro) {
     intro.classList.toggle("hidden", APP_STATE.currentStep > 0);
@@ -2938,6 +2999,8 @@ function handleBack() {
 window.addEventListener("DOMContentLoaded", () => {
   const backBtn = document.getElementById("backBtn");
   const nextBtn = document.getElementById("nextBtn");
+  const langEnBtn = document.getElementById("langEnBtn");
+  const langEsBtn = document.getElementById("langEsBtn");
   
   if (backBtn) {
     backBtn.addEventListener("click", handleBack);
@@ -2945,6 +3008,20 @@ window.addEventListener("DOMContentLoaded", () => {
 
   if (nextBtn) {
     nextBtn.addEventListener("click", handleNext);
+  }
+
+  if (langEnBtn) {
+    langEnBtn.addEventListener("click", () => {
+      APP_STATE.locale = "en";
+      renderLandingCopy();
+    });
+  }
+
+  if (langEsBtn) {
+    langEsBtn.addEventListener("click", () => {
+      APP_STATE.locale = "es";
+      renderLandingCopy();
+    });
   }
 
   renderQuestion();
