@@ -65,6 +65,8 @@ h1 {
 .intro {
   margin-bottom: 20px;
   color: #000000;
+  font-size: 16px;
+  font-weight: 400;
   line-height: 1.45;
 }
 
@@ -429,6 +431,25 @@ button.hidden {
   margin-top: 20px;
 }
 
+.footer-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.footer-guide {
+  font-weight: 700;
+  color: #444;
+}
+
+.footer-separator {
+  color: #888;
+}
+
 .site-branding {
   justify-content: space-between;
   margin-top: auto;
@@ -481,7 +502,6 @@ body.results-view-active .site-branding {
 }
 
 .footer-note {
-  font-size: 14px;
   color: #666;
 }
 
@@ -541,9 +561,9 @@ body.results-view-active .site-branding {
   }
 
   .intro {
-    font-size: 15px;
+    font-size: 14px;
     line-height: 1.5;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
   }
 
   .question-block {
@@ -644,6 +664,10 @@ body.results-view-active .site-branding {
     font-size: 13px;
   }
 
+  .footer-meta {
+    font-size: 13px;
+  }
+
   .site-branding {
     margin-top: auto;
     padding-top: 16px;
@@ -704,7 +728,7 @@ body.results-view-active .site-branding {
 .option-card-text {
   display: block;
   width: 100%;
-  font-size: 19px;
+  font-size: 17px;
   line-height: 1.35;
   font-weight: 500;
   color: #222;
@@ -780,7 +804,7 @@ body.results-view-active .site-branding {
   }
 
   .option-card-text {
-    font-size: 17px;
+    font-size: 16px;
   }
 }
 
@@ -1104,7 +1128,7 @@ body.results-view-active .site-branding {
   }
 
   .option-card-text {
-    font-size: 15px;
+    font-size: 14px;
     line-height: 1.32;
     font-weight: 500;
   }
