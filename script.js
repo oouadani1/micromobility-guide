@@ -54,14 +54,14 @@ const SCORING_DISCLAIMER_TEXT =
 const PRINT_ICON_SVG =
   '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 9V4h10v5"/><path d="M7 14H5a2 2 0 0 1-2-2v-1.5A2.5 2.5 0 0 1 5.5 8h13A2.5 2.5 0 0 1 21 10.5V12a2 2 0 0 1-2 2h-2"/><path d="M7 12h10v8H7z"/><circle cx="17.5" cy="10.5" r=".75" fill="currentColor" stroke="none"/></svg>';
 const RECOMMENDATION_IMAGE_ALT_TEXT = {
-  bicycle: "Image of a standard bicycle",
-  ebike: "Image of an electric bicycle",
-  escooter: "Image of an electric scooter",
-  lowSpeedPoweredMicromobility: "Image of compact e-devices",
-  cargoBike: "Image of a cargo bike",
-  adaptiveMobility: "Image of adaptive cycles",
-  bikeshare: "Image of bikeshare bicycles",
-  humanPoweredYouth: "Image of age-appropriate youth mobility devices"
+  bicycle: "Standard two-wheel bicycle",
+  ebike: "Step-through electric bicycle",
+  escooter: "Standing electric scooter",
+  lowSpeedPoweredMicromobility: "Compact low-speed electric devices",
+  cargoBike: "Long-tail cargo bicycle",
+  adaptiveMobility: "Adaptive cycles",
+  bikeshare: "Docked bikeshare bicycles",
+  humanPoweredYouth: "Age-appropriate youth mobility devices"
 };
 
 const DEVICE_CONTENT = {
@@ -1167,19 +1167,19 @@ const QUESTIONS = {
 const ROUTE_OPTION_MEDIA = {
   bikeLanes: {
     src: "route-bikeLanes-square.jpg",
-    alt: "Photo of a bike lane separated from cars"
+    alt: "Bike lane separated from cars"
   },
   mixedRoads: {
     src: "route-mixedRoads-square.jpg",
-    alt: "Photo of a route with a bike lane next to busier traffic"
+    alt: "Bike lane next to busier traffic"
   },
   regularRoads: {
     src: "route-regularRoads-square.jpg",
-    alt: "Photo of a road next to cars without separated bike space"
+    alt: "Road next to cars without separated bike space"
   },
   trails: {
     src: "route-trails-square.jpg",
-    alt: "Photo of a trail or park path for biking"
+    alt: "Trail or park path for biking"
   }
 };
 
@@ -2460,11 +2460,11 @@ function getRecommendationImageAlt(recId, answers) {
   const foldableSuggested = shouldSuggestFoldable(answers);
 
   if (foldableSuggested && recId === "bicycle") {
-    return isSpanishLocale() ? getUiText("foldableBikeImageAlt") : "Image of a foldable bicycle";
+    return isSpanishLocale() ? getUiText("foldableBikeImageAlt") : "Foldable bicycle";
   }
 
   if (foldableSuggested && recId === "ebike") {
-    return isSpanishLocale() ? getUiText("foldableEbikeImageAlt") : "Image of a foldable electric bicycle";
+    return isSpanishLocale() ? getUiText("foldableEbikeImageAlt") : "Foldable electric bicycle";
   }
 
   return getRecommendationImageAltMap(recId);

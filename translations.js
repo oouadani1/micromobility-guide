@@ -40,8 +40,8 @@ window.MICROMOBILITY_TRANSLATIONS = {
       childTransportOptionLabel: "Escuela, trabajo o mandados",
       foldableBikeTag: "Tipo sugerido: bicicleta plegable",
       foldableEbikeTag: "Tipo sugerido: bicicleta eléctrica plegable",
-      foldableBikeImageAlt: "Imagen de una bicicleta plegable",
-      foldableEbikeImageAlt: "Imagen de una bicicleta eléctrica plegable"
+      foldableBikeImageAlt: "Bicicleta plegable",
+      foldableEbikeImageAlt: "Bicicleta eléctrica plegable"
     }
   },
   outputs: {
@@ -185,22 +185,22 @@ window.MICROMOBILITY_TRANSLATIONS = {
   },
   routeAlt: {
     es: {
-      bikeLanes: "Foto de una ciclovía separada del tráfico",
-      mixedRoads: "Foto de una ruta con ciclovía junto a tráfico más intenso",
-      regularRoads: "Foto de una calle junto a autos sin espacio separado para bicicletas",
-      trails: "Foto de un sendero o camino de parque para bicicletas"
+      bikeLanes: "Ciclovía separada del tráfico",
+      mixedRoads: "Ciclovía junto a tráfico más intenso",
+      regularRoads: "Calle junto a autos sin espacio separado para bicicletas",
+      trails: "Sendero o camino de parque para bicicletas"
     }
   },
   recommendationImageAlt: {
     es: {
-      bicycle: "Imagen de una bicicleta tradicional",
-      ebike: "Imagen de una bicicleta eléctrica",
-      escooter: "Imagen de un scooter eléctrico",
-      lowSpeedPoweredMicromobility: "Imagen de dispositivos eléctricos compactos",
-      cargoBike: "Imagen de una bicicleta de carga",
-      adaptiveMobility: "Imagen de ciclos adaptados",
-      bikeshare: "Imagen de bicicletas compartidas",
-      humanPoweredYouth: "Imagen de opciones de movilidad para niños y jóvenes"
+      bicycle: "Bicicleta tradicional de dos ruedas",
+      ebike: "Bicicleta eléctrica de cuadro bajo",
+      escooter: "Scooter eléctrico de pie",
+      lowSpeedPoweredMicromobility: "Dispositivos eléctricos compactos de baja velocidad",
+      cargoBike: "Bicicleta de carga de cola larga",
+      adaptiveMobility: "Ciclos adaptados",
+      bikeshare: "Bicicletas compartidas en estación",
+      humanPoweredYouth: "Opciones de movilidad para niños y jóvenes"
     }
   },
   exploreReasons: {
