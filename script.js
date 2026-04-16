@@ -1442,7 +1442,7 @@ function getRecommendationPriorityMeta(index, score, topScore) {
   if (score >= topScore - 1) {
     return {
       label: "Also suggested",
-      className: "all-results-tag-strong"
+      className: "all-results-tag-suggested"
     };
   }
 
@@ -1783,7 +1783,6 @@ function renderAllDeviceResultsPanel(allRecommendations, answers) {
 
       return `
       <li class="all-results-item">
-        <div class="all-results-rank">${index + 1}</div>
         ${imageSrc ? `<img src="${imageSrc}" alt="${getRecommendationImageAlt(rec.id, answers)}" class="all-results-image">` : ""}
         <div class="all-results-copy">
           <p class="all-results-device">${rec.label}</p>

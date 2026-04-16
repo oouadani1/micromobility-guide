@@ -282,7 +282,7 @@ button.hidden {
 .all-results-item {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   padding: 10px 0;
   border-top: 1px solid rgba(219, 227, 243, 0.9);
 }
@@ -295,14 +295,6 @@ button.hidden {
 .all-results-device,
 .all-results-tag {
   margin: 0;
-}
-
-.all-results-rank {
-  width: 24px;
-  flex: 0 0 24px;
-  font-size: 13px;
-  font-weight: 700;
-  color: #666;
 }
 
 .all-results-image {
