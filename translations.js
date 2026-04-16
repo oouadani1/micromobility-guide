@@ -452,9 +452,9 @@ window.MICROMOBILITY_TRANSLATIONS = {
         nextSteps: [
           { label: "Aprende más sobre ciclos adaptados", url: "https://canva.link/nj039whwwsd7466" },
           { label: "Participa en un evento de ciclismo accesible", url: "https://www.mass.gov/accessible-cycling" },
-          { label: "Aprende más sobre el Programa de Acceso Universal del DCR", url: "https://www.mass.gov/orgs/universal-access-program" },
-          { label: "Consulta la lista de equipos de ciclismo adaptado del DCR", url: "https://www.mass.gov/info-details/adaptive-cycling-equipment" },
-          { label: "Prueba los dispositivos motorizados de movilidad del DCR", url: "https://www.mass.gov/info-details/dcr-power-driven-mobility-devices" }
+          { label: "Aprende más sobre el Programa de Acceso Universal del Departamento de Conservación y Recreación", url: "https://www.mass.gov/orgs/universal-access-program" },
+          { label: "Consulta la lista de equipos de ciclismo adaptado del Departamento de Conservación y Recreación", url: "https://www.mass.gov/info-details/adaptive-cycling-equipment" },
+          { label: "Prueba los dispositivos motorizados de movilidad del Departamento de Conservación y Recreación", url: "https://www.mass.gov/info-details/dcr-power-driven-mobility-devices" }
         ]
       },
       humanPoweredYouth: {
@@ -483,7 +483,7 @@ window.MICROMOBILITY_TRANSLATIONS = {
           { label: "Más tiendas en Pinkbike", url: "https://www.pinkbike.com/directory/list/massachusetts/2/bike-shop/" },
           { label: "Más tiendas en Singletracks", url: "https://www.singletracks.com/bike-shops/region/massachusetts/" },
           { label: "Explora recursos de Safe Routes to School", url: "https://www.mass.gov/safe-routes-to-school" },
-          { label: "Lee la guía de productos apropiados por edad de la CPSC", url: "https://www.cpsc.gov/content/2020-Age-Determination-Guidelines" }
+          { label: "Lee la guía de productos apropiados por edad de la Comisión de Seguridad de Productos del Consumidor", url: "https://www.cpsc.gov/content/2020-Age-Determination-Guidelines" }
         ]
       }
     }

@@ -657,9 +657,9 @@ const DEVICE_CONTENT = {
     nextSteps: [
       { label: "Learn more about adaptive cycles", url: "https://canva.link/nj039whwwsd7466" },
       { label: "Join an accessible cycling event", url: "https://www.mass.gov/accessible-cycling" },
-      { label: "Learn more about the Department of Conservation and Recreation's (DCR) Universal Access Program", url: "https://www.mass.gov/orgs/universal-access-program" },
-      { label: "Check out DCR's adaptive cycling equipment list", url: "https://www.mass.gov/info-details/adaptive-cycling-equipment" },
-      { label: "Try out DCR's power-driven mobility devices", url: "https://www.mass.gov/info-details/dcr-power-driven-mobility-devices" }
+      { label: "Learn more about the Department of Conservation and Recreation Universal Access Program", url: "https://www.mass.gov/orgs/universal-access-program" },
+      { label: "Check out the Department of Conservation and Recreation adaptive cycling equipment list", url: "https://www.mass.gov/info-details/adaptive-cycling-equipment" },
+      { label: "Try the Department of Conservation and Recreation power-driven mobility devices", url: "https://www.mass.gov/info-details/dcr-power-driven-mobility-devices" }
     ],
   },
   humanPoweredYouth: {
@@ -747,7 +747,7 @@ const DEVICE_CONTENT = {
       { label: "More shops on Pinkbike", url: "https://www.pinkbike.com/directory/list/massachusetts/2/bike-shop/" },
       { label: "More shops on Singletracks", url: "https://www.singletracks.com/bike-shops/region/massachusetts/" },
       { label: "Explore Safe Routes to School resources", url: "https://www.mass.gov/safe-routes-to-school" },
-      { label: "Read Consumer Product Safety Commission (CPSC) age-appropriate product guidance", url: "https://www.cpsc.gov/content/2020-Age-Determination-Guidelines" }
+      { label: "Read Consumer Product Safety Commission age-appropriate product guidance", url: "https://www.cpsc.gov/content/2020-Age-Determination-Guidelines" }
     ]
   }
 };
@@ -2599,14 +2599,14 @@ function getConditionalNextSteps(recId, answers) {
 
   if (answers.transitLink === "yes") {
     steps.push({
-      label: isSpanishLocale() ? "Consulta las políticas de micromovilidad de la MBTA" : "Check MBTA micromobility policies",
+      label: isSpanishLocale() ? "Consulta las políticas de micromovilidad de la Autoridad de Transporte de la Bahía de Massachusetts" : "Check Massachusetts Bay Transportation Authority micromobility policies",
       url: "https://www.mbta.com/bikes"
     });
     if (recId !== "bikeshare") {
       steps.push({
         label: isSpanishLocale()
-          ? "Aprende a estacionar de forma segura tu dispositivo de micromovilidad en una estación de la MBTA"
-          : "Learn how to safely park your micromobility device at an MBTA station",
+          ? "Aprende a estacionar de forma segura tu dispositivo de micromovilidad en una estación de la Autoridad de Transporte de la Bahía de Massachusetts"
+          : "Learn how to safely park your micromobility device at a Massachusetts Bay Transportation Authority station",
         url: "https://bc.mbta.com/riding_the_t/bikes/register/Default.asp"
       });
     }
