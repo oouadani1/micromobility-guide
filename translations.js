@@ -1,9 +1,9 @@
 window.MICROMOBILITY_TRANSLATIONS = {
   ui: {
     es: {
-      title: "Guía de compra de micromovilidad",
+      title: "Guía de micromovilidad",
       languageToggleLabel: "Selector de idioma",
-      footerGuide: "Guía de compra de micromovilidad",
+      footerGuide: "Guía de micromovilidad",
       footerNote: "Creada por The Lab @ MassDOT",
       labLogoAlt: "Logotipo de The Lab @ MassDOT",
       resultsIntroText:
@@ -16,7 +16,7 @@ window.MICROMOBILITY_TRANSLATIONS = {
       notSuggested: "No recomendado",
       seeAllDeviceTypes: "Ver todos los tipos de dispositivos",
       yourResponses: "Tus respuestas",
-      whyConsiderIt: "Por qué considerarlo",
+      whyConsiderIt: "Por qué elegirlo",
       whyThisFitsForYou: "Por qué te puede funcionar",
       whyThisFits: "Por qué puede funcionar",
       thingsToConsider: "Qué tener en cuenta",
