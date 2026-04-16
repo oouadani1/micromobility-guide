@@ -995,7 +995,32 @@ const SCORING_RULES = {
 };
 
 function getDeviceContent(recId) {
-  return DEVICE_CONTENT[recId] || null;
+  const locale = getCurrentLocale();
+  const baseContent = DEVICE_CONTENT[recId] || null;
+  const localizedContent = I18N.deviceContent?.[locale]?.[recId];
+
+  if (!baseContent) {
+    return localizedContent || null;
+  }
+
+  if (!localizedContent) {
+    return baseContent;
+  }
+
+  return {
+    ...baseContent,
+    ...localizedContent,
+    whyConditional: {
+      ...(baseContent.whyConditional || {}),
+      ...(localizedContent.whyConditional || {})
+    },
+    considerConditional: {
+      ...(baseContent.considerConditional || {}),
+      ...(localizedContent.considerConditional || {})
+    },
+    considerBase: localizedContent.considerBase || baseContent.considerBase,
+    nextSteps: localizedContent.nextSteps || baseContent.nextSteps
+  };
 }
 
 function getWhyBase(recId) {
@@ -1169,6 +1194,153 @@ const APP_STATE = {
   currentScores: null,
   currentPathway: null
 };
+
+const I18N = window.MICROMOBILITY_TRANSLATIONS || {};
+
+const BIKE_SHOP_URL = "https://nbda.com/dealer-finder-member-directory/#!directory/map/tag=Massachusetts";
+const PINKBIKE_URL = "https://www.pinkbike.com/directory/list/massachusetts/2/bike-shop/";
+const SINGLETRACKS_URL = "https://www.singletracks.com/bike-shops/region/massachusetts/";
+
+function getCurrentLocale() {
+  return APP_STATE.locale === "es" ? "es" : "en";
+}
+
+function isSpanishLocale() {
+  return getCurrentLocale() === "es";
+}
+
+function getUiText(key) {
+  const locale = getCurrentLocale();
+  return I18N.ui?.[locale]?.[key] || "";
+}
+
+function getOutputStrings(outputId) {
+  const locale = getCurrentLocale();
+  return I18N.outputs?.[locale]?.[outputId] || OUTPUTS[outputId] || { label: outputId, shortLabel: outputId };
+}
+
+function getOutputLabel(outputId) {
+  return getOutputStrings(outputId).label;
+}
+
+function getQuestionLocaleCopy(questionId) {
+  const locale = getCurrentLocale();
+  return I18N.questions?.[locale]?.[questionId] || {};
+}
+
+function getLocalizedQuestion(questionId) {
+  const baseQuestion = QUESTIONS[questionId];
+  if (!baseQuestion) return null;
+
+  const localeCopy = getQuestionLocaleCopy(questionId);
+
+  return {
+    ...baseQuestion,
+    label: localeCopy.label || baseQuestion.label,
+    options: (baseQuestion.options || []).map((option) => ({
+      ...option,
+      label: localeCopy.options?.[option.value] || option.label
+    }))
+  };
+}
+
+function getPathwayQuestionLabelSet(pathway) {
+  if (!isSpanishLocale()) {
+    return null;
+  }
+
+  return I18N.pathwayQuestionLabels?.es?.[pathway] || null;
+}
+
+function getRouteOptionAlt(optionValue) {
+  const locale = getCurrentLocale();
+  return I18N.routeAlt?.[locale]?.[optionValue] || ROUTE_OPTION_MEDIA[optionValue]?.alt || "";
+}
+
+function getRecommendationImageAltMap(recId) {
+  const locale = getCurrentLocale();
+  return I18N.recommendationImageAlt?.[locale]?.[recId] || RECOMMENDATION_IMAGE_ALT_TEXT[recId] || getOutputLabel(recId);
+}
+
+function getExploreReasonText(recId) {
+  const locale = getCurrentLocale();
+  return I18N.exploreReasons?.[locale]?.[recId] || EXPLORE_REASON_TEXT[recId] || "";
+}
+
+function getAgeReferenceText(pathway) {
+  if (isSpanishLocale()) {
+    if (pathway === "myself") return "tu edad";
+    if (pathway === "child") return "la edad del nino o la nina";
+    return "la edad de la persona que lo usara";
+  }
+
+  if (pathway === "myself") return "your age";
+  if (pathway === "child") return "the child's age";
+  return "the rider's age";
+}
+
+function getDynamicCountLabel(current, total) {
+  if (isSpanishLocale()) {
+    return `${current} ${getUiText("countOf")} ${total}`;
+  }
+
+  return `${current} of ${total}`;
+}
+
+function renderLocaleChrome() {
+  const documentTitle = document.getElementById("documentTitle");
+  const languageToggle = document.getElementById("languageToggle");
+  const footerGuide = document.getElementById("footerGuide");
+  const footerNote = document.getElementById("footerNote");
+  const labLogo = document.getElementById("labLogo");
+  const backBtn = document.getElementById("backBtn");
+  const nextBtn = document.getElementById("nextBtn");
+
+  if (documentTitle) {
+    documentTitle.textContent = isSpanishLocale() ? getUiText("title") : "Micromobility Buyer's Guide";
+  }
+
+  document.title = isSpanishLocale() ? getUiText("title") : "Micromobility Buyer's Guide";
+
+  if (languageToggle) {
+    languageToggle.setAttribute(
+      "aria-label",
+      isSpanishLocale() ? getUiText("languageToggleLabel") : "Language toggle"
+    );
+  }
+
+  if (footerGuide) {
+    footerGuide.textContent = isSpanishLocale()
+      ? getUiText("footerGuide")
+      : "Micromobility Buyer's Guide";
+  }
+
+  if (footerNote) {
+    footerNote.textContent = isSpanishLocale()
+      ? getUiText("footerNote")
+      : "Built by The Lab @ MassDOT";
+  }
+
+  if (labLogo) {
+    labLogo.alt = isSpanishLocale()
+      ? getUiText("labLogoAlt")
+      : "The Lab at MassDOT logo";
+  }
+
+  if (backBtn) {
+    backBtn.setAttribute(
+      "aria-label",
+      isSpanishLocale() ? getUiText("previousQuestion") : "Previous question"
+    );
+  }
+
+  if (nextBtn) {
+    nextBtn.setAttribute(
+      "aria-label",
+      isSpanishLocale() ? getUiText("nextQuestion") : "Next question"
+    );
+  }
+}
 
 const DEBUG_MODE = false;
 
@@ -1436,7 +1608,7 @@ function getSortedRecommendations(scores, answers) {
     .filter(([, score]) => Number.isFinite(score))
     .map(([id, score]) => ({
       id,
-      label: OUTPUTS[id].label,
+      label: getOutputLabel(id),
       score
     }))
     .sort((a, b) => b.score - a.score);
@@ -1454,13 +1626,13 @@ function getTopRecommendations(sortedDevices) {
 function getRecommendationPriorityMeta(index, score, topScore) {
   if (score >= topScore - 1) {
     return {
-      label: "Also suggested",
+      label: isSpanishLocale() ? getUiText("alsoSuggested") : "Also suggested",
       className: "all-results-tag-suggested"
     };
   }
 
   return {
-    label: "Not suggested",
+    label: isSpanishLocale() ? getUiText("notSuggested") : "Not suggested",
     className: "all-results-tag-not"
   };
 }
@@ -1473,6 +1645,11 @@ function getAllResultsImage(recId, answers) {
 }
 
 function getQuestionLabelForPathway(questionId, pathway) {
+  const localizedPathwayLabels = getPathwayQuestionLabelSet(pathway);
+  if (localizedPathwayLabels?.[questionId]) {
+    return localizedPathwayLabels[questionId];
+  }
+
   if (pathway === "myself") {
     const myselfLabels = {
       ageInput: "How old are you?",
@@ -1485,7 +1662,7 @@ function getQuestionLabelForPathway(questionId, pathway) {
       storage: "How will your device usually be stored?"
     };
 
-    return myselfLabels[questionId] || QUESTIONS[questionId]?.label || questionId;
+    return myselfLabels[questionId] || getLocalizedQuestion(questionId)?.label || questionId;
   }
 
   if (pathway === "someoneElse" || pathway === "exploring") {
@@ -1500,7 +1677,7 @@ function getQuestionLabelForPathway(questionId, pathway) {
       storage: "How will the rider's device usually be stored?"
     };
 
-    return riderLabels[questionId] || QUESTIONS[questionId]?.label || questionId;
+    return riderLabels[questionId] || getLocalizedQuestion(questionId)?.label || questionId;
   }
 
   if (pathway === "child") {
@@ -1514,10 +1691,10 @@ function getQuestionLabelForPathway(questionId, pathway) {
       storage: "How will the child's device usually be stored?"
     };
 
-    return childLabels[questionId] || QUESTIONS[questionId]?.label || questionId;
+    return childLabels[questionId] || getLocalizedQuestion(questionId)?.label || questionId;
   }
 
-  return QUESTIONS[questionId]?.label || questionId;
+  return getLocalizedQuestion(questionId)?.label || questionId;
 }
 
 function getAnswerDisplayValue(questionId, value) {
@@ -1527,7 +1704,7 @@ function getAnswerDisplayValue(questionId, value) {
     return String(value);
   }
 
-  const options = QUESTIONS[questionId]?.options || [];
+  const options = getLocalizedQuestion(questionId)?.options || [];
   return options.find((option) => option.value === value)?.label || String(value);
 }
 
@@ -1562,7 +1739,7 @@ function renderPrintInputsSummary(rawAnswers) {
 
   return `
     <section class="print-section">
-      <h3 class="print-section-heading">Your responses</h3>
+      <h3 class="print-section-heading">${isSpanishLocale() ? getUiText("yourResponses") : "Your responses"}</h3>
       <dl class="print-input-list">${itemsHtml}</dl>
     </section>
   `;
@@ -1570,6 +1747,109 @@ function renderPrintInputsSummary(rawAnswers) {
 
 function getAllResultsPositiveFactor(recId, answers) {
   if (!answers) return "";
+
+  if (isSpanishLocale()) {
+    switch (recId) {
+      case "bicycle":
+        if (answers.transitLink === "yes") {
+          return "todavia puede funcionar razonablemente bien en un viaje que incluye transporte publico";
+        }
+        if (answers.carryChildren === "yes") {
+          return "puede servir para llevar ninos con los accesorios adecuados";
+        }
+        if (answers.primaryUse === "recreation" || answers.routeType === "trails") {
+          return "encaja bien con el tipo de recorrido que se describio";
+        }
+        if (answers.distance === "under3" || answers.distance === "3to9") {
+          return "es una opcion versatil para los viajes diarios y los trayectos cortos";
+        }
+        return "es una opcion versatil para los viajes diarios";
+
+      case "ebike":
+        if (answers.distance === "10plus" || answers.distance === "3to9") {
+          return "la asistencia electrica encaja bien con la distancia del viaje";
+        }
+        if (answers.routeType === "regularRoads") {
+          return "puede manejar mejor recorridos largos o calles mas exigentes que los dispositivos mas livianos";
+        }
+        if (answers.carryChildren === "yes") {
+          return "algunos modelos pueden servir para llevar ninos o carga extra";
+        }
+        if (answers.transitLink === "yes") {
+          return "todavia puede apoyar un viaje que incluye transporte publico si hace falta";
+        }
+        return "reduce el esfuerzo fisico en los viajes diarios";
+
+      case "escooter":
+        if (answers.transitLink === "yes") {
+          return "su tamano plegable puede funcionar bien con una conexion al transporte publico";
+        }
+        if (answers.distance === "under3" && answers.routeType === "bikeLanes") {
+          return "la distancia corta del viaje y la ruta de menor estres encajan bien con esta opcion";
+        }
+        if (answers.storage === "indoor") {
+          return "su tamano compacto hace mas facil guardarlo adentro";
+        }
+        return "puede ser practico para viajes cortos en rutas mas lisas";
+
+      case "lowSpeedPoweredMicromobility":
+        if (answers.distance === "under3" && answers.storage === "indoor") {
+          return "el viaje corto y la necesidad de guardarlo adentro encajan bien con estos dispositivos compactos";
+        }
+        if (answers.routeType === "bikeLanes" || answers.routeType === "trails") {
+          return "estos dispositivos funcionan mejor en el tipo de ruta de menor estres que se selecciono";
+        }
+        if (answers.transitLink === "yes") {
+          return "su portabilidad puede ayudar cuando el transporte publico forma parte del viaje";
+        }
+        return "su tamano compacto puede hacer que los trayectos cortos se sientan simples y flexibles";
+
+      case "cargoBike":
+        if (answers.carryChildren === "yes") {
+          return "su mayor capacidad de carga encaja con la necesidad de llevar ninos";
+        }
+        if (answers.primaryUse === "deliveries") {
+          return "su capacidad mayor funciona bien para entregas o cargas pesadas";
+        }
+        if (answers.primaryUse === "transport") {
+          return "puede manejar mandados, compras y carga cotidiana mejor que la mayoria de los dispositivos";
+        }
+        return "ofrece mucha mas capacidad de carga que una bicicleta tradicional";
+
+      case "bikeshare":
+        if (answers.storage === "outdoor") {
+          return "no hace falta guardarlas afuera personalmente";
+        }
+        if (answers.transitLink === "yes") {
+          return "pueden funcionar bien para conexiones con transporte publico y viajes de ida";
+        }
+        if (answers.primaryUse === "transport") {
+          return "pueden ser utiles para viajes diarios sin comprometerse a tener un dispositivo propio";
+        }
+        return "pueden ser utiles cuando la flexibilidad importa mas que tener un dispositivo propio";
+
+      case "adaptiveMobility":
+        if (answers.adaptiveNeed === "yes") {
+          return "suele ofrecer mas apoyo para la movilidad que la mayoria de los otros tipos de dispositivos";
+        }
+        if (answers.primaryUse === "recreation") {
+          return "puede ofrecer una posicion mas estable y comoda para circular";
+        }
+        if (answers.primaryUse === "transport") {
+          return "puede ser una opcion de transporte estable con la configuracion adecuada";
+        }
+        return "puede ofrecer mas estabilidad y comodidad que los dispositivos estandar de dos ruedas";
+
+      case "humanPoweredYouth":
+        if (answers.distance === "under3") {
+          return `${getAgeReferenceText(answers.pathway)} y la distancia corta del viaje apuntan a opciones no motorizadas adecuadas para esta etapa`;
+        }
+        return `${getAgeReferenceText(answers.pathway)} apunta a opciones no motorizadas adecuadas para esta etapa`;
+
+      default:
+        return "coincide con parte del perfil de viaje que se describio";
+    }
+  }
 
   switch (recId) {
     case "bicycle":
@@ -1664,9 +1944,9 @@ function getAllResultsPositiveFactor(recId, answers) {
 
     case "humanPoweredYouth":
       if (answers.distance === "under3") {
-        return "your age and shorter trip distance point toward age-appropriate nonmotorized options";
+        return `${getAgeReferenceText(answers.pathway)} and the shorter trip distance point toward age-appropriate nonmotorized options`;
       }
-      return "your age points toward age-appropriate nonmotorized options";
+      return `${getAgeReferenceText(answers.pathway)} points toward age-appropriate nonmotorized options`;
 
     default:
       return "it matches part of the trip profile you described";
@@ -1675,6 +1955,106 @@ function getAllResultsPositiveFactor(recId, answers) {
 
 function getAllResultsCautionFactor(recId, answers) {
   if (!answers) return "";
+
+  if (isSpanishLocale()) {
+    switch (recId) {
+      case "bicycle":
+        if (answers.primaryUse === "deliveries") {
+          return "los viajes de trabajo o entrega mas exigentes suelen ser mas faciles con mas capacidad de carga o asistencia electrica";
+        }
+        if (answers.carryChildren === "yes") {
+          return "llevar ninos suele ser mas facil en una bicicleta de carga o en una bicicleta electrica pensada para eso";
+        }
+        if (answers.distance === "10plus") {
+          return "las distancias mas largas pueden requerir mas esfuerzo sin asistencia electrica";
+        }
+        if (answers.routeType === "regularRoads") {
+          return "las calles sin separacion de los autos pueden sentirse mas exigentes que las rutas de menor estres";
+        }
+        return "requiere mas esfuerzo fisico que las opciones electricas";
+
+      case "ebike":
+        if (answers.age === "age14to16") {
+          return `${getAgeReferenceText(answers.pathway)} reduce las opciones apropiadas a modelos de Clase 1`;
+        }
+        if (answers.transitLink === "yes") {
+          return "su peso puede hacer que las conexiones con el transporte publico sean menos practicas que con dispositivos plegables mas pequenos";
+        }
+        if (answers.storage === "indoor") {
+          return "la carga en interiores y la seguridad de la bateria requieren mas planificacion";
+        }
+        return "cuesta mas y requiere mas mantenimiento que una bicicleta tradicional";
+
+      case "escooter":
+        if (answers.routeType === "regularRoads" || answers.routeType === "mixedRoads") {
+          return "se siente menos comodo en calles mas irregulares o con mas trafico";
+        }
+        if (answers.distance === "10plus") {
+          return "es menos ideal para viajes largos donde importan mas la comodidad y la autonomia";
+        }
+        if (answers.carryChildren === "yes") {
+          return "no esta disenado para llevar ninos";
+        }
+        return "sus ruedas pequenas y la posicion de pie limitan la comodidad en superficies mas irregulares";
+
+      case "lowSpeedPoweredMicromobility":
+        if (answers.routeType !== "bikeLanes" && answers.routeType !== "trails") {
+          return "estos dispositivos funcionan mejor en rutas mas lisas y de menor estres";
+        }
+        if (answers.distance === "3to9" || answers.distance === "10plus") {
+          return "suelen ser una opcion mas debil cuando los viajes se vuelven mas largos";
+        }
+        if (answers.storage !== "indoor") {
+          return "tienen mas sentido cuando pueden guardarse adentro con facilidad";
+        }
+        return "suelen ser menos versatiles que las bicicletas para los viajes cotidianos";
+
+      case "cargoBike":
+        if (answers.transitLink === "yes") {
+          return "su tamano mas pesado y voluminoso dificulta las conexiones con el transporte publico";
+        }
+        if (answers.storage === "indoor") {
+          return "su tamano mas grande puede hacer mas dificil guardarla adentro";
+        }
+        if (answers.distance === "10plus") {
+          return "los viajes largos suelen ser mas faciles en un modelo electrico de carga que en uno sin asistencia";
+        }
+        return "su tamano y peso la hacen mas aparatosa que las opciones mas simples";
+
+      case "bikeshare":
+        if (answers.adaptiveNeed === "yes") {
+          return "las bicicletas compartidas se adaptan menos a necesidades de apoyo para la movilidad";
+        }
+        if (answers.carryChildren === "yes") {
+          return "las bicicletas publicas compartidas no suelen ser una opcion practica para llevar ninos";
+        }
+        if (answers.distance === "10plus") {
+          return "pueden ser menos practicas si se necesitan viajes largos con regularidad";
+        }
+        return "dependen de la disponibilidad de estaciones y pueden ser menos confiables que tener un dispositivo propio";
+
+      case "adaptiveMobility":
+        if (answers.storage === "indoor") {
+          return "algunos modelos pueden ser mas grandes y dificiles de guardar adentro";
+        }
+        if (answers.transitLink === "yes") {
+          return "el tamano y el peso varian mucho, asi que algunos modelos son mas dificiles de combinar con el transporte publico";
+        }
+        if (answers.adaptiveNeed !== "yes") {
+          return "puede ser una opcion mas especializada y costosa de lo necesario";
+        }
+        return "la mejor opcion depende mucho del tipo de apoyo que se necesite";
+
+      case "humanPoweredYouth":
+        if (answers.distance === "10plus" || answers.transitLink === "yes") {
+          return "los viajes largos o con conexion al transporte publico pueden ir mas alla de lo que estas opciones sencillas hacen mejor";
+        }
+        return "ofrecen menos velocidad y alcance que las opciones motorizadas mas grandes";
+
+      default:
+        return "es una opcion menos directa que algunas de las que quedaron mejor ubicadas";
+    }
+  }
 
   switch (recId) {
     case "bicycle":
@@ -1694,7 +2074,7 @@ function getAllResultsCautionFactor(recId, answers) {
 
     case "ebike":
       if (answers.age === "age14to16") {
-        return "your age narrows the appropriate options to Class 1 models";
+        return `${getAgeReferenceText(answers.pathway)} narrows the appropriate options to Class 1 models`;
       }
       if (answers.transitLink === "yes") {
         return "its weight can make transit connections less convenient than smaller foldable devices";
@@ -1762,7 +2142,7 @@ function getAllResultsCautionFactor(recId, answers) {
       if (answers.adaptiveNeed !== "yes") {
         return "it can be more specialized and expensive than you may need";
       }
-      return "the best option depends heavily on the rider's specific support needs";
+      return "the best option depends heavily on the specific kind of support needed";
 
     case "humanPoweredYouth":
       if (answers.distance === "10plus" || answers.transitLink === "yes") {
@@ -1775,13 +2155,17 @@ function getAllResultsCautionFactor(recId, answers) {
   }
 }
 
-function getAllResultsReason(rec, answers, priority) {
+function getAllResultsReason(rec, answers) {
   if (!answers) return "";
 
   const positive = getAllResultsPositiveFactor(rec.id, answers);
   const caution = getAllResultsCautionFactor(rec.id, answers);
 
-  return `${rec.label} could work because ${positive}, but ${caution}.`;
+  if (isSpanishLocale()) {
+    return `Puede funcionar porque ${positive}, pero ${caution}.`;
+  }
+
+  return `Could work because ${positive}, but ${caution}.`;
 }
 
 function renderAllDeviceResultsPanel(allRecommendations, answers) {
@@ -1795,7 +2179,10 @@ function renderAllDeviceResultsPanel(allRecommendations, answers) {
     .map((rec, index) => {
       const imageSrc = getAllResultsImage(rec.id, answers);
       const priority = getRecommendationPriorityMeta(index, rec.score, topPanelScore);
-      const reason = formatTextForPathway(getAllResultsReason(rec, answers, priority), answers.pathway);
+      const rawReason = getAllResultsReason(rec, answers, priority);
+      const reason = isSpanishLocale()
+        ? rawReason
+        : formatTextForPathway(rawReason, answers.pathway);
 
       return `
       <li class="all-results-item">
@@ -1812,7 +2199,7 @@ function renderAllDeviceResultsPanel(allRecommendations, answers) {
 
   return `
     <details class="all-results-panel">
-      <summary>See all device types</summary>
+      <summary>${isSpanishLocale() ? getUiText("seeAllDeviceTypes") : "See all device types"}</summary>
       <ul class="all-results-list">${itemsHtml}</ul>
     </details>
   `;
@@ -1823,10 +2210,10 @@ function renderPrintRecommendationSummary(rec, answers, pathway) {
   if (!content) return "";
   const printRationaleHeading =
     pathway === "exploring"
-      ? "Why consider it"
+      ? (isSpanishLocale() ? getUiText("whyConsiderIt") : "Why consider it")
       : pathway === "myself"
-        ? "Why this fits for you"
-        : "Why this fits";
+        ? (isSpanishLocale() ? getUiText("whyThisFitsForYou") : "Why this fits for you")
+        : (isSpanishLocale() ? getUiText("whyThisFits") : "Why this fits");
 
   const imageSrc = getRecommendationImage(rec.id, answers, content);
   const imageTag = getRecommendationImageTag(rec.id, answers);
@@ -1834,9 +2221,7 @@ function renderPrintRecommendationSummary(rec, answers, pathway) {
   let considerations = getConsiderBase(rec.id);
 
   if (answers.storage !== "indoor" && (rec.id === "ebike" || rec.id === "escooter")) {
-    considerations = considerations.filter(
-      (item) => !item.includes("UL-certified batteries")
-    );
+    considerations = considerations.filter((_, itemIndex) => itemIndex !== 0);
   }
 
   const orderedConsiderations = [...considerations, ...considerationItems];
@@ -1850,13 +2235,13 @@ function renderPrintRecommendationSummary(rec, answers, pathway) {
     <article class="print-rec-card">
       <div class="print-rec-header">
         ${imageSrc ? `<img src="${imageSrc}" alt="${getRecommendationImageAlt(rec.id, answers)}" class="print-rec-image">` : ""}
-        <div class="print-rec-title-wrap">
-          <h4 class="print-rec-title">${rec.label}</h4>
-          ${imageTag ? `<p class="print-rec-image-tag"><em>${imageTag}</em></p>` : ""}
-        </div>
+      <div class="print-rec-title-wrap">
+        <h4 class="print-rec-title">${rec.label}</h4>
+        ${imageTag ? `<p class="print-rec-image-tag"><em>${imageTag}</em></p>` : ""}
+      </div>
       </div>
       <p class="print-rec-reason"><strong>${printRationaleHeading}:</strong> ${printReason}</p>
-      <p class="print-rec-cost"><strong>Typical cost:</strong> ${content.cost}</p>
+      <p class="print-rec-cost"><strong>${isSpanishLocale() ? getUiText("typicalCost") : "Typical cost"}:</strong> ${content.cost}</p>
       ${considerationsHtml ? `<ul class="print-rec-list">${considerationsHtml}</ul>` : ""}
     </article>
   `;
@@ -1906,12 +2291,14 @@ function renderPrintSummary(recommendations, answers, pathway) {
   return `
     <section class="print-summary ${densityClass}" aria-hidden="true">
       <div class="print-header">
-        <h2 class="print-title">Micromobility Buyer's Guide</h2>
-        <img src="lab-logo-black.png" alt="The Lab at MassDOT logo" class="print-logo">
+        <h2 class="print-title">${isSpanishLocale() ? getUiText("title") : "Micromobility Buyer's Guide"}</h2>
+        <img src="lab-logo-black.png" alt="${isSpanishLocale() ? getUiText("labLogoAlt") : "The Lab at MassDOT logo"}" class="print-logo">
       </div>
       ${renderPrintInputsSummary(rawAnswers)}
       <section class="print-section">
-        <h3 class="print-section-heading">${pathway === "exploring" ? "Selected micromobility device" : "See micromobility options"}</h3>
+        <h3 class="print-section-heading">${pathway === "exploring"
+          ? (isSpanishLocale() ? getUiText("selectedMicromobilityDevice") : "Selected micromobility device")
+          : (isSpanishLocale() ? getUiText("seeMicromobilityOptions") : "See micromobility options")}</h3>
         <div class="print-rec-grid">${topRecommendationsHtml}</div>
       </section>
   `;
@@ -1919,6 +2306,10 @@ function renderPrintSummary(recommendations, answers, pathway) {
 
 function formatTextForPathway(text, pathway) {
   if (!text) {
+    return text;
+  }
+
+  if (isSpanishLocale()) {
     return text;
   }
 
@@ -2019,7 +2410,7 @@ function getRecommendationReason(recId, answers, pathway) {
   if (!content) return "";
 
   if (pathway === "exploring") {
-    return EXPLORE_REASON_TEXT[recId] || formatTextForPathway(getWhyBase(recId), pathway);
+    return getExploreReasonText(recId) || formatTextForPathway(getWhyBase(recId), pathway);
   }
 
   const orderedWhyConditionals =
@@ -2069,14 +2460,14 @@ function getRecommendationImageAlt(recId, answers) {
   const foldableSuggested = shouldSuggestFoldable(answers);
 
   if (foldableSuggested && recId === "bicycle") {
-    return "Image of a foldable bicycle";
+    return isSpanishLocale() ? getUiText("foldableBikeImageAlt") : "Image of a foldable bicycle";
   }
 
   if (foldableSuggested && recId === "ebike") {
-    return "Image of a foldable electric bicycle";
+    return isSpanishLocale() ? getUiText("foldableEbikeImageAlt") : "Image of a foldable electric bicycle";
   }
 
-  return RECOMMENDATION_IMAGE_ALT_TEXT[recId] || OUTPUTS[recId]?.label || "";
+  return getRecommendationImageAltMap(recId);
 }
 
 function getMatchedConsiderationSlots(answers) {
@@ -2170,8 +2561,8 @@ function getResultCardConsiderationItems(recId, answers, content) {
   }
 
   if (answers.pathway === "exploring" && recId === "escooter") {
-    const bikeLaneText = "Due to their small wheels, standing position, and lack of suspension, e-scooters perform best on bike lanes and smooth paths.";
-    const mixedRoadText = "Due to their small wheels, standing position, and lack of suspension, e-scooters can feel less comfortable on rougher roads or in heavier traffic. Consider a model with suspesion and all-season tires.";
+    const bikeLaneText = getDeviceContent(recId)?.considerConditional?.routeBikeLanes || "";
+    const mixedRoadText = getDeviceContent(recId)?.considerConditional?.routeMixedRoads || "";
     const bikeLaneIndex = items.indexOf(bikeLaneText);
     const mixedRoadIndex = items.indexOf(mixedRoadText);
 
@@ -2179,7 +2570,9 @@ function getResultCardConsiderationItems(recId, answers, content) {
       items.splice(
         Math.min(bikeLaneIndex, mixedRoadIndex),
         2,
-        "Due to their small wheels, standing position, and lack of suspension, e-scooters perform best on bike lanes and smooth paths, and can feel less comfortable on rougher roads or in heavier traffic. Consider a model with suspesion and all-season tires."
+        isSpanishLocale()
+          ? "Por sus ruedas pequenas, la posicion de pie y la falta de suspension, los scooters electricos funcionan mejor en ciclovias y superficies lisas, y pueden sentirse menos comodos en calles irregulares o con mas trafico. Considera un modelo con suspension y llantas para todo clima."
+          : "Due to their small wheels, standing position, and lack of suspension, e-scooters perform best on bike lanes and smooth paths, and can feel less comfortable on rougher roads or in heavier traffic. Consider a model with suspesion and all-season tires."
       );
     }
   }
@@ -2191,11 +2584,11 @@ function getRecommendationImageTag(recId, answers) {
   const foldableSuggested = shouldSuggestFoldable(answers);
 
   if (foldableSuggested && recId === "bicycle") {
-    return "Suggested type: Foldable bike";
+    return isSpanishLocale() ? getUiText("foldableBikeTag") : "Suggested type: Foldable bike";
   }
 
   if (foldableSuggested && recId === "ebike") {
-    return "Suggested type: Foldable e-bike";
+    return isSpanishLocale() ? getUiText("foldableEbikeTag") : "Suggested type: Foldable e-bike";
   }
 
   return "";
@@ -2206,12 +2599,14 @@ function getConditionalNextSteps(recId, answers) {
 
   if (answers.transitLink === "yes") {
     steps.push({
-      label: "Check MBTA micromobility policies",
+      label: isSpanishLocale() ? "Consulta las politicas de micromovilidad de la MBTA" : "Check MBTA micromobility policies",
       url: "https://www.mbta.com/bikes"
     });
     if (recId !== "bikeshare") {
       steps.push({
-        label: "Learn how to safely park your micromobility device at an MBTA station",
+        label: isSpanishLocale()
+          ? "Aprende a estacionar de forma segura tu dispositivo de micromovilidad en una estacion de la MBTA"
+          : "Learn how to safely park your micromobility device at an MBTA station",
         url: "https://bc.mbta.com/riding_the_t/bikes/register/Default.asp"
       });
     }
@@ -2222,7 +2617,9 @@ function getConditionalNextSteps(recId, answers) {
     (recId === "ebike" || recId === "escooter" || recId === "lowSpeedPoweredMicromobility" || recId === "cargoBike" || recId === "adaptiveMobility")
   ) {
     steps.push({
-      label: "Learn how to safely charge your micromobility battery and avoid fires",
+      label: isSpanishLocale()
+        ? "Aprende a cargar de forma segura tu bateria de micromovilidad y a evitar incendios"
+        : "Learn how to safely charge your micromobility battery and avoid fires",
       url: "https://www.cpsc.gov/Safety-Education/Safety-Education-Centers/Micromobility-Information-Center"
     });
   }
@@ -2235,17 +2632,17 @@ function renderSingleRecommendationCard(rec, answers, pathway) {
   const considerationItems = getResultCardConsiderationItems(rec.id, answers, content);
   const rationaleHeading =
     pathway === "exploring"
-      ? "Why consider it"
+      ? (isSpanishLocale() ? getUiText("whyConsiderIt") : "Why consider it")
       : pathway === "myself"
-        ? "Why this fits for you"
-        : "Why this fits";
+        ? (isSpanishLocale() ? getUiText("whyThisFitsForYou") : "Why this fits for you")
+        : (isSpanishLocale() ? getUiText("whyThisFits") : "Why this fits");
   const considerations = getConsiderBase(rec.id);
 
   let filteredBaseConsiderations = [...considerations];
 
   if (answers.storage !== "indoor" && (rec.id === "ebike" || rec.id === "escooter")) {
     filteredBaseConsiderations = filteredBaseConsiderations.filter(
-      (item) => !item.includes("UL-certified batteries")
+      (_, itemIndex) => itemIndex !== 0
     );
   }
 
@@ -2256,17 +2653,13 @@ function renderSingleRecommendationCard(rec, answers, pathway) {
 
   const considerationGroups = [];
 
-  orderedConsiderations.forEach((item) => {
-    const isBluebikesDiscountDetail =
-      item === "If you participate in programs like SNAP or MassHealth, or have a qualifying income, you are eligible for a $50/year Bluebikes membership." ||
-      item === "If you live in the City of Boston and have not had an annual membership recently., you may be eligible for a $60/year Bluebikes membership, or $5/year if you have a qualifying income.";
-
+  orderedConsiderations.forEach((item, itemIndex) => {
     const lastGroup = considerationGroups[considerationGroups.length - 1];
     const canNestUnderPrevious =
       rec.id === "bikeshare" &&
-      isBluebikesDiscountDetail &&
+      (itemIndex === 3 || itemIndex === 4) &&
       lastGroup &&
-      lastGroup.item === "Many bikeshare companies, health insurance providers, universities, employers, or municipalities offer discounts. Check your providers to learn more.";
+      considerationGroups.length === 3;
 
     if (canNestUnderPrevious) {
       lastGroup.children.push(item);
@@ -2300,14 +2693,14 @@ function renderSingleRecommendationCard(rec, answers, pathway) {
 
   nextSteps.forEach((step) => {
     const isAdditionalShopLink =
-      step.label === "More shops on Pinkbike" ||
-      step.label === "More shops on Singletracks";
+      step.url === PINKBIKE_URL ||
+      step.url === SINGLETRACKS_URL;
 
     const lastGroup = nextStepGroups[nextStepGroups.length - 1];
     const canNestUnderPrevious =
       isAdditionalShopLink &&
       lastGroup &&
-      /Visit (your|a) local bike shop\.?$/i.test(lastGroup.step.label);
+      lastGroup.step.url === BIKE_SHOP_URL;
 
     if (canNestUnderPrevious) {
       lastGroup.children.push(step);
@@ -2360,17 +2753,17 @@ function renderSingleRecommendationCard(rec, answers, pathway) {
       </p>
 
       <div class="guidance">
-        <h3 class="guidance-heading">Things to consider</h3>
+        <h3 class="guidance-heading">${isSpanishLocale() ? getUiText("thingsToConsider") : "Things to consider"}</h3>
         <ul class="guidance-list">${considerationsHtml}</ul>
 
         <p class="device-cost">
-          <span class="device-cost-label">Typical cost:</span>
+          <span class="device-cost-label">${isSpanishLocale() ? getUiText("typicalCost") : "Typical cost"}:</span>
           <span class="device-cost-value">${content.cost}</span>
         </p>
       </div>
 
       <div class="next-steps">
-        <h3 class="guidance-heading">Next steps</h3>
+        <h3 class="guidance-heading">${isSpanishLocale() ? getUiText("nextSteps") : "Next steps"}</h3>
         <ul class="next-steps-list">${nextStepsHtml}</ul>
       </div>
     </div>
@@ -2436,7 +2829,7 @@ function renderRecommendations(recommendations, allRecommendations, answers, sco
 
   if (!recommendations.length) {
     result.classList.remove("hidden");
-    result.innerHTML = "<strong>No recommendations available.</strong>";
+    result.innerHTML = `<strong>${isSpanishLocale() ? getUiText("noRecommendations") : "No recommendations available."}</strong>`;
     return;
   }
 
@@ -2477,8 +2870,8 @@ function renderCurrentRecommendationPage() {
 
   const resultsIntroText =
     pathway === "exploring"
-      ? EXPLORING_RESULTS_TITLE_TEXT
-      : RESULTS_INTRO_TEXT;
+      ? (isSpanishLocale() ? getUiText("exploringResultsTitleText") : EXPLORING_RESULTS_TITLE_TEXT)
+      : (isSpanishLocale() ? getUiText("resultsIntroText") : RESULTS_INTRO_TEXT);
 
   result.classList.remove("hidden");
   result.innerHTML = `
@@ -2490,16 +2883,16 @@ function renderCurrentRecommendationPage() {
           id="resultPrevBtn"
           type="button"
           class="results-arrow-btn ${showPrev ? "" : "hidden"}"
-          aria-label="Previous recommendation"
+          aria-label="${isSpanishLocale() ? getUiText("previousRecommendation") : "Previous recommendation"}"
         >
           <span aria-hidden="true">&#8249;</span>
         </button>
-        <p class="results-counter">${index + 1} of ${recommendations.length}</p>
+        <p class="results-counter">${getDynamicCountLabel(index + 1, recommendations.length)}</p>
         <button
           id="resultNextBtn"
           type="button"
           class="results-arrow-btn ${showNext ? "" : "hidden"}"
-          aria-label="Next recommendation"
+          aria-label="${isSpanishLocale() ? getUiText("nextRecommendation") : "Next recommendation"}"
         >
           <span aria-hidden="true">&#8250;</span>
         </button>
@@ -2510,14 +2903,14 @@ function renderCurrentRecommendationPage() {
         class="results-restart-btn results-restart-btn-desktop"
         data-role="restart-results"
       >
-        Start over
+        ${isSpanishLocale() ? getUiText("startOver") : "Start over"}
       </button>
 
       <button
         type="button"
         class="results-print-btn results-print-btn-desktop"
         data-role="print-results"
-        aria-label="Print results"
+        aria-label="${isSpanishLocale() ? getUiText("printResults") : "Print results"}"
       >
         ${PRINT_ICON_SVG}
       </button>
@@ -2531,21 +2924,21 @@ function renderCurrentRecommendationPage() {
         class="results-restart-btn results-restart-btn-mobile"
         data-role="restart-results"
       >
-        Start over
+        ${isSpanishLocale() ? getUiText("startOver") : "Start over"}
       </button>
 
       <button
         type="button"
         class="results-print-btn results-print-btn-mobile"
         data-role="print-results"
-        aria-label="Print results"
+        aria-label="${isSpanishLocale() ? getUiText("printResults") : "Print results"}"
       >
         ${PRINT_ICON_SVG}
       </button>
     </div>
 
     <p class="recommendation-disclaimer results-disclaimer">
-      ${SCORING_DISCLAIMER_TEXT}
+      ${isSpanishLocale() ? getUiText("scoringDisclaimerText") : SCORING_DISCLAIMER_TEXT}
     </p>
 
     ${allResultsPanelHtml}
@@ -2669,7 +3062,7 @@ function getRenderedQuestionLabel(questionId) {
 }
 
 function getRenderedQuestionOptions(questionId) {
-  const question = QUESTIONS[questionId];
+  const question = getLocalizedQuestion(questionId);
   if (!question?.options) return [];
 
   const pathway = getSelectedPathway();
@@ -2686,7 +3079,12 @@ function getRenderedQuestionOptions(questionId) {
     .filter((option) => showDeliveryOption || option.value !== "deliveries")
     .map((option) =>
       option.value === "transport"
-        ? { ...option, label: "School, commuting, or errands" }
+        ? {
+            ...option,
+            label: isSpanishLocale()
+              ? getUiText("childTransportOptionLabel")
+              : "School, commuting, or errands"
+          }
         : option
     );
 }
@@ -2729,6 +3127,7 @@ function renderLandingCopy() {
   const copy = getLandingLocaleCopy();
 
   document.documentElement.lang = APP_STATE.locale;
+  renderLocaleChrome();
 
   if (heroTitle) {
     heroTitle.textContent = copy.heroTitle;
@@ -2768,7 +3167,7 @@ function renderQuestion() {
 
   const sequence = getCurrentSequence();
   const questionId = getCurrentQuestionId();
-  const question = QUESTIONS[questionId];
+  const question = getLocalizedQuestion(questionId);
   const renderedOptions = getRenderedQuestionOptions(questionId);
   const renderedLabel = getRenderedQuestionLabel(questionId);
   const savedValue = APP_STATE.answers[questionId] || "";
@@ -2794,7 +3193,7 @@ progress.textContent = "";
                   <span class="option-card-media">
                     <img
                       src="${ROUTE_OPTION_MEDIA[option.value].src}"
-                      alt="${ROUTE_OPTION_MEDIA[option.value].alt}"
+                      alt="${getRouteOptionAlt(option.value)}"
                       class="option-card-image"
                     >
                   </span>
@@ -2861,7 +3260,7 @@ progress.textContent = "";
         max="${question.max}"
         step="1"
         value="${savedValue}"
-        placeholder="Enter age"
+        placeholder="${isSpanishLocale() ? getUiText("agePlaceholder") : "Enter age"}"
         style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #d0d0d0; font-size: 15px; box-sizing: border-box;"
       />
       <div id="stepError" class="error-message hidden" style="margin-top: 8px;"></div>
@@ -2917,14 +3316,17 @@ function clearStepError() {
 
 function saveCurrentStepValue() {
   const questionId = getCurrentQuestionId();
-  const question = QUESTIONS[questionId];
+  const question = getLocalizedQuestion(questionId);
 
-  if (!question) return { valid: false, message: "Question not found." };
+  if (!question) return { valid: false, message: isSpanishLocale() ? "No se encontro la pregunta." : "Question not found." };
 
   if (question.type === "radio") {
     const selected = document.querySelector(`input[name="${questionId}"]:checked`);
     if (!selected) {
-      return { valid: false, message: "Please select an answer before continuing." };
+      return {
+        valid: false,
+        message: isSpanishLocale() ? getUiText("selectAnswerError") : "Please select an answer before continuing."
+      };
     }
 
     APP_STATE.answers[questionId] = selected.value;
@@ -2942,18 +3344,26 @@ function saveCurrentStepValue() {
     const age = Number(rawValue);
 
     if (rawValue === "" || !Number.isInteger(age)) {
-      return { valid: false, message: "Please enter an age before continuing." };
+      return {
+        valid: false,
+        message: isSpanishLocale() ? getUiText("enterAgeError") : "Please enter an age before continuing."
+      };
     }
 
     if (age < question.min || age > question.max) {
-      return { valid: false, message: `Please enter an age between ${question.min} and ${question.max}.` };
+      return {
+        valid: false,
+        message: isSpanishLocale()
+          ? `${getUiText("enterAgeBetweenPrefix")} ${question.min} ${getUiText("enterAgeBetweenJoin")} ${question.max}.`
+          : `Please enter an age between ${question.min} and ${question.max}.`
+      };
     }
 
     APP_STATE.answers[questionId] = rawValue;
     return { valid: true };
   }
 
-  return { valid: false, message: "Unsupported question type." };
+  return { valid: false, message: isSpanishLocale() ? "Este tipo de pregunta no es compatible." : "Unsupported question type." };
 }
 
 function handleNext() {
@@ -3013,14 +3423,14 @@ window.addEventListener("DOMContentLoaded", () => {
   if (langEnBtn) {
     langEnBtn.addEventListener("click", () => {
       APP_STATE.locale = "en";
-      renderLandingCopy();
+      renderQuestion();
     });
   }
 
   if (langEsBtn) {
     langEsBtn.addEventListener("click", () => {
       APP_STATE.locale = "es";
-      renderLandingCopy();
+      renderQuestion();
     });
   }
 
