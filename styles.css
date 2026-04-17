@@ -551,9 +551,11 @@ body.results-view-active .site-branding {
   align-items: center;
   justify-content: center;
   border-radius: 999px;
+  border: 1.5px solid rgba(20, 85, 143, 0.18);
   font-size: 30px;
   font-weight: 700;
   line-height: 1;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
 }
 
 .lab-logo {
@@ -983,7 +985,7 @@ body.results-view-active .site-branding {
   align-items: center;
   justify-content: center;
   border-radius: 999px;
-  border: none;
+  border: 1.5px solid rgba(20, 85, 143, 0.18);
   background: var(--button-green-aa);
   font-size: 30px;
   font-weight: 700;
@@ -998,6 +1000,22 @@ body.results-view-active .site-branding {
 .results-arrow-btn span {
   display: block;
   transform: translateY(-1px);
+}
+
+@media (forced-colors: active) {
+  .form-nav button,
+  .results-arrow-btn {
+    forced-color-adjust: auto;
+    background: ButtonFace;
+    color: ButtonText;
+    border: 2px solid ButtonText;
+    box-shadow: none;
+  }
+
+  .form-nav button:hover,
+  .results-arrow-btn:hover {
+    transform: none;
+  }
 }
 
 .results-arrow-btn.hidden {
