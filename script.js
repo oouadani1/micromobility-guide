@@ -3220,6 +3220,10 @@ progress.textContent = "";
       });
 
       input.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter") {
+          pointerSelectionInProgress = false;
+        }
+
         if (event.key !== "Enter") return;
         if (!input.checked) return;
 
