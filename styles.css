@@ -1002,22 +1002,6 @@ body.results-view-active .site-branding {
   transform: translateY(-1px);
 }
 
-@media (forced-colors: active) {
-  .form-nav button,
-  .results-arrow-btn {
-    forced-color-adjust: auto;
-    background: ButtonFace;
-    color: ButtonText;
-    border: 2px solid ButtonText;
-    box-shadow: none;
-  }
-
-  .form-nav button:hover,
-  .results-arrow-btn:hover {
-    transform: none;
-  }
-}
-
 .results-arrow-btn.hidden {
   display: inline-flex !important;
   visibility: hidden;
@@ -1028,6 +1012,26 @@ body.results-view-active .site-branding {
   margin-top: 0;
   margin-left: auto;
   white-space: nowrap;
+  border: 1.5px solid rgba(20, 85, 143, 0.18);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+@media (forced-colors: active) {
+  .form-nav button,
+  .results-arrow-btn,
+  .results-restart-btn {
+    forced-color-adjust: auto;
+    background: ButtonFace;
+    color: ButtonText;
+    border: 2px solid ButtonText;
+    box-shadow: none;
+  }
+
+  .form-nav button:hover,
+  .results-arrow-btn:hover,
+  .results-restart-btn:hover {
+    transform: none;
+  }
 }
 
 .results-print-btn {
