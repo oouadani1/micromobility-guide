@@ -71,8 +71,8 @@ window.MICROMOBILITY_TRANSLATIONS = {
         shortLabel: "Bicicletas compartidas"
       },
       adaptiveMobility: {
-        label: "Ciclos adaptados",
-        shortLabel: "Ciclos adaptados"
+        label: "Bicicletas adaptadas",
+        shortLabel: "Bicicletas adaptadas"
       },
       humanPoweredYouth: {
         label: "Opciones de movilidad según la edad",
@@ -143,9 +143,9 @@ window.MICROMOBILITY_TRANSLATIONS = {
       storage: {
         label: "¿Cómo se guardará normalmente el dispositivo?",
         options: {
-          indoor: "Tiene que ser fácil guardarlo adentro",
-          outdoor: "Normalmente se guardará afuera",
-          notMajorConcern: "El lugar para guardarlo es flexible"
+          indoor: "Tiene que ser fácil llevarlo adentro",
+          outdoor: "Se guardará afuera la mayoría del tiempo",
+          notMajorConcern: "Tengo flexibilidad para guardarlo"
         }
       }
     }
@@ -198,7 +198,7 @@ window.MICROMOBILITY_TRANSLATIONS = {
       escooter: "Scooter eléctrico de pie",
       lowSpeedPoweredMicromobility: "Dispositivos eléctricos compactos de baja velocidad",
       cargoBike: "Bicicleta de carga de cola larga",
-      adaptiveMobility: "Ciclos adaptados",
+      adaptiveMobility: "Bicicletas adaptadas",
       bikeshare: "Bicicletas compartidas en estación",
       humanPoweredYouth: "Opciones de movilidad para niños y jóvenes"
     }
@@ -218,7 +218,7 @@ window.MICROMOBILITY_TRANSLATIONS = {
       bikeshare:
         "Las bicicletas compartidas resultan muy útiles cuando la flexibilidad importa más que tener un dispositivo propio. Suelen funcionar bien para trayectos cortos, mandados y conexiones con el transporte público, especialmente en lugares donde las estaciones son fáciles de encontrar.",
       adaptiveMobility:
-        "Un ciclo adaptado puede ser una muy buena opción cuando la comodidad, la estabilidad o el apoyo físico son especialmente importantes. Distintos diseños adaptados pueden servir para transporte, recreación o necesidades específicas de movilidad, según la configuración.",
+        "Una bicicleta adaptada puede ser una muy buena opción cuando la comodidad, la estabilidad o el apoyo físico son especialmente importantes. Distintos diseños adaptados pueden servir para transporte, recreación o necesidades específicas de movilidad, según la configuración.",
       humanPoweredYouth:
         "Las opciones de movilidad adecuadas para la edad pueden ayudar a niños y jóvenes a ganar confianza y habilidades con el tiempo. Suelen ser adecuadas para recreación, práctica y trayectos cortos en parques, caminos y otros entornos de menor estrés."
     }
@@ -425,7 +425,7 @@ window.MICROMOBILITY_TRANSLATIONS = {
       },
       adaptiveMobility: {
         cost: "$2,500-$10,000",
-        whyBase: "Un ciclo adaptado puede ser una opción versátil para moverse.",
+        whyBase: "Una bicicleta adaptada puede ser una opción versátil para moverse.",
         whyConditional: {
           adaptiveNeedYes:
             "Es una muy buena opción cuando hay una discapacidad o una necesidad de apoyo para la movilidad, porque estos dispositivos pueden adaptarse a distintas necesidades, niveles de comodidad y usos.",
@@ -435,7 +435,7 @@ window.MICROMOBILITY_TRANSLATIONS = {
             "Además, muchos tienen una posición sentada cómoda o reclinada, lo que puede hacerlos una buena opción para recreación y ejercicio suave."
         },
         considerBase: [
-          "Los ciclos adaptados vienen en distintos estilos. Vale la pena explorar bicicletas reclinadas, triciclos y ciclos impulsados con las manos."
+          "Las bicicletas adaptadas vienen en distintos estilos. Vale la pena explorar bicicletas reclinadas, triciclos y bicicletas impulsadas con las manos."
         ],
         considerConditional: {
           age14to16:
@@ -445,12 +445,12 @@ window.MICROMOBILITY_TRANSLATIONS = {
           carryChildrenYes:
             "Si hay una discapacidad y además se llevarán niños, vale la pena considerar un triciclo de carga eléctrico, que puede ofrecer estabilidad, seguridad y espacio. Asegúrate de que los niños usen cascos bien ajustados y que vayan sujetos en asientos o arneses adecuados.",
           storageIndoor:
-            "Los ciclos adaptados no suelen ser ideales para guardarlos adentro por su peso y largo. Si se guardarán en un cobertizo o garaje y tienen motor eléctrico, sigue prácticas seguras de carga para reducir el riesgo de sobrecalentamiento y fuego.",
+            "Las bicicletas adaptadas no suelen ser ideales para guardarlas adentro por su peso y largo. Si se guardarán en un cobertizo o garaje y tienen motor eléctrico, sigue prácticas seguras de carga para reducir el riesgo de sobrecalentamiento y fuego.",
           storageOutdoor:
-            "Si se guardará afuera un ciclo adaptado, quita siempre la batería si la tiene, usa un candado de buena calidad y una cubierta impermeable, y procura dejarlo en un lugar seguro."
+            "Si se guardará afuera una bicicleta adaptada, quita siempre la batería si la tiene, usa un candado de buena calidad y una cubierta impermeable, y procura dejarla en un lugar seguro."
         },
         nextSteps: [
-          { label: "Aprende más sobre ciclos adaptados", url: "https://canva.link/nj039whwwsd7466" },
+          { label: "Aprende más sobre bicicletas adaptadas", url: "https://canva.link/nj039whwwsd7466" },
           { label: "Participa en un evento de ciclismo accesible", url: "https://www.mass.gov/accessible-cycling" },
           { label: "Aprende más sobre el Programa de Acceso Universal del Departamento de Conservación y Recreación", url: "https://www.mass.gov/orgs/universal-access-program" },
           { label: "Consulta la lista de equipos de ciclismo adaptado del Departamento de Conservación y Recreación", url: "https://www.mass.gov/info-details/adaptive-cycling-equipment" },
