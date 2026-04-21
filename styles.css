@@ -396,11 +396,13 @@ button.hidden {
 }
 
 .all-results-tag-suggested {
-  color: #222;
+  color: var(--text-blue-aa);
+  font-weight: 600;
 }
 
 .all-results-tag-not {
   color: #d32f2f;
+  font-weight: 600;
 }
 
 .all-results-reason {
