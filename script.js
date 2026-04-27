@@ -1190,6 +1190,7 @@ const APP_STATE = {
   answers: {},
   locale: "en",
   currentResultIndex: 0,
+  allResultsPanelOpen: false,
   currentRecommendations: [],
   currentAllRecommendations: [],
   currentNormalizedAnswers: null,
@@ -2200,7 +2201,7 @@ function renderAllDeviceResultsPanel(allRecommendations, answers) {
     .join("");
 
   return `
-    <details class="all-results-panel">
+    <details class="all-results-panel"${APP_STATE.allResultsPanelOpen ? " open" : ""}>
       <summary>${isSpanishLocale() ? getUiText("seeAllDeviceTypes") : "See all device types"}</summary>
       <ul class="all-results-list">${itemsHtml}</ul>
     </details>
@@ -2788,6 +2789,7 @@ function renderSingleRecommendationCard(rec, answers, pathway) {
 function resetAppState() {
   APP_STATE.currentStep = 0;
   APP_STATE.currentResultIndex = 0;
+  APP_STATE.allResultsPanelOpen = false;
   APP_STATE.currentRecommendations = [];
   APP_STATE.currentAllRecommendations = [];
   APP_STATE.currentNormalizedAnswers = null;
@@ -2967,6 +2969,13 @@ function renderCurrentRecommendationPage() {
   const restartBtns = document.querySelectorAll('[data-role="restart-results"]');
   const printBtns = document.querySelectorAll('[data-role="print-results"]');
   const cardEl = result.querySelector(".recommendation-card");
+  const allResultsPanel = result.querySelector(".all-results-panel");
+
+  if (allResultsPanel) {
+    allResultsPanel.addEventListener("toggle", () => {
+      APP_STATE.allResultsPanelOpen = allResultsPanel.open;
+    });
+  }
 
   if (prevBtn) {
     prevBtn.addEventListener("click", () => {
