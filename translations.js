@@ -75,8 +75,8 @@ window.MICROMOBILITY_TRANSLATIONS = {
         shortLabel: "Bicicletas adaptadas"
       },
       humanPoweredYouth: {
-        label: "Opciones de movilidad según la edad",
-        shortLabel: "Movilidad juvenil"
+        label: "Micromovilidad infantil",
+        shortLabel: "Micromovilidad infantil"
       }
     }
   },
@@ -197,10 +197,10 @@ window.MICROMOBILITY_TRANSLATIONS = {
       ebike: "Bicicleta eléctrica de cuadro bajo",
       escooter: "Scooter eléctrico de pie",
       lowSpeedPoweredMicromobility: "Dispositivos eléctricos compactos de baja velocidad",
-      cargoBike: "Bicicleta de carga de cola larga",
+      cargoBike: "Bicicleta longtail de carga",
       adaptiveMobility: "Bicicletas adaptadas",
       bikeshare: "Bicicletas compartidas en estación",
-      humanPoweredYouth: "Opciones de movilidad para niños y jóvenes"
+      humanPoweredYouth: "Micromovilidad infantil"
     }
   },
   exploreReasons: {
@@ -220,7 +220,7 @@ window.MICROMOBILITY_TRANSLATIONS = {
       adaptiveMobility:
         "Una bicicleta adaptada puede ser una muy buena opción cuando la comodidad, la estabilidad o el apoyo físico son especialmente importantes. Distintos diseños adaptados pueden servir para transporte, recreación o necesidades específicas de movilidad, según la configuración.",
       humanPoweredYouth:
-        "Las opciones de movilidad adecuadas para la edad pueden ayudar a niños y jóvenes a ganar confianza y habilidades con el tiempo. Suelen ser adecuadas para recreación, práctica y trayectos cortos en parques, caminos y otros entornos de menor estrés."
+        "La micromovilidad infantil puede ayudar a niños y niñas a ganar confianza y habilidades con el tiempo. Suele funcionar bien para recreación, práctica y trayectos cortos en parques, caminos y otros entornos de menor estrés."
     }
   },
   deviceContent: {
@@ -322,7 +322,7 @@ window.MICROMOBILITY_TRANSLATIONS = {
             "Sigue prácticas seguras de carga si el scooter eléctrico se guardará adentro para reducir el riesgo de sobrecalentamiento y fuego. Consulta Próximos pasos para más información sobre carga segura."
         },
         nextSteps: [
-          { label: "Aprende más sobre scooters eléctricos", url: "https://canva.link/t5ka95rvio5ijw3" }
+          { label: "Aprende más sobre scooters eléctricos", url: "https://canva.link/cp01o7oz44c6k3x" }
         ]
       },
       lowSpeedPoweredMicromobility: {
@@ -351,7 +351,7 @@ window.MICROMOBILITY_TRANSLATIONS = {
             "Sigue prácticas seguras de carga si el dispositivo eléctrico compacto se guardará adentro para reducir el riesgo de sobrecalentamiento y fuego. Consulta Próximos pasos para más información sobre carga segura."
         },
         nextSteps: [
-          { label: "Aprende más sobre dispositivos eléctricos compactos", url: "https://canva.link/60attcpjzby1bki" }
+          { label: "Aprende más sobre dispositivos eléctricos compactos", url: "https://canva.link/tryse3p99aay4kh" }
         ]
       },
       cargoBike: {
@@ -386,7 +386,7 @@ window.MICROMOBILITY_TRANSLATIONS = {
             "Si se guardará afuera, quita siempre la batería si la tiene, usa un candado de buena calidad y una cubierta impermeable, y procura dejarla en un lugar seguro."
         },
         nextSteps: [
-          { label: "Aprende más sobre bicicletas de carga", url: "https://canva.link/gcyamow1yonirts" },
+          { label: "Aprende más sobre bicicletas de carga", url: "https://canva.link/mxd4tl2ztz66udv" },
           { label: "Pide prestada una bicicleta de carga gratis para ver si es adecuada para ti", url: "https://cpp.ebikelibrary.org/" },
           { label: "Visita una tienda local de bicicletas", url: "https://nbda.com/dealer-finder-member-directory/#!directory/map/tag=Massachusetts" },
           { label: "Más tiendas en Pinkbike", url: "https://www.pinkbike.com/directory/list/massachusetts/2/bike-shop/" },
@@ -417,7 +417,7 @@ window.MICROMOBILITY_TRANSLATIONS = {
         ],
         considerConditional: {},
         nextSteps: [
-          { label: "Aprende sobre bicicletas compartidas", url: "https://canva.link/b11lytyb0ic1dgc" },
+          { label: "Aprende sobre bicicletas compartidas", url: "https://canva.link/okeib3m5wndg3le" },
           { label: "Consulta los programas de bicicletas compartidas y descuentos en Massachusetts", url: "https://goclean.masscec.com/homeowners/bike-share-programs/" },
           { label: "Consulta el descuento de Bluebikes para personas con ingresos elegibles", url: "https://bluebikes.com/pricing/income-eligible-program" },
           { label: "Consulta el descuento de Bluebikes de la ciudad de Boston", url: "https://www.boston.gov/departments/boston-bikes/discounted-bluebikes" }
@@ -450,7 +450,7 @@ window.MICROMOBILITY_TRANSLATIONS = {
             "Si se guardará afuera una bicicleta adaptada, quita siempre la batería si la tiene, usa un candado de buena calidad y una cubierta impermeable, y procura dejarla en un lugar seguro."
         },
         nextSteps: [
-          { label: "Aprende más sobre bicicletas adaptadas", url: "https://canva.link/nj039whwwsd7466" },
+          { label: "Aprende más sobre bicicletas adaptadas", url: "https://canva.link/vgl07xaudinnid3" },
           { label: "Participa en un evento de ciclismo accesible", url: "https://www.mass.gov/accessible-cycling" },
           { label: "Aprende más sobre el Programa de Acceso Universal del Departamento de Conservación y Recreación", url: "https://www.mass.gov/orgs/universal-access-program" },
           { label: "Consulta la lista de equipos de ciclismo adaptado del Departamento de Conservación y Recreación", url: "https://www.mass.gov/info-details/adaptive-cycling-equipment" },
@@ -460,7 +460,7 @@ window.MICROMOBILITY_TRANSLATIONS = {
       humanPoweredYouth: {
         cost: "$50-$500, según el tipo de dispositivo",
         whyBase:
-          "Las opciones de movilidad adecuadas para la edad pueden ayudar a niños y jóvenes a ganar confianza y habilidades poco a poco.",
+          "La micromovilidad infantil puede ayudar a niños y niñas a ganar confianza y habilidades poco a poco.",
         whyConditional: {
           recreation:
             "Estas opciones funcionan bien para recreación, práctica y recorridos cotidianos por el vecindario.",
@@ -478,7 +478,7 @@ window.MICROMOBILITY_TRANSLATIONS = {
             "Los niños y niñas de 9 a 12 años suelen poder usar con seguridad bicicletas y scooters sin motor, pero los dispositivos motorizados más rápidos por lo general no son adecuados, porque el equilibrio, la dirección y la toma de riesgos pueden hacer más difícil usarlos de manera segura."
         },
         nextSteps: [
-          { label: "Aprende más sobre opciones de movilidad para niños y jóvenes", url: "https://canva.link/60qopm17rsnhlls" },
+          { label: "Aprende más sobre micromovilidad infantil", url: "https://canva.link/hlxw7uyjn0rutxx" },
           { label: "Visita una tienda local de bicicletas", url: "https://nbda.com/dealer-finder-member-directory/#!directory/map/tag=Massachusetts" },
           { label: "Más tiendas en Pinkbike", url: "https://www.pinkbike.com/directory/list/massachusetts/2/bike-shop/" },
           { label: "Más tiendas en Singletracks", url: "https://www.singletracks.com/bike-shops/region/massachusetts/" },
