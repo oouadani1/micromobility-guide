@@ -3374,11 +3374,21 @@ function saveCurrentStepValue() {
     const input = document.getElementById(questionId);
     const rawValue = input?.value?.trim() || "";
     const age = Number(rawValue);
+    const wholeNumberPattern = /^[1-9]\d*$/;
 
-    if (rawValue === "" || !Number.isInteger(age)) {
+    if (rawValue === "") {
       return {
         valid: false,
         message: isSpanishLocale() ? getUiText("enterAgeError") : "Please enter an age before continuing."
+      };
+    }
+
+    if (!wholeNumberPattern.test(rawValue) || !Number.isInteger(age)) {
+      return {
+        valid: false,
+        message: isSpanishLocale()
+          ? getUiText("enterWholeAgeError")
+          : "Please enter a whole number age without decimals."
       };
     }
 

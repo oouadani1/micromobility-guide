@@ -36,6 +36,7 @@ window.MICROMOBILITY_TRANSLATIONS = {
       agePlaceholder: "Escribe la edad",
       selectAnswerError: "Selecciona una respuesta antes de continuar.",
       enterAgeError: "Escribe una edad antes de continuar.",
+      enterWholeAgeError: "Escribe una edad con un número entero, sin decimales.",
       enterAgeBetweenPrefix: "Escribe una edad entre",
       enterAgeBetweenJoin: "y",
       countOf: "de",
