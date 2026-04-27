@@ -973,9 +973,9 @@ const SCORING_RULES = {
       ebike: 1,
       escooter: 1,
       lowSpeedPoweredMicromobility: 2,
-      cargoBike: 1,
+      cargoBike: 0,
       adaptiveMobility: -1,
-      bikeshare: 0
+      bikeshare: 1
     },
     outdoor: {
       bicycle: 2,
@@ -2229,9 +2229,9 @@ function renderPrintRecommendationSummary(rec, answers, pathway) {
   const orderedConsiderations = [...considerations, ...considerationItems];
   const considerationsHtml = orderedConsiderations
     .slice(0, 3)
-    .map((item) => `<li>${formatTextForPathway(item, pathway)}</li>`)
+    .map((item) => `<li>${stripPrintNextStepsText(formatTextForPathway(item, pathway))}</li>`)
     .join("");
-  const printReason = getRecommendationReason(rec.id, answers, pathway);
+  const printReason = stripPrintNextStepsText(getRecommendationReason(rec.id, answers, pathway));
 
   return `
     <article class="print-rec-card">
@@ -2247,6 +2247,19 @@ function renderPrintRecommendationSummary(rec, answers, pathway) {
       ${considerationsHtml ? `<ul class="print-rec-list">${considerationsHtml}</ul>` : ""}
     </article>
   `;
+}
+
+function stripPrintNextStepsText(text) {
+  if (!text) return text;
+
+  return text
+    .replace(/\s*See Next steps to[^.]*\./gi, "")
+    .replace(/\s*See Next steps for[^.]*\./gi, "")
+    .replace(/\s*or see Next steps to[^.]*\./gi, "")
+    .replace(/\s*Consulta Próximos pasos para[^.]*\./gi, "")
+    .replace(/\s*o consulta Próximos pasos[^.]*\./gi, "")
+    .replace(/\s{2,}/g, " ")
+    .trim();
 }
 
 function getPrintDensityClass(recommendations, rawAnswers, answers, pathway) {

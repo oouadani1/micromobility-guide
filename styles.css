@@ -1428,7 +1428,7 @@ body.results-view-active .site-branding {
   .print-section-heading {
     margin: 0 0 5px;
     font-size: 10pt;
-    color: var(--text-green-aa);
+    color: var(--text-blue-aa);
   }
 
   .print-input-list {
@@ -1481,7 +1481,7 @@ body.results-view-active .site-branding {
   .print-rec-title {
     margin: 0;
     font-size: 10pt;
-    color: var(--text-green-aa);
+    color: var(--text-blue-aa);
   }
 
   .print-rec-image-tag,
