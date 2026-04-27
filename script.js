@@ -2941,8 +2941,7 @@ function renderCurrentRecommendationPage() {
 
     <p class="recommendation-disclaimer results-disclaimer">
       ${isSpanishLocale() ? getUiText("scoringDisclaimerText") : SCORING_DISCLAIMER_TEXT}
-    </p>
-    <p class="recommendation-disclaimer results-disclaimer">
+      <span class="recommendation-disclaimer-separator" aria-hidden="true"> | </span>
       ${isSpanishLocale() ? getUiText("feedbackPromptText") : FEEDBACK_PROMPT_TEXT}
     </p>
 

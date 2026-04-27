@@ -440,8 +440,12 @@ button.hidden {
   color: #666;
 }
 
+.recommendation-disclaimer-separator {
+  color: #888;
+}
+
 .recommendation-disclaimer a {
-  color: inherit;
+  color: var(--text-blue-aa);
   text-decoration: underline;
 }
 
