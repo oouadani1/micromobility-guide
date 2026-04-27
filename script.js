@@ -3374,7 +3374,8 @@ function saveCurrentStepValue() {
     const input = document.getElementById(questionId);
     const rawValue = input?.value?.trim() || "";
     const age = Number(rawValue);
-    const wholeNumberPattern = /^[1-9]\d*$/;
+    const leadingZerosPattern = /^0\d+$/;
+    const digitsOnlyPattern = /^\d+$/;
 
     if (rawValue === "") {
       return {
@@ -3383,7 +3384,16 @@ function saveCurrentStepValue() {
       };
     }
 
-    if (!wholeNumberPattern.test(rawValue) || !Number.isInteger(age)) {
+    if (leadingZerosPattern.test(rawValue)) {
+      return {
+        valid: false,
+        message: isSpanishLocale()
+          ? getUiText("enterAgeLeadingZerosError")
+          : "Please enter a whole number age without zeros in the beginning."
+      };
+    }
+
+    if (!digitsOnlyPattern.test(rawValue) || !Number.isInteger(age)) {
       return {
         valid: false,
         message: isSpanishLocale()
