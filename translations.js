@@ -248,7 +248,7 @@ window.MICROMOBILITY_TRANSLATIONS = {
             "Si la bicicleta se guardará afuera, conviene usar un candado de buena calidad y buscar un lugar seguro para estacionarla."
         },
         nextSteps: [
-          { label: "Aprende más sobre bicicletas", url: "https://canva.link/nrvd5v2bvwbf99v" },
+          { label: "Aprende más sobre bicicletas", url: "https://canva.link/bh775v57ue1fke8" },
           { label: "Visita una tienda local de bicicletas", url: "https://nbda.com/dealer-finder-member-directory/#!directory/map/tag=Massachusetts" },
           { label: "Más tiendas en Pinkbike", url: "https://www.pinkbike.com/directory/list/massachusetts/2/bike-shop/" },
           { label: "Más tiendas en Singletracks", url: "https://www.singletracks.com/bike-shops/region/massachusetts/" },
@@ -290,7 +290,7 @@ window.MICROMOBILITY_TRANSLATIONS = {
             "Si la bicicleta eléctrica se guardará afuera, quita siempre la batería, usa un candado de buena calidad y procura dejarla en un lugar seguro."
         },
         nextSteps: [
-          { label: "Aprende más sobre bicicletas eléctricas", url: "https://canva.link/ez6c09mq8tpfpk4" },
+          { label: "Aprende más sobre bicicletas eléctricas", url: "https://canva.link/i1cgpdzh1o50n4i" },
           { label: "Visita una tienda local de bicicletas", url: "https://nbda.com/dealer-finder-member-directory/#!directory/map/tag=Massachusetts" },
           { label: "Más tiendas en Pinkbike", url: "https://www.pinkbike.com/directory/list/massachusetts/2/bike-shop/" },
           { label: "Más tiendas en Singletracks", url: "https://www.singletracks.com/bike-shops/region/massachusetts/" },
