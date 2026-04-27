@@ -51,6 +51,8 @@ const RESULTS_INTRO_TEXT = "Based on your responses, these micromobility options
 const EXPLORING_RESULTS_TITLE_TEXT = "Explore a variety of micromobility devices.";
 const SCORING_DISCLAIMER_TEXT =
   "Suggestions are generated using an additive scoring system based on your responses. Results are informational only, and more than one device type may be appropriate.";
+const FEEDBACK_PROMPT_TEXT =
+  'Love this idea? Think it needs more work? Let us know your thoughts at <a href="mailto:thelab@dot.state.ma.us">thelab@dot.state.ma.us</a>.';
 const PRINT_ICON_SVG =
   '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 9V4h10v5"/><path d="M7 14H5a2 2 0 0 1-2-2v-1.5A2.5 2.5 0 0 1 5.5 8h13A2.5 2.5 0 0 1 21 10.5V12a2 2 0 0 1-2 2h-2"/><path d="M7 12h10v8H7z"/><circle cx="17.5" cy="10.5" r=".75" fill="currentColor" stroke="none"/></svg>';
 const RECOMMENDATION_IMAGE_ALT_TEXT = {
@@ -2939,6 +2941,9 @@ function renderCurrentRecommendationPage() {
 
     <p class="recommendation-disclaimer results-disclaimer">
       ${isSpanishLocale() ? getUiText("scoringDisclaimerText") : SCORING_DISCLAIMER_TEXT}
+    </p>
+    <p class="recommendation-disclaimer results-disclaimer">
+      ${isSpanishLocale() ? getUiText("feedbackPromptText") : FEEDBACK_PROMPT_TEXT}
     </p>
 
     ${allResultsPanelHtml}

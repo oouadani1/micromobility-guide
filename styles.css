@@ -440,6 +440,11 @@ button.hidden {
   color: #666;
 }
 
+.recommendation-disclaimer a {
+  color: inherit;
+  text-decoration: underline;
+}
+
 .recommendation-sublist {
   margin: 8px 0 0 0;
   padding-left: 28px;

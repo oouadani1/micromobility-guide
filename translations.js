@@ -12,6 +12,8 @@ window.MICROMOBILITY_TRANSLATIONS = {
         "Explora una variedad de dispositivos de micromovilidad.",
       scoringDisclaimerText:
         "Las sugerencias se generan con un sistema de puntuación acumulativa basado en tus respuestas. Los resultados son solo informativos y puede haber más de un tipo de dispositivo adecuado.",
+      feedbackPromptText:
+        '¿Te gusta esta idea? ¿Crees que necesita más trabajo? Compártenos tus comentarios en <a href="mailto:thelab@dot.state.ma.us">thelab@dot.state.ma.us</a>.',
       alsoSuggested: "También recomendado",
       notSuggested: "No recomendado",
       seeAllDeviceTypes: "Ver todos los tipos de dispositivos",
