@@ -35,17 +35,17 @@ const OUTPUTS = {
 
 const APP_NAME = "Explore Micromobility";
 const INTRO_TEXT =
-  "Explore Micromobility is a public information tool for browsing micromobility options, such as bikes, e-scooters, and more. Answer a few questions to see which device types are surfaced based on your responses.";
+  "Explore Micromobility is a public information tool for browsing micromobility options, such as bikes, e-scooters, and more. Answer a few questions to explore some micromobility devices.";
 const LANDING_PAGE_COPY = {
   en: {
-    heroTitle: "Explore micromobility options in Massachusetts.",
+    heroTitle: "Explore Micromobility",
     introText:
-      "Explore Micromobility is a public information tool for browsing micromobility options, such as bikes, e-scooters, and more. Answer a few questions to see which device types are surfaced based on your responses."
+      "Explore Micromobility is a public information tool for browsing micromobility options, such as bikes, e-scooters, and more. Answer a few questions to explore some micromobility devices."
   },
   es: {
-    heroTitle: "Explora opciones de micromovilidad en Massachusetts.",
+    heroTitle: "Explore Micromobility",
     introText:
-      "Explore Micromobility es una herramienta pública de información para explorar opciones de micromovilidad, como bicicletas y scooters eléctricos. Responde algunas preguntas para ver qué tipos de dispositivos aparecen según tus respuestas."
+      "Explore Micromobility es una herramienta pública de información para explorar opciones de micromovilidad, como bicicletas, scooters eléctricos y más. Responde algunas preguntas para explorar algunos dispositivos de micromovilidad."
   }
 };
 const RESULTS_INTRO_TEXT = "Based on your responses, explore these micromobility options.";
@@ -59,16 +59,15 @@ const RESULTS_METHODS_OVERVIEW_TEXT =
 const RESULTS_METHODS_REPORT_TEXT =
   "The explorer is informed by the Special Commission on Micromobility report filed on January 31, 2026 and by current Massachusetts law and operator rules where applicable.";
 const RESULTS_METHODS_VISIBILITY_TITLE_TEXT = "Current visibility rules";
-const RESULTS_METHODS_SCORING_TITLE_TEXT = "What affects scoring";
-const RESULTS_METHODS_CURRENT_RESPONSE_TITLE_TEXT = "What affected this result";
+const RESULTS_METHODS_SCORING_TITLE_TEXT = "Your responses";
+const RESULTS_METHODS_CURRENT_RESPONSE_TITLE_TEXT = "What helped show these options";
+const RESULTS_METHODS_LIMITING_TITLE_TEXT = "What may have lowered other options";
 const RESULTS_METHODS_REPORT_LINK_TEXT = "Read the Special Commission report";
-const RESULTS_METHODS_BICYCLE_LAW_LINK_TEXT = "Massachusetts bicycle and e-bike rules";
-const RESULTS_METHODS_SCOOTER_LAW_LINK_TEXT = "Massachusetts motorized scooter rules";
+const RESULTS_METHODS_BICYCLE_LAW_LINK_TEXT = "Massachusetts law about bicycles";
 const FEEDBACK_PROMPT_TEXT =
-  'Love this idea? Think it needs more work? Let us know your thoughts at <a href="mailto:thelab@dot.state.ma.us">thelab@dot.state.ma.us</a>.';
+  '<strong>Love this idea? Think it needs more work? Let us know your thoughts at <a href="mailto:thelab@dot.state.ma.us">thelab@dot.state.ma.us</a>.</strong>';
 const REPORT_URL = "https://www.mass.gov/doc/special-commission-on-micromobility-report-january-2026/download";
 const BICYCLE_LAW_URL = "https://www.mass.gov/info-details/massachusetts-law-about-bicycles";
-const SCOOTER_LAW_URL = "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIV/Chapter90/Section1E";
 const PRINT_ICON_SVG =
   '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 9V4h10v5"/><path d="M7 14H5a2 2 0 0 1-2-2v-1.5A2.5 2.5 0 0 1 5.5 8h13A2.5 2.5 0 0 1 21 10.5V12a2 2 0 0 1-2 2h-2"/><path d="M7 12h10v8H7z"/><circle cx="17.5" cy="10.5" r=".75" fill="currentColor" stroke="none"/></svg>';
 const RECOMMENDATION_IMAGE_ALT_TEXT = {
@@ -2190,19 +2189,27 @@ function getAllResultsReason(rec, answers) {
 
 function getMethodologyScoringFactors(answers) {
   const factors = [];
+  const ageLabel = isSpanishLocale() ? getUiText("scoringFactorAge") : "Age";
+  const mobilityNeedLabel = isSpanishLocale() ? getUiText("scoringFactorMobilityNeed") : "Mobility need";
+  const primaryUseLabel = isSpanishLocale() ? getUiText("scoringFactorPrimaryUse") : "Primary use";
+  const transitConnectionLabel = isSpanishLocale() ? getUiText("scoringFactorTransitConnection") : "Transit connection";
+  const childCarryingLabel = isSpanishLocale() ? getUiText("scoringFactorChildCarrying") : "Child carrying";
+  const tripDistanceLabel = isSpanishLocale() ? getUiText("scoringFactorTripDistance") : "Trip distance";
+  const routeTypeLabel = isSpanishLocale() ? getUiText("scoringFactorRouteType") : "Route type";
+  const storageLabel = isSpanishLocale() ? getUiText("scoringFactorStorage") : "Storage";
 
-  if (answers.ageInput) factors.push(`Age: ${answers.ageInput}`);
+  if (answers.ageInput) factors.push(`${ageLabel}: ${answers.ageInput}`);
   if (answers.pathway !== "exploring" && answers.adaptiveNeed) {
-    factors.push(`Mobility need: ${getAnswerDisplayValue("adaptiveNeed", answers.adaptiveNeed)}`);
+    factors.push(`${mobilityNeedLabel}: ${getAnswerDisplayValue("adaptiveNeed", answers.adaptiveNeed)}`);
   }
-  if (answers.primaryUse) factors.push(`Primary use: ${getAnswerDisplayValue("primaryUse", answers.primaryUse)}`);
-  if (answers.transitLink) factors.push(`Transit connection: ${getAnswerDisplayValue("transitLink", answers.transitLink)}`);
+  if (answers.primaryUse) factors.push(`${primaryUseLabel}: ${getAnswerDisplayValue("primaryUse", answers.primaryUse)}`);
+  if (answers.transitLink) factors.push(`${transitConnectionLabel}: ${getAnswerDisplayValue("transitLink", answers.transitLink)}`);
   if (answers.pathway !== "child" && answers.carryChildren) {
-    factors.push(`Child carrying: ${getAnswerDisplayValue("carryChildren", answers.carryChildren)}`);
+    factors.push(`${childCarryingLabel}: ${getAnswerDisplayValue("carryChildren", answers.carryChildren)}`);
   }
-  if (answers.distance) factors.push(`Trip distance: ${getAnswerDisplayValue("distance", answers.distance)}`);
-  if (answers.routeType) factors.push(`Route type: ${getAnswerDisplayValue("routeType", answers.routeType)}`);
-  if (answers.storage) factors.push(`Storage: ${getAnswerDisplayValue("storage", answers.storage)}`);
+  if (answers.distance) factors.push(`${tripDistanceLabel}: ${getAnswerDisplayValue("distance", answers.distance)}`);
+  if (answers.routeType) factors.push(`${routeTypeLabel}: ${getAnswerDisplayValue("routeType", answers.routeType)}`);
+  if (answers.storage) factors.push(`${storageLabel}: ${getAnswerDisplayValue("storage", answers.storage)}`);
 
   return factors;
 }
@@ -2258,44 +2265,161 @@ function getCurrentResponseVisibilityRules(answers) {
   return rules;
 }
 
+function getCurrentResponsePositiveDrivers(answers) {
+  const drivers = [];
+
+  if (answers.pathway === "exploring") {
+    return drivers;
+  }
+
+  if (answers.age === "age3to13") {
+    drivers.push(isSpanishLocale() ? getUiText("positiveReasonAgeYouth") : "The selected age range makes the tool highlight youth-oriented options.");
+  } else if (answers.age === "age14to16") {
+    drivers.push(isSpanishLocale() ? getUiText("positiveReasonAgeTeen") : "The selected age range keeps the focus on age-appropriate options for teenagers.");
+  } else if (answers.age === "age50plus") {
+    drivers.push(isSpanishLocale() ? getUiText("positiveReasonAgeOlder") : "The selected age range keeps the focus on more stable and practical options.");
+  }
+
+  if (answers.adaptiveNeed === "yes") {
+    drivers.push(isSpanishLocale() ? getUiText("positiveReasonAdaptiveNeed") : "A selected mobility need raises adaptive cycles and other supportive options.");
+  }
+
+  if (answers.primaryUse === "transport") {
+    drivers.push(isSpanishLocale() ? getUiText("positiveReasonTransport") : "Using the device for work, school, or errands raises more practical day-to-day options.");
+  } else if (answers.primaryUse === "deliveries") {
+    drivers.push(isSpanishLocale() ? getUiText("positiveReasonDeliveries") : "Using the device for deliveries or work raises options with more carrying capacity.");
+  } else if (answers.primaryUse === "recreation") {
+    drivers.push(isSpanishLocale() ? getUiText("positiveReasonRecreation") : "Using the device for recreation or exercise raises options suited to riding for fun and activity.");
+  }
+
+  if (answers.transitLink === "yes") {
+    drivers.push(isSpanishLocale() ? getUiText("positiveReasonTransit") : "Including public transit raises options that work better with mixed-mode trips.");
+  }
+
+  if (answers.carryChildren === "yes") {
+    drivers.push(isSpanishLocale() ? getUiText("positiveReasonChildren") : "Carrying children raises more family-friendly options, such as some bicycles and cargo bikes.");
+  }
+
+  if (answers.distance === "under3") {
+    drivers.push(isSpanishLocale() ? getUiText("positiveReasonDistanceUnder3") : "Shorter trips raise lighter and easier-to-use options.");
+  } else if (answers.distance === "3to9") {
+    drivers.push(isSpanishLocale() ? getUiText("positiveReasonDistance3to9") : "Mid-range trips raise practical everyday bikes and some electric options.");
+  } else if (answers.distance === "10plus") {
+    drivers.push(isSpanishLocale() ? getUiText("positiveReasonDistance10plus") : "Longer trips raise electric-assist and higher-range options.");
+  }
+
+  if (answers.routeType === "bikeLanes") {
+    drivers.push(isSpanishLocale() ? getUiText("positiveReasonRouteBikeLanes") : "Separated bike lanes allow a wider range of riding options to appear.");
+  } else if (answers.routeType === "mixedRoads") {
+    drivers.push(isSpanishLocale() ? getUiText("positiveReasonRouteMixedRoads") : "Routes with some traffic raise options that tend to feel more stable and practical around cars.");
+  } else if (answers.routeType === "regularRoads") {
+    drivers.push(isSpanishLocale() ? getUiText("positiveReasonRouteRegularRoads") : "Routes without separation from cars raise more stable, road-ready options.");
+  } else if (answers.routeType === "trails") {
+    drivers.push(isSpanishLocale() ? getUiText("positiveReasonRouteTrails") : "Trail and park routes raise options suited to that type of riding.");
+  }
+
+  if (answers.storage === "indoor") {
+    drivers.push(isSpanishLocale() ? getUiText("positiveReasonStorageIndoor") : "Needing to bring the device inside raises options that are easier to store or fold.");
+  } else if (answers.storage === "outdoor") {
+    drivers.push(isSpanishLocale() ? getUiText("positiveReasonStorageOutdoor") : "Outdoor storage raises options that are easier to park or leave outside.");
+  } else if (answers.storage === "notMajorConcern") {
+    drivers.push(isSpanishLocale() ? getUiText("positiveReasonStorageFlexible") : "Flexible storage keeps a wider mix of device types in consideration.");
+  }
+
+  return drivers;
+}
+
+function getCurrentResponseLimitingNotes(answers) {
+  const notes = [];
+
+  if (answers.pathway === "exploring") {
+    return notes;
+  }
+
+  if (answers.age === "age14to16") {
+    notes.push(isSpanishLocale() ? getUiText("negativeReasonAgeTeen") : "Some shared or motorized options appear lower or do not appear for this age range.");
+  } else if (answers.age === "age50plus") {
+    notes.push(isSpanishLocale() ? getUiText("negativeReasonAgeOlder") : "Some smaller or standing options appear lower for this age range.");
+  }
+
+  if (answers.carryChildren === "yes") {
+    notes.push(isSpanishLocale() ? getUiText("negativeReasonChildren") : "Standing devices and smaller personal e-devices appear lower when carrying children is selected.");
+  }
+
+  if (answers.routeType === "regularRoads") {
+    notes.push(isSpanishLocale() ? getUiText("negativeReasonRouteRegularRoads") : "Some lighter options appear lower on routes without separation from cars.");
+  } else if (answers.routeType === "trails") {
+    notes.push(isSpanishLocale() ? getUiText("negativeReasonRouteTrails") : "Some small-wheel options appear lower on trail or park routes.");
+  }
+
+  return notes.slice(0, 2);
+}
+
+function getResultsVisibilityLawNotes() {
+  if (isSpanishLocale()) {
+    return [
+      getUiText("visibilityRuleHelmets"),
+      getUiText("visibilityRuleEbikes"),
+      getUiText("visibilityRuleOperators"),
+      getUiText("visibilityRulePolicy")
+    ];
+  }
+
+  return [
+    "Current Massachusetts law requires helmets for bicycle riders age 16 and under, and for manually propelled scooters age 16 and under.",
+    "Massachusetts treats electric bicycles separately from motorized scooters. Current law gives electric bicycles bicycle-style operating rules, while motorized scooters require a valid driver's license or learner's permit.",
+    "Operator rules may also limit access. For example, Bluebikes currently requires riders to be 16 or older.",
+    "Some visibility rules in this tool are policy choices used to reflect the report's safety-oriented implementation approach, even where state law does not create the exact same display rule."
+  ];
+}
+
 function renderResultsMethodology(answers) {
+  if (answers.pathway === "exploring") {
+    return "";
+  }
+
   const scoringFactors = getMethodologyScoringFactors(answers);
-  const currentResponseRules = getCurrentResponseVisibilityRules(answers);
+  const currentResponseRules = getCurrentResponsePositiveDrivers(answers);
+  const limitingNotes = getCurrentResponseLimitingNotes(answers);
+  const visibilityLawNotes = getResultsVisibilityLawNotes();
   const scoringFactorsHtml = scoringFactors
+    .map((item) => `<li>${item}</li>`)
+    .join("");
+  const visibilityLawNotesHtml = visibilityLawNotes
     .map((item) => `<li>${item}</li>`)
     .join("");
   const currentResponseRulesHtml = currentResponseRules.length
     ? currentResponseRules.map((item) => `<li>${item}</li>`).join("")
-    : "<li>No additional visibility rules were triggered for this response.</li>";
+    : `<li>${isSpanishLocale() ? getUiText("noAdditionalVisibilityRules") : "No additional visibility rules were triggered for this response."}</li>`;
+  const limitingNotesHtml = limitingNotes.length
+    ? `
+        <p class="results-methodology__section-title">${isSpanishLocale() ? getUiText("whatMayLowerOptions") : RESULTS_METHODS_LIMITING_TITLE_TEXT}</p>
+        <ul class="results-methodology__list">${limitingNotes.map((item) => `<li>${item}</li>`).join("")}</ul>
+      `
+    : "";
 
   return `
     <details class="results-methodology"${APP_STATE.resultsMethodologyOpen ? " open" : ""}>
-      <summary>${RESULTS_METHODS_SUMMARY_TEXT}</summary>
+      <summary>${isSpanishLocale() ? getUiText("howResultsAreShown") : RESULTS_METHODS_SUMMARY_TEXT}</summary>
       <div class="results-methodology__body">
-        <p class="results-methodology__title">${RESULTS_METHODS_TITLE_TEXT}</p>
-        <p>${RESULTS_METHODS_OVERVIEW_TEXT}</p>
-        <p>${RESULTS_METHODS_REPORT_TEXT}</p>
+        <p class="results-methodology__title">${isSpanishLocale() ? getUiText("howExplorerWorks") : RESULTS_METHODS_TITLE_TEXT}</p>
+        <p>${isSpanishLocale() ? getUiText("resultsOverviewText") : RESULTS_METHODS_OVERVIEW_TEXT}</p>
+        <p>${isSpanishLocale() ? getUiText("resultsReportText") : RESULTS_METHODS_REPORT_TEXT}</p>
 
-        <p class="results-methodology__section-title">${RESULTS_METHODS_VISIBILITY_TITLE_TEXT}</p>
-        <ul class="results-methodology__list">
-          <li>Current Massachusetts law requires helmets for bicycle riders age 16 and under, and for manually propelled scooters age 16 and under.</li>
-          <li>Massachusetts treats electric bicycles separately from motorized scooters. Current law gives electric bicycles bicycle-style operating rules, while motorized scooters require a valid driver's license or learner's permit.</li>
-          <li>Operator rules may also limit access. For example, Bluebikes currently requires riders to be 16 or older.</li>
-          <li>Some visibility rules in this tool are policy choices used to reflect the report's safety-oriented implementation approach, even where state law does not create the exact same display rule.</li>
-        </ul>
+        <p class="results-methodology__section-title">${isSpanishLocale() ? getUiText("currentVisibilityRules") : RESULTS_METHODS_VISIBILITY_TITLE_TEXT}</p>
+        <ul class="results-methodology__list">${visibilityLawNotesHtml}</ul>
 
-        <p class="results-methodology__section-title">${RESULTS_METHODS_SCORING_TITLE_TEXT}</p>
+        <p class="results-methodology__section-title">${isSpanishLocale() ? getUiText("whatAffectsScoring") : RESULTS_METHODS_SCORING_TITLE_TEXT}</p>
         <ul class="results-methodology__list">${scoringFactorsHtml}</ul>
 
-        <p class="results-methodology__section-title">${RESULTS_METHODS_CURRENT_RESPONSE_TITLE_TEXT}</p>
+        <p class="results-methodology__section-title">${isSpanishLocale() ? getUiText("whatHelpedShowResults") : RESULTS_METHODS_CURRENT_RESPONSE_TITLE_TEXT}</p>
         <ul class="results-methodology__list">${currentResponseRulesHtml}</ul>
+        ${limitingNotesHtml}
 
         <p class="results-methodology__links">
-          <a href="${REPORT_URL}" target="_blank" rel="noopener noreferrer">${RESULTS_METHODS_REPORT_LINK_TEXT}</a>
+          <a href="${REPORT_URL}" target="_blank" rel="noopener noreferrer">${isSpanishLocale() ? getUiText("readCommissionReport") : RESULTS_METHODS_REPORT_LINK_TEXT}</a>
           <span aria-hidden="true"> | </span>
-          <a href="${BICYCLE_LAW_URL}" target="_blank" rel="noopener noreferrer">${RESULTS_METHODS_BICYCLE_LAW_LINK_TEXT}</a>
-          <span aria-hidden="true"> | </span>
-          <a href="${SCOOTER_LAW_URL}" target="_blank" rel="noopener noreferrer">${RESULTS_METHODS_SCOOTER_LAW_LINK_TEXT}</a>
+          <a href="${BICYCLE_LAW_URL}" target="_blank" rel="noopener noreferrer">${isSpanishLocale() ? getUiText("massLawAboutBicycles") : RESULTS_METHODS_BICYCLE_LAW_LINK_TEXT}</a>
         </p>
       </div>
     </details>
@@ -3087,14 +3211,15 @@ function renderCurrentRecommendationPage() {
       </button>
     </div>
 
+    ${allResultsPanelHtml}
+    ${resultsMethodologyHtml}
+
     <p class="recommendation-disclaimer results-disclaimer">
       ${isSpanishLocale() ? getUiText("scoringDisclaimerText") : SCORING_DISCLAIMER_TEXT}
       <span class="recommendation-disclaimer-separator" aria-hidden="true"> | </span>
       ${isSpanishLocale() ? getUiText("feedbackPromptText") : FEEDBACK_PROMPT_TEXT}
     </p>
 
-    ${resultsMethodologyHtml}
-    ${allResultsPanelHtml}
     ${printSummaryHtml}
   `;
 
