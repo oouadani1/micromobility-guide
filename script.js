@@ -3246,6 +3246,7 @@ function renderCurrentRecommendationPage() {
   const restartBtns = document.querySelectorAll('[data-role="restart-results"]');
   const printBtns = document.querySelectorAll('[data-role="print-results"]');
   renderFooterDisclaimer();
+  setFooterDisclaimerVisibility(true);
 
   const cardEl = result.querySelector(".recommendation-card");
   const allResultsPanel = result.querySelector(".all-results-panel");
@@ -3443,6 +3444,13 @@ function renderFooterDisclaimer() {
   `;
 }
 
+function setFooterDisclaimerVisibility(isVisible) {
+  const footerDisclaimer = document.getElementById("footerDisclaimer");
+  if (!footerDisclaimer) return;
+
+  footerDisclaimer.classList.toggle("hidden", !isVisible);
+}
+
 function renderLandingCopy() {
   const intro = document.getElementById("introText");
   const heroTitle = document.getElementById("heroTitle");
@@ -3460,6 +3468,7 @@ function renderLandingCopy() {
   }
 
   renderFooterDisclaimer();
+  setFooterDisclaimerVisibility(true);
 
   updateLandingLanguageToggle();
 }
@@ -3487,7 +3496,7 @@ function renderQuestion() {
     heroTitle.classList.toggle("hidden", APP_STATE.currentStep > 0);
   }
 
-
+  setFooterDisclaimerVisibility(APP_STATE.currentStep === 0);
 
   result.classList.add("hidden");
   result.innerHTML = "";
