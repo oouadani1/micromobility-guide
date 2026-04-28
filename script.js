@@ -2711,8 +2711,21 @@ function shouldSuggestFoldable(answers) {
   );
 }
 
+function shouldUseRecreationTrailImage(answers) {
+  return answers?.primaryUse === "recreation" || answers?.routeType === "trails";
+}
+
 function getRecommendationImage(recId, answers, content) {
   const foldableSuggested = shouldSuggestFoldable(answers);
+  const recreationTrailImage = shouldUseRecreationTrailImage(answers);
+
+  if (recreationTrailImage && recId === "bicycle") {
+    return "mountain-bike.webp";
+  }
+
+  if (recreationTrailImage && recId === "ebike") {
+    return "e-mtb.jpg";
+  }
 
   if (foldableSuggested && recId === "bicycle") {
     return "foldable-bike-v2.png";
@@ -2727,6 +2740,15 @@ function getRecommendationImage(recId, answers, content) {
 
 function getRecommendationImageAlt(recId, answers) {
   const foldableSuggested = shouldSuggestFoldable(answers);
+  const recreationTrailImage = shouldUseRecreationTrailImage(answers);
+
+  if (recreationTrailImage && recId === "bicycle") {
+    return isSpanishLocale() ? "Bicicleta de montaña" : "Mountain bicycle";
+  }
+
+  if (recreationTrailImage && recId === "ebike") {
+    return isSpanishLocale() ? "Bicicleta eléctrica de montaña" : "Electric mountain bicycle";
+  }
 
   if (foldableSuggested && recId === "bicycle") {
     return isSpanishLocale() ? getUiText("foldableBikeImageAlt") : "Foldable bicycle";
