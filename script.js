@@ -2720,11 +2720,11 @@ function getRecommendationImage(recId, answers, content) {
   const recreationTrailImage = shouldUseRecreationTrailImage(answers);
 
   if (recreationTrailImage && recId === "bicycle") {
-    return "mountain-bike.webp";
+    return "mountain-bike-transparent.png";
   }
 
   if (recreationTrailImage && recId === "ebike") {
-    return "e-mtb.jpg";
+    return "e-mtb-transparent.png";
   }
 
   if (foldableSuggested && recId === "bicycle") {
