@@ -16,7 +16,7 @@ body {
 :root {
   --text-blue-aa: #14558F;
   --text-green-aa: #1e853f;
-  --button-green-aa: #1e853f;
+  --button-green-aa: #14558F;
   --app-max-width: 960px;
 }
 
@@ -362,7 +362,7 @@ button.hidden {
   list-style: none;
   margin: 0;
   padding: 0 16px 16px;
-  border-top: 1px solid #dbe3f3;
+  border-top: none;
 }
 
 .all-results-item {
@@ -461,13 +461,23 @@ button.hidden {
 
 .recommendation-disclaimer {
   margin-top: 18px;
-  font-size: 12px;
-  line-height: 1.35;
+  font-size: 13px;
+  line-height: 1.45;
   color: #666;
 }
 
-.recommendation-disclaimer-separator {
-  color: #888;
+.recommendation-disclaimer-copy {
+  display: block;
+}
+
+.recommendation-disclaimer-feedback {
+  display: block;
+  margin-top: 6px;
+}
+
+.landing-disclaimer {
+  margin-top: 0;
+  margin-bottom: 18px;
 }
 
 .recommendation-disclaimer a {
@@ -514,7 +524,7 @@ button.hidden {
 
 .results-methodology__body {
   padding: 0 16px 16px;
-  border-top: 1px solid #dbe3f3;
+  border-top: none;
 }
 
 .results-methodology__title,
@@ -837,7 +847,7 @@ body.results-view-active .site-branding {
   }
 
   .recommendation-disclaimer {
-    font-size: 12px;
+    font-size: 13px;
     line-height: 1.5;
   }
 
@@ -859,13 +869,49 @@ body.results-view-active .site-branding {
 
   .site-branding {
     margin-top: auto;
-    padding-top: 16px;
+    padding-top: 14px;
   }
 
   .language-toggle__button {
     min-width: 70px;
     padding: 6px 10px;
     font-size: 12px;
+  }
+
+  .all-results-panel summary,
+  .results-methodology summary,
+  .all-results-device,
+  .all-results-tag,
+  .all-results-reason,
+  .results-methodology__title,
+  .results-methodology__section-title,
+  .results-methodology__body p,
+  .results-methodology__list li {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .all-results-panel summary,
+  .results-methodology summary {
+    padding: 12px 14px;
+  }
+
+  .all-results-list,
+  .results-methodology__body {
+    padding-left: 14px;
+    padding-right: 14px;
+    padding-bottom: 14px;
+  }
+
+  .all-results-item {
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .all-results-image {
+    width: 48px;
+    height: 48px;
+    flex: 0 0 48px;
   }
 }
 
@@ -1020,8 +1066,8 @@ body.results-view-active .site-branding {
   }
 
   body.results-view-active .site-branding {
-    margin-top: 14px;
-    padding-top: 10px;
+    margin-top: 10px;
+    padding-top: 6px;
   }
 
   .form-nav.form-nav--next-only {
@@ -1152,9 +1198,9 @@ body.results-view-active .site-branding {
 .results-print-btn {
   margin-top: 0;
   white-space: nowrap;
-  background: #ffffff;
-  color: var(--text-green-aa);
-  border: 1px solid var(--text-green-aa);
+  background: var(--text-blue-aa);
+  color: #ffffff;
+  border: 1px solid var(--text-blue-aa);
   box-shadow: none;
   width: 48px;
   height: 48px;

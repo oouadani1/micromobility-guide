@@ -53,12 +53,12 @@ const EXPLORING_RESULTS_TITLE_TEXT = "Explore micromobility options.";
 const SCORING_DISCLAIMER_TEXT =
   "Explore Micromobility is an informational resource. It does not provide legal, safety, financial, or purchasing advice, and it does not endorse specific products, brands, sellers, or services. Review current laws, local rules, and product details before riding, renting, or purchasing.";
 const RESULTS_METHODS_SUMMARY_TEXT = "How results are shown";
-const RESULTS_METHODS_TITLE_TEXT = "How this explorer works";
+const RESULTS_METHODS_TITLE_TEXT = "How the Micromobility Explorer works";
 const RESULTS_METHODS_OVERVIEW_TEXT =
-  "This tool uses an additive scoring system. Each answer adds points to device types that align with that response, then visibility rules determine which device types appear in the results.";
+  "This tool gives different device types more or fewer points based on your answers. After that, a few display rules help decide which options appear in the results.";
 const RESULTS_METHODS_REPORT_TEXT =
   "The explorer is informed by the Special Commission on Micromobility report filed on January 31, 2026 and by current Massachusetts law and operator rules where applicable.";
-const RESULTS_METHODS_VISIBILITY_TITLE_TEXT = "Current visibility rules";
+const RESULTS_METHODS_VISIBILITY_TITLE_TEXT = "Why some options may not appear";
 const RESULTS_METHODS_SCORING_TITLE_TEXT = "Your responses";
 const RESULTS_METHODS_CURRENT_RESPONSE_TITLE_TEXT = "What helped show these options";
 const RESULTS_METHODS_LIMITING_TITLE_TEXT = "What may have lowered other options";
@@ -3055,6 +3055,7 @@ function resetAppState() {
 function resetIntroState() {
   const intro = document.getElementById("introText");
   const heroTitle = document.getElementById("heroTitle");
+  const landingDisclaimer = document.getElementById("landingDisclaimer");
 
   renderLandingCopy();
 
@@ -3066,12 +3067,17 @@ function resetIntroState() {
   if (heroTitle) {
     heroTitle.classList.remove("hidden");
   }
+
+  if (landingDisclaimer) {
+    landingDisclaimer.classList.remove("hidden");
+  }
 }
 
 function renderRecommendations(recommendations, allRecommendations, answers, scores, pathway) {
   const result = document.getElementById("result");
   const intro = document.getElementById("introText");
   const heroTitle = document.getElementById("heroTitle");
+  const landingDisclaimer = document.getElementById("landingDisclaimer");
   const formStep = document.getElementById("formStep");
   const formNav = document.getElementById("formNav");
   const progress = document.getElementById("progress");
@@ -3088,6 +3094,10 @@ function renderRecommendations(recommendations, allRecommendations, answers, sco
 
   if (heroTitle) {
     heroTitle.classList.add("hidden");
+  }
+
+  if (landingDisclaimer) {
+    landingDisclaimer.classList.add("hidden");
   }
 
   if (!result) return;
@@ -3213,9 +3223,8 @@ function renderCurrentRecommendationPage() {
     ${resultsMethodologyHtml}
 
     <p class="recommendation-disclaimer results-disclaimer">
-      ${isSpanishLocale() ? getUiText("scoringDisclaimerText") : SCORING_DISCLAIMER_TEXT}
-      <span class="recommendation-disclaimer-separator" aria-hidden="true"> | </span>
-      ${isSpanishLocale() ? getUiText("feedbackPromptText") : FEEDBACK_PROMPT_TEXT}
+      <span class="recommendation-disclaimer-copy">${isSpanishLocale() ? getUiText("scoringDisclaimerText") : SCORING_DISCLAIMER_TEXT}</span>
+      <span class="recommendation-disclaimer-feedback">${isSpanishLocale() ? getUiText("feedbackPromptText") : FEEDBACK_PROMPT_TEXT}</span>
     </p>
 
     ${printSummaryHtml}
@@ -3414,6 +3423,7 @@ function updateLandingLanguageToggle() {
 function renderLandingCopy() {
   const intro = document.getElementById("introText");
   const heroTitle = document.getElementById("heroTitle");
+  const landingDisclaimer = document.getElementById("landingDisclaimer");
   const copy = getLandingLocaleCopy();
 
   document.documentElement.lang = APP_STATE.locale;
@@ -3427,6 +3437,13 @@ function renderLandingCopy() {
     intro.textContent = copy.introText;
   }
 
+  if (landingDisclaimer) {
+    landingDisclaimer.innerHTML = `
+      <span class="recommendation-disclaimer-copy">${isSpanishLocale() ? getUiText("scoringDisclaimerText") : SCORING_DISCLAIMER_TEXT}</span>
+      <span class="recommendation-disclaimer-feedback">${isSpanishLocale() ? getUiText("feedbackPromptText") : FEEDBACK_PROMPT_TEXT}</span>
+    `;
+  }
+
   updateLandingLanguageToggle();
 }
 
@@ -3438,6 +3455,7 @@ function renderQuestion() {
   const nextBtn = document.getElementById("nextBtn");
   const intro = document.getElementById("introText");
   const heroTitle = document.getElementById("heroTitle");
+  const landingDisclaimer = document.getElementById("landingDisclaimer");
   const introDescriptionId = APP_STATE.currentStep === 0 ? "introText" : "";
 
   if (!formStep || !progress || !backBtn || !nextBtn) return;
@@ -3451,6 +3469,10 @@ function renderQuestion() {
 
   if (heroTitle) {
     heroTitle.classList.toggle("hidden", APP_STATE.currentStep > 0);
+  }
+
+  if (landingDisclaimer) {
+    landingDisclaimer.classList.toggle("hidden", APP_STATE.currentStep > 0);
   }
 
   result.classList.add("hidden");
