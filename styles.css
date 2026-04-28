@@ -475,11 +475,6 @@ button.hidden {
   margin-top: 6px;
 }
 
-.landing-disclaimer {
-  margin-top: 0;
-  margin-bottom: 18px;
-}
-
 .recommendation-disclaimer a {
   color: var(--text-blue-aa);
   text-decoration: underline;
@@ -639,6 +634,11 @@ button.hidden {
   justify-content: space-between;
   margin-top: auto;
   padding-top: 24px;
+}
+
+.footer-disclaimer {
+  margin-top: 10px;
+  margin-bottom: 0;
 }
 
 .form-nav {
@@ -872,6 +872,10 @@ body.results-view-active .site-branding {
     padding-top: 14px;
   }
 
+  .footer-disclaimer {
+    margin-top: 8px;
+  }
+
   .language-toggle__button {
     min-width: 70px;
     padding: 6px 10px;
@@ -1066,8 +1070,8 @@ body.results-view-active .site-branding {
   }
 
   body.results-view-active .site-branding {
-    margin-top: 10px;
-    padding-top: 6px;
+    margin-top: auto;
+    padding-top: 10px;
   }
 
   .form-nav.form-nav--next-only {
@@ -1470,7 +1474,6 @@ body.results-view-active .site-branding {
   .results-toolbar,
   .results-actions-mobile,
   .recommendation-card,
-  .results-disclaimer,
   .all-results-panel,
   .results-methodology,
   .footer-branding {
