@@ -2359,7 +2359,6 @@ function getResultsVisibilityLawNotes() {
   if (isSpanishLocale()) {
     return [
       getUiText("visibilityRuleHelmets"),
-      getUiText("visibilityRuleEbikes"),
       getUiText("visibilityRuleOperators"),
       getUiText("visibilityRulePolicy")
     ];
@@ -2367,7 +2366,6 @@ function getResultsVisibilityLawNotes() {
 
   return [
     "Current Massachusetts law requires helmets for bicycle riders age 16 and under, and for manually propelled scooters age 16 and under.",
-    "Massachusetts treats electric bicycles separately from motorized scooters. Current law gives electric bicycles bicycle-style operating rules, while motorized scooters require a valid driver's license or learner's permit.",
     "Operator rules may also limit access. For example, Bluebikes currently requires riders to be 16 or older.",
     "Some visibility rules in this tool are policy choices used to reflect the report's safety-oriented implementation approach, even where state law does not create the exact same display rule."
   ];
@@ -2457,7 +2455,7 @@ function renderAllDeviceResultsPanel(allRecommendations, answers) {
 
   return `
     <details class="all-results-panel"${APP_STATE.allResultsPanelOpen ? " open" : ""}>
-      <summary>${isSpanishLocale() ? getUiText("seeAllDeviceTypes") : "See all device types"}</summary>
+      <summary>${isSpanishLocale() ? getUiText("seeAllDeviceTypes") : "See other relevant devices"}</summary>
       <ul class="all-results-list">${itemsHtml}</ul>
     </details>
   `;

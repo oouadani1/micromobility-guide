@@ -336,7 +336,8 @@ button.hidden {
 .all-results-panel summary {
   padding: 14px 16px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 0.95rem;
+  line-height: 1.35;
   font-weight: 700;
   color: var(--text-blue-aa);
   list-style: none;
@@ -398,12 +399,15 @@ button.hidden {
 }
 
 .all-results-device {
+  font-size: 0.95rem;
+  line-height: 1.35;
   font-weight: 600;
   color: #222;
 }
 
 .all-results-tag {
-  font-size: 14px;
+  font-size: 0.95rem;
+  line-height: 1.35;
   color: #555;
 }
 
@@ -429,8 +433,8 @@ button.hidden {
 
 .all-results-reason {
   margin: 4px 0 0;
-  font-size: 12.5px;
-  line-height: 1.3;
+  font-size: 0.95rem;
+  line-height: 1.35;
   color: #555;
 }
 
@@ -486,7 +490,8 @@ button.hidden {
 .results-methodology summary {
   padding: 14px 16px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 0.95rem;
+  line-height: 1.35;
   font-weight: 700;
   color: var(--text-blue-aa);
   list-style: none;
@@ -515,15 +520,16 @@ button.hidden {
 .results-methodology__title,
 .results-methodology__section-title {
   margin: 14px 0 8px;
-  font-size: 14px;
+  font-size: 0.95rem;
+  line-height: 1.35;
   font-weight: 700;
   color: #222;
 }
 
 .results-methodology__body p {
   margin: 12px 0 0;
-  font-size: 13px;
-  line-height: 1.45;
+  font-size: 0.95rem;
+  line-height: 1.35;
   color: #444;
 }
 
@@ -534,8 +540,8 @@ button.hidden {
 
 .results-methodology__list li {
   margin-bottom: 7px;
-  font-size: 13px;
-  line-height: 1.45;
+  font-size: 0.95rem;
+  line-height: 1.35;
   color: #444;
 }
 
@@ -641,8 +647,8 @@ body.question-flow-active .site-branding {
 }
 
 body.results-view-active .site-branding {
-  margin-top: auto;
-  padding-top: 24px;
+  margin-top: 16px;
+  padding-top: 10px;
 }
 
 .form-nav--next-only {
@@ -1014,8 +1020,8 @@ body.results-view-active .site-branding {
   }
 
   body.results-view-active .site-branding {
-    margin-top: auto;
-    padding-top: 16px;
+    margin-top: 14px;
+    padding-top: 10px;
   }
 
   .form-nav.form-nav--next-only {
@@ -1420,6 +1426,7 @@ body.results-view-active .site-branding {
   .recommendation-card,
   .results-disclaimer,
   .all-results-panel,
+  .results-methodology,
   .footer-branding {
     display: none !important;
   }
