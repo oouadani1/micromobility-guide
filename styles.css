@@ -229,7 +229,7 @@ button.hidden {
   font-size: 30px;
   font-weight: 800;
   line-height: 1.1;
-  color: var(--text-green-aa);
+  color: var(--text-blue-aa);
 }
 
 .recommendation-extra {
@@ -473,6 +473,7 @@ button.hidden {
 .recommendation-disclaimer-feedback {
   display: block;
   margin-top: 6px;
+  color: #000000;
 }
 
 .recommendation-disclaimer a {

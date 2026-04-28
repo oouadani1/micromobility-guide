@@ -52,13 +52,13 @@ const RESULTS_INTRO_TEXT = "Based on your responses, explore these micromobility
 const EXPLORING_RESULTS_TITLE_TEXT = "Explore micromobility options.";
 const SCORING_DISCLAIMER_TEXT =
   "Explore Micromobility is an informational resource. It does not provide legal, safety, financial, or purchasing advice, and it does not endorse specific products, brands, sellers, or services. Review current laws, local rules, and product details before riding, renting, or purchasing.";
-const RESULTS_METHODS_SUMMARY_TEXT = "How recommendations are chosen";
+const RESULTS_METHODS_SUMMARY_TEXT = "How results are shown";
 const RESULTS_METHODS_TITLE_TEXT = "How the Micromobility Explorer works";
 const RESULTS_METHODS_OVERVIEW_TEXT =
-  "This tool gives different device types more or fewer points based on your answers. After that, a few extra rules help decide which options appear in the results.";
+  "This tool gives different device types more or fewer points based on your answers. After that, a few extra checks help decide which options show up in the results.";
 const RESULTS_METHODS_REPORT_TEXT =
-  "The explorer is informed by the Special Commission on Micromobility report filed on January 31, 2026 and by current Massachusetts law and operator rules where applicable.";
-const RESULTS_METHODS_VISIBILITY_TITLE_TEXT = "Why some options may not appear";
+  "The explorer is informed by the Special Commission on Micromobility report filed on January 31, 2026 and by current Massachusetts law and current program information where relevant.";
+const RESULTS_METHODS_VISIBILITY_TITLE_TEXT = "Why some options may not show up";
 const RESULTS_METHODS_SCORING_TITLE_TEXT = "Your responses";
 const RESULTS_METHODS_CURRENT_RESPONSE_TITLE_TEXT = "What helped show these options";
 const RESULTS_METHODS_LIMITING_TITLE_TEXT = "What may have lowered other options";
@@ -2281,23 +2281,23 @@ function getCurrentResponsePositiveDrivers(answers) {
   }
 
   if (answers.adaptiveNeed === "yes") {
-    drivers.push(isSpanishLocale() ? getUiText("positiveReasonAdaptiveNeed") : "A selected mobility need raises adaptive cycles and other supportive options.");
+    drivers.push(isSpanishLocale() ? getUiText("positiveReasonAdaptiveNeed") : "A selected mobility need shows adaptive cycles and other supportive options more clearly.");
   }
 
   if (answers.primaryUse === "transport") {
-    drivers.push(isSpanishLocale() ? getUiText("positiveReasonTransport") : "Using the device for work, school, or errands raises more practical day-to-day options.");
+    drivers.push(isSpanishLocale() ? getUiText("positiveReasonTransport") : "Using the device for work, school, or errands shows more practical day-to-day options.");
   } else if (answers.primaryUse === "deliveries") {
-    drivers.push(isSpanishLocale() ? getUiText("positiveReasonDeliveries") : "Using the device for deliveries or work raises options with more carrying capacity.");
+    drivers.push(isSpanishLocale() ? getUiText("positiveReasonDeliveries") : "Using the device for deliveries or work shows options with more carrying capacity.");
   } else if (answers.primaryUse === "recreation") {
-    drivers.push(isSpanishLocale() ? getUiText("positiveReasonRecreation") : "Using the device for recreation or exercise raises options suited to riding for fun and activity.");
+    drivers.push(isSpanishLocale() ? getUiText("positiveReasonRecreation") : "Using the device for recreation or exercise shows options suited to riding for fun and activity.");
   }
 
   if (answers.transitLink === "yes") {
-    drivers.push(isSpanishLocale() ? getUiText("positiveReasonTransit") : "Including public transit raises options that work better with mixed-mode trips.");
+    drivers.push(isSpanishLocale() ? getUiText("positiveReasonTransit") : "Including public transit shows options that work better with mixed-mode trips.");
   }
 
   if (answers.carryChildren === "yes") {
-    drivers.push(isSpanishLocale() ? getUiText("positiveReasonChildren") : "Carrying children raises more family-friendly options, such as some bicycles and cargo bikes.");
+    drivers.push(isSpanishLocale() ? getUiText("positiveReasonChildren") : "Carrying children shows more family-friendly options, such as some bicycles and cargo bikes.");
   }
 
   if (answers.distance === "under3") {
@@ -2319,9 +2319,9 @@ function getCurrentResponsePositiveDrivers(answers) {
   }
 
   if (answers.storage === "indoor") {
-    drivers.push(isSpanishLocale() ? getUiText("positiveReasonStorageIndoor") : "Needing to bring the device inside raises options that are easier to store or fold.");
+    drivers.push(isSpanishLocale() ? getUiText("positiveReasonStorageIndoor") : "Needing to bring the device inside shows options that are easier to store or fold.");
   } else if (answers.storage === "outdoor") {
-    drivers.push(isSpanishLocale() ? getUiText("positiveReasonStorageOutdoor") : "Outdoor storage raises options that are easier to park or leave outside.");
+    drivers.push(isSpanishLocale() ? getUiText("positiveReasonStorageOutdoor") : "Outdoor storage shows options that are easier to park or leave outside.");
   } else if (answers.storage === "notMajorConcern") {
     drivers.push(isSpanishLocale() ? getUiText("positiveReasonStorageFlexible") : "Flexible storage keeps a wider mix of device types in consideration.");
   }
@@ -2366,8 +2366,8 @@ function getResultsVisibilityLawNotes() {
 
   return [
     "Current Massachusetts law requires helmets for bicycle riders age 16 and under, and for manually propelled scooters age 16 and under.",
-    "Operator rules may also limit access. For example, Bluebikes currently requires riders to be 16 or older.",
-    "Some visibility rules in this tool are policy choices used to reflect the report's safety-oriented implementation approach, even where state law does not create the exact same display rule."
+    "Some shared systems have their own service requirements. For example, Bluebikes currently requires riders to be 16 or older.",
+    "Some options are shown more cautiously in this tool to reflect the report's safety-focused approach, even when state law does not use the exact same categories."
   ];
 }
 
@@ -2388,7 +2388,7 @@ function renderResultsMethodology(answers) {
     .join("");
   const currentResponseRulesHtml = currentResponseRules.length
     ? currentResponseRules.map((item) => `<li>${item}</li>`).join("")
-    : `<li>${isSpanishLocale() ? getUiText("noAdditionalVisibilityRules") : "No additional visibility rules were triggered for this response."}</li>`;
+    : `<li>${isSpanishLocale() ? getUiText("noAdditionalVisibilityRules") : "No additional notes changed what showed up for this response."}</li>`;
   const limitingNotesHtml = limitingNotes.length
     ? `
         <p class="results-methodology__section-title">${isSpanishLocale() ? getUiText("whatMayLowerOptions") : RESULTS_METHODS_LIMITING_TITLE_TEXT}</p>
