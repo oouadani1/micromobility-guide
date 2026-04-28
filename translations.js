@@ -1,27 +1,27 @@
 window.MICROMOBILITY_TRANSLATIONS = {
   ui: {
     es: {
-      title: "Guía de micromovilidad",
+      title: "Explore Micromobility",
       languageToggleLabel: "Selector de idioma",
-      footerGuide: "Guía de micromovilidad",
+      footerGuide: "Explore Micromobility",
       footerNote: "Creada por The Lab @ MassDOT",
       labLogoAlt: "Logotipo de The Lab @ MassDOT",
       resultsIntroText:
-        "Según tus respuestas, estas opciones podrían ajustarse bien a lo que buscas.",
+        "Según tus respuestas, explora estas opciones de micromovilidad.",
       exploringResultsTitleText:
-        "Explora una variedad de dispositivos de micromovilidad.",
+        "Explora opciones de micromovilidad.",
       scoringDisclaimerText:
-        "Las sugerencias se generan con un sistema de puntuación acumulativa basado en tus respuestas. Los resultados son solo informativos y puede haber más de un tipo de dispositivo adecuado.",
+        "Explore Micromobility es un recurso informativo. No ofrece asesoría legal, de seguridad, financiera ni de compra, y no respalda productos, marcas, vendedores ni servicios específicos. Revisa las leyes vigentes, las reglas locales y la información del producto antes de usarlo, alquilarlo o comprarlo.",
       feedbackPromptText:
         '¿Te gusta esta idea? ¿Crees que necesita más trabajo? Compártenos tus comentarios en <a href="mailto:thelab@dot.state.ma.us">thelab@dot.state.ma.us</a>.',
-      alsoSuggested: "También recomendado",
-      notSuggested: "No recomendado",
+      alsoSuggested: "También aparece",
+      notSuggested: "Aparece más abajo",
       seeAllDeviceTypes: "Ver todos los tipos de dispositivos",
       yourResponses: "Tus respuestas",
-      whyConsiderIt: "Por qué elegirlo",
-      whyThisFitsForYou: "Por qué te puede funcionar",
-      whyThisFits: "Por qué puede funcionar",
-      thingsToConsider: "Qué tener en cuenta",
+      whyConsiderIt: "Por qué aparece",
+      whyThisFitsForYou: "Por qué aparece",
+      whyThisFits: "Por qué aparece",
+      thingsToConsider: "Qué saber",
       typicalCost: "Costo típico",
       nextSteps: "Próximos pasos",
       selectedMicromobilityDevice: "Dispositivo de micromovilidad seleccionado",

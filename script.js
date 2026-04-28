@@ -33,26 +33,42 @@ const OUTPUTS = {
   }
 };
 
+const APP_NAME = "Explore Micromobility";
 const INTRO_TEXT =
-  "Micromobility devices are small, affordable, and flexible ways to get around, such as bikes, e-scooters, and more. Answer a few questions to see what micromobility devices could work well for you.";
+  "Explore Micromobility is a public information tool for browsing micromobility options, such as bikes, e-scooters, and more. Answer a few questions to see which device types are surfaced based on your responses.";
 const LANDING_PAGE_COPY = {
   en: {
-    heroTitle: "Find a micromobility device that fits your needs.",
+    heroTitle: "Explore micromobility options in Massachusetts.",
     introText:
-      "Micromobility devices are small, affordable, and flexible ways to get around, such as bikes, e-scooters, and more. Answer a few questions to see what micromobility devices could work well for you."
+      "Explore Micromobility is a public information tool for browsing micromobility options, such as bikes, e-scooters, and more. Answer a few questions to see which device types are surfaced based on your responses."
   },
   es: {
-    heroTitle: "Encuentra un dispositivo de micromovilidad que se adapte a tus necesidades.",
+    heroTitle: "Explora opciones de micromovilidad en Massachusetts.",
     introText:
-      "Los dispositivos de micromovilidad, como bicicletas y scooters eléctricos, son formas simples, accesibles y flexibles de moverse. Responde algunas preguntas para ver qué opciones podrían funcionarte."
+      "Explore Micromobility es una herramienta pública de información para explorar opciones de micromovilidad, como bicicletas y scooters eléctricos. Responde algunas preguntas para ver qué tipos de dispositivos aparecen según tus respuestas."
   }
 };
-const RESULTS_INTRO_TEXT = "Based on your responses, these micromobility options may be a good fit.";
-const EXPLORING_RESULTS_TITLE_TEXT = "Explore a variety of micromobility devices.";
+const RESULTS_INTRO_TEXT = "Based on your responses, explore these micromobility options.";
+const EXPLORING_RESULTS_TITLE_TEXT = "Explore micromobility options.";
 const SCORING_DISCLAIMER_TEXT =
-  "Suggestions are generated using an additive scoring system based on your responses. Results are informational only, and more than one device type may be appropriate.";
+  "Explore Micromobility is an informational resource. It does not provide legal, safety, financial, or purchasing advice, and it does not endorse specific products, brands, sellers, or services. Review current laws, local rules, and product details before riding, renting, or purchasing.";
+const RESULTS_METHODS_SUMMARY_TEXT = "How results are shown";
+const RESULTS_METHODS_TITLE_TEXT = "How this explorer works";
+const RESULTS_METHODS_OVERVIEW_TEXT =
+  "This tool uses an additive scoring system. Each answer adds points to device types that align with that response, then visibility rules determine which device types appear in the results.";
+const RESULTS_METHODS_REPORT_TEXT =
+  "The explorer is informed by the Special Commission on Micromobility report filed on January 31, 2026 and by current Massachusetts law and operator rules where applicable.";
+const RESULTS_METHODS_VISIBILITY_TITLE_TEXT = "Current visibility rules";
+const RESULTS_METHODS_SCORING_TITLE_TEXT = "What affects scoring";
+const RESULTS_METHODS_CURRENT_RESPONSE_TITLE_TEXT = "What affected this result";
+const RESULTS_METHODS_REPORT_LINK_TEXT = "Read the Special Commission report";
+const RESULTS_METHODS_BICYCLE_LAW_LINK_TEXT = "Massachusetts bicycle and e-bike rules";
+const RESULTS_METHODS_SCOOTER_LAW_LINK_TEXT = "Massachusetts motorized scooter rules";
 const FEEDBACK_PROMPT_TEXT =
   'Love this idea? Think it needs more work? Let us know your thoughts at <a href="mailto:thelab@dot.state.ma.us">thelab@dot.state.ma.us</a>.';
+const REPORT_URL = "https://www.mass.gov/doc/special-commission-on-micromobility-report-january-2026/download";
+const BICYCLE_LAW_URL = "https://www.mass.gov/info-details/massachusetts-law-about-bicycles";
+const SCOOTER_LAW_URL = "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIV/Chapter90/Section1E";
 const PRINT_ICON_SVG =
   '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 9V4h10v5"/><path d="M7 14H5a2 2 0 0 1-2-2v-1.5A2.5 2.5 0 0 1 5.5 8h13A2.5 2.5 0 0 1 21 10.5V12a2 2 0 0 1-2 2h-2"/><path d="M7 12h10v8H7z"/><circle cx="17.5" cy="10.5" r=".75" fill="currentColor" stroke="none"/></svg>';
 const RECOMMENDATION_IMAGE_ALT_TEXT = {
@@ -100,7 +116,7 @@ const DEVICE_CONTENT = {
       routeBikeLanes: "",
       routeMixedRoads: "",
       routeRegularRoads: "",
-      routeTrails: "Some types of bikes, such as mountain bikes, are a great fit on trails and unpaved paths.",
+      routeTrails: "Some types of bikes, such as mountain bikes, are commonly used on trails and unpaved paths.",
       // Storage
       storageIndoor: "",
       storageOutdoor: "",
@@ -202,7 +218,7 @@ const DEVICE_CONTENT = {
     considerConditional: {
       // Age
       age3to13: "",
-      age14to16: "Class 1 e-bikes are suggested for you given your age because of their manageable speed and power. This is based on recommendations made by the Special Commission on Micromobility. Ask your parents for more information, or see Next steps to learn more.",
+      age14to16: "For ages 14 to 16, this explorer surfaces Class 1 e-bikes. This reflects the tool's current implementation of the Special Commission on Micromobility report and current Massachusetts rules.",
       age17to49: "",
       age50plus: "",
       // Adaptive need
@@ -217,7 +233,7 @@ const DEVICE_CONTENT = {
       transitLinkYes: "Check Massachusetts Bay Transportation Authority (MBTA) or your local Regional Transit Authority (RTA) rules before bringing a device on a bus or train, and look into nearby station bike parking or bike shed options where available. See Next steps for more information.",
       transitLinkNo: "",
       // Carrying children
-      carryChildrenYes: "Since you will carry children, consider add-ons such as a kid seat, a tag-along bike attachment, or a bike trailer. Make sure they wear properly fitted helmets and are secured in appropriate seats or harnesses.",
+      carryChildrenYes: "When carrying children is part of the trip, common setups include a child seat, tag-along attachment, or trailer. Children should wear properly fitted helmets and use appropriate seats or harnesses.",
       carryChildrenNo: "",
       // Distance
       distanceUnder3: "",
@@ -262,7 +278,7 @@ const DEVICE_CONTENT = {
       deliveries: "",
       recreation: "",
       // Transit link
-      transitLinkYes: "It is also a great choice when public transit is part of your commute, since most e-scooters can be folded.",
+      transitLinkYes: "This option can pair well with public transit because many e-scooters can be folded.",
       transitLinkNo: "",
       // Carrying children
       carryChildrenYes: "",
@@ -311,7 +327,7 @@ const DEVICE_CONTENT = {
       distance10plus: "",
       // Route type
       routeBikeLanes: "Due to their small wheels, standing position, and lack of suspension, e-scooters perform best on bike lanes and smooth paths.",
-      routeMixedRoads: "Due to their small wheels, standing position, and lack of suspension, e-scooters can feel less comfortable on rougher roads or in heavier traffic. Consider a model with suspesion and all-season tires.",
+      routeMixedRoads: "Due to their small wheels, standing position, and lack of suspension, e-scooters can feel less comfortable on rougher roads or in heavier traffic. Models with suspension and all-season tires may be more suitable in those conditions.",
       routeRegularRoads: "",
       routeTrails: "",
       // Storage
@@ -326,7 +342,7 @@ const DEVICE_CONTENT = {
   lowSpeedPoweredMicromobility: {
     image: "low-power-mobility.png",
     cost: "$300-$2,500",
-    whyBase: "Compact e-devices can be a great fit for short trips because of their affordability, size, and fun factor.",
+    whyBase: "Compact e-devices can work for short trips because of their size and portability.",
     // WHY CONDITIONAL
     // Active text slots under current logic: transport, recreation, transitLinkYes, distanceUnder3, routeBikeLanes, routeTrails
     whyConditional: {
@@ -482,7 +498,7 @@ const DEVICE_CONTENT = {
     },
     nextSteps: [
       { label: "Learn more about cargo bikes.", url: "https://canva.link/gcyamow1yonirts" },
-      { label: "Borrow a cargo bike for free to see if it is a good fit for you.", url: "https://cpp.ebikelibrary.org/" },
+      { label: "Borrow a cargo bike for free to explore how it works in practice.", url: "https://cpp.ebikelibrary.org/" },
       { label: "Visit a local bike shop.", url: "https://nbda.com/dealer-finder-member-directory/#!directory/map/tag=Massachusetts" },
       { label: "More shops on Pinkbike", url: "https://www.pinkbike.com/directory/list/massachusetts/2/bike-shop/" },
       { label: "More shops on Singletracks", url: "https://www.singletracks.com/bike-shops/region/massachusetts/" },
@@ -535,7 +551,7 @@ const DEVICE_CONTENT = {
       "If you live in the City of Boston and have not had an annual membership recently, you may be eligible for a $60/year Bluebikes membership, or $5/year if you have a qualifying income.",
       "Consider downloading your local bikeshare app and setting it up at home before your trip.",
       "Most bikeshare systems offer a choice between e-bikes and standard bikes.",
-      "It is a good idea to bring a helmet with you since most bikeshare systems do not typically provide one.",
+      "Most bikeshare systems do not provide helmets, so riders should plan to bring one.",
       ""
     ],
     // CONSIDER CONDITIONAL
@@ -682,7 +698,7 @@ const DEVICE_CONTENT = {
       // Primary use
       transport: "",
       deliveries: "",
-      recreation: "These options are a great fit for recreation, practice, and everyday neighborhood riding.",
+      recreation: "These options are commonly used for recreation, practice, and everyday neighborhood riding.",
       // Transit link
       transitLinkYes: "",
       transitLinkNo: "",
@@ -762,7 +778,7 @@ const EXPLORE_REASON_TEXT = {
   escooter:
     "An e-scooter can be a practical option for quick trips, especially when compact storage and transit connections matter. It tends to work best on smooth routes, bike lanes, and other lower-stress riding environments.",
   lowSpeedPoweredMicromobility:
-    "Compact e-devices can be a good fit for short trips because they are portable and easy to store. They tend to work best on smoother routes, bike lanes, and paved park paths, and can also appeal to riders looking for a fun, lightweight option.",
+    "Compact e-devices can work for short trips because they are portable and easy to store. They tend to work best on smoother routes, bike lanes, and paved park paths.",
   cargoBike:
     "A cargo bike can be a strong option when a standard bike may not carry enough. It is especially useful for hauling groceries, supplies, children, or heavier everyday loads, and can also support delivery use depending on the setup.",
   bikeshare:
@@ -770,7 +786,7 @@ const EXPLORE_REASON_TEXT = {
   adaptiveMobility:
     "An adaptive cycle can be a strong option when comfort, stability, or physical support are especially important. Different adaptive designs can work for transportation, recreation, or rider-specific mobility needs depending on the setup.",
   humanPoweredYouth:
-    "Age-appropriate mobility options can help younger riders build confidence and skills over time. These options are often a good fit for recreation, practice, and shorter trips in parks, paths, and other lower-stress riding areas."
+    "Age-appropriate mobility options can help younger riders build confidence and skills over time. These options are commonly used for recreation, practice, and shorter trips in parks, paths, and other lower-stress riding areas."
 };
 
 const SCORING_RULES = {
@@ -1191,6 +1207,7 @@ const APP_STATE = {
   locale: "en",
   currentResultIndex: 0,
   allResultsPanelOpen: false,
+  resultsMethodologyOpen: false,
   currentRecommendations: [],
   currentAllRecommendations: [],
   currentNormalizedAnswers: null,
@@ -1300,10 +1317,10 @@ function renderLocaleChrome() {
   const nextBtn = document.getElementById("nextBtn");
 
   if (documentTitle) {
-    documentTitle.textContent = isSpanishLocale() ? getUiText("title") : "Micromobility Buyer's Guide";
+    documentTitle.textContent = isSpanishLocale() ? getUiText("title") : APP_NAME;
   }
 
-  document.title = isSpanishLocale() ? getUiText("title") : "Micromobility Buyer's Guide";
+  document.title = isSpanishLocale() ? getUiText("title") : APP_NAME;
 
   if (languageToggle) {
     languageToggle.setAttribute(
@@ -1315,7 +1332,7 @@ function renderLocaleChrome() {
   if (footerGuide) {
     footerGuide.textContent = isSpanishLocale()
       ? getUiText("footerGuide")
-      : "Micromobility Buyer's Guide";
+      : APP_NAME;
   }
 
   if (footerNote) {
@@ -1629,13 +1646,13 @@ function getTopRecommendations(sortedDevices) {
 function getRecommendationPriorityMeta(index, score, topScore) {
   if (score >= topScore - 1) {
     return {
-      label: isSpanishLocale() ? getUiText("alsoSuggested") : "Also suggested",
+      label: isSpanishLocale() ? getUiText("alsoSuggested") : "Also shown",
       className: "all-results-tag-suggested"
     };
   }
 
   return {
-    label: isSpanishLocale() ? getUiText("notSuggested") : "Not suggested",
+    label: isSpanishLocale() ? getUiText("notSuggested") : "Shown lower",
     className: "all-results-tag-not"
   };
 }
@@ -2171,6 +2188,120 @@ function getAllResultsReason(rec, answers) {
   return `Could work because ${positive}, but ${caution}.`;
 }
 
+function getMethodologyScoringFactors(answers) {
+  const factors = [];
+
+  if (answers.ageInput) factors.push(`Age: ${answers.ageInput}`);
+  if (answers.pathway !== "exploring" && answers.adaptiveNeed) {
+    factors.push(`Mobility need: ${getAnswerDisplayValue("adaptiveNeed", answers.adaptiveNeed)}`);
+  }
+  if (answers.primaryUse) factors.push(`Primary use: ${getAnswerDisplayValue("primaryUse", answers.primaryUse)}`);
+  if (answers.transitLink) factors.push(`Transit connection: ${getAnswerDisplayValue("transitLink", answers.transitLink)}`);
+  if (answers.pathway !== "child" && answers.carryChildren) {
+    factors.push(`Child carrying: ${getAnswerDisplayValue("carryChildren", answers.carryChildren)}`);
+  }
+  if (answers.distance) factors.push(`Trip distance: ${getAnswerDisplayValue("distance", answers.distance)}`);
+  if (answers.routeType) factors.push(`Route type: ${getAnswerDisplayValue("routeType", answers.routeType)}`);
+  if (answers.storage) factors.push(`Storage: ${getAnswerDisplayValue("storage", answers.storage)}`);
+
+  return factors;
+}
+
+function getCurrentResponseVisibilityRules(answers) {
+  const rules = [];
+
+  if (answers.pathway === "exploring") {
+    rules.push("In Explore all device options mode, age-based visibility filters are not applied.");
+    return rules;
+  }
+
+  if (answers.age === "age3to13") {
+    rules.push("For ages 3 to 13, only youth options are shown. If a mobility need is selected, adaptive cycles move to the top and other adult-oriented device types are hidden.");
+  }
+
+  if (answers.age === "age14to16") {
+    rules.push("For ages 14 to 16, e-scooters, compact e-devices, and bikeshare are hidden in this explorer.");
+  }
+
+  if (answers.age === "age50plus") {
+    rules.push("For ages 50 and older, e-scooters and compact e-devices are hidden in this explorer.");
+  }
+
+  if (answers.carryChildren === "yes") {
+    rules.push("When carrying children is selected, e-scooters and compact e-devices are hidden.");
+  }
+
+  if (answers.routeType === "regularRoads") {
+    rules.push("For routes on roads without separation from cars, e-scooters are hidden.");
+  }
+
+  if (answers.routeType === "trails") {
+    rules.push("For trail-focused routes, e-scooters are hidden.");
+  }
+
+  if (
+    answers.routeType &&
+    answers.routeType !== "bikeLanes" &&
+    answers.routeType !== "trails"
+  ) {
+    rules.push("Compact e-devices appear only for lower-stress routes in this explorer.");
+  }
+
+  if (answers.distance && answers.distance !== "under3") {
+    rules.push("Compact e-devices appear only for trips under 3 miles in this explorer.");
+  }
+
+  if (answers.storage && answers.storage !== "indoor") {
+    rules.push("Compact e-devices appear only when indoor storage is selected in this explorer.");
+  }
+
+  return rules;
+}
+
+function renderResultsMethodology(answers) {
+  const scoringFactors = getMethodologyScoringFactors(answers);
+  const currentResponseRules = getCurrentResponseVisibilityRules(answers);
+  const scoringFactorsHtml = scoringFactors
+    .map((item) => `<li>${item}</li>`)
+    .join("");
+  const currentResponseRulesHtml = currentResponseRules.length
+    ? currentResponseRules.map((item) => `<li>${item}</li>`).join("")
+    : "<li>No additional visibility rules were triggered for this response.</li>";
+
+  return `
+    <details class="results-methodology"${APP_STATE.resultsMethodologyOpen ? " open" : ""}>
+      <summary>${RESULTS_METHODS_SUMMARY_TEXT}</summary>
+      <div class="results-methodology__body">
+        <p class="results-methodology__title">${RESULTS_METHODS_TITLE_TEXT}</p>
+        <p>${RESULTS_METHODS_OVERVIEW_TEXT}</p>
+        <p>${RESULTS_METHODS_REPORT_TEXT}</p>
+
+        <p class="results-methodology__section-title">${RESULTS_METHODS_VISIBILITY_TITLE_TEXT}</p>
+        <ul class="results-methodology__list">
+          <li>Current Massachusetts law requires helmets for bicycle riders age 16 and under, and for manually propelled scooters age 16 and under.</li>
+          <li>Massachusetts treats electric bicycles separately from motorized scooters. Current law gives electric bicycles bicycle-style operating rules, while motorized scooters require a valid driver's license or learner's permit.</li>
+          <li>Operator rules may also limit access. For example, Bluebikes currently requires riders to be 16 or older.</li>
+          <li>Some visibility rules in this tool are policy choices used to reflect the report's safety-oriented implementation approach, even where state law does not create the exact same display rule.</li>
+        </ul>
+
+        <p class="results-methodology__section-title">${RESULTS_METHODS_SCORING_TITLE_TEXT}</p>
+        <ul class="results-methodology__list">${scoringFactorsHtml}</ul>
+
+        <p class="results-methodology__section-title">${RESULTS_METHODS_CURRENT_RESPONSE_TITLE_TEXT}</p>
+        <ul class="results-methodology__list">${currentResponseRulesHtml}</ul>
+
+        <p class="results-methodology__links">
+          <a href="${REPORT_URL}" target="_blank" rel="noopener noreferrer">${RESULTS_METHODS_REPORT_LINK_TEXT}</a>
+          <span aria-hidden="true"> | </span>
+          <a href="${BICYCLE_LAW_URL}" target="_blank" rel="noopener noreferrer">${RESULTS_METHODS_BICYCLE_LAW_LINK_TEXT}</a>
+          <span aria-hidden="true"> | </span>
+          <a href="${SCOOTER_LAW_URL}" target="_blank" rel="noopener noreferrer">${RESULTS_METHODS_SCOOTER_LAW_LINK_TEXT}</a>
+        </p>
+      </div>
+    </details>
+  `;
+}
+
 function renderAllDeviceResultsPanel(allRecommendations, answers) {
   const panelRecommendations = allRecommendations
     .filter((rec) => rec.score > 0)
@@ -2213,10 +2344,10 @@ function renderPrintRecommendationSummary(rec, answers, pathway) {
   if (!content) return "";
   const printRationaleHeading =
     pathway === "exploring"
-      ? (isSpanishLocale() ? getUiText("whyConsiderIt") : "Why consider it")
+      ? (isSpanishLocale() ? getUiText("whyConsiderIt") : "Why it appears")
       : pathway === "myself"
-        ? (isSpanishLocale() ? getUiText("whyThisFitsForYou") : "Why this fits for you")
-        : (isSpanishLocale() ? getUiText("whyThisFits") : "Why this fits");
+        ? (isSpanishLocale() ? getUiText("whyThisFitsForYou") : "Why it appears")
+        : (isSpanishLocale() ? getUiText("whyThisFits") : "Why it appears");
 
   const imageSrc = getRecommendationImage(rec.id, answers, content);
   const imageTag = getRecommendationImageTag(rec.id, answers);
@@ -2307,7 +2438,7 @@ function renderPrintSummary(recommendations, answers, pathway) {
   return `
     <section class="print-summary ${densityClass}" aria-hidden="true">
       <div class="print-header">
-        <h2 class="print-title">${isSpanishLocale() ? getUiText("title") : "Micromobility Buyer's Guide"}</h2>
+        <h2 class="print-title">${isSpanishLocale() ? getUiText("title") : APP_NAME}</h2>
         <img src="lab-logo-black.png" alt="${isSpanishLocale() ? getUiText("labLogoAlt") : "The Lab at MassDOT logo"}" class="print-logo">
       </div>
       ${renderPrintInputsSummary(rawAnswers)}
@@ -2648,10 +2779,10 @@ function renderSingleRecommendationCard(rec, answers, pathway) {
   const considerationItems = getResultCardConsiderationItems(rec.id, answers, content);
   const rationaleHeading =
     pathway === "exploring"
-      ? (isSpanishLocale() ? getUiText("whyConsiderIt") : "Why consider it")
+      ? (isSpanishLocale() ? getUiText("whyConsiderIt") : "Why it appears")
       : pathway === "myself"
-        ? (isSpanishLocale() ? getUiText("whyThisFitsForYou") : "Why this fits for you")
-        : (isSpanishLocale() ? getUiText("whyThisFits") : "Why this fits");
+        ? (isSpanishLocale() ? getUiText("whyThisFitsForYou") : "Why it appears")
+        : (isSpanishLocale() ? getUiText("whyThisFits") : "Why it appears");
   const considerations = getConsiderBase(rec.id);
 
   let filteredBaseConsiderations = [...considerations];
@@ -2769,7 +2900,7 @@ function renderSingleRecommendationCard(rec, answers, pathway) {
       </p>
 
       <div class="guidance">
-        <h3 class="guidance-heading">${isSpanishLocale() ? getUiText("thingsToConsider") : "Things to consider"}</h3>
+        <h3 class="guidance-heading">${isSpanishLocale() ? getUiText("thingsToConsider") : "Things to know"}</h3>
         <ul class="guidance-list">${considerationsHtml}</ul>
 
         <p class="device-cost">
@@ -2790,6 +2921,7 @@ function resetAppState() {
   APP_STATE.currentStep = 0;
   APP_STATE.currentResultIndex = 0;
   APP_STATE.allResultsPanelOpen = false;
+  APP_STATE.resultsMethodologyOpen = false;
   APP_STATE.currentRecommendations = [];
   APP_STATE.currentAllRecommendations = [];
   APP_STATE.currentNormalizedAnswers = null;
@@ -2876,6 +3008,7 @@ function renderCurrentRecommendationPage() {
   const cardHtml = renderSingleRecommendationCard(rec, answers, pathway);
   const allResultsPanelHtml =
     pathway === "exploring" ? "" : renderAllDeviceResultsPanel(allRecommendations, answers);
+  const resultsMethodologyHtml = renderResultsMethodology(answers);
   const printSummaryHtml = renderPrintSummary(
     recommendations,
     answers,
@@ -2960,6 +3093,7 @@ function renderCurrentRecommendationPage() {
       ${isSpanishLocale() ? getUiText("feedbackPromptText") : FEEDBACK_PROMPT_TEXT}
     </p>
 
+    ${resultsMethodologyHtml}
     ${allResultsPanelHtml}
     ${printSummaryHtml}
   `;
@@ -2970,10 +3104,17 @@ function renderCurrentRecommendationPage() {
   const printBtns = document.querySelectorAll('[data-role="print-results"]');
   const cardEl = result.querySelector(".recommendation-card");
   const allResultsPanel = result.querySelector(".all-results-panel");
+  const resultsMethodology = result.querySelector(".results-methodology");
 
   if (allResultsPanel) {
     allResultsPanel.addEventListener("toggle", () => {
       APP_STATE.allResultsPanelOpen = allResultsPanel.open;
+    });
+  }
+
+  if (resultsMethodology) {
+    resultsMethodology.addEventListener("toggle", () => {
+      APP_STATE.resultsMethodologyOpen = resultsMethodology.open;
     });
   }
 
