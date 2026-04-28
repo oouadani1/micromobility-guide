@@ -3114,7 +3114,7 @@ function renderRecommendations(recommendations, allRecommendations, answers, sco
     heroTitle.classList.add("hidden");
   }
 
-
+  setLandingHeaderVisibility(false);
 
   if (!result) return;
 
@@ -3451,6 +3451,13 @@ function setFooterDisclaimerVisibility(isVisible) {
   footerDisclaimer.classList.toggle("hidden", !isVisible);
 }
 
+function setLandingHeaderVisibility(isVisible) {
+  const landingHeader = document.querySelector(".landing-header");
+  if (!landingHeader) return;
+
+  landingHeader.classList.toggle("hidden", !isVisible);
+}
+
 function renderLandingCopy() {
   const intro = document.getElementById("introText");
   const heroTitle = document.getElementById("heroTitle");
@@ -3469,6 +3476,7 @@ function renderLandingCopy() {
 
   renderFooterDisclaimer();
   setFooterDisclaimerVisibility(true);
+  setLandingHeaderVisibility(true);
 
   updateLandingLanguageToggle();
 }
@@ -3496,6 +3504,7 @@ function renderQuestion() {
     heroTitle.classList.toggle("hidden", APP_STATE.currentStep > 0);
   }
 
+  setLandingHeaderVisibility(APP_STATE.currentStep === 0);
   setFooterDisclaimerVisibility(APP_STATE.currentStep === 0);
 
   result.classList.add("hidden");
