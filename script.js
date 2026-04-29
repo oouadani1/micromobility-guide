@@ -3126,6 +3126,19 @@ function announceResultsSummary(rec, answers, pathway) {
   });
 }
 
+function getResultsFocusSummary(rec, answers, pathway) {
+  if (!rec) return "";
+
+  const rationaleHeading =
+    pathway === "exploring"
+      ? (isSpanishLocale() ? getUiText("whyConsiderIt") : "Why it appears")
+      : pathway === "myself"
+        ? (isSpanishLocale() ? getUiText("whyThisFitsForYou") : "Why it appears")
+        : (isSpanishLocale() ? getUiText("whyThisFits") : "Why it appears");
+
+  return `${rec.label}. ${rationaleHeading}. ${getRecommendationReason(rec.id, answers, pathway)}`;
+}
+
 function resetAppState() {
   APP_STATE.currentStep = 0;
   APP_STATE.currentResultIndex = 0;
@@ -3235,12 +3248,16 @@ function renderCurrentRecommendationPage() {
     pathway === "exploring"
       ? (isSpanishLocale() ? getUiText("exploringResultsTitleText") : EXPLORING_RESULTS_TITLE_TEXT)
       : (isSpanishLocale() ? getUiText("resultsIntroText") : RESULTS_INTRO_TEXT);
+  const resultsFocusSummary = getResultsFocusSummary(rec, answers, pathway);
 
   result.classList.remove("hidden");
   result.setAttribute("role", "region");
   result.setAttribute("aria-labelledby", "resultsHeading");
+  result.setAttribute("aria-describedby", "resultsFocusSummary");
+  result.setAttribute("tabindex", "-1");
   result.innerHTML = `
     <div id="resultsLive" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
+    <p id="resultsFocusSummary" class="visually-hidden">${resultsFocusSummary}</p>
     <h2 id="resultsHeading" class="results-intro-heading" tabindex="-1">${resultsIntroText}</h2>
 
     ${cardHtml}
@@ -3319,8 +3336,6 @@ function renderCurrentRecommendationPage() {
   const cardEl = result.querySelector(".recommendation-card");
   const allResultsPanel = result.querySelector(".all-results-panel");
   const resultsMethodology = result.querySelector(".results-methodology");
-  const resultsHeading = result.querySelector("#resultsHeading");
-  const cardTitleEl = result.querySelector(".recommendation-title");
 
   if (allResultsPanel) {
     bindDisclosureToggle(allResultsPanel, (expanded) => {
@@ -3368,11 +3383,7 @@ function renderCurrentRecommendationPage() {
 
   announceResultsSummary(rec, answers, pathway);
 
-  if (cardTitleEl) {
-    cardTitleEl.focus();
-  } else if (resultsHeading) {
-    resultsHeading.focus();
-  }
+  result.focus();
 
   bindMobileRecommendationSwipe(cardEl, recommendations.length);
 }
