@@ -2405,7 +2405,9 @@ function renderResultsMethodology(answers) {
 
   return `
     <details class="results-methodology"${APP_STATE.resultsMethodologyOpen ? " open" : ""}>
-      <summary tabindex="0">${isSpanishLocale() ? getUiText("howResultsAreShown") : RESULTS_METHODS_SUMMARY_TEXT}</summary>
+      <summary>
+        <button type="button" class="details-toggle-btn">${isSpanishLocale() ? getUiText("howResultsAreShown") : RESULTS_METHODS_SUMMARY_TEXT}</button>
+      </summary>
       <div class="results-methodology__body">
         <p class="results-methodology__title">${isSpanishLocale() ? getUiText("howExplorerWorks") : RESULTS_METHODS_TITLE_TEXT}</p>
         <p>${isSpanishLocale() ? getUiText("resultsOverviewText") : RESULTS_METHODS_OVERVIEW_TEXT}</p>
@@ -2462,7 +2464,9 @@ function renderAllDeviceResultsPanel(allRecommendations, answers) {
 
   return `
     <details class="all-results-panel"${APP_STATE.allResultsPanelOpen ? " open" : ""}>
-      <summary tabindex="0">${isSpanishLocale() ? getUiText("seeAllDeviceTypes") : "See other relevant devices"}</summary>
+      <summary>
+        <button type="button" class="details-toggle-btn">${isSpanishLocale() ? getUiText("seeAllDeviceTypes") : "See other relevant devices"}</button>
+      </summary>
       <ul class="all-results-list">${itemsHtml}</ul>
     </details>
   `;
@@ -3312,23 +3316,33 @@ function bindDetailsSummaryKeyboard(detailsEl) {
   if (!detailsEl) return;
 
   const summaryEl = detailsEl.querySelector("summary");
-  if (!summaryEl) return;
+  const buttonEl = detailsEl.querySelector(".details-toggle-btn");
+  if (!summaryEl || !buttonEl) return;
 
-  summaryEl.setAttribute("role", "button");
-  summaryEl.setAttribute("tabindex", "0");
-  summaryEl.setAttribute("aria-expanded", String(detailsEl.open));
+  const syncExpandedState = () => {
+    buttonEl.setAttribute("aria-expanded", String(detailsEl.open));
+  };
 
-  summaryEl.addEventListener("keydown", (event) => {
+  summaryEl.addEventListener("click", (event) => {
+    event.preventDefault();
+  });
+
+  buttonEl.addEventListener("click", (event) => {
+    event.preventDefault();
+    detailsEl.open = !detailsEl.open;
+    syncExpandedState();
+  });
+
+  buttonEl.addEventListener("keydown", (event) => {
     if (event.key !== "Enter" && event.key !== " ") return;
 
     event.preventDefault();
     detailsEl.open = !detailsEl.open;
-    summaryEl.setAttribute("aria-expanded", String(detailsEl.open));
+    syncExpandedState();
   });
 
-  detailsEl.addEventListener("toggle", () => {
-    summaryEl.setAttribute("aria-expanded", String(detailsEl.open));
-  });
+  detailsEl.addEventListener("toggle", syncExpandedState);
+  syncExpandedState();
 }
 
 function bindMobileRecommendationSwipe(cardEl, totalRecommendations) {

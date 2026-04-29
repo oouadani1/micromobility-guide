@@ -184,6 +184,7 @@ button:focus-visible,
 .next-step-item a:focus-visible,
 .all-results-panel summary:focus-visible,
 .results-methodology summary:focus-visible,
+.details-toggle-btn:focus-visible,
 .results-arrow-btn:focus-visible,
 .results-print-btn:focus-visible {
   outline: 3px solid var(--text-blue-aa);
@@ -1708,6 +1709,29 @@ body.results-view-active .results-methodology {
 .results-methodology summary {
   padding: 16px 18px;
   font-size: 15px;
+}
+
+.details-toggle-btn {
+  width: 100%;
+  margin-top: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 14px;
+  background: transparent;
+  color: var(--text-blue-aa);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: left;
+  box-shadow: none;
+}
+
+.details-toggle-btn:hover {
+  background: rgba(20, 85, 143, 0.08);
+}
+
+.details-toggle-btn:focus-visible {
+  background: rgba(20, 85, 143, 0.1);
 }
 
 .all-results-list,
