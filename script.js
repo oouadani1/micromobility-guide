@@ -3515,7 +3515,7 @@ function updateLandingLanguageToggle() {
   const enBtn = document.getElementById("langEnBtn");
   const esBtn = document.getElementById("langEsBtn");
   const landingControls = document.getElementById("landingControls");
-  const showLandingControls = APP_STATE.currentStep === 0 && !APP_STATE.answers.pathway;
+  const showLandingControls = APP_STATE.currentStep === 0;
 
   if (landingControls) {
     landingControls.classList.toggle("hidden", !showLandingControls);
