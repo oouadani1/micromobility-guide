@@ -2388,18 +2388,18 @@ function renderResultsMethodology(answers) {
   const limitingNotes = getCurrentResponseLimitingNotes(answers);
   const visibilityLawNotes = getResultsVisibilityLawNotes();
   const scoringFactorsHtml = scoringFactors
-    .map((item) => `<li>${item}</li>`)
+    .map((item) => `<li tabindex="0">${item}</li>`)
     .join("");
   const visibilityLawNotesHtml = visibilityLawNotes
-    .map((item) => `<li>${item}</li>`)
+    .map((item) => `<li tabindex="0">${item}</li>`)
     .join("");
   const currentResponseRulesHtml = currentResponseRules.length
-    ? currentResponseRules.map((item) => `<li>${item}</li>`).join("")
-    : `<li>${isSpanishLocale() ? getUiText("noAdditionalVisibilityRules") : "No additional notes changed what showed up for this response."}</li>`;
+    ? currentResponseRules.map((item) => `<li tabindex="0">${item}</li>`).join("")
+    : `<li tabindex="0">${isSpanishLocale() ? getUiText("noAdditionalVisibilityRules") : "No additional notes changed what showed up for this response."}</li>`;
   const limitingNotesHtml = limitingNotes.length
     ? `
-        <h3 class="results-methodology__section-title">${isSpanishLocale() ? getUiText("whatMayLowerOptions") : RESULTS_METHODS_LIMITING_TITLE_TEXT}</h3>
-        <ul class="results-methodology__list">${limitingNotes.map((item) => `<li>${item}</li>`).join("")}</ul>
+        <h3 class="results-methodology__section-title" tabindex="0">${isSpanishLocale() ? getUiText("whatMayLowerOptions") : RESULTS_METHODS_LIMITING_TITLE_TEXT}</h3>
+        <ul class="results-methodology__list" tabindex="0">${limitingNotes.map((item) => `<li tabindex="0">${item}</li>`).join("")}</ul>
       `
     : "";
 
@@ -2420,21 +2420,21 @@ function renderResultsMethodology(answers) {
         ${APP_STATE.resultsMethodologyOpen ? "" : "hidden"}
         data-accordion-panel
       >
-        <h3 class="results-methodology__title">${isSpanishLocale() ? getUiText("howExplorerWorks") : RESULTS_METHODS_TITLE_TEXT}</h3>
-        <p>${isSpanishLocale() ? getUiText("resultsOverviewText") : RESULTS_METHODS_OVERVIEW_TEXT}</p>
-        <p>${isSpanishLocale() ? getUiText("resultsReportText") : RESULTS_METHODS_REPORT_TEXT}</p>
+        <h3 class="results-methodology__title" tabindex="0">${isSpanishLocale() ? getUiText("howExplorerWorks") : RESULTS_METHODS_TITLE_TEXT}</h3>
+        <p tabindex="0">${isSpanishLocale() ? getUiText("resultsOverviewText") : RESULTS_METHODS_OVERVIEW_TEXT}</p>
+        <p tabindex="0">${isSpanishLocale() ? getUiText("resultsReportText") : RESULTS_METHODS_REPORT_TEXT}</p>
 
-        <h3 class="results-methodology__section-title">${isSpanishLocale() ? getUiText("currentVisibilityRules") : RESULTS_METHODS_VISIBILITY_TITLE_TEXT}</h3>
-        <ul class="results-methodology__list">${visibilityLawNotesHtml}</ul>
+        <h3 class="results-methodology__section-title" tabindex="0">${isSpanishLocale() ? getUiText("currentVisibilityRules") : RESULTS_METHODS_VISIBILITY_TITLE_TEXT}</h3>
+        <ul class="results-methodology__list" tabindex="0">${visibilityLawNotesHtml}</ul>
 
-        <h3 class="results-methodology__section-title">${isSpanishLocale() ? getUiText("whatAffectsScoring") : RESULTS_METHODS_SCORING_TITLE_TEXT}</h3>
-        <ul class="results-methodology__list">${scoringFactorsHtml}</ul>
+        <h3 class="results-methodology__section-title" tabindex="0">${isSpanishLocale() ? getUiText("whatAffectsScoring") : RESULTS_METHODS_SCORING_TITLE_TEXT}</h3>
+        <ul class="results-methodology__list" tabindex="0">${scoringFactorsHtml}</ul>
 
-        <h3 class="results-methodology__section-title">${isSpanishLocale() ? getUiText("whatHelpedShowResults") : RESULTS_METHODS_CURRENT_RESPONSE_TITLE_TEXT}</h3>
-        <ul class="results-methodology__list">${currentResponseRulesHtml}</ul>
+        <h3 class="results-methodology__section-title" tabindex="0">${isSpanishLocale() ? getUiText("whatHelpedShowResults") : RESULTS_METHODS_CURRENT_RESPONSE_TITLE_TEXT}</h3>
+        <ul class="results-methodology__list" tabindex="0">${currentResponseRulesHtml}</ul>
         ${limitingNotesHtml}
 
-        <p class="results-methodology__links">
+        <p class="results-methodology__links" tabindex="0">
           <a href="${REPORT_URL}" target="_blank" rel="noopener noreferrer">${isSpanishLocale() ? getUiText("readCommissionReport") : RESULTS_METHODS_REPORT_LINK_TEXT}</a>
           <span aria-hidden="true"> | </span>
           <a href="${BICYCLE_LAW_URL}" target="_blank" rel="noopener noreferrer">${isSpanishLocale() ? getUiText("massLawAboutBicycles") : RESULTS_METHODS_BICYCLE_LAW_LINK_TEXT}</a>
@@ -2459,14 +2459,18 @@ function renderAllDeviceResultsPanel(allRecommendations, answers) {
       const reason = isSpanishLocale()
         ? rawReason
         : formatTextForPathway(rawReason, answers.pathway);
+      const itemId = `all-results-item-${rec.id}-${index}`;
+      const deviceId = `${itemId}-device`;
+      const tagId = `${itemId}-tag`;
+      const reasonId = `${itemId}-reason`;
 
       return `
-      <li class="all-results-item">
+      <li class="all-results-item" tabindex="0" aria-labelledby="${deviceId} ${tagId} ${reasonId}">
         ${imageSrc ? `<img src="${imageSrc}" alt="${getRecommendationImageAlt(rec.id, answers)}" class="all-results-image">` : ""}
         <div class="all-results-copy">
-          <p class="all-results-device">${rec.label}</p>
-          <p class="all-results-tag ${priority.className}">${priority.label}</p>
-          <p class="all-results-reason"><em>${reason}</em></p>
+          <p id="${deviceId}" class="all-results-device" tabindex="0">${rec.label}</p>
+          <p id="${tagId}" class="all-results-tag ${priority.className}" tabindex="0">${priority.label}</p>
+          <p id="${reasonId}" class="all-results-reason" tabindex="0"><em>${reason}</em></p>
         </div>
       </li>
     `;
@@ -2488,7 +2492,7 @@ function renderAllDeviceResultsPanel(allRecommendations, answers) {
         ${APP_STATE.allResultsPanelOpen ? "" : "hidden"}
         data-accordion-panel
       >
-        <ul class="all-results-list">${itemsHtml}</ul>
+        <ul class="all-results-list" tabindex="0">${itemsHtml}</ul>
       </div>
     </section>
   `;
@@ -3093,7 +3097,7 @@ function renderSingleRecommendationCard(rec, answers, pathway) {
         id="${recommendationReasonId}"
         class="recommendation-reason"
         tabindex="0"
-        aria-labelledby="${recommendationReasonHeadingId}"
+        aria-label="${rationaleHeading}. ${getRecommendationReason(rec.id, answers, pathway)}"
       >
         ${getRecommendationReason(rec.id, answers, pathway)}
       </p>
@@ -3291,6 +3295,9 @@ function renderCurrentRecommendationPage() {
 
     ${cardHtml}
 
+    ${allResultsPanelHtml}
+    ${resultsMethodologyHtml}
+
     <div class="results-toolbar">
       <div class="results-pager">
         <button
@@ -3301,7 +3308,7 @@ function renderCurrentRecommendationPage() {
         >
           <span aria-hidden="true">&#8249;</span>
         </button>
-        <p class="results-counter">${getDynamicCountLabel(index + 1, recommendations.length)}</p>
+        <p class="results-counter" tabindex="0">${getDynamicCountLabel(index + 1, recommendations.length)}</p>
         <button
           id="resultNextBtn"
           type="button"
@@ -3316,6 +3323,7 @@ function renderCurrentRecommendationPage() {
         type="button"
         class="results-restart-btn results-restart-btn-desktop"
         data-role="restart-results"
+        aria-label="${isSpanishLocale() ? getUiText("startOver") : "Start over"}"
       >
         ${isSpanishLocale() ? getUiText("startOver") : "Start over"}
       </button>
@@ -3335,6 +3343,7 @@ function renderCurrentRecommendationPage() {
         type="button"
         class="results-restart-btn results-restart-btn-mobile"
         data-role="restart-results"
+        aria-label="${isSpanishLocale() ? getUiText("startOver") : "Start over"}"
       >
         ${isSpanishLocale() ? getUiText("startOver") : "Start over"}
       </button>
@@ -3348,9 +3357,6 @@ function renderCurrentRecommendationPage() {
         ${PRINT_ICON_SVG}
       </button>
     </div>
-
-    ${allResultsPanelHtml}
-    ${resultsMethodologyHtml}
 
     ${printSummaryHtml}
   `;
@@ -3606,10 +3612,28 @@ function updateLandingLanguageToggle() {
 function renderFooterDisclaimer() {
   const footerDisclaimer = document.getElementById("footerDisclaimer");
   if (!footerDisclaimer) return;
+  const feedbackText = (isSpanishLocale() ? getUiText("feedbackPromptText") : FEEDBACK_PROMPT_TEXT)
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  footerDisclaimer.setAttribute("tabindex", "0");
+  footerDisclaimer.setAttribute(
+    "aria-label",
+    isSpanishLocale() ? getUiText("scoringDisclaimerText") : SCORING_DISCLAIMER_TEXT
+  );
 
   footerDisclaimer.innerHTML = `
-    <span class="recommendation-disclaimer-copy">${isSpanishLocale() ? getUiText("scoringDisclaimerText") : SCORING_DISCLAIMER_TEXT}</span>
-    <span class="recommendation-disclaimer-feedback">${isSpanishLocale() ? getUiText("feedbackPromptText") : FEEDBACK_PROMPT_TEXT}</span>
+    <span
+      class="recommendation-disclaimer-copy"
+      tabindex="0"
+      aria-label="${isSpanishLocale() ? getUiText("scoringDisclaimerText") : SCORING_DISCLAIMER_TEXT}"
+    >${isSpanishLocale() ? getUiText("scoringDisclaimerText") : SCORING_DISCLAIMER_TEXT}</span>
+    <span
+      class="recommendation-disclaimer-feedback"
+      tabindex="0"
+      aria-label="${feedbackText}"
+    >${isSpanishLocale() ? getUiText("feedbackPromptText") : FEEDBACK_PROMPT_TEXT}</span>
   `;
 }
 
