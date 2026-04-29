@@ -2955,6 +2955,8 @@ function renderSingleRecommendationCard(rec, answers, pathway) {
   const content = getDeviceContent(rec.id);
   const considerationItems = getResultCardConsiderationItems(rec.id, answers, content);
   const recommendationTitleId = `recommendation-title-${rec.id}`;
+  const recommendationReasonId = `recommendation-reason-${rec.id}`;
+  const recommendationIntroId = `recommendation-intro-${rec.id}`;
   const rationaleHeading =
     pathway === "exploring"
       ? (isSpanishLocale() ? getUiText("whyConsiderIt") : "Why it appears")
@@ -3066,14 +3068,21 @@ function renderSingleRecommendationCard(rec, answers, pathway) {
   const imageTag = getRecommendationImageTag(rec.id, answers);
 
   return `
-    <article class="recommendation-card" aria-labelledby="${recommendationTitleId}">
+    <section
+      class="recommendation-card"
+      role="region"
+      tabindex="-1"
+      aria-labelledby="${recommendationTitleId}"
+      aria-describedby="${recommendationIntroId} ${recommendationReasonId}"
+    >
       <h2 id="${recommendationTitleId}" class="recommendation-title">${rec.label}</h2>
+      <p id="${recommendationIntroId}" class="visually-hidden">${rationaleHeading}</p>
 
       ${imageSrc ? `<img src="${imageSrc}" alt="${getRecommendationImageAlt(rec.id, answers)}" class="device-image">` : ""}
       ${imageTag ? `<p class="recommendation-image-tag">${imageTag}</p>` : ""}
 
       <h3 class="guidance-heading">${rationaleHeading}</h3>
-      <p class="recommendation-reason">
+      <p id="${recommendationReasonId}" class="recommendation-reason">
         ${getRecommendationReason(rec.id, answers, pathway)}
       </p>
 
@@ -3091,7 +3100,7 @@ function renderSingleRecommendationCard(rec, answers, pathway) {
         <h3 class="guidance-heading">${isSpanishLocale() ? getUiText("nextSteps") : "Next steps"}</h3>
         <ul class="next-steps-list">${nextStepsHtml}</ul>
       </div>
-    </article>
+    </section>
   `;
 }
 
@@ -3333,7 +3342,9 @@ function renderCurrentRecommendationPage() {
     });
   });
 
-  if (resultsHeading) {
+  if (cardEl) {
+    cardEl.focus();
+  } else if (resultsHeading) {
     resultsHeading.focus();
   }
 
