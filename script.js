@@ -217,7 +217,7 @@ const DEVICE_CONTENT = {
     considerConditional: {
       // Age
       age3to13: "",
-      age14to16: "For ages 14 to 16, this explorer surfaces Class 1 e-bikes. This reflects the tool's current implementation of the Special Commission on Micromobility report and current Massachusetts rules.",
+      age14to16: "For ages 14 to 16, this explorer shows Class 1 e-bikes. This reflects the tool's current implementation of the Special Commission on Micromobility report and current Massachusetts rules.",
       age17to49: "",
       age50plus: "",
       // Adaptive need
@@ -2367,7 +2367,7 @@ function getResultsVisibilityLawNotes() {
   return [
     "Current Massachusetts law requires helmets for bicycle riders age 16 and under, and for manually propelled scooters age 16 and under.",
     "Some shared systems have their own service requirements. For example, Bluebikes currently requires riders to be 16 or older.",
-    "Some options are shown more cautiously in this tool to reflect the report's safety-focused approach, even when state law does not use the exact same categories."
+    "Some options are shown more cautiously in this tool to reflect the report's safety-focused approach, even when existing state law does not use the exact same categories."
   ];
 }
 
@@ -2398,7 +2398,7 @@ function renderResultsMethodology(answers) {
 
   return `
     <details class="results-methodology"${APP_STATE.resultsMethodologyOpen ? " open" : ""}>
-      <summary>${isSpanishLocale() ? getUiText("howResultsAreShown") : RESULTS_METHODS_SUMMARY_TEXT}</summary>
+      <summary tabindex="0">${isSpanishLocale() ? getUiText("howResultsAreShown") : RESULTS_METHODS_SUMMARY_TEXT}</summary>
       <div class="results-methodology__body">
         <p class="results-methodology__title">${isSpanishLocale() ? getUiText("howExplorerWorks") : RESULTS_METHODS_TITLE_TEXT}</p>
         <p>${isSpanishLocale() ? getUiText("resultsOverviewText") : RESULTS_METHODS_OVERVIEW_TEXT}</p>
@@ -2455,7 +2455,7 @@ function renderAllDeviceResultsPanel(allRecommendations, answers) {
 
   return `
     <details class="all-results-panel"${APP_STATE.allResultsPanelOpen ? " open" : ""}>
-      <summary>${isSpanishLocale() ? getUiText("seeAllDeviceTypes") : "See other relevant devices"}</summary>
+      <summary tabindex="0">${isSpanishLocale() ? getUiText("seeAllDeviceTypes") : "See other relevant devices"}</summary>
       <ul class="all-results-list">${itemsHtml}</ul>
     </details>
   `;

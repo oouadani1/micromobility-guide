@@ -1470,7 +1470,7 @@ body.results-view-active .card {
 
 .landing-header {
   gap: 24px;
-  margin-bottom: 12px;
+  margin-bottom: 4px;
 }
 
 .intro {
@@ -1486,7 +1486,7 @@ body.results-view-active .card {
 }
 
 body.question-flow-active #formStep {
-  max-width: 920px;
+  max-width: none;
 }
 
 .question-block {
@@ -1536,8 +1536,8 @@ body.question-flow-active .form-nav {
 
 .footer-branding {
   gap: 18px;
-  margin-top: 36px;
-  padding-top: 28px;
+  margin-top: 40px;
+  padding-top: 34px;
   border-top: 1px solid rgba(20, 85, 143, 0.12);
   align-items: flex-end;
 }
@@ -1864,7 +1864,7 @@ body.results-view-active .results-methodology {
   }
 
   .footer-branding {
-    padding-top: 20px;
+    padding-top: 24px;
     gap: 12px;
   }
 
