@@ -653,8 +653,8 @@ body.question-flow-active .form-nav {
 }
 
 body.question-flow-active .site-branding {
-  margin-top: 12px;
-  padding-top: 0;
+  margin-top: 20px;
+  padding-top: 14px;
 }
 
 body.results-view-active .site-branding {
@@ -1066,8 +1066,8 @@ body.results-view-active .site-branding {
   }
 
   body.question-flow-active .site-branding {
-    margin-top: 10px;
-    padding-top: 0;
+    margin-top: 16px;
+    padding-top: 12px;
   }
 
   body.results-view-active .site-branding {

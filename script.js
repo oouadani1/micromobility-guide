@@ -1642,7 +1642,14 @@ function getTopRecommendations(sortedDevices) {
   return sortedDevices.slice(0, 2);
 }
 
-function getRecommendationPriorityMeta(index, score, topScore) {
+function getRecommendationPriorityMeta(index, score, topScore, recId, answers) {
+  if (recId === "bikeshare" && answers?.carryChildren === "yes") {
+    return {
+      label: isSpanishLocale() ? getUiText("notSuggested") : "Shown lower",
+      className: "all-results-tag-not"
+    };
+  }
+
   if (score >= topScore - 1) {
     return {
       label: isSpanishLocale() ? getUiText("alsoSuggested") : "Also shown",
@@ -1837,7 +1844,7 @@ function getAllResultsPositiveFactor(recId, answers) {
 
       case "bikeshare":
         if (answers.storage === "outdoor") {
-          return "no hace falta guardarlas afuera por cuenta propia";
+          return "no hace falta guardar un dispositivo en casa";
         }
         if (answers.transitLink === "yes") {
           return "funcionan bien para conexiones con transporte público y viajes de ida";
@@ -1939,7 +1946,7 @@ function getAllResultsPositiveFactor(recId, answers) {
 
     case "bikeshare":
       if (answers.storage === "outdoor") {
-        return "you do not need to store it yourself outdoors";
+        return "you do not need to store a device at home";
       }
       if (answers.transitLink === "yes") {
         return "it can work well for transit connections and one-way trips";
@@ -2301,21 +2308,21 @@ function getCurrentResponsePositiveDrivers(answers) {
   }
 
   if (answers.distance === "under3") {
-    drivers.push(isSpanishLocale() ? getUiText("positiveReasonDistanceUnder3") : "Shorter trips raise lighter and easier-to-use options.");
+    drivers.push(isSpanishLocale() ? getUiText("positiveReasonDistanceUnder3") : "Shorter trips show lighter and easier-to-use options more clearly.");
   } else if (answers.distance === "3to9") {
-    drivers.push(isSpanishLocale() ? getUiText("positiveReasonDistance3to9") : "Mid-range trips raise practical everyday bikes and some electric options.");
+    drivers.push(isSpanishLocale() ? getUiText("positiveReasonDistance3to9") : "Mid-range trips show practical everyday bikes and some electric options more clearly.");
   } else if (answers.distance === "10plus") {
-    drivers.push(isSpanishLocale() ? getUiText("positiveReasonDistance10plus") : "Longer trips raise electric-assist and higher-range options.");
+    drivers.push(isSpanishLocale() ? getUiText("positiveReasonDistance10plus") : "Longer trips show electric-assist and higher-range options more clearly.");
   }
 
   if (answers.routeType === "bikeLanes") {
     drivers.push(isSpanishLocale() ? getUiText("positiveReasonRouteBikeLanes") : "Separated bike lanes allow a wider range of riding options to appear.");
   } else if (answers.routeType === "mixedRoads") {
-    drivers.push(isSpanishLocale() ? getUiText("positiveReasonRouteMixedRoads") : "Routes with some traffic raise options that tend to feel more stable and practical around cars.");
+    drivers.push(isSpanishLocale() ? getUiText("positiveReasonRouteMixedRoads") : "Routes with some traffic show options that tend to feel more stable and practical around cars more clearly.");
   } else if (answers.routeType === "regularRoads") {
-    drivers.push(isSpanishLocale() ? getUiText("positiveReasonRouteRegularRoads") : "Routes without separation from cars raise more stable, road-ready options.");
+    drivers.push(isSpanishLocale() ? getUiText("positiveReasonRouteRegularRoads") : "Routes without separation from cars show more stable, road-ready options more clearly.");
   } else if (answers.routeType === "trails") {
-    drivers.push(isSpanishLocale() ? getUiText("positiveReasonRouteTrails") : "Trail and park routes raise options suited to that type of riding.");
+    drivers.push(isSpanishLocale() ? getUiText("positiveReasonRouteTrails") : "Trail and park routes show options suited to that type of riding more clearly.");
   }
 
   if (answers.storage === "indoor") {
@@ -2434,7 +2441,7 @@ function renderAllDeviceResultsPanel(allRecommendations, answers) {
   const itemsHtml = panelRecommendations
     .map((rec, index) => {
       const imageSrc = getAllResultsImage(rec.id, answers);
-      const priority = getRecommendationPriorityMeta(index, rec.score, topPanelScore);
+      const priority = getRecommendationPriorityMeta(index, rec.score, topPanelScore, rec.id, answers);
       const rawReason = getAllResultsReason(rec, answers, priority);
       const reason = isSpanishLocale()
         ? rawReason
@@ -3253,12 +3260,14 @@ function renderCurrentRecommendationPage() {
   const resultsMethodology = result.querySelector(".results-methodology");
 
   if (allResultsPanel) {
+    bindDetailsSummaryKeyboard(allResultsPanel);
     allResultsPanel.addEventListener("toggle", () => {
       APP_STATE.allResultsPanelOpen = allResultsPanel.open;
     });
   }
 
   if (resultsMethodology) {
+    bindDetailsSummaryKeyboard(resultsMethodology);
     resultsMethodology.addEventListener("toggle", () => {
       APP_STATE.resultsMethodologyOpen = resultsMethodology.open;
     });
@@ -3297,6 +3306,29 @@ function renderCurrentRecommendationPage() {
   });
 
   bindMobileRecommendationSwipe(cardEl, recommendations.length);
+}
+
+function bindDetailsSummaryKeyboard(detailsEl) {
+  if (!detailsEl) return;
+
+  const summaryEl = detailsEl.querySelector("summary");
+  if (!summaryEl) return;
+
+  summaryEl.setAttribute("role", "button");
+  summaryEl.setAttribute("tabindex", "0");
+  summaryEl.setAttribute("aria-expanded", String(detailsEl.open));
+
+  summaryEl.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+
+    event.preventDefault();
+    detailsEl.open = !detailsEl.open;
+    summaryEl.setAttribute("aria-expanded", String(detailsEl.open));
+  });
+
+  detailsEl.addEventListener("toggle", () => {
+    summaryEl.setAttribute("aria-expanded", String(detailsEl.open));
+  });
 }
 
 function bindMobileRecommendationSwipe(cardEl, totalRecommendations) {
