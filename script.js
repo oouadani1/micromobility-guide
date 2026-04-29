@@ -2957,6 +2957,12 @@ function renderSingleRecommendationCard(rec, answers, pathway) {
   const recommendationTitleId = `recommendation-title-${rec.id}`;
   const recommendationReasonId = `recommendation-reason-${rec.id}`;
   const recommendationIntroId = `recommendation-intro-${rec.id}`;
+  const recommendationReasonHeadingId = `recommendation-reason-heading-${rec.id}`;
+  const recommendationGuidanceId = `recommendation-guidance-${rec.id}`;
+  const recommendationGuidanceHeadingId = `recommendation-guidance-heading-${rec.id}`;
+  const recommendationCostId = `recommendation-cost-${rec.id}`;
+  const recommendationNextStepsId = `recommendation-next-steps-${rec.id}`;
+  const recommendationNextStepsHeadingId = `recommendation-next-steps-heading-${rec.id}`;
   const rationaleHeading =
     pathway === "exploring"
       ? (isSpanishLocale() ? getUiText("whyConsiderIt") : "Why it appears")
@@ -3066,6 +3072,7 @@ function renderSingleRecommendationCard(rec, answers, pathway) {
 
   const imageSrc = getRecommendationImage(rec.id, answers, content);
   const imageTag = getRecommendationImageTag(rec.id, answers);
+  const costLabel = isSpanishLocale() ? getUiText("typicalCost") : "Typical cost";
 
   return `
     <section
@@ -3073,6 +3080,7 @@ function renderSingleRecommendationCard(rec, answers, pathway) {
       role="region"
       aria-labelledby="${recommendationTitleId}"
       aria-describedby="${recommendationIntroId} ${recommendationReasonId}"
+      tabindex="0"
     >
       <h2 id="${recommendationTitleId}" class="recommendation-title" tabindex="-1">${rec.label}</h2>
       <p id="${recommendationIntroId}" class="visually-hidden">${rationaleHeading}</p>
@@ -3080,23 +3088,45 @@ function renderSingleRecommendationCard(rec, answers, pathway) {
       ${imageSrc ? `<img src="${imageSrc}" alt="${getRecommendationImageAlt(rec.id, answers)}" class="device-image">` : ""}
       ${imageTag ? `<p class="recommendation-image-tag">${imageTag}</p>` : ""}
 
-      <h3 class="guidance-heading">${rationaleHeading}</h3>
-      <p id="${recommendationReasonId}" class="recommendation-reason">
+      <h3 id="${recommendationReasonHeadingId}" class="guidance-heading" tabindex="0">${rationaleHeading}</h3>
+      <p
+        id="${recommendationReasonId}"
+        class="recommendation-reason"
+        tabindex="0"
+        aria-labelledby="${recommendationReasonHeadingId}"
+      >
         ${getRecommendationReason(rec.id, answers, pathway)}
       </p>
 
-      <div class="guidance">
-        <h3 class="guidance-heading">${isSpanishLocale() ? getUiText("thingsToConsider") : "Things to know"}</h3>
-        <ul class="guidance-list">${considerationsHtml}</ul>
+      <div
+        id="${recommendationGuidanceId}"
+        class="guidance"
+        role="group"
+        aria-labelledby="${recommendationGuidanceHeadingId}"
+        tabindex="0"
+      >
+        <h3 id="${recommendationGuidanceHeadingId}" class="guidance-heading" tabindex="0">${isSpanishLocale() ? getUiText("thingsToConsider") : "Things to know"}</h3>
+        <ul class="guidance-list" tabindex="0" aria-labelledby="${recommendationGuidanceHeadingId}">${considerationsHtml}</ul>
 
-        <p class="device-cost">
-          <span class="device-cost-label">${isSpanishLocale() ? getUiText("typicalCost") : "Typical cost"}:</span>
+        <p
+          id="${recommendationCostId}"
+          class="device-cost"
+          tabindex="0"
+          aria-label="${costLabel}: ${content.cost}"
+        >
+          <span class="device-cost-label">${costLabel}:</span>
           <span class="device-cost-value">${content.cost}</span>
         </p>
       </div>
 
-      <div class="next-steps">
-        <h3 class="guidance-heading">${isSpanishLocale() ? getUiText("nextSteps") : "Next steps"}</h3>
+      <div
+        id="${recommendationNextStepsId}"
+        class="next-steps"
+        role="group"
+        aria-labelledby="${recommendationNextStepsHeadingId}"
+        tabindex="0"
+      >
+        <h3 id="${recommendationNextStepsHeadingId}" class="guidance-heading" tabindex="0">${isSpanishLocale() ? getUiText("nextSteps") : "Next steps"}</h3>
         <ul class="next-steps-list">${nextStepsHtml}</ul>
       </div>
     </section>
