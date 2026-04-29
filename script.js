@@ -2406,9 +2406,9 @@ function renderResultsMethodology(answers) {
   return `
     <details class="results-methodology"${APP_STATE.resultsMethodologyOpen ? " open" : ""}>
       <summary>
-        <button type="button" class="details-toggle-btn">${isSpanishLocale() ? getUiText("howResultsAreShown") : RESULTS_METHODS_SUMMARY_TEXT}</button>
+        <button type="button" class="details-toggle-btn" aria-controls="results-methodology-panel">${isSpanishLocale() ? getUiText("howResultsAreShown") : RESULTS_METHODS_SUMMARY_TEXT}</button>
       </summary>
-      <div class="results-methodology__body">
+      <div id="results-methodology-panel" class="results-methodology__body" role="region" aria-label="${isSpanishLocale() ? getUiText("howResultsAreShown") : RESULTS_METHODS_SUMMARY_TEXT}">
         <p class="results-methodology__title">${isSpanishLocale() ? getUiText("howExplorerWorks") : RESULTS_METHODS_TITLE_TEXT}</p>
         <p>${isSpanishLocale() ? getUiText("resultsOverviewText") : RESULTS_METHODS_OVERVIEW_TEXT}</p>
         <p>${isSpanishLocale() ? getUiText("resultsReportText") : RESULTS_METHODS_REPORT_TEXT}</p>
@@ -2465,9 +2465,9 @@ function renderAllDeviceResultsPanel(allRecommendations, answers) {
   return `
     <details class="all-results-panel"${APP_STATE.allResultsPanelOpen ? " open" : ""}>
       <summary>
-        <button type="button" class="details-toggle-btn">${isSpanishLocale() ? getUiText("seeAllDeviceTypes") : "See other relevant devices"}</button>
+        <button type="button" class="details-toggle-btn" aria-controls="all-results-panel-list">${isSpanishLocale() ? getUiText("seeAllDeviceTypes") : "See other relevant devices"}</button>
       </summary>
-      <ul class="all-results-list">${itemsHtml}</ul>
+      <ul id="all-results-panel-list" class="all-results-list" role="region" aria-label="${isSpanishLocale() ? getUiText("seeAllDeviceTypes") : "See other relevant devices"}">${itemsHtml}</ul>
     </details>
   `;
 }
