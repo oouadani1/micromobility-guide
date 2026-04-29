@@ -2954,6 +2954,7 @@ function getConditionalNextSteps(recId, answers) {
 function renderSingleRecommendationCard(rec, answers, pathway) {
   const content = getDeviceContent(rec.id);
   const considerationItems = getResultCardConsiderationItems(rec.id, answers, content);
+  const recommendationTitleId = `recommendation-title-${rec.id}`;
   const rationaleHeading =
     pathway === "exploring"
       ? (isSpanishLocale() ? getUiText("whyConsiderIt") : "Why it appears")
@@ -3065,8 +3066,8 @@ function renderSingleRecommendationCard(rec, answers, pathway) {
   const imageTag = getRecommendationImageTag(rec.id, answers);
 
   return `
-    <div class="recommendation-card">
-      <h2 class="recommendation-title">${rec.label}</h2>
+    <article class="recommendation-card" aria-labelledby="${recommendationTitleId}">
+      <h2 id="${recommendationTitleId}" class="recommendation-title">${rec.label}</h2>
 
       ${imageSrc ? `<img src="${imageSrc}" alt="${getRecommendationImageAlt(rec.id, answers)}" class="device-image">` : ""}
       ${imageTag ? `<p class="recommendation-image-tag">${imageTag}</p>` : ""}
@@ -3090,7 +3091,7 @@ function renderSingleRecommendationCard(rec, answers, pathway) {
         <h3 class="guidance-heading">${isSpanishLocale() ? getUiText("nextSteps") : "Next steps"}</h3>
         <ul class="next-steps-list">${nextStepsHtml}</ul>
       </div>
-    </div>
+    </article>
   `;
 }
 
@@ -3205,8 +3206,12 @@ function renderCurrentRecommendationPage() {
       : (isSpanishLocale() ? getUiText("resultsIntroText") : RESULTS_INTRO_TEXT);
 
   result.classList.remove("hidden");
+  result.setAttribute("role", "region");
+  result.setAttribute("aria-labelledby", "resultsHeading");
   result.innerHTML = `
-    <p class="results-intro-heading">${resultsIntroText}</p>
+    <h2 id="resultsHeading" class="results-intro-heading" tabindex="-1">${resultsIntroText}</h2>
+
+    ${cardHtml}
 
     <div class="results-toolbar">
       <div class="results-pager">
@@ -3247,8 +3252,6 @@ function renderCurrentRecommendationPage() {
       </button>
     </div>
 
-    ${cardHtml}
-
     <div class="results-actions-mobile">
       <button
         type="button"
@@ -3284,6 +3287,7 @@ function renderCurrentRecommendationPage() {
   const cardEl = result.querySelector(".recommendation-card");
   const allResultsPanel = result.querySelector(".all-results-panel");
   const resultsMethodology = result.querySelector(".results-methodology");
+  const resultsHeading = result.querySelector("#resultsHeading");
 
   if (allResultsPanel) {
     bindDisclosureToggle(allResultsPanel, (expanded) => {
@@ -3328,6 +3332,10 @@ function renderCurrentRecommendationPage() {
       window.print();
     });
   });
+
+  if (resultsHeading) {
+    resultsHeading.focus();
+  }
 
   bindMobileRecommendationSwipe(cardEl, recommendations.length);
 }
@@ -3395,6 +3403,21 @@ function bindMobileRecommendationSwipe(cardEl, totalRecommendations) {
       (APP_STATE.currentResultIndex - 1 + totalRecommendations) % totalRecommendations;
     renderCurrentRecommendationPage();
   }, { passive: true });
+}
+
+function announceStepError(message) {
+  const liveRegionEl = document.getElementById("stepErrorLive");
+  if (!liveRegionEl) return;
+
+  liveRegionEl.textContent = "";
+
+  window.requestAnimationFrame(() => {
+    window.requestAnimationFrame(() => {
+      if (document.getElementById("stepErrorLive") === liveRegionEl) {
+        liveRegionEl.textContent = message;
+      }
+    });
+  });
 }
 
 function submitCurrentAnswers() {
@@ -3591,9 +3614,10 @@ progress.textContent = "";
     const describedByIds = [introDescriptionId, "stepError"].filter(Boolean).join(" ");
     formStep.innerHTML = `
       <div class="question-block">
-        <fieldset class="question-fieldset">
+        <div id="stepErrorLive" class="visually-hidden" aria-live="assertive" aria-atomic="true"></div>
+        <fieldset class="question-fieldset" ${describedByIds ? `aria-describedby="${describedByIds}"` : ""}>
           <legend id="${legendId}" class="question-label">${renderedLabel}</legend>
-          <div class="option-grid option-grid-${Math.min(renderedOptions.length, 4)}" role="radiogroup" aria-labelledby="${legendId}" ${describedByIds ? `aria-describedby="${describedByIds}"` : ""}>
+          <div class="option-grid option-grid-${Math.min(renderedOptions.length, 4)}">
             ${renderedOptions.map((option) => `
               <label class="option-card ${usesRouteImages ? "option-card--with-image" : ""}" for="${questionId}-${option.value}">
                 <input
@@ -3602,7 +3626,6 @@ progress.textContent = "";
                   type="radio"
                   name="${questionId}"
                   value="${option.value}"
-                  aria-labelledby="${legendId} ${questionId}-${option.value}-label"
                   ${savedValue === option.value ? "checked" : ""}
                 >
                 ${usesRouteImages ? `
@@ -3618,7 +3641,7 @@ progress.textContent = "";
               </label>
             `).join("")}
           </div>
-          <div id="stepError" class="error-message hidden" role="alert" aria-live="assertive" aria-atomic="true" style="margin-top: 8px;"></div>
+          <div id="stepError" class="error-message hidden" style="margin-top: 8px;"></div>
         </fieldset>
       </div>
     `;
@@ -3670,9 +3693,10 @@ progress.textContent = "";
   }
 
  if (question.type === "number") {
-  const describedByIds = [introDescriptionId, "stepError"].filter(Boolean).join(" ");
+ const describedByIds = [introDescriptionId, "stepError"].filter(Boolean).join(" ");
   formStep.innerHTML = `
     <div class="question-block">
+      <div id="stepErrorLive" class="visually-hidden" aria-live="assertive" aria-atomic="true"></div>
       <label for="${questionId}" class="question-label">${renderedLabel}</label>
       <input
         id="${questionId}"
@@ -3685,7 +3709,7 @@ progress.textContent = "";
         ${describedByIds ? `aria-describedby="${describedByIds}"` : ""}
         style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #d0d0d0; font-size: 15px; box-sizing: border-box;"
       />
-      <div id="stepError" class="error-message hidden" role="alert" aria-live="assertive" aria-atomic="true" style="margin-top: 8px;"></div>
+      <div id="stepError" class="error-message hidden" style="margin-top: 8px;"></div>
     </div>
   `;
 
@@ -3726,15 +3750,20 @@ function showStepError(message) {
 
   errorEl.textContent = message;
   errorEl.classList.remove("hidden");
+  announceStepError(message);
 
   const questionId = getCurrentQuestionId();
   const numberInput = document.getElementById(questionId);
   if (numberInput && numberInput.type === "number") {
     numberInput.setAttribute("aria-invalid", "true");
+    numberInput.setAttribute("aria-errormessage", "stepError");
   }
 
   const radioInputs = document.querySelectorAll(`input[name="${questionId}"]`);
-  radioInputs.forEach((input) => input.setAttribute("aria-invalid", "true"));
+  radioInputs.forEach((input) => {
+    input.setAttribute("aria-invalid", "true");
+    input.setAttribute("aria-errormessage", "stepError");
+  });
 }
 
 function clearStepError() {
@@ -3744,14 +3773,23 @@ function clearStepError() {
   errorEl.textContent = "";
   errorEl.classList.add("hidden");
 
+  const liveRegionEl = document.getElementById("stepErrorLive");
+  if (liveRegionEl) {
+    liveRegionEl.textContent = "";
+  }
+
   const questionId = getCurrentQuestionId();
   const numberInput = document.getElementById(questionId);
   if (numberInput && numberInput.type === "number") {
     numberInput.removeAttribute("aria-invalid");
+    numberInput.removeAttribute("aria-errormessage");
   }
 
   const radioInputs = document.querySelectorAll(`input[name="${questionId}"]`);
-  radioInputs.forEach((input) => input.removeAttribute("aria-invalid"));
+  radioInputs.forEach((input) => {
+    input.removeAttribute("aria-invalid");
+    input.removeAttribute("aria-errormessage");
+  });
 }
 
 function saveCurrentStepValue() {

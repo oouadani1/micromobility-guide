@@ -212,6 +212,18 @@ body.results-view-active .result {
   display: none;
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 #formNav.hidden,
 button.hidden {
   display: none !important;
@@ -1235,10 +1247,20 @@ body.results-view-active .site-branding {
 }
 
 .results-actions-mobile {
+  grid-area: actions;
   display: none;
 }
 
+.all-results-panel {
+  grid-area: all-results;
+}
+
+.results-methodology {
+  grid-area: methodology;
+}
+
 .print-summary {
+  grid-area: print;
   display: none;
 }
 
@@ -1571,31 +1593,33 @@ body.question-flow-active .form-nav {
 body.results-view-active #result {
   display: grid;
   grid-template-columns: minmax(0, 1.5fr) minmax(300px, 0.95fr);
+  grid-template-areas:
+    "intro intro"
+    "toolbar toolbar"
+    "card card"
+    "actions actions"
+    "all-results all-results"
+    "methodology methodology"
+    "print print";
   gap: 20px 24px;
   align-items: start;
   margin-top: 0;
 }
 
-body.results-view-active .results-intro-heading,
-body.results-view-active .results-toolbar,
-body.results-view-active .recommendation-card,
-body.results-view-active .results-actions-mobile,
-body.results-view-active .print-summary {
-  grid-column: 1 / -1;
-}
-
-body.results-view-active .all-results-panel,
-body.results-view-active .results-methodology {
-  grid-column: 1 / -1;
-}
-
 .results-intro-heading {
+  grid-area: intro;
   margin-bottom: 0;
   font-size: 28px;
   line-height: 1.25;
 }
 
+.results-intro-heading:focus {
+  outline: 3px solid var(--text-blue-aa);
+  outline-offset: 4px;
+}
+
 .results-toolbar {
+  grid-area: toolbar;
   margin: 0;
   padding: 14px 18px;
   border: none;
@@ -1637,6 +1661,7 @@ body.results-view-active .results-methodology {
 }
 
 .recommendation-card {
+  grid-area: card;
   margin-top: 0;
   padding: 34px 36px 36px;
   border-radius: 28px;
@@ -1800,12 +1825,14 @@ body.results-view-active .results-methodology {
 
   body.results-view-active #result {
     grid-template-columns: 1fr;
-  }
-
-
-  body.results-view-active .all-results-panel,
-  body.results-view-active .results-methodology {
-    grid-column: 1 / -1;
+    grid-template-areas:
+      "intro"
+      "toolbar"
+      "card"
+      "actions"
+      "all-results"
+      "methodology"
+      "print";
   }
 
   .recommendation-card {
@@ -1847,12 +1874,15 @@ body.results-view-active .results-methodology {
 
   body.results-view-active #result {
     grid-template-columns: 1fr;
+    grid-template-areas:
+      "intro"
+      "toolbar"
+      "card"
+      "actions"
+      "all-results"
+      "methodology"
+      "print";
     gap: 14px;
-  }
-
-  body.results-view-active .all-results-panel,
-  body.results-view-active .results-methodology {
-    grid-column: 1 / -1;
   }
 
   .results-intro-heading {
