@@ -2955,6 +2955,8 @@ function renderSingleRecommendationCard(rec, answers, pathway) {
   const content = getDeviceContent(rec.id);
   const considerationItems = getResultCardConsiderationItems(rec.id, answers, content);
   const recommendationTitleId = `recommendation-title-${rec.id}`;
+  const recommendationReasonId = `recommendation-reason-${rec.id}`;
+  const recommendationIntroId = `recommendation-intro-${rec.id}`;
   const rationaleHeading =
     pathway === "exploring"
       ? (isSpanishLocale() ? getUiText("whyConsiderIt") : "Why it appears")
@@ -3066,17 +3068,20 @@ function renderSingleRecommendationCard(rec, answers, pathway) {
   const imageTag = getRecommendationImageTag(rec.id, answers);
 
   return `
-    <article
+    <section
       class="recommendation-card"
+      role="region"
       aria-labelledby="${recommendationTitleId}"
+      aria-describedby="${recommendationIntroId} ${recommendationReasonId}"
     >
-      <h3 id="${recommendationTitleId}" class="recommendation-title">${rec.label}</h3>
+      <h2 id="${recommendationTitleId}" class="recommendation-title" tabindex="-1">${rec.label}</h2>
+      <p id="${recommendationIntroId}" class="visually-hidden">${rationaleHeading}</p>
 
       ${imageSrc ? `<img src="${imageSrc}" alt="${getRecommendationImageAlt(rec.id, answers)}" class="device-image">` : ""}
       ${imageTag ? `<p class="recommendation-image-tag">${imageTag}</p>` : ""}
 
       <h3 class="guidance-heading">${rationaleHeading}</h3>
-      <p class="recommendation-reason">
+      <p id="${recommendationReasonId}" class="recommendation-reason">
         ${getRecommendationReason(rec.id, answers, pathway)}
       </p>
 
@@ -3094,29 +3099,27 @@ function renderSingleRecommendationCard(rec, answers, pathway) {
         <h3 class="guidance-heading">${isSpanishLocale() ? getUiText("nextSteps") : "Next steps"}</h3>
         <ul class="next-steps-list">${nextStepsHtml}</ul>
       </div>
-    </article>
+    </section>
   `;
 }
 
-function announceResultsStatus(totalRecommendations) {
-  const liveRegionEl = document.getElementById("results-status");
-  if (!liveRegionEl) return;
+function announceResultsSummary(rec, answers, pathway) {
+  const liveRegionEl = document.getElementById("resultsLive");
+  if (!liveRegionEl || !rec) return;
 
-  const optionCountText =
-    totalRecommendations === 1
-      ? (isSpanishLocale() ? "One micromobility option is available." : "One micromobility option is available.")
-      : (isSpanishLocale()
-          ? `${totalRecommendations} micromobility options are available.`
-          : `${totalRecommendations} micromobility options are available.`);
-  const summaryText = isSpanishLocale()
-    ? `Results updated. ${optionCountText}`
-    : `Results updated. ${optionCountText}`;
+  const rationaleHeading =
+    pathway === "exploring"
+      ? (isSpanishLocale() ? getUiText("whyConsiderIt") : "Why it appears")
+      : pathway === "myself"
+        ? (isSpanishLocale() ? getUiText("whyThisFitsForYou") : "Why it appears")
+        : (isSpanishLocale() ? getUiText("whyThisFits") : "Why it appears");
+  const summaryText = `${rec.label}. ${rationaleHeading}. ${getRecommendationReason(rec.id, answers, pathway)}`;
 
   liveRegionEl.textContent = "";
 
   window.requestAnimationFrame(() => {
     window.requestAnimationFrame(() => {
-      if (document.getElementById("results-status") === liveRegionEl) {
+      if (document.getElementById("resultsLive") === liveRegionEl) {
         liveRegionEl.textContent = summaryText;
       }
     });
@@ -3234,80 +3237,76 @@ function renderCurrentRecommendationPage() {
       : (isSpanishLocale() ? getUiText("resultsIntroText") : RESULTS_INTRO_TEXT);
 
   result.classList.remove("hidden");
+  result.setAttribute("role", "region");
+  result.setAttribute("aria-labelledby", "resultsHeading");
   result.innerHTML = `
-    <section id="results" aria-labelledby="results-heading" tabindex="-1">
-      <div id="results-status" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
-      <h2 id="results-heading" class="results-intro-heading">${resultsIntroText}</h2>
+    <div id="resultsLive" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
+    <h2 id="resultsHeading" class="results-intro-heading" tabindex="-1">${resultsIntroText}</h2>
 
-      ${cardHtml}
+    ${cardHtml}
 
-      <div class="results-toolbar">
-        <div class="results-pager">
-          <button
-            id="resultPrevBtn"
-            type="button"
-            class="results-arrow-btn ${showPrev ? "" : "hidden"}"
-            aria-label="${isSpanishLocale() ? getUiText("previousRecommendation") : "Show previous option"}"
-            ${showPrev ? "" : "aria-hidden=\"true\""}
-          >
-            <span aria-hidden="true">&#8249;</span>
-          </button>
-          <p class="results-counter">${getDynamicCountLabel(index + 1, recommendations.length)}</p>
-          <button
-            id="resultNextBtn"
-            type="button"
-            class="results-arrow-btn ${showNext ? "" : "hidden"}"
-            aria-label="${isSpanishLocale() ? getUiText("nextRecommendation") : "Show next option"}"
-            ${showNext ? "" : "aria-hidden=\"true\""}
-          >
-            <span aria-hidden="true">&#8250;</span>
-          </button>
-        </div>
-
+    <div class="results-toolbar">
+      <div class="results-pager">
         <button
+          id="resultPrevBtn"
           type="button"
-          class="results-restart-btn results-restart-btn-desktop"
-          data-role="restart-results"
-          aria-label="${isSpanishLocale() ? getUiText("startOver") : "Start over"}"
+          class="results-arrow-btn ${showPrev ? "" : "hidden"}"
+          aria-label="${isSpanishLocale() ? getUiText("previousRecommendation") : "Previous recommendation"}"
         >
-          ${isSpanishLocale() ? getUiText("startOver") : "Start over"}
+          <span aria-hidden="true">&#8249;</span>
         </button>
-
+        <p class="results-counter">${getDynamicCountLabel(index + 1, recommendations.length)}</p>
         <button
+          id="resultNextBtn"
           type="button"
-          class="results-print-btn results-print-btn-desktop"
-          data-role="print-results"
-          aria-label="${isSpanishLocale() ? getUiText("printResults") : "Print results"}"
+          class="results-arrow-btn ${showNext ? "" : "hidden"}"
+          aria-label="${isSpanishLocale() ? getUiText("nextRecommendation") : "Next recommendation"}"
         >
-          ${PRINT_ICON_SVG}
+          <span aria-hidden="true">&#8250;</span>
         </button>
       </div>
 
-      <div class="results-actions-mobile">
-        <button
-          type="button"
-          class="results-restart-btn results-restart-btn-mobile"
-          data-role="restart-results"
-          aria-label="${isSpanishLocale() ? getUiText("startOver") : "Start over"}"
-        >
-          ${isSpanishLocale() ? getUiText("startOver") : "Start over"}
-        </button>
+      <button
+        type="button"
+        class="results-restart-btn results-restart-btn-desktop"
+        data-role="restart-results"
+      >
+        ${isSpanishLocale() ? getUiText("startOver") : "Start over"}
+      </button>
 
-        <button
-          type="button"
-          class="results-print-btn results-print-btn-mobile"
-          data-role="print-results"
-          aria-label="${isSpanishLocale() ? getUiText("printResults") : "Print results"}"
-        >
-          ${PRINT_ICON_SVG}
-        </button>
-      </div>
+      <button
+        type="button"
+        class="results-print-btn results-print-btn-desktop"
+        data-role="print-results"
+        aria-label="${isSpanishLocale() ? getUiText("printResults") : "Print results"}"
+      >
+        ${PRINT_ICON_SVG}
+      </button>
+    </div>
 
-      ${allResultsPanelHtml}
-      ${resultsMethodologyHtml}
+    <div class="results-actions-mobile">
+      <button
+        type="button"
+        class="results-restart-btn results-restart-btn-mobile"
+        data-role="restart-results"
+      >
+        ${isSpanishLocale() ? getUiText("startOver") : "Start over"}
+      </button>
 
-      ${printSummaryHtml}
-    </section>
+      <button
+        type="button"
+        class="results-print-btn results-print-btn-mobile"
+        data-role="print-results"
+        aria-label="${isSpanishLocale() ? getUiText("printResults") : "Print results"}"
+      >
+        ${PRINT_ICON_SVG}
+      </button>
+    </div>
+
+    ${allResultsPanelHtml}
+    ${resultsMethodologyHtml}
+
+    ${printSummaryHtml}
   `;
 
   const prevBtn = document.getElementById("resultPrevBtn");
@@ -3317,10 +3316,11 @@ function renderCurrentRecommendationPage() {
   renderFooterDisclaimer();
   setFooterDisclaimerVisibility(true);
 
-  const resultsSection = document.getElementById("results");
   const cardEl = result.querySelector(".recommendation-card");
   const allResultsPanel = result.querySelector(".all-results-panel");
   const resultsMethodology = result.querySelector(".results-methodology");
+  const resultsHeading = result.querySelector("#resultsHeading");
+  const cardTitleEl = result.querySelector(".recommendation-title");
 
   if (allResultsPanel) {
     bindDisclosureToggle(allResultsPanel, (expanded) => {
@@ -3366,10 +3366,12 @@ function renderCurrentRecommendationPage() {
     });
   });
 
-  announceResultsStatus(recommendations.length);
+  announceResultsSummary(rec, answers, pathway);
 
-  if (resultsSection) {
-    resultsSection.focus();
+  if (cardTitleEl) {
+    cardTitleEl.focus();
+  } else if (resultsHeading) {
+    resultsHeading.focus();
   }
 
   bindMobileRecommendationSwipe(cardEl, recommendations.length);
