@@ -3105,15 +3105,14 @@ function renderSingleRecommendationCard(rec, answers, pathway) {
 
 function announceResultsSummary(rec, answers, pathway) {
   const liveRegionEl = document.getElementById("resultsLive");
-  if (!liveRegionEl || !rec) return;
+  if (!liveRegionEl) return;
 
-  const rationaleHeading =
-    pathway === "exploring"
-      ? (isSpanishLocale() ? getUiText("whyConsiderIt") : "Why it appears")
-      : pathway === "myself"
-        ? (isSpanishLocale() ? getUiText("whyThisFitsForYou") : "Why it appears")
-        : (isSpanishLocale() ? getUiText("whyThisFits") : "Why it appears");
-  const summaryText = `${rec.label}. ${rationaleHeading}. ${getRecommendationReason(rec.id, answers, pathway)}`;
+  const optionCount = (APP_STATE.currentRecommendations || []).length;
+  const summaryText = optionCount === 1
+    ? (isSpanishLocale() ? "Results updated. One option available." : "Results updated. One option available.")
+    : (isSpanishLocale()
+        ? `Results updated. ${optionCount} options available.`
+        : `Results updated. ${optionCount} options available.`);
 
   liveRegionEl.textContent = "";
 
@@ -3251,14 +3250,14 @@ function renderCurrentRecommendationPage() {
   const resultsFocusSummary = getResultsFocusSummary(rec, answers, pathway);
 
   result.classList.remove("hidden");
-  result.setAttribute("role", "region");
-  result.setAttribute("aria-labelledby", "resultsHeading");
-  result.setAttribute("aria-describedby", "resultsFocusSummary");
-  result.setAttribute("tabindex", "-1");
+  result.removeAttribute("role");
+  result.removeAttribute("aria-labelledby");
+  result.removeAttribute("aria-describedby");
+  result.removeAttribute("tabindex");
   result.innerHTML = `
     <div id="resultsLive" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
     <p id="resultsFocusSummary" class="visually-hidden">${resultsFocusSummary}</p>
-    <h2 id="resultsHeading" class="results-intro-heading" tabindex="-1">${resultsIntroText}</h2>
+    <h2 id="resultsHeading" class="results-intro-heading" tabindex="-1" aria-describedby="resultsFocusSummary">${resultsIntroText}</h2>
 
     ${cardHtml}
 
@@ -3336,6 +3335,7 @@ function renderCurrentRecommendationPage() {
   const cardEl = result.querySelector(".recommendation-card");
   const allResultsPanel = result.querySelector(".all-results-panel");
   const resultsMethodology = result.querySelector(".results-methodology");
+  const resultsHeading = result.querySelector("#resultsHeading");
 
   if (allResultsPanel) {
     bindDisclosureToggle(allResultsPanel, (expanded) => {
@@ -3383,7 +3383,9 @@ function renderCurrentRecommendationPage() {
 
   announceResultsSummary(rec, answers, pathway);
 
-  result.focus();
+  if (resultsHeading) {
+    resultsHeading.focus();
+  }
 
   bindMobileRecommendationSwipe(cardEl, recommendations.length);
 }
