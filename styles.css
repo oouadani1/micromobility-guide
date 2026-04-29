@@ -212,7 +212,8 @@ body.results-view-active .result {
   display: none;
 }
 
-.visually-hidden {
+.visually-hidden,
+.sr-only {
   position: absolute;
   width: 1px;
   height: 1px;
