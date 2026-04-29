@@ -2398,28 +2398,39 @@ function renderResultsMethodology(answers) {
     : `<li>${isSpanishLocale() ? getUiText("noAdditionalVisibilityRules") : "No additional notes changed what showed up for this response."}</li>`;
   const limitingNotesHtml = limitingNotes.length
     ? `
-        <p class="results-methodology__section-title">${isSpanishLocale() ? getUiText("whatMayLowerOptions") : RESULTS_METHODS_LIMITING_TITLE_TEXT}</p>
+        <h3 class="results-methodology__section-title">${isSpanishLocale() ? getUiText("whatMayLowerOptions") : RESULTS_METHODS_LIMITING_TITLE_TEXT}</h3>
         <ul class="results-methodology__list">${limitingNotes.map((item) => `<li>${item}</li>`).join("")}</ul>
       `
     : "";
 
   return `
-    <details class="results-methodology"${APP_STATE.resultsMethodologyOpen ? " open" : ""}>
-      <summary>
-        <button type="button" class="details-toggle-btn" aria-controls="results-methodology-panel">${isSpanishLocale() ? getUiText("howResultsAreShown") : RESULTS_METHODS_SUMMARY_TEXT}</button>
-      </summary>
-      <div id="results-methodology-panel" class="results-methodology__body" role="region" aria-label="${isSpanishLocale() ? getUiText("howResultsAreShown") : RESULTS_METHODS_SUMMARY_TEXT}">
-        <p class="results-methodology__title">${isSpanishLocale() ? getUiText("howExplorerWorks") : RESULTS_METHODS_TITLE_TEXT}</p>
+    <section class="results-methodology" data-accordion-root>
+      <button
+        type="button"
+        class="details-toggle-btn"
+        id="results-methodology-trigger"
+        aria-expanded="${APP_STATE.resultsMethodologyOpen ? "true" : "false"}"
+        aria-controls="results-methodology-panel"
+      >${isSpanishLocale() ? getUiText("howResultsAreShown") : RESULTS_METHODS_SUMMARY_TEXT}</button>
+      <div
+        id="results-methodology-panel"
+        class="results-methodology__body"
+        role="region"
+        aria-labelledby="results-methodology-trigger"
+        ${APP_STATE.resultsMethodologyOpen ? "" : "hidden"}
+        data-accordion-panel
+      >
+        <h3 class="results-methodology__title">${isSpanishLocale() ? getUiText("howExplorerWorks") : RESULTS_METHODS_TITLE_TEXT}</h3>
         <p>${isSpanishLocale() ? getUiText("resultsOverviewText") : RESULTS_METHODS_OVERVIEW_TEXT}</p>
         <p>${isSpanishLocale() ? getUiText("resultsReportText") : RESULTS_METHODS_REPORT_TEXT}</p>
 
-        <p class="results-methodology__section-title">${isSpanishLocale() ? getUiText("currentVisibilityRules") : RESULTS_METHODS_VISIBILITY_TITLE_TEXT}</p>
+        <h3 class="results-methodology__section-title">${isSpanishLocale() ? getUiText("currentVisibilityRules") : RESULTS_METHODS_VISIBILITY_TITLE_TEXT}</h3>
         <ul class="results-methodology__list">${visibilityLawNotesHtml}</ul>
 
-        <p class="results-methodology__section-title">${isSpanishLocale() ? getUiText("whatAffectsScoring") : RESULTS_METHODS_SCORING_TITLE_TEXT}</p>
+        <h3 class="results-methodology__section-title">${isSpanishLocale() ? getUiText("whatAffectsScoring") : RESULTS_METHODS_SCORING_TITLE_TEXT}</h3>
         <ul class="results-methodology__list">${scoringFactorsHtml}</ul>
 
-        <p class="results-methodology__section-title">${isSpanishLocale() ? getUiText("whatHelpedShowResults") : RESULTS_METHODS_CURRENT_RESPONSE_TITLE_TEXT}</p>
+        <h3 class="results-methodology__section-title">${isSpanishLocale() ? getUiText("whatHelpedShowResults") : RESULTS_METHODS_CURRENT_RESPONSE_TITLE_TEXT}</h3>
         <ul class="results-methodology__list">${currentResponseRulesHtml}</ul>
         ${limitingNotesHtml}
 
@@ -2429,7 +2440,7 @@ function renderResultsMethodology(answers) {
           <a href="${BICYCLE_LAW_URL}" target="_blank" rel="noopener noreferrer">${isSpanishLocale() ? getUiText("massLawAboutBicycles") : RESULTS_METHODS_BICYCLE_LAW_LINK_TEXT}</a>
         </p>
       </div>
-    </details>
+    </section>
   `;
 }
 
@@ -2463,12 +2474,23 @@ function renderAllDeviceResultsPanel(allRecommendations, answers) {
     .join("");
 
   return `
-    <details class="all-results-panel"${APP_STATE.allResultsPanelOpen ? " open" : ""}>
-      <summary>
-        <button type="button" class="details-toggle-btn" aria-controls="all-results-panel-list">${isSpanishLocale() ? getUiText("seeAllDeviceTypes") : "See other relevant devices"}</button>
-      </summary>
-      <ul id="all-results-panel-list" class="all-results-list" role="region" aria-label="${isSpanishLocale() ? getUiText("seeAllDeviceTypes") : "See other relevant devices"}">${itemsHtml}</ul>
-    </details>
+    <section class="all-results-panel" data-accordion-root>
+      <button
+        type="button"
+        class="details-toggle-btn"
+        id="all-results-trigger"
+        aria-expanded="${APP_STATE.allResultsPanelOpen ? "true" : "false"}"
+        aria-controls="all-results-panel"
+      >${isSpanishLocale() ? getUiText("seeAllDeviceTypes") : "See other relevant devices"}</button>
+      <div
+        id="all-results-panel"
+        aria-labelledby="all-results-trigger"
+        ${APP_STATE.allResultsPanelOpen ? "" : "hidden"}
+        data-accordion-panel
+      >
+        <ul class="all-results-list">${itemsHtml}</ul>
+      </div>
+    </section>
   `;
 }
 
@@ -3264,16 +3286,14 @@ function renderCurrentRecommendationPage() {
   const resultsMethodology = result.querySelector(".results-methodology");
 
   if (allResultsPanel) {
-    bindDetailsSummaryKeyboard(allResultsPanel);
-    allResultsPanel.addEventListener("toggle", () => {
-      APP_STATE.allResultsPanelOpen = allResultsPanel.open;
+    bindDisclosureToggle(allResultsPanel, (expanded) => {
+      APP_STATE.allResultsPanelOpen = expanded;
     });
   }
 
   if (resultsMethodology) {
-    bindDetailsSummaryKeyboard(resultsMethodology);
-    resultsMethodology.addEventListener("toggle", () => {
-      APP_STATE.resultsMethodologyOpen = resultsMethodology.open;
+    bindDisclosureToggle(resultsMethodology, (expanded) => {
+      APP_STATE.resultsMethodologyOpen = expanded;
     });
   }
 
@@ -3312,37 +3332,37 @@ function renderCurrentRecommendationPage() {
   bindMobileRecommendationSwipe(cardEl, recommendations.length);
 }
 
-function bindDetailsSummaryKeyboard(detailsEl) {
-  if (!detailsEl) return;
+function bindDisclosureToggle(rootEl, onToggle) {
+  if (!rootEl) return;
 
-  const summaryEl = detailsEl.querySelector("summary");
-  const buttonEl = detailsEl.querySelector(".details-toggle-btn");
-  if (!summaryEl || !buttonEl) return;
+  const buttonEl = rootEl.querySelector(".details-toggle-btn");
+  const panelEl = rootEl.querySelector("[data-accordion-panel]");
+  if (!buttonEl || !panelEl) return;
 
-  const syncExpandedState = () => {
-    buttonEl.setAttribute("aria-expanded", String(detailsEl.open));
+  const setExpanded = (expanded) => {
+    buttonEl.setAttribute("aria-expanded", String(expanded));
+    panelEl.hidden = !expanded;
+    if (typeof onToggle === "function") {
+      onToggle(expanded);
+    }
   };
 
-  summaryEl.addEventListener("click", (event) => {
-    event.preventDefault();
-  });
+  const toggleExpanded = () => {
+    setExpanded(buttonEl.getAttribute("aria-expanded") !== "true");
+  };
 
-  buttonEl.addEventListener("click", (event) => {
-    event.preventDefault();
-    detailsEl.open = !detailsEl.open;
-    syncExpandedState();
+  buttonEl.addEventListener("click", () => {
+    toggleExpanded();
   });
 
   buttonEl.addEventListener("keydown", (event) => {
     if (event.key !== "Enter" && event.key !== " ") return;
 
     event.preventDefault();
-    detailsEl.open = !detailsEl.open;
-    syncExpandedState();
+    toggleExpanded();
   });
 
-  detailsEl.addEventListener("toggle", syncExpandedState);
-  syncExpandedState();
+  setExpanded(buttonEl.getAttribute("aria-expanded") === "true");
 }
 
 function bindMobileRecommendationSwipe(cardEl, totalRecommendations) {
@@ -3567,17 +3587,22 @@ progress.textContent = "";
 
   if (question.type === "radio") {
     const usesRouteImages = questionId === "routeType";
+    const legendId = `${questionId}-legend`;
+    const describedByIds = [introDescriptionId, "stepError"].filter(Boolean).join(" ");
     formStep.innerHTML = `
       <div class="question-block">
-        <fieldset class="question-fieldset" ${introDescriptionId ? `aria-describedby="${introDescriptionId}"` : ""}>
-          <legend class="question-label">${renderedLabel}</legend>
-          <div class="option-grid option-grid-${Math.min(renderedOptions.length, 4)}">
+        <fieldset class="question-fieldset">
+          <legend id="${legendId}" class="question-label">${renderedLabel}</legend>
+          <div class="option-grid option-grid-${Math.min(renderedOptions.length, 4)}" role="radiogroup" aria-labelledby="${legendId}" ${describedByIds ? `aria-describedby="${describedByIds}"` : ""}>
             ${renderedOptions.map((option) => `
-              <label class="option-card ${usesRouteImages ? "option-card--with-image" : ""}">
+              <label class="option-card ${usesRouteImages ? "option-card--with-image" : ""}" for="${questionId}-${option.value}">
                 <input
+                  id="${questionId}-${option.value}"
+                  class="option-card-input"
                   type="radio"
                   name="${questionId}"
                   value="${option.value}"
+                  aria-labelledby="${legendId} ${questionId}-${option.value}-label"
                   ${savedValue === option.value ? "checked" : ""}
                 >
                 ${usesRouteImages ? `
@@ -3589,11 +3614,11 @@ progress.textContent = "";
                     >
                   </span>
                 ` : ""}
-                <span class="option-card-text">${option.label}</span>
+                <span id="${questionId}-${option.value}-label" class="option-card-text">${option.label}</span>
               </label>
             `).join("")}
           </div>
-          <div id="stepError" class="error-message hidden" style="margin-top: 8px;"></div>
+          <div id="stepError" class="error-message hidden" role="alert" aria-live="assertive" aria-atomic="true" style="margin-top: 8px;"></div>
         </fieldset>
       </div>
     `;
@@ -3645,6 +3670,7 @@ progress.textContent = "";
   }
 
  if (question.type === "number") {
+  const describedByIds = [introDescriptionId, "stepError"].filter(Boolean).join(" ");
   formStep.innerHTML = `
     <div class="question-block">
       <label for="${questionId}" class="question-label">${renderedLabel}</label>
@@ -3656,10 +3682,10 @@ progress.textContent = "";
         step="1"
         value="${savedValue}"
         placeholder="${isSpanishLocale() ? getUiText("agePlaceholder") : "Enter age"}"
-        ${introDescriptionId ? `aria-describedby="${introDescriptionId}"` : ""}
+        ${describedByIds ? `aria-describedby="${describedByIds}"` : ""}
         style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #d0d0d0; font-size: 15px; box-sizing: border-box;"
       />
-      <div id="stepError" class="error-message hidden" style="margin-top: 8px;"></div>
+      <div id="stepError" class="error-message hidden" role="alert" aria-live="assertive" aria-atomic="true" style="margin-top: 8px;"></div>
     </div>
   `;
 
@@ -3700,6 +3726,15 @@ function showStepError(message) {
 
   errorEl.textContent = message;
   errorEl.classList.remove("hidden");
+
+  const questionId = getCurrentQuestionId();
+  const numberInput = document.getElementById(questionId);
+  if (numberInput && numberInput.type === "number") {
+    numberInput.setAttribute("aria-invalid", "true");
+  }
+
+  const radioInputs = document.querySelectorAll(`input[name="${questionId}"]`);
+  radioInputs.forEach((input) => input.setAttribute("aria-invalid", "true"));
 }
 
 function clearStepError() {
@@ -3708,6 +3743,15 @@ function clearStepError() {
 
   errorEl.textContent = "";
   errorEl.classList.add("hidden");
+
+  const questionId = getCurrentQuestionId();
+  const numberInput = document.getElementById(questionId);
+  if (numberInput && numberInput.type === "number") {
+    numberInput.removeAttribute("aria-invalid");
+  }
+
+  const radioInputs = document.querySelectorAll(`input[name="${questionId}"]`);
+  radioInputs.forEach((input) => input.removeAttribute("aria-invalid"));
 }
 
 function saveCurrentStepValue() {

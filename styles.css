@@ -962,14 +962,16 @@ body.results-view-active .site-branding {
   background: rgba(255, 255, 255, 0.9);
 }
 
-.option-card input[type="radio"] {
+.option-card-input {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  opacity: 0;
-  cursor: pointer;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .option-card-text {
@@ -1003,14 +1005,14 @@ body.results-view-active .site-branding {
   border: 1px solid rgba(20, 85, 143, 0.14);
 }
 
-.option-card:has(input[type="radio"]:checked) {
+.option-card:has(.option-card-input:checked) {
   border-color: #14558F;
   background: rgba(20, 85, 143, 0.10);
   box-shadow: 0 10px 26px rgba(20, 85, 143, 0.16);
   transform: translateY(-2px);
 }
 
-.option-card:has(input[type="radio"]:checked) .option-card-text {
+.option-card:has(.option-card-input:checked) .option-card-text {
   color: #111;
   font-weight: 600;
 }
@@ -1712,19 +1714,6 @@ body.results-view-active .results-methodology {
   box-shadow: 0 10px 24px rgba(24, 59, 91, 0.06);
 }
 
-.all-results-panel summary,
-.results-methodology summary {
-  padding: 0;
-  font-size: 15px;
-}
-
-.all-results-panel summary::after,
-.results-methodology summary::after,
-.all-results-panel[open] summary::after,
-.results-methodology[open] summary::after {
-  content: none;
-}
-
 .details-toggle-btn {
   width: 100%;
   margin-top: 0;
@@ -1761,6 +1750,10 @@ body.results-view-active .results-methodology {
 
 .details-toggle-btn:focus-visible {
   background: rgba(20, 85, 143, 0.1);
+}
+
+[data-accordion-panel][hidden] {
+  display: none;
 }
 
 .all-results-list,
