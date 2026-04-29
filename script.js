@@ -2448,9 +2448,9 @@ function renderResultsMethodology(answers) {
         ${limitingNotesHtml}
 
         <p class="results-methodology__links">
-          <a href="${REPORT_URL}" target="_blank" rel="noopener noreferrer">${isSpanishLocale() ? getUiText("readCommissionReport") : RESULTS_METHODS_REPORT_LINK_TEXT}</a>
+          <a href="${REPORT_URL}" target="_blank" rel="noopener noreferrer" tabindex="-1">${isSpanishLocale() ? getUiText("readCommissionReport") : RESULTS_METHODS_REPORT_LINK_TEXT}</a>
           <span aria-hidden="true"> | </span>
-          <a href="${BICYCLE_LAW_URL}" target="_blank" rel="noopener noreferrer">${isSpanishLocale() ? getUiText("massLawAboutBicycles") : RESULTS_METHODS_BICYCLE_LAW_LINK_TEXT}</a>
+          <a href="${BICYCLE_LAW_URL}" target="_blank" rel="noopener noreferrer" tabindex="-1">${isSpanishLocale() ? getUiText("massLawAboutBicycles") : RESULTS_METHODS_BICYCLE_LAW_LINK_TEXT}</a>
         </p>
       </div>
     </section>
@@ -3073,7 +3073,7 @@ function renderSingleRecommendationCard(rec, answers, pathway) {
               .map(
                 (child) => `
                   <li class="next-step-subitem">
-                    <a href="${child.url}" target="_blank" rel="noopener noreferrer">${formatTextForPathway(child.label, pathway)}</a>
+                    <a href="${child.url}" target="_blank" rel="noopener noreferrer" tabindex="-1">${formatTextForPathway(child.label, pathway)}</a>
                   </li>
                 `
               )
@@ -3084,7 +3084,7 @@ function renderSingleRecommendationCard(rec, answers, pathway) {
 
       return `
         <li class="next-step-item">
-          <a href="${step.url}" target="_blank" rel="noopener noreferrer">${formatTextForPathway(step.label, pathway)}</a>
+          <a href="${step.url}" target="_blank" rel="noopener noreferrer" tabindex="-1">${formatTextForPathway(step.label, pathway)}</a>
           ${childrenHtml}
         </li>
       `;
@@ -3327,7 +3327,7 @@ function renderCurrentRecommendationPage() {
         >
           <span aria-hidden="true">&#8249;</span>
         </button>
-        <p class="results-counter" tabindex="0">${getDynamicCountLabel(index + 1, recommendations.length)}</p>
+        <p class="results-counter">${getDynamicCountLabel(index + 1, recommendations.length)}</p>
         <button
           id="resultNextBtn"
           type="button"
