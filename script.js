@@ -3071,11 +3071,10 @@ function renderSingleRecommendationCard(rec, answers, pathway) {
     <section
       class="recommendation-card"
       role="region"
-      tabindex="-1"
       aria-labelledby="${recommendationTitleId}"
       aria-describedby="${recommendationIntroId} ${recommendationReasonId}"
     >
-      <h2 id="${recommendationTitleId}" class="recommendation-title">${rec.label}</h2>
+      <h2 id="${recommendationTitleId}" class="recommendation-title" tabindex="-1">${rec.label}</h2>
       <p id="${recommendationIntroId}" class="visually-hidden">${rationaleHeading}</p>
 
       ${imageSrc ? `<img src="${imageSrc}" alt="${getRecommendationImageAlt(rec.id, answers)}" class="device-image">` : ""}
@@ -3102,6 +3101,29 @@ function renderSingleRecommendationCard(rec, answers, pathway) {
       </div>
     </section>
   `;
+}
+
+function announceResultsSummary(rec, answers, pathway) {
+  const liveRegionEl = document.getElementById("resultsLive");
+  if (!liveRegionEl || !rec) return;
+
+  const rationaleHeading =
+    pathway === "exploring"
+      ? (isSpanishLocale() ? getUiText("whyConsiderIt") : "Why it appears")
+      : pathway === "myself"
+        ? (isSpanishLocale() ? getUiText("whyThisFitsForYou") : "Why it appears")
+        : (isSpanishLocale() ? getUiText("whyThisFits") : "Why it appears");
+  const summaryText = `${rec.label}. ${rationaleHeading}. ${getRecommendationReason(rec.id, answers, pathway)}`;
+
+  liveRegionEl.textContent = "";
+
+  window.requestAnimationFrame(() => {
+    window.requestAnimationFrame(() => {
+      if (document.getElementById("resultsLive") === liveRegionEl) {
+        liveRegionEl.textContent = summaryText;
+      }
+    });
+  });
 }
 
 function resetAppState() {
@@ -3218,6 +3240,7 @@ function renderCurrentRecommendationPage() {
   result.setAttribute("role", "region");
   result.setAttribute("aria-labelledby", "resultsHeading");
   result.innerHTML = `
+    <div id="resultsLive" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
     <h2 id="resultsHeading" class="results-intro-heading" tabindex="-1">${resultsIntroText}</h2>
 
     ${cardHtml}
@@ -3297,6 +3320,7 @@ function renderCurrentRecommendationPage() {
   const allResultsPanel = result.querySelector(".all-results-panel");
   const resultsMethodology = result.querySelector(".results-methodology");
   const resultsHeading = result.querySelector("#resultsHeading");
+  const cardTitleEl = result.querySelector(".recommendation-title");
 
   if (allResultsPanel) {
     bindDisclosureToggle(allResultsPanel, (expanded) => {
@@ -3342,8 +3366,10 @@ function renderCurrentRecommendationPage() {
     });
   });
 
-  if (cardEl) {
-    cardEl.focus();
+  announceResultsSummary(rec, answers, pathway);
+
+  if (cardTitleEl) {
+    cardTitleEl.focus();
   } else if (resultsHeading) {
     resultsHeading.focus();
   }
