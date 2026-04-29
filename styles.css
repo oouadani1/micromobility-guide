@@ -1509,6 +1509,10 @@ body.results-view-active .card {
   line-height: 1.65;
 }
 
+body.question-flow-active #introText:not(.hidden) {
+  margin-bottom: 14px;
+}
+
 #formStep {
   width: 100%;
 }
@@ -1855,6 +1859,10 @@ body.results-view-active #result {
     max-width: none;
     font-size: 15px;
     line-height: 1.6;
+  }
+
+  body.question-flow-active #introText:not(.hidden) {
+    margin-bottom: 12px;
   }
 
   .question-label {
