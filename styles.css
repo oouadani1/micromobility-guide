@@ -1466,24 +1466,31 @@ body.results-view-active .site-branding {
 
 body.question-flow-active .card,
 body.results-view-active .card {
-  gap: 20px;
+  gap: 8px;
+  padding-top: 24px;
 }
 
 .landing-header {
+  align-items: center;
   gap: 24px;
-  margin-bottom: 4px;
+  margin-bottom: 0;
 }
 
 .intro {
   max-width: none;
   width: 100%;
-  margin-bottom: 8px;
+  margin-top: 0;
+  margin-bottom: 0;
   font-size: 17px;
   line-height: 1.65;
 }
 
 #formStep {
   width: 100%;
+}
+
+#progress:empty {
+  display: none;
 }
 
 body.question-flow-active #formStep {
@@ -1707,23 +1714,45 @@ body.results-view-active .results-methodology {
 
 .all-results-panel summary,
 .results-methodology summary {
-  padding: 16px 18px;
+  padding: 0;
   font-size: 15px;
+}
+
+.all-results-panel summary::after,
+.results-methodology summary::after,
+.all-results-panel[open] summary::after,
+.results-methodology[open] summary::after {
+  content: none;
 }
 
 .details-toggle-btn {
   width: 100%;
   margin-top: 0;
-  padding: 0;
+  padding: 16px 18px;
   border: 0;
-  border-radius: 14px;
+  border-radius: 22px;
   background: transparent;
   color: var(--text-blue-aa);
   font-size: 15px;
   font-weight: 700;
   line-height: 1.35;
   text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
   box-shadow: none;
+}
+
+.details-toggle-btn::after {
+  content: "+";
+  flex: 0 0 auto;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.details-toggle-btn[aria-expanded="true"]::after {
+  content: "-";
 }
 
 .details-toggle-btn:hover {
@@ -1764,6 +1793,7 @@ body.results-view-active .results-methodology {
 .results-methodology__section-title {
   margin-top: 16px;
   font-size: 15px;
+  color: #000000;
 }
 
 .results-actions-mobile {

@@ -99,7 +99,7 @@ const DEVICE_CONTENT = {
       adaptiveNeedNo: "",
       // Primary use
       transport: "",
-      deliveries: "",
+      deliveries: "Additionally, some adaptive cycles can be configured to carry work items, equipment, or larger everyday loads.",
       recreation: "It is especially well suited for recreation and exercise.",
       // Transit link
       transitLinkYes: "Connecting to transit is also convenient with a bicycle.",
@@ -112,12 +112,12 @@ const DEVICE_CONTENT = {
       distance3to9: "",
       distance10plus: "",
       // Route type
-      routeBikeLanes: "",
+      routeBikeLanes: "Separated bike lanes can also make this type of device easier to use comfortably and consistently.",
       routeMixedRoads: "",
       routeRegularRoads: "",
       routeTrails: "Some types of bikes, such as mountain bikes, are commonly used on trails and unpaved paths.",
       // Storage
-      storageIndoor: "",
+      storageIndoor: "Indoor storage can support security, weather protection, and charging needs for some adaptive models.",
       storageOutdoor: "",
       storageNotMajorConcern: ""
     },
@@ -280,7 +280,7 @@ const DEVICE_CONTENT = {
       transitLinkYes: "This option can pair well with public transit because many e-scooters can be folded.",
       transitLinkNo: "",
       // Carrying children
-      carryChildrenYes: "",
+      carryChildrenYes: "Some configurations can also support carrying children with the right seating or cargo setup.",
       carryChildrenNo: "",
       // Distance
       distanceUnder3: "",
@@ -611,25 +611,25 @@ const DEVICE_CONTENT = {
       adaptiveNeedNo: "",
       // Primary use
       transport: "Additionally, many are built with everyday commuting in mind, and some can even carry larger loads.",
-      deliveries: "",
+      deliveries: "Additionally, some adaptive cycles can be configured to carry work items, equipment, or larger everyday loads.",
       recreation: "Additionally, many are built with a comfortable or reclined seating position, making them a nice choice for casual recreation and exercise.",
       // Transit link
       transitLinkYes: "",
       transitLinkNo: "",
       // Carrying children
-      carryChildrenYes: "",
+      carryChildrenYes: "Some configurations can also support carrying children with the right seating or cargo setup.",
       carryChildrenNo: "",
       // Distance
       distanceUnder3: "",
       distance3to9: "",
       distance10plus: "",
       // Route type
-      routeBikeLanes: "",
+      routeBikeLanes: "Separated bike lanes can also make this type of device easier to use comfortably and consistently.",
       routeMixedRoads: "",
       routeRegularRoads: "",
       routeTrails: "",
       // Storage
-      storageIndoor: "",
+      storageIndoor: "Indoor storage can support security, weather protection, and charging needs for some adaptive models.",
       storageOutdoor: "",
       storageNotMajorConcern: ""
     },
@@ -2700,7 +2700,7 @@ function getRecommendationReason(recId, answers, pathway) {
         if (!text || !matchedSlots.has(slot)) return false;
 
         if (recId === "adaptiveMobility" && slot === "adaptiveNeedYes") {
-          return pathway === "child" && answers.adaptiveNeed === "yes";
+          return answers.adaptiveNeed === "yes";
         }
 
         return true;

@@ -481,8 +481,16 @@ window.MICROMOBILITY_TRANSLATIONS = {
             "Es una muy buena opción cuando hay una discapacidad o una necesidad de apoyo para la movilidad, porque estos dispositivos pueden adaptarse a distintas necesidades, niveles de comodidad y usos.",
           transport:
             "Además, muchos están diseñados pensando en los viajes cotidianos, y algunos incluso pueden llevar cargas más grandes.",
+          deliveries:
+            "Además, algunas bicicletas adaptadas pueden configurarse para llevar materiales de trabajo, equipo o cargas cotidianas más grandes.",
           recreation:
-            "Además, muchos tienen una posición sentada cómoda o reclinada, lo que puede hacerlos una buena opción para recreación y ejercicio suave."
+            "Además, muchos tienen una posición sentada cómoda o reclinada, lo que puede hacerlos una buena opción para recreación y ejercicio suave.",
+          carryChildrenYes:
+            "Algunas configuraciones también pueden permitir llevar niños con el sistema de asiento o carga adecuado.",
+          routeBikeLanes:
+            "Las ciclovías separadas también pueden hacer que este tipo de dispositivo resulte más cómodo y constante de usar.",
+          storageIndoor:
+            "Guardar el dispositivo adentro puede ayudar con la seguridad, la protección frente al clima y la carga en algunos modelos adaptados."
         },
         considerBase: [
           "Las bicicletas adaptadas vienen en distintos estilos. Vale la pena explorar bicicletas reclinadas, triciclos y bicicletas impulsadas con las manos."
